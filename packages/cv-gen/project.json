@@ -19,7 +19,11 @@
           "packages/cv-gen/src/favicon.ico",
           "packages/cv-gen/src/assets"
         ],
-        "styles": ["packages/cv-gen/src/styles.scss"],
+        "styles": [
+          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+          "node_modules/primeng/resources/primeng.min.css",
+          "packages/cv-gen/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
