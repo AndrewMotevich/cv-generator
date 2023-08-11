@@ -1,5 +1,5 @@
 {
-  "/languages": {
+  "/employees": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LanguageListResponse"
+                "$ref": "#/components/schemas/EmployeeListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Language"
+        "Employee"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/languages"
+      "operationId": "get/employees"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LanguageResponse"
+                "$ref": "#/components/schemas/EmployeeResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "Language"
+        "Employee"
       ],
       "parameters": [],
-      "operationId": "post/languages",
+      "operationId": "post/employees",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/LanguageRequest"
+              "$ref": "#/components/schemas/EmployeeRequest"
             }
           }
         }
       }
     }
   },
-  "/languages/{id}": {
+  "/employees/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LanguageResponse"
+                "$ref": "#/components/schemas/EmployeeResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "Language"
+        "Employee"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/languages/{id}"
+      "operationId": "get/employees/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LanguageResponse"
+                "$ref": "#/components/schemas/EmployeeResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "Language"
+        "Employee"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/languages/{id}",
+      "operationId": "put/employees/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/LanguageRequest"
+              "$ref": "#/components/schemas/EmployeeRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "Language"
+        "Employee"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/languages/{id}"
+      "operationId": "delete/employees/{id}"
     }
   }
 }

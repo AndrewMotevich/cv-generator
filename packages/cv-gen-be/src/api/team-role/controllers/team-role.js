@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- *  position controller
+ * team-role controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::position.position');
+module.exports = createCoreController('api::team-role.team-role');

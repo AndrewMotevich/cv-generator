@@ -9,8 +9,7 @@
     "displayName": "User"
   },
   "options": {
-    "draftAndPublish": false,
-    "timestamps": true
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -62,32 +61,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "skills": {
-      "type": "json"
-    },
-    "languages": {
-      "type": "json"
-    },
-    "education": {
-      "type": "string"
-    },
-    "position": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::position.position"
-    },
-    "description": {
-      "type": "text"
-    },
-    "firstName": {
-      "type": "string"
-    },
-    "lastName": {
-      "type": "string"
-    },
-    "cvs": {
-      "type": "json"
     }
   }
 }

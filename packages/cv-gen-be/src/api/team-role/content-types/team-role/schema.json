@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "languages",
+  "collectionName": "team_roles",
   "info": {
-    "singularName": "language",
-    "pluralName": "languages",
-    "displayName": "language",
+    "singularName": "team-role",
+    "pluralName": "team-roles",
+    "displayName": "teamRole",
     "description": ""
   },
   "options": {

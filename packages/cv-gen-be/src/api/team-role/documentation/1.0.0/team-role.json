@@ -1,5 +1,5 @@
 {
-  "/positions": {
+  "/team-roles": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PositionListResponse"
+                "$ref": "#/components/schemas/TeamRoleListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Position"
+        "Team-role"
       ],
       "parameters": [
         {
@@ -169,7 +169,7 @@
           }
         }
       ],
-      "operationId": "get/positions"
+      "operationId": "get/team-roles"
     },
     "post": {
       "responses": {
@@ -178,7 +178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PositionResponse"
+                "$ref": "#/components/schemas/TeamRoleResponse"
               }
             }
           }
@@ -235,23 +235,23 @@
         }
       },
       "tags": [
-        "Position"
+        "Team-role"
       ],
       "parameters": [],
-      "operationId": "post/positions",
+      "operationId": "post/team-roles",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/PositionRequest"
+              "$ref": "#/components/schemas/TeamRoleRequest"
             }
           }
         }
       }
     }
   },
-  "/positions/{id}": {
+  "/team-roles/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -259,7 +259,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PositionResponse"
+                "$ref": "#/components/schemas/TeamRoleResponse"
               }
             }
           }
@@ -316,7 +316,7 @@
         }
       },
       "tags": [
-        "Position"
+        "Team-role"
       ],
       "parameters": [
         {
@@ -330,7 +330,7 @@
           }
         }
       ],
-      "operationId": "get/positions/{id}"
+      "operationId": "get/team-roles/{id}"
     },
     "put": {
       "responses": {
@@ -339,7 +339,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PositionResponse"
+                "$ref": "#/components/schemas/TeamRoleResponse"
               }
             }
           }
@@ -396,7 +396,7 @@
         }
       },
       "tags": [
-        "Position"
+        "Team-role"
       ],
       "parameters": [
         {
@@ -410,13 +410,13 @@
           }
         }
       ],
-      "operationId": "put/positions/{id}",
+      "operationId": "put/team-roles/{id}",
       "requestBody": {
         "required": true,
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/components/schemas/PositionRequest"
+              "$ref": "#/components/schemas/TeamRoleRequest"
             }
           }
         }
@@ -487,7 +487,7 @@
         }
       },
       "tags": [
-        "Position"
+        "Team-role"
       ],
       "parameters": [
         {
@@ -501,7 +501,7 @@
           }
         }
       ],
-      "operationId": "delete/positions/{id}"
+      "operationId": "delete/team-roles/{id}"
     }
   }
 }
