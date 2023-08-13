@@ -1,1 +1,11 @@
-<p>core.page works!</p>
+<cv-gen-header></cv-gen-header>
+<div style="display: flex">
+  <cv-gen-side-bar></cv-gen-side-bar>
+  <div style="display: flex; flex-direction: column;">
+    <cv-gen-breadcrumbs></cv-gen-breadcrumbs>
+    <div style="border: 2px solid black; height: 10rem">
+      <h3>router outlet:</h3>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
