@@ -23,8 +23,8 @@ export const rootRoutes: Routes = [
     path: 'home',
     loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
   },
-  { path: '', redirectTo: 'home/projects', pathMatch: 'full' },
   { path: 'about', component: AboutPageComponent },
+  { path: '', redirectTo: 'home/projects', pathMatch: 'full' },
   { path: '**', component: NotFoundPageComponent },
 ];
 
