@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
+import { EmployeesFacade } from './ngrx/facades/employees.facade';
 
 @Component({
   selector: 'cv-gen-root',
@@ -8,9 +9,13 @@ import { PrimeNGConfig } from 'primeng/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    private employeesFacade: EmployeesFacade
+  ) {}
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    this.employeesFacade.init();
   }
 }
