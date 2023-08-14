@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { EmployeesFacade } from './ngrx/facades/employees.facade';
+import { EmployeesFacade } from './ngrx/employees/employees.facade';
 
 @Component({
   selector: 'cv-gen-root',

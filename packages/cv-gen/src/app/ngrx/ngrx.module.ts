@@ -6,33 +6,24 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
-import * as fromEmployees from './reducers/employees.reducer';
-import { EmployeesEffects } from './effects/employees.effects';
-import { EmployeesFacade } from './facades/employees.facade';
+import { EFFECTS, FACADES, STORE } from '.';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    StoreModule.forRoot(
-      {},
-      {
-        metaReducers: [],
-        runtimeChecks: {
-          strictActionImmutability: true,
-          strictStateImmutability: true,
-        },
-      }
-    ),
+    StoreModule.forRoot(STORE, {
+      metaReducers: [],
+      runtimeChecks: {
+        strictActionImmutability: true,
+        strictStateImmutability: true,
+      },
+    }),
     EffectsModule.forRoot([]),
-    StoreModule.forFeature(
-      fromEmployees.EMPLOYEES_FEATURE_KEY,
-      fromEmployees.employeesReducer
-    ),
-    EffectsModule.forFeature([EmployeesEffects]),
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    EffectsModule.forFeature([...EFFECTS]),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ logOnly: !isDevMode() }),
   ],
-  providers: [EmployeesFacade],
+  providers: [...FACADES],
 })
 export class NgrxModule {}

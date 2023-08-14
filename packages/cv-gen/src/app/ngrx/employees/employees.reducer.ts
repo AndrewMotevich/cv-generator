@@ -1,12 +1,8 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import * as EmployeesActions from '../actions/employees.actions';
-import {
-  Department,
-  IEmployee,
-  Specialization,
-} from '../effects/mock/employees.mock';
+import * as EmployeesActions from './employees.actions';
+import { Department, IEmployee, Specialization } from './mock/employees.mock';
 
 export interface EmployeesEntity extends IEmployee {
   id: string;
@@ -34,7 +30,7 @@ export const initialEmployeesState: EmployeesState =
     loaded: false,
   });
 
-const reducer = createReducer(
+export const EmployeesReducer = createReducer(
   initialEmployeesState,
   on(EmployeesActions.loadEmployeesSuccess, (state, { employees }) => {
     console.log(employees);
@@ -45,10 +41,3 @@ const reducer = createReducer(
     error,
   }))
 );
-
-export function employeesReducer(
-  state: EmployeesState | undefined,
-  action: Action
-) {
-  return reducer(state, action);
-}

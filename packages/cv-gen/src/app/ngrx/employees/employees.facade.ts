@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 
-import * as EmployeesActions from '../actions/employees.actions';
+import * as EmployeesActions from './employees.actions';
 // import * as EmployeesFeature from '../reducers/employees.reducer';
-import * as EmployeesSelectors from '../selectors/employees.selectors';
+import * as EmployeesSelectors from './employees.selectors';
 
 @Injectable()
 export class EmployeesFacade {
@@ -24,7 +24,6 @@ export class EmployeesFacade {
    * or more tasks in your Effects.
    */
   init() {
-    console.log('facade');
     this.store.dispatch(EmployeesActions.initEmployees());
   }
 }

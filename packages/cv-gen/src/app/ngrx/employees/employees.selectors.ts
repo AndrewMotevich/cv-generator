@@ -3,7 +3,7 @@ import {
   EMPLOYEES_FEATURE_KEY,
   EmployeesState,
   employeesAdapter,
-} from '../reducers/employees.reducer';
+} from './employees.reducer';
 
 // Lookup the 'Employees' feature state managed by NgRx
 export const selectEmployeesState = createFeatureSelector<EmployeesState>(

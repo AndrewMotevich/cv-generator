@@ -1,6 +1,18 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { projectsRoutes } from '../routes';
+import { RouterModule, Routes } from '@angular/router';
+
+import { ProjectListPageComponent } from './pages/projects-list/projects-list.page.component';
+import { CreateProjectPageComponent } from './pages/create-project/create-project.page.component';
+import { EditProjectPageComponent } from './pages/edit-project/edit-project.page.component';
+
+import { BASE, CREATE, EDIT } from '../shared/constants/routing-paths.consts';
+
+const projectsRoutes: Routes = [
+  { path: BASE.path, component: ProjectListPageComponent },
+  { path: CREATE.path, component: CreateProjectPageComponent },
+  { path: EDIT.path, component: EditProjectPageComponent },
+  { path: '**', redirectTo: BASE.path, pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(projectsRoutes)],
