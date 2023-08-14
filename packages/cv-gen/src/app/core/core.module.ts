@@ -7,6 +7,8 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   declarations: [
     CorePageComponent,
@@ -14,6 +16,6 @@ import { HeaderComponent } from './components/header/header.component';
     SidebarComponent,
     HeaderComponent,
   ],
-  imports: [CommonModule, CoreRoutingModule],
+  imports: [CommonModule, CoreRoutingModule, TranslateModule],
 })
 export class CoreModule {}
