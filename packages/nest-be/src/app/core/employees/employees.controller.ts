@@ -12,8 +12,9 @@ import {
 } from '@nestjs/common';
 import { EmployeeDto } from './dto/employee.dto';
 import { EmployeesService } from './employees.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('EMPLOYEES')
 @Controller('employees')
 export class EmployeesController {

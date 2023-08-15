@@ -1,7 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { CvsService } from './cvs.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('CVS')
 @Controller('cvs')
 export class CvsController {

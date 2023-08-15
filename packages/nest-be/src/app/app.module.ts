@@ -7,8 +7,17 @@ import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
-  imports: [AuthModule, SharedModule, CoreModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    AuthModule,
+    SharedModule,
+    CoreModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
