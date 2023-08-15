@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}
+
+model Employee {
+  id             Int    @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String @unique
+  department     String
+  specialization String
+  cvs            CV[]
+
+  @@unique([firstName, lastName])
+  @@map("employees")
+}
+
+model CV {
+  id           Int        @id @default(autoincrement())
+  name         String
+  employeeInfo Employee   @relation(fields: [employeeId], references: [id])
+  employeeId   Int
+  language     Language[]
+  skills       Skill[]
+  projects     Project[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@map("cvs")
+}
+
+model Project {
+  id               Int              @id @default(autoincrement())
+  projectName      String
+  startDate        DateTime
+  endDate          DateTime
+  teamSize         Int              @default(1)
+  techStack        Skill[]
+  description      String
+  responsibilities Responsibility[]
+  teamRoles        TeamRole[]
+  cvs              CV[]
+
+  @@map("projects")
+}
+
+model Skill {
+  id       Int       @id @default(autoincrement())
+  name     String
+  cvs      CV[]
+  projects Project[]
+}
+
+model TeamRole {
+  id       Int       @id @default(autoincrement())
+  name     String
+  projects Project[]
+}
+
+model Responsibility {
+  id       Int       @id @default(autoincrement())
+  name     String
+  projects Project[]
+}
+
+model Language {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  level String
+  cvs   CV[]
+}
+
+// enum Level {
+//   A1
+//   A2
+//   B1
+//   B2
+//   C1
+//   C2
+// }
+
+// enum Department {
+//   Java
+//   JavaScript
+//   Python
+// }
+
+// enum Specialization {
+//   Spring
+//   Angular
+//   React
+//   Vue
+//   Django
+//   Flask
+// }
