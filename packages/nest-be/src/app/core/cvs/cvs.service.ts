@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class AppService {
+export class CvsService {
   getData(): { message: string } {
-    return { message: 'Hello from CV-gen API' };
+    return { message: 'Hello from cvs' };
   }
 }
