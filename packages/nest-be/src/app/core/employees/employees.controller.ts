@@ -12,7 +12,9 @@ import {
 } from '@nestjs/common';
 import { EmployeeDto } from './dto/employee.dto';
 import { EmployeesService } from './employees.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('EMPLOYEES')
 @Controller('employees')
 export class EmployeesController {
   constructor(private employeesService: EmployeesService) {}

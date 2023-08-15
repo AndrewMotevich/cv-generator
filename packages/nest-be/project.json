@@ -24,18 +24,11 @@
       }
     },
     "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "nest-be:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "nest-be:build:development"
-        },
-        "production": {
-          "buildTarget": "nest-be:build:production"
-        }
+        "commands": ["nest start --watch"],
+        "cwd": "./",
+        "parallel": true
       }
     },
     "lint": {
