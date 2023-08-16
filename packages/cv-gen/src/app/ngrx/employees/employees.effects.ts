@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { switchMap, catchError, of } from 'rxjs';
 import * as EmployeesActions from './employees.actions';
-import { employees } from './mock/employees.mock';
+import { employeesMock } from './mock/employees.mock';
 
 @Injectable()
 export class EmployeesEffects {
@@ -12,7 +12,7 @@ export class EmployeesEffects {
     this.actions$.pipe(
       ofType(EmployeesActions.initEmployees),
       switchMap(() =>
-        of(EmployeesActions.loadEmployeesSuccess({ employees: employees }))
+        of(EmployeesActions.loadEmployeesSuccess({ employees: employeesMock }))
       ),
       catchError((error) => {
         console.error('Error', error);

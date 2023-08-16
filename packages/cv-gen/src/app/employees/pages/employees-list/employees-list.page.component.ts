@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { IEmployee } from '../../models/employee.model';
+import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -6,4 +8,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./employees-list.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeesListPageComponent {}
+export class EmployeesListPageComponent {
+  data: IEmployee[] = employeesMock;
+  cols = [
+    { field: 'firstName', header: 'First name' },
+    { field: 'lastName', header: 'Last name' },
+    { field: 'email', header: 'Email' },
+    { field: 'department', header: 'Department' },
+    { field: 'specialization', header: 'Specialization' },
+  ];
+}

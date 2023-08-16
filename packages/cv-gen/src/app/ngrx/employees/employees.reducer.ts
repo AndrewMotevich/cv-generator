@@ -2,15 +2,14 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import * as EmployeesActions from './employees.actions';
-import { Department, IEmployee, Specialization } from './mock/employees.mock';
 
-export interface EmployeesEntity extends IEmployee {
-  id: string;
+export interface EmployeesEntity {
+  id: number;
   firstName: string;
   lastName: string;
   email: string;
-  department: Department;
-  specialization: Specialization;
+  department: string;
+  specialization: string;
 }
 
 export const EMPLOYEES_FEATURE_KEY = 'employees';
