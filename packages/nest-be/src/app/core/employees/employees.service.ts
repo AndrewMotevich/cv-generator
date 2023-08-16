@@ -13,7 +13,10 @@ export class EmployeesService {
   ) {}
 
   async getEmployees() {
-    return this.dataBaseService.employee.findMany({ take: 10 });
+    return this.dataBaseService.employee.findMany({
+      take: 10,
+      include: { department: true, specialization: true },
+    });
   }
 
   async addEmployee(dto: EmployeeDto) {

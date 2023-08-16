@@ -2,7 +2,7 @@ import { IRoutingPath } from '../interfaces/routing-path.interface';
 
 export const BASE: IRoutingPath = {
   path: '',
-  fullPath: '/',
+  fullPath: '',
 };
 
 export const AUTH: IRoutingPath = {
@@ -12,7 +12,7 @@ export const AUTH: IRoutingPath = {
 
 export const HOME: IRoutingPath = {
   path: '',
-  fullPath: '/',
+  fullPath: '',
 };
 
 export const ABOUT: IRoutingPath = {
