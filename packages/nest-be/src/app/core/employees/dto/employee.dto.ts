@@ -18,7 +18,9 @@ export class EmployeeDto implements Employee {
   @IsEmail()
   email: string;
 
+  @IsString()
   department: string;
 
+  @IsString()
   specialization: string;
 }

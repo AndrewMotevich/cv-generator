@@ -2,6 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from './users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
+import { JWT_ACCESS_OPTIONS, JWT_REFRESH_OPTIONS } from '../config/jwt.config';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -14,11 +16,13 @@ export class AuthService {
 
   async signIn(username: string, pass: string, response: Response) {
     const user = await this.usersService.findOne(username);
-    if (user?.password !== pass) {
+    if (!(await bcrypt.compare(pass, user?.password))) {
       throw new UnauthorizedException();
     }
     const payload = { email: user.email };
-    return this.getTokens(payload, response);
+    const tokens = await this.getTokens(payload, response);
+    this.usersService.updateRefreshToken(tokens.refresh_token);
+    return tokens;
   }
 
   async refresh(request: Request, response: Response) {
@@ -30,7 +34,13 @@ export class AuthService {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_REFRESH_SECRET,
       });
-      return this.getTokens(payload, response);
+      const userToken = await this.usersService.getRefreshToken(payload.email);
+      if (userToken.refreshToken !== token) {
+        throw new UnauthorizedException();
+      }
+      const tokens = await this.getTokens(payload, response);
+      await this.usersService.updateRefreshToken(tokens.refresh_token);
+      return tokens;
     } catch {
       throw new UnauthorizedException();
     }
@@ -39,17 +49,11 @@ export class AuthService {
   private async getTokens(payload: { email: string }, response: Response) {
     const accessToken = await this.jwtService.signAsync(
       { email: payload.email },
-      {
-        secret: process.env.JWT_ACCESS_SECRET,
-        expiresIn: '60m',
-      }
+      JWT_ACCESS_OPTIONS
     );
     const refreshToken = await this.jwtService.signAsync(
       { email: payload.email },
-      {
-        secret: process.env.JWT_REFRESH_SECRET,
-        expiresIn: '1d',
-      }
+      JWT_REFRESH_OPTIONS
     );
 
     response.cookie('refresh', refreshToken, {

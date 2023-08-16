@@ -2,7 +2,8 @@
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
-    "password" TEXT NOT NULL
+    "password" TEXT NOT NULL,
+    "refreshToken" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -10,9 +11,7 @@ CREATE TABLE "employees" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "department" TEXT NOT NULL,
-    "specialization" TEXT NOT NULL
+    "email" TEXT NOT NULL
 );
 
 -- CreateTable
@@ -58,6 +57,26 @@ CREATE TABLE "Language" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "level" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Department" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Specialization" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "_EmployeeToSpecialization" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
+    CONSTRAINT "_EmployeeToSpecialization_A_fkey" FOREIGN KEY ("A") REFERENCES "employees" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_EmployeeToSpecialization_B_fkey" FOREIGN KEY ("B") REFERENCES "Specialization" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -108,6 +127,14 @@ CREATE TABLE "_ProjectToTeamRole" (
     CONSTRAINT "_ProjectToTeamRole_B_fkey" FOREIGN KEY ("B") REFERENCES "TeamRole" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "_DepartmentToEmployee" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL,
+    CONSTRAINT "_DepartmentToEmployee_A_fkey" FOREIGN KEY ("A") REFERENCES "Department" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_DepartmentToEmployee_B_fkey" FOREIGN KEY ("B") REFERENCES "employees" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -119,6 +146,18 @@ CREATE UNIQUE INDEX "employees_firstName_lastName_key" ON "employees"("firstName
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Language_name_key" ON "Language"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Department_name_key" ON "Department"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Specialization_name_key" ON "Specialization"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_EmployeeToSpecialization_AB_unique" ON "_EmployeeToSpecialization"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_EmployeeToSpecialization_B_index" ON "_EmployeeToSpecialization"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CVToLanguage_AB_unique" ON "_CVToLanguage"("A", "B");
@@ -155,3 +194,9 @@ CREATE UNIQUE INDEX "_ProjectToTeamRole_AB_unique" ON "_ProjectToTeamRole"("A", 
 
 -- CreateIndex
 CREATE INDEX "_ProjectToTeamRole_B_index" ON "_ProjectToTeamRole"("B");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_DepartmentToEmployee_AB_unique" ON "_DepartmentToEmployee"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_DepartmentToEmployee_B_index" ON "_DepartmentToEmployee"("B");

@@ -8,21 +8,23 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
+  id           Int     @id @default(autoincrement())
+  email        String  @unique
+  password     String
+  refreshToken String?
 }
 
 model Employee {
-  id             Int    @id @default(autoincrement())
-  firstName      String
-  lastName       String
-  email          String @unique
-  department     String
-  specialization String
-  cvs            CV[]
+  id               Int            @id @default(autoincrement())
+  firstName        String
+  lastName         String
+  email            String         @unique
+  department       Department     @relation(fields: [departmentId], references: [id])
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+  departmentId     Int
+  specializationId Int
+  cvs              CV[]
 
-  @@unique([firstName, lastName])
   @@map("employees")
 }
 
@@ -81,26 +83,14 @@ model Language {
   cvs   CV[]
 }
 
-// enum Level {
-//   A1
-//   A2
-//   B1
-//   B2
-//   C1
-//   C2
-// }
+model Department {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  employees Employee[]
+}
 
-// enum Department {
-//   Java
-//   JavaScript
-//   Python
-// }
-
-// enum Specialization {
-//   Spring
-//   Angular
-//   React
-//   Vue
-//   Django
-//   Flask
-// }
+model Specialization {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  employees Employee[]
+}
