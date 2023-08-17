@@ -1,3 +1,7 @@
 {
-  "HEADER": "CV-Gen"
+  "HEADER": "CV-Gen",
+  "ERROR_MESSAGES": {
+    "REQUIRED": "{{value}} is required!",
+    "EMAIL": "Invalid email!"
+  }
 }

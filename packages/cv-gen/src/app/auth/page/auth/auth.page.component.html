@@ -1,2 +1,6 @@
-<h2>auth.page works!</h2>
-<cv-gen-auth-form></cv-gen-auth-form>
+<form [formGroup]="authForm">
+  <label for="myInput">Email</label>
+  <cv-gen-text-input [errorMessages]="errorMessages" id="myInput" formControlName="textInput"></cv-gen-text-input>
+  <p-button (click)="submit()">Submit</p-button>
+</form>
+{{authForm.controls.textInput.value}}

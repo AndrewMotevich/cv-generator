@@ -12,5 +12,5 @@ import { TableModule } from 'primeng/table';
 })
 export class BaseTable1Component {
   @Input() data: unknown[];
-  @Input() cols: unknown[];
+  @Input() cols: { field: string; header: string }[];
 }

@@ -1,38 +1,70 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
 import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  FormControl,
-} from '@angular/forms';
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  Input,
+  OnInit,
+  Optional,
+  Self,
+} from '@angular/core';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'cv-gen-text-input',
   templateUrl: './text-input.component.html',
   styleUrls: ['./text-input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextInputComponent),
-      multi: true,
-    },
-  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextInputComponent implements ControlValueAccessor, OnInit {
-  control = new FormControl('');
+export class TextInputComponent
+  implements ControlValueAccessor, OnInit, DoCheck
+{
+  @Input() public label: string;
+  @Input() public errorMessages: { [key: string]: string };
 
-  ngOnInit(): void {
-    this.control.valueChanges.subscribe((res) => this.onChange(res || ''));
+  public control: FormControl = new FormControl('');
+
+  public currentErrorKey: string;
+
+  private onChange: (val: string) => void;
+
+  private onTouch: (val: string) => void;
+
+  constructor(
+    @Self() @Optional() private ngControl: NgControl,
+    private changeDetection: ChangeDetectorRef
+  ) {
+    this.ngControl.valueAccessor = this;
   }
-  onChange: (val: string) => void;
-  onTouch: (val: string) => void;
-  writeValue(value: string) {
+
+  public ngOnInit(): void {
+    this.control.valueChanges.subscribe((res) => {
+      this.onChange(res || '');
+    });
+  }
+
+  public ngDoCheck(): void {
+    if (this.ngControl.control.errors) {
+      this.currentErrorKey = Object.keys(this.ngControl.control.errors)[0]
+      this.control.setErrors(this.ngControl.control.errors);
+      this.changeDetection.markForCheck();
+    }
+    if (this.ngControl.control?.touched) {
+      this.control.markAsTouched();
+    } else {
+      this.control.markAsPristine();
+    }
+  }
+
+  public writeValue(value: string) {
     this.control.setValue(value, { emitEvent: false });
   }
-  registerOnChange(fn: (val: string) => void) {
-    console.log('onChange', fn);
+
+  public registerOnChange(fn: (val: string) => void) {
     this.onChange = fn;
   }
-  registerOnTouched(fn: (val: string) => void) {
+
+  public registerOnTouched(fn: (val: string) => void) {
     this.onTouch = fn;
   }
 }
