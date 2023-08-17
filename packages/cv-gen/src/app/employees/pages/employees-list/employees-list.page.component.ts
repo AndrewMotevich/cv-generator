@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IEmployee } from '../../models/employee.model';
 import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
+import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -10,7 +11,7 @@ import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
 })
 export class EmployeesListPageComponent {
   data: IEmployee[] = employeesMock;
-  cols = [
+  cols: IColumns[] = [
     { field: 'firstName', header: 'First name' },
     { field: 'lastName', header: 'Last name' },
     { field: 'email', header: 'Email' },

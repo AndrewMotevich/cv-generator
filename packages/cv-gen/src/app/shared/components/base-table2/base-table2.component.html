@@ -1,6 +1,13 @@
-<table>
-  <thead>
-    <ng-content select="[data]"></ng-content>
-  </thead>
-  <ng-content select="tbody"></ng-content>
-</table>
+<p-table
+  [value]="data"
+  [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header">
+    <ng-content select="[header]"></ng-content>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-rowData
+    let-columns="columns">
+    <ng-content select="[body]"></ng-content>
+  </ng-template>
+</p-table>

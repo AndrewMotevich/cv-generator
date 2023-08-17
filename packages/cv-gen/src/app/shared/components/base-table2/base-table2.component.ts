@@ -10,4 +10,8 @@ import { TableModule } from 'primeng/table';
   styleUrls: ['./base-table2.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BaseTable2Component {}
+export class BaseTable2Component {
+  data = [{}]
+}
+
+

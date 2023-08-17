@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
+import { IColumns } from '../../interfaces/shared.interfeces';
 
 @Component({
   selector: 'cv-gen-base-table1',
@@ -12,5 +13,5 @@ import { TableModule } from 'primeng/table';
 })
 export class BaseTable1Component {
   @Input() data: unknown[];
-  @Input() cols: { field: string; header: string }[];
+  @Input() cols: IColumns[];
 }

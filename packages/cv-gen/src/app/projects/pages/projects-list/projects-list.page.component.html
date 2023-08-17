@@ -1,12 +1,9 @@
 <cv-gen-base-table2>
-    <tr data>
-      <td>statue</td>
-      <td>statue</td>
-    </tr>
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>statue</td>
-    </tr>
-  </tbody>
+  <tr header>
+    <th *ngFor="let col of cols">{{ col.header }}</th>
+  </tr>
+  <tr body *ngFor="let project of projects">
+    <td>{{project.id}}</td>
+    <td style="color:blue">{{project.projectName}}</td>
+  </tr>
 </cv-gen-base-table2>
