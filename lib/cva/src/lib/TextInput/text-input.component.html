@@ -3,7 +3,7 @@
     type="text"
     placeholder="myPlaceholder"
     pInputText
-    [class]="control.invalid ? 'ng-invalid ng-dirty' : ''"
+    [ngClass]="control.invalid ? 'ng-invalid ng-dirty' : ''"
     [formControl]="control">
     <ng-template [ngIf]="control.errors && control.invalid">
       <small class="error">{{errorMessages[currentErrorKey]}}</small>

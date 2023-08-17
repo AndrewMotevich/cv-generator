@@ -4,11 +4,11 @@ import {
   Component,
   DoCheck,
   Input,
-  OnInit,
   Optional,
   Self,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { BaseInputClass } from '../shared/classes/base-input.class';
 
 @Component({
   selector: 'cv-gen-text-input',
@@ -16,31 +16,22 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
   styleUrls: ['./text-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextInputComponent
-  implements ControlValueAccessor, OnInit, DoCheck
+export class TextInputComponent extends BaseInputClass
+  implements ControlValueAccessor, DoCheck
 {
   @Input() public label: string;
   @Input() public errorMessages: { [key: string]: string };
 
-  public control: FormControl = new FormControl('');
+  public override control: FormControl
 
   public currentErrorKey: string;
-
-  private onChange: (val: string) => void;
-
-  private onTouch: (val: string) => void;
 
   constructor(
     @Self() @Optional() private ngControl: NgControl,
     private changeDetection: ChangeDetectorRef
   ) {
+    super(new FormControl(''))
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngOnInit(): void {
-    this.control.valueChanges.subscribe((res) => {
-      this.onChange(res || '');
-    });
   }
 
   public ngDoCheck(): void {
@@ -56,15 +47,4 @@ export class TextInputComponent
     }
   }
 
-  public writeValue(value: string) {
-    this.control.setValue(value, { emitEvent: false });
-  }
-
-  public registerOnChange(fn: (val: string) => void) {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: (val: string) => void) {
-    this.onTouch = fn;
-  }
 }
