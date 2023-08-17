@@ -15,4 +15,8 @@ export class ProjectListPageComponent {
     {field: "id", header: "Id"},
     {field: "projectName", header: "Project Name"},
   ]
+
+  alert(any: unknown){
+    alert(any)
+  }
 }

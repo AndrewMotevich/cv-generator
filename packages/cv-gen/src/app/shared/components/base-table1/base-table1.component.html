@@ -13,7 +13,7 @@
     pTemplate="body"
     let-rowData
     let-columns="columns">
-    <tr>
+    <tr class="table-row" (click)="rowCallback(rowData)">
       <td *ngFor="let col of columns">{{ rowData[col.field] }}</td>
     </tr>
   </ng-template>

@@ -14,4 +14,5 @@ import { IColumns } from '../../interfaces/shared.interfeces';
 export class BaseTable1Component {
   @Input() data: unknown[];
   @Input() cols: IColumns[];
+  @Input() rowCallback: (rowData: {[key: string]: unknown}) => void;
 }

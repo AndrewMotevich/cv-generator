@@ -11,6 +11,7 @@ import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 })
 export class EmployeesListPageComponent {
   data: IEmployee[] = employeesMock;
+
   cols: IColumns[] = [
     { field: 'firstName', header: 'First name' },
     { field: 'lastName', header: 'Last name' },
@@ -18,4 +19,8 @@ export class EmployeesListPageComponent {
     { field: 'department', header: 'Department' },
     { field: 'specialization', header: 'Specialization' },
   ];
+
+  alertFirstName(data: unknown){
+    alert((data as IEmployee).firstName)
+  }
 }
