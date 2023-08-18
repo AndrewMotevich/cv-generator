@@ -19,8 +19,11 @@ import { BaseInputClass } from '../shared/classes/base-input.class';
 export class TextInputComponent extends BaseInputClass
   implements ControlValueAccessor, DoCheck
 {
-  @Input() public label: string;
   @Input() public errorMessages: { [key: string]: string };
+  @Input() public placeholder: string;
+  @Input() public label: string;
+  @Input() public leftIcon: string;
+  @Input() public disabled: boolean;
 
   public override control: FormControl
 

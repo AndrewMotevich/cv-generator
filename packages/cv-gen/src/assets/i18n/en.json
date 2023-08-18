@@ -1,7 +1,15 @@
 {
-  "HEADER": "CV-Gen",
+  "APPLICATION": "CV-Gen",
+  "LABELS": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "DEPARTMENT": "Department",
+    "SPECIALIZATION": "Specialization"
+  },
   "ERROR_MESSAGES": {
     "REQUIRED": "{{value}} is required!",
-    "EMAIL": "Invalid email!"
+    "EMAIL": "Invalid email!",
+    "MIN_LENGTH": "Min length {{value}}!",
+    "MAX_LENGTH": "Max length {{value}}!"
   }
 }

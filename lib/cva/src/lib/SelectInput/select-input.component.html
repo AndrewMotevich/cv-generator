@@ -1,1 +1,11 @@
-<p>select-input works!</p>
+<div class="flex-layout">
+  <label htmlFor="inputText">{{label}}</label>
+  <p-dropdown
+    [options]="options"
+    [formControl]="control"
+    [placeholder]="placeholder"
+    [editable]="true"></p-dropdown>
+    <ng-template [ngIf]="control.errors && control.invalid">
+      <small class="error">{{errorMessages[currentErrorKey]}}</small>
+    </ng-template>
+</div>

@@ -1,6 +1,15 @@
 <form [formGroup]="authForm">
-  <label for="myInput">Email</label>
-  <cv-gen-text-input [errorMessages]="errorMessages" id="myInput" formControlName="textInput"></cv-gen-text-input>
+  <cv-gen-text-input
+    label="Email"
+    placeholder="Enter Email"
+    formControlName="textInput"
+    leftIcon="pi pi-search"
+    [errorMessages]="errorMessages"></cv-gen-text-input>
+  <cv-gen-select-input
+    label="City"
+    placeholder="Select City"
+    formControlName="selectInput"
+    [options]="cities"
+    [errorMessages]="errorMessages"></cv-gen-select-input>
   <p-button (click)="submit()">Submit</p-button>
 </form>
-{{authForm.controls.textInput.value}}

@@ -12,23 +12,34 @@ import { TranslateService } from '@ngx-translate/core';
 export class AuthPageComponent {
   errorMessages = {
     required: '',
-    email: ''
-  }
+    email: '',
+  };
+
+  cities = ['New York', 'Rome', 'London', 'Istanbul', 'Paris'];
 
   authForm = new FormGroup({
-    textInput: new FormControl('', { validators: [Validators.required, Validators.email] }),
+    textInput: new FormControl('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    selectInput: new FormControl('', {
+      validators: [Validators.required],
+    }),
   });
 
-  constructor(private translateService: TranslateService){
-    this.translateService.get('ERROR_MESSAGES.REQUIRED', {value: "Email"}).subscribe(res => this.errorMessages.required = res)
-    this.translateService.get('ERROR_MESSAGES.EMAIL').subscribe(res => this.errorMessages.email = res)
+  constructor(private translateService: TranslateService) {
+    this.translateService
+      .get('ERROR_MESSAGES.REQUIRED', { value: 'Field' })
+      .subscribe((res) => (this.errorMessages.required = res));
+    this.translateService
+      .get('ERROR_MESSAGES.EMAIL')
+      .subscribe((res) => (this.errorMessages.email = res));
   }
 
   submit() {
     if (this.authForm.invalid) {
-      markAsDirty(this.authForm.controls)
-      return
-    };
+      markAsDirty(this.authForm.controls);
+      return;
+    }
     console.log(this.authForm.getRawValue());
   }
 }
