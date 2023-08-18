@@ -5,21 +5,43 @@
     formControlName="textInput"
     leftIcon="pi pi-search"
     [errorMessages]="errorMessages"></cv-gen-text-input>
+
   <cv-gen-select-input
     label="Specialization"
     placeholder="Select spec"
     formControlName="selectInput"
     [options]="specialization"
     [errorMessages]="errorMessages"></cv-gen-select-input>
+
   <cv-gen-date-input
     label="Date"
     placeholder="Select Date"
     formControlName="dateInput"
     [errorMessages]="errorMessages"></cv-gen-date-input>
+
   <cv-gen-chips-input
     label="Skills"
     placeholder="Enter your skills"
     formControlName="chipsInput"
     [errorMessages]="errorMessages"></cv-gen-chips-input>
+
+  <cv-gen-textarea-input
+    label="Description"
+    placeholder="Write description"
+    formControlName="textareaInput"
+    [errorMessages]="errorMessages"></cv-gen-textarea-input>
+
+  <cv-gen-number-input
+    label="Team size"
+    placeholder="Write team size"
+    formControlName="numberInput"
+    [errorMessages]="errorMessages"></cv-gen-number-input>
+
+  <cv-gen-password-input
+    label="Password"
+    placeholder="Enter password"
+    formControlName="passwordInput"
+    [errorMessages]="errorMessages"></cv-gen-password-input>
+
   <p-button (click)="submit()">Submit</p-button>
 </form>

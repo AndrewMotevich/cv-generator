@@ -13,8 +13,8 @@ export class AuthPageComponent implements OnInit {
   errorMessages = {
     required: '',
     email: '',
-    minLength: '',
-    maxLength: '',
+    minlength: '',
+    maxlength: '',
   };
 
   specialization = ['Angular', 'React', 'Vue'];
@@ -23,11 +23,12 @@ export class AuthPageComponent implements OnInit {
     textInput: new FormControl('', {
       validators: [Validators.required, Validators.email],
     }),
-    selectInput: new FormControl('', {
-      validators: [Validators.required],
-    }),
+    selectInput: new FormControl('', { validators: [Validators.required] }),
     dateInput: new FormControl('', { validators: Validators.required }),
     chipsInput: new FormControl('', { validators: Validators.required }),
+    textareaInput: new FormControl('', { validators: [Validators.required, Validators.maxLength(255)] }),
+    numberInput: new FormControl('', { validators: Validators.required }),
+    passwordInput: new FormControl('', { validators: [Validators.required, Validators.minLength(8)] }),
   });
 
   constructor(private translateService: TranslateService) {}
@@ -41,10 +42,10 @@ export class AuthPageComponent implements OnInit {
       .subscribe((res) => (this.errorMessages.email = res));
     this.translateService
       .get('ERROR_MESSAGES.MIN_LENGTH', { value: 8 })
-      .subscribe((res) => (this.errorMessages.maxLength = res));
+      .subscribe((res) => (this.errorMessages.minlength = res));
     this.translateService
       .get('ERROR_MESSAGES.MAX_LENGTH', { value: 255 })
-      .subscribe((res) => (this.errorMessages.maxLength = res));
+      .subscribe((res) => (this.errorMessages.maxlength = res));
   }
 
   submit() {

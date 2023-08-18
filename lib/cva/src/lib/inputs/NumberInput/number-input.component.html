@@ -1,11 +1,11 @@
 <div class="flex-layout">
-  <label htmlFor="inputText">{{label}}</label>
-  <p-dropdown
-    [class]="control.invalid ? 'ng-invalid ng-dirty' : ''"
-    [options]="options"
-    [formControl]="control"
+  <label htmlFor="inputNumber">{{label}}</label>
+  <p-inputNumber
+    id="inputNumber"
+    mode="decimal"
+    [useGrouping]="false"
     [placeholder]="placeholder"
-    [editable]="true"></p-dropdown>
+    [formControl]="control"></p-inputNumber>
   <ng-template [ngIf]="control.errors && control.invalid">
     <small class="error">{{errorMessages[currentErrorKey]}}</small>
   </ng-template>

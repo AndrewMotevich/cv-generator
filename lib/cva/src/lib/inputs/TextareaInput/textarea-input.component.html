@@ -1,10 +1,13 @@
 <div class="flex-layout">
-  <label htmlFor="chipsInput">{{label}}</label>
-  <p-chips
-    separator=","
-    [class]="control.invalid ? 'ng-invalid ng-dirty' : ''"
+  <label htmlFor="textareaInput">{{label}}</label>
+  <textarea
+    pInputTextarea
+    id="textareaInput"
+    [rows]="rows"
+    [cols]="cols"
     [placeholder]="placeholder"
-    [formControl]="control"></p-chips>
+    [autoResize]="true"
+    [formControl]="control"></textarea>
   <ng-template [ngIf]="control.errors && control.invalid">
     <small class="error">{{errorMessages[currentErrorKey]}}</small>
   </ng-template>

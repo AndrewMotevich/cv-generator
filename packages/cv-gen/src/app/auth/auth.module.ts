@@ -3,7 +3,15 @@ import { CommonModule } from '@angular/common';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { AuthPageComponent } from './page/auth/auth.page.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { ChipsInputModule, DateInputModule, SelectInputModule, TextInputModule, TextareaModule } from '@cva/my-cva-lib';
+import {
+  ChipsInputModule,
+  DateInputModule,
+  NumberInputModule,
+  PasswordInputModule,
+  SelectInputModule,
+  TextInputModule,
+  TextareaModule,
+} from '@cva/my-cva-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 
@@ -19,7 +27,9 @@ import { ButtonModule } from 'primeng/button';
     SelectInputModule,
     DateInputModule,
     ChipsInputModule,
-    TextareaModule
+    TextareaModule,
+    NumberInputModule,
+    PasswordInputModule,
   ],
 })
 export class AuthModule {}

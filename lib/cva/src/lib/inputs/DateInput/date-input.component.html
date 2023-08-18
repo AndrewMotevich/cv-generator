@@ -2,7 +2,7 @@
   <label htmlFor="dateInput">{{label}}</label>
   <p-calendar
     id="dateInput"
-    [class]="control.invalid ? 'ng-invalid ng-dirty' : ''"
+    [placeholder]="placeholder"
     [formControl]="control"></p-calendar>
   <ng-template [ngIf]="control.errors && control.invalid">
     <small class="error">{{errorMessages[currentErrorKey]}}</small>
