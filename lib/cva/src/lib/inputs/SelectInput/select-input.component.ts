@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
-import { BaseInputClass } from '../shared/classes/base-input.class';
+import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
   selector: 'cv-gen-select-input',

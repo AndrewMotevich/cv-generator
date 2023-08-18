@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
-import { BaseInputClass } from '../shared/classes/base-input.class';
+import { BaseInputClass } from '../../shared/classes/base-input.class';
 import { FormControl, NgControl } from '@angular/forms';
 
 @Component({
