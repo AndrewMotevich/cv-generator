@@ -14,10 +14,12 @@ import {
 } from '@cva/my-cva-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AuthPageComponent, AuthFormComponent],
   imports: [
+    TranslateModule,
     ButtonModule,
     CommonModule,
     AuthRoutingModule,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextareaInputComponent } from './textarea-input.component';
+import { GetErrorMessagePipe } from '../../get-error-message.pipe';
 
 @NgModule({
   declarations: [TextareaInputComponent],
@@ -11,6 +12,7 @@ import { TextareaInputComponent } from './textarea-input.component';
     InputTextareaModule,
     FormsModule,
     ReactiveFormsModule,
+    GetErrorMessagePipe
   ],
   exports: [TextareaInputComponent],
 })

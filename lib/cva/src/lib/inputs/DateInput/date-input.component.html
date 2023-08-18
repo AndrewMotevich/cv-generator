@@ -2,9 +2,12 @@
   <label htmlFor="dateInput">{{label}}</label>
   <p-calendar
     id="dateInput"
+    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
     [placeholder]="placeholder"
     [formControl]="control"></p-calendar>
-  <ng-template [ngIf]="control.errors && control.invalid">
-    <small class="error">{{errorMessages[currentErrorKey]}}</small>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small class="error">
+      {{control.errors | getErrorMessage : errorMessages}}
+    </small>
   </ng-template>
 </div>

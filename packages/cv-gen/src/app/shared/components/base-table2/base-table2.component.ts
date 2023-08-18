@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BaseTable2Component {
-  data = [{}]
+  public data: unknown[] = [{}]
 }
 
 

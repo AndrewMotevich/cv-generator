@@ -8,11 +8,11 @@
     id="inputText"
     type="text"
     pInputText
-    [class]="control.invalid ? 'ng-invalid ng-dirty' : ''"
+    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
     [placeholder]="placeholder"
     [formControl]="control">
   </span>
-  <ng-template [ngIf]="control.errors && control.invalid">
-    <small class="error">{{errorMessages[currentErrorKey]}}</small>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small class="error">{{control.errors | getErrorMessage : errorMessages}}</small>
   </ng-template>
 </div>

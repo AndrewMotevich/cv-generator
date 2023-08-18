@@ -1,15 +1,17 @@
+import { ChangeDetectorRef, Directive, DoCheck, OnInit } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
 
-export class BaseInputClass {
-  public control: FormControl;
+@Directive()
+export class BaseInputClass implements OnInit, DoCheck {
+  public control: FormControl = new FormControl('');
 
-  private _ngControl: NgControl;
 
-  public currentErrorKey: string;
+  constructor(
+    protected ngControl: NgControl,
+    protected cdRef: ChangeDetectorRef
+  ) {}
 
-  constructor(control: FormControl, _ngControl: NgControl) {
-    this.control = control;
-    this._ngControl = _ngControl;
+  ngOnInit(): void {
     this.control.valueChanges.subscribe((res) => {
       this.onChange(res || '');
     });
@@ -30,13 +32,13 @@ export class BaseInputClass {
     this.onTouch = fn;
   }
 
-  public checkChanges() {
-    if (this._ngControl.control.errors) {
-      this.currentErrorKey = Object.keys(this._ngControl.control.errors)[0];
-      this.control.setErrors(this._ngControl.control.errors);
+  public ngDoCheck() {
+    if (this.ngControl.control.errors) {
+      this.control.setErrors(this.ngControl.control.errors);
+      this.cdRef.markForCheck();
     }
-    if (this._ngControl.control?.touched) {
-      this.control.markAsTouched();
+    if (this.ngControl.control?.dirty) {
+      this.control.markAsDirty();
     } else {
       this.control.markAsPristine();
     }

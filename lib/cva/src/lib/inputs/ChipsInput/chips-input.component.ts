@@ -6,7 +6,7 @@ import {
   Optional,
   Self,
 } from '@angular/core';
-import { FormControl, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
@@ -19,20 +19,11 @@ export class ChipsInputComponent extends BaseInputClass implements DoCheck {
   @Input() public label: string;
   @Input() public placeholder: string;
 
-  override control: FormControl;
-
-  override currentErrorKey: string;
-
   constructor(
-    @Self() @Optional() private ngControl: NgControl,
-    private changeDetection: ChangeDetectorRef
+    @Self() @Optional() ngControl: NgControl,
+    cdRef: ChangeDetectorRef
   ) {
-    super(new FormControl(''), ngControl);
+    super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngDoCheck(): void {
-    this.checkChanges();
-    this.changeDetection.markForCheck();
   }
 }

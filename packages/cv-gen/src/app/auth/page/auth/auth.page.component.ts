@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { markAsDirty } from '../../../shared/utils/mark-as-dirty.util';
+import {
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
+import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,30 +13,34 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthPageComponent implements OnInit {
-  errorMessages = {
+  public errorMessages = {
     required: '',
     email: '',
     minlength: '',
     maxlength: '',
   };
 
-  specialization = ['Angular', 'React', 'Vue'];
+  public specialization = ['Angular', 'React', 'Vue'];
 
-  authForm = new FormGroup({
-    textInput: new FormControl('', {
-      validators: [Validators.required, Validators.email],
-    }),
-    selectInput: new FormControl('', { validators: [Validators.required] }),
-    dateInput: new FormControl('', { validators: Validators.required }),
-    chipsInput: new FormControl('', { validators: Validators.required }),
-    textareaInput: new FormControl('', { validators: [Validators.required, Validators.maxLength(255)] }),
-    numberInput: new FormControl('', { validators: Validators.required }),
-    passwordInput: new FormControl('', { validators: [Validators.required, Validators.minLength(8)] }),
+  public authForm = this.fb.group({
+    textInput: ['', [Validators.required, Validators.email]],
+    passwordInput: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  constructor(private translateService: TranslateService) {}
+  public projectsForm = this.fb.group({
+    selectInput: ['', { validators: [Validators.required] }],
+    dateInput: ['', { validators: Validators.required }],
+    chipsInput: ['', { validators: Validators.required }],
+    textareaInput: ['', [Validators.required, Validators.maxLength(255)]],
+    numberInput: ['', { validators: Validators.required }],
+  });
 
-  ngOnInit() {
+  constructor(
+    private translateService: TranslateService,
+    private fb: FormBuilder,
+  ) {}
+
+  public ngOnInit() {
     this.translateService
       .get('ERROR_MESSAGES.REQUIRED', { value: 'Field' })
       .subscribe((res) => (this.errorMessages.required = res));
@@ -48,11 +55,23 @@ export class AuthPageComponent implements OnInit {
       .subscribe((res) => (this.errorMessages.maxlength = res));
   }
 
-  submit() {
+  public submitAuth() {
     if (this.authForm.invalid) {
-      markAsDirty(this.authForm.controls);
+      markAllAsDirty(this.authForm.controls);
       return;
     }
     console.log(this.authForm.getRawValue());
+  }
+
+  public submitProjects() {
+    if (this.projectsForm.invalid) {
+      markAllAsDirty(this.projectsForm.controls);
+      return;
+    }
+    console.log(this.authForm.getRawValue());
+  }
+
+  public switchLanguage(lang: string){
+    this.translateService.use(lang)
   }
 }

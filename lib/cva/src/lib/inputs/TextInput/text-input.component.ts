@@ -7,7 +7,7 @@ import {
   Optional,
   Self,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
@@ -25,20 +25,11 @@ export class TextInputComponent extends BaseInputClass
   @Input() public leftIcon: string;
   @Input() public disabled: boolean;
 
-  public override control: FormControl
-
-  public override currentErrorKey: string;
-
   constructor(
-    @Self() @Optional() private ngControl: NgControl,
-    private changeDetection: ChangeDetectorRef
+    @Self() @Optional() ngControl: NgControl,
+    cdRef: ChangeDetectorRef
   ) {
-    super(new FormControl(''), ngControl);
+    super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngDoCheck(): void {
-    this.checkChanges()
-    this.changeDetection.markForCheck()
   }
 }

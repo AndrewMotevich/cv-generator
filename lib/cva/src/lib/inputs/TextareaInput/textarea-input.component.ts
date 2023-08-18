@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
-import { FormControl, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 
 @Component({
   selector: 'cv-gen-textarea-input',
@@ -14,20 +14,11 @@ export class TextareaInputComponent extends BaseInputClass implements DoCheck {
   @Input() public rows = 5;
   @Input() public cols = 5;
 
-  override control: FormControl;
-
-  override currentErrorKey: string;
-
   constructor(
-    @Self() @Optional() private ngControl: NgControl,
-    private changeDetection: ChangeDetectorRef
+    @Self() @Optional() ngControl: NgControl,
+    cdRef: ChangeDetectorRef
   ) {
-    super(new FormControl(''), ngControl);
+    super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngDoCheck(): void {
-    this.checkChanges();
-    this.changeDetection.markForCheck();
   }
 }

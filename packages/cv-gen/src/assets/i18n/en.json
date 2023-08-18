@@ -4,7 +4,10 @@
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "DEPARTMENT": "Department",
-    "SPECIALIZATION": "Specialization"
+    "SPECIALIZATION": "Specialization",
+    "SKILLS": "Skills",
+    "DESCRIPTION": "Description",
+    "TEAM_SIZE": "Team size"
   },
   "ERROR_MESSAGES": {
     "REQUIRED": "{{value}} is required!",

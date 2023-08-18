@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
-import { FormControl, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
@@ -13,20 +13,11 @@ export class SelectInputComponent extends BaseInputClass implements DoCheck{
   @Input() placeholder: string
   @Input() options: unknown[]
 
-  public override control: FormControl
-
-  public override currentErrorKey: string;
-
   constructor(
-    @Self() @Optional() private ngControl: NgControl,
-    private changeDetection: ChangeDetectorRef
+    @Self() @Optional() ngControl: NgControl,
+    cdRef: ChangeDetectorRef
   ) {
-    super(new FormControl(''), ngControl);
+    super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngDoCheck(): void {
-    this.checkChanges()
-    this.changeDetection.markForCheck()
   }
 }

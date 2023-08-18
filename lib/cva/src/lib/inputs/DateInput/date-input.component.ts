@@ -1,5 +1,12 @@
-import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
-import { FormControl, NgControl } from '@angular/forms';
+import {
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  Input,
+  Optional,
+  Self,
+} from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
@@ -9,23 +16,14 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
 })
 export class DateInputComponent extends BaseInputClass implements DoCheck {
   @Input() public errorMessages: { [key: string]: string };
-  @Input() public label: string
-  @Input() public placeholder: string
-
-  override control: FormControl;
-
-  override currentErrorKey: string;
+  @Input() public label: string;
+  @Input() public placeholder: string;
 
   constructor(
-    @Self() @Optional() private ngControl: NgControl,
-    private changeDetection: ChangeDetectorRef
+    @Self() @Optional() ngControl: NgControl,
+    cdRef: ChangeDetectorRef
   ) {
-    super(new FormControl(''), ngControl);
+    super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;
-  }
-
-  public ngDoCheck(): void {
-    this.checkChanges()
-    this.changeDetection.markForCheck()
   }
 }

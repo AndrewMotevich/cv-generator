@@ -2,11 +2,14 @@
   <label htmlFor="inputSelect">{{label}}</label>
   <p-dropdown
     id="inputSelect"
+    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
     [options]="options"
     [formControl]="control"
     [placeholder]="placeholder"
     [editable]="true"></p-dropdown>
-  <ng-template [ngIf]="control.errors && control.invalid">
-    <small class="error">{{errorMessages[currentErrorKey]}}</small>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small class="error">
+      {{control.errors | getErrorMessage : errorMessages}}
+    </small>
   </ng-template>
 </div>

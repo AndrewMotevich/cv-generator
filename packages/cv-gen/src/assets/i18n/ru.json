@@ -1,3 +1,18 @@
 {
-  "HEADER": "Резю-ген"
+  "APPLICATION": "CV-Gen",
+  "LABELS": {
+    "EMAIL": "Почта",
+    "PASSWORD": "Пароль",
+    "DEPARTMENT": "Департамент",
+    "SPECIALIZATION": "Специализация",
+    "SKILLS": "Навыки",
+    "DESCRIPTION": "Описание",
+    "TEAM_SIZE": "Размер команды"
+  },
+  "ERROR_MESSAGES": {
+    "REQUIRED": "{{value}} обязателен!",
+    "EMAIL": "Неправильная почта!",
+    "MIN_LENGTH": "Минимальная длина {{value}}!",
+    "MAX_LENGTH": "Максимальная длина {{value}}!"
+  }
 }
