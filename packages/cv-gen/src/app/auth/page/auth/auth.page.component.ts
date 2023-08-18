@@ -27,6 +27,7 @@ export class AuthPageComponent implements OnInit {
       validators: [Validators.required],
     }),
     dateInput: new FormControl('', { validators: Validators.required }),
+    chipsInput: new FormControl('', { validators: Validators.required }),
   });
 
   constructor(private translateService: TranslateService) {}

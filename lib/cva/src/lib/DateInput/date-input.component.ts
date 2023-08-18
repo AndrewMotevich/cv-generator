@@ -9,7 +9,8 @@ import { BaseInputClass } from '../shared/classes/base-input.class';
 })
 export class DateInputComponent extends BaseInputClass implements DoCheck {
   @Input() public errorMessages: { [key: string]: string };
-  @Input() label: string
+  @Input() public label: string
+  @Input() public placeholder: string
 
   override control: FormControl;
 

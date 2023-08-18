@@ -11,6 +11,15 @@
     formControlName="selectInput"
     [options]="specialization"
     [errorMessages]="errorMessages"></cv-gen-select-input>
-  <cv-gen-date-input label="Date" formControlName="dateInput" [errorMessages]="errorMessages"></cv-gen-date-input>
+  <cv-gen-date-input
+    label="Date"
+    placeholder="Select Date"
+    formControlName="dateInput"
+    [errorMessages]="errorMessages"></cv-gen-date-input>
+  <cv-gen-chips-input
+    label="Skills"
+    placeholder="Enter your skills"
+    formControlName="chipsInput"
+    [errorMessages]="errorMessages"></cv-gen-chips-input>
   <p-button (click)="submit()">Submit</p-button>
 </form>
