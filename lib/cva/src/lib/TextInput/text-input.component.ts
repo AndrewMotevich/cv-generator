@@ -27,27 +27,18 @@ export class TextInputComponent extends BaseInputClass
 
   public override control: FormControl
 
-  public currentErrorKey: string;
+  public override currentErrorKey: string;
 
   constructor(
     @Self() @Optional() private ngControl: NgControl,
     private changeDetection: ChangeDetectorRef
   ) {
-    super(new FormControl(''))
+    super(new FormControl(''), ngControl);
     this.ngControl.valueAccessor = this;
   }
 
   public ngDoCheck(): void {
-    if (this.ngControl.control.errors) {
-      this.currentErrorKey = Object.keys(this.ngControl.control.errors)[0]
-      this.control.setErrors(this.ngControl.control.errors);
-      this.changeDetection.markForCheck();
-    }
-    if (this.ngControl.control?.touched) {
-      this.control.markAsTouched();
-    } else {
-      this.control.markAsPristine();
-    }
+    this.checkChanges()
+    this.changeDetection.markForCheck()
   }
-
 }

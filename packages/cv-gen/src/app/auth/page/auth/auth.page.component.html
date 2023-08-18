@@ -6,10 +6,11 @@
     leftIcon="pi pi-search"
     [errorMessages]="errorMessages"></cv-gen-text-input>
   <cv-gen-select-input
-    label="City"
-    placeholder="Select City"
+    label="Specialization"
+    placeholder="Select spec"
     formControlName="selectInput"
-    [options]="cities"
+    [options]="specialization"
     [errorMessages]="errorMessages"></cv-gen-select-input>
+  <cv-gen-date-input label="Date" formControlName="dateInput" [errorMessages]="errorMessages"></cv-gen-date-input>
   <p-button (click)="submit()">Submit</p-button>
 </form>

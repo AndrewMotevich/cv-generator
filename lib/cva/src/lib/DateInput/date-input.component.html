@@ -1,1 +1,7 @@
-<p>date-input works!</p>
+<div class="flex-layout">
+  <label htmlFor="dateInput">{{label}}</label>
+  <p-calendar id="dateInput" [formControl]="control"></p-calendar>
+  <ng-template [ngIf]="control.errors && control.invalid">
+    <small class="error">{{errorMessages[currentErrorKey]}}</small>
+  </ng-template>
+</div>

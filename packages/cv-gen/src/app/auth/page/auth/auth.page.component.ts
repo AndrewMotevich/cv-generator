@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { markAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,13 +9,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./auth.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthPageComponent {
+export class AuthPageComponent implements OnInit {
   errorMessages = {
     required: '',
     email: '',
+    minLength: '',
+    maxLength: '',
   };
 
-  cities = ['New York', 'Rome', 'London', 'Istanbul', 'Paris'];
+  specialization = ['Angular', 'React', 'Vue'];
 
   authForm = new FormGroup({
     textInput: new FormControl('', {
@@ -24,15 +26,24 @@ export class AuthPageComponent {
     selectInput: new FormControl('', {
       validators: [Validators.required],
     }),
+    dateInput: new FormControl('', { validators: Validators.required }),
   });
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService) {}
+
+  ngOnInit() {
     this.translateService
       .get('ERROR_MESSAGES.REQUIRED', { value: 'Field' })
       .subscribe((res) => (this.errorMessages.required = res));
     this.translateService
       .get('ERROR_MESSAGES.EMAIL')
       .subscribe((res) => (this.errorMessages.email = res));
+    this.translateService
+      .get('ERROR_MESSAGES.MIN_LENGTH', { value: 8 })
+      .subscribe((res) => (this.errorMessages.maxLength = res));
+    this.translateService
+      .get('ERROR_MESSAGES.MAX_LENGTH', { value: 255 })
+      .subscribe((res) => (this.errorMessages.maxLength = res));
   }
 
   submit() {
