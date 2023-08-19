@@ -2,54 +2,51 @@
 <p-button (click)="switchLanguage('ru')">Ru</p-button>
 
 <div style="display: flex;">
-<form style="width: 30vw;" [formGroup]="authForm">
-  <cv-gen-text-input
-    label="{{'LABELS.EMAIL' | translate}}"
-    placeholder="Enter Email"
-    formControlName="textInput"
-    leftIcon="pi pi-search"
-    [errorMessages]="errorMessages"></cv-gen-text-input>
+  <form
+    style="width: 30vw;"
+    [formGroup]="authForm">
+    <cv-gen-text-input
+      label="{{'LABELS.EMAIL' | translate}}"
+      placeholder="Enter Email"
+      formControlName="textInput"
+      leftIcon="pi pi-search"></cv-gen-text-input>
 
     <cv-gen-password-input
-    label="{{'LABELS.PASSWORD' | translate}}"
-    placeholder="Enter password"
-    formControlName="passwordInput"
-    [errorMessages]="errorMessages"></cv-gen-password-input>
+      label="{{'LABELS.PASSWORD' | translate}}"
+      placeholder="Enter password"
+      formControlName="passwordInput"></cv-gen-password-input>
 
     <p-button (click)="submitAuth()">Submit</p-button>
   </form>
 
-  <form style="width: 30vw;" [formGroup]="projectsForm">
+  <form
+    style="width: 30vw;"
+    [formGroup]="projectsForm">
     <cv-gen-number-input
-    label="{{'LABELS.TEAM_SIZE' | translate}}"
-    placeholder="Write team size"
-    formControlName="numberInput"
-    [errorMessages]="errorMessages"></cv-gen-number-input>
+      label="{{'LABELS.TEAM_SIZE' | translate}}"
+      placeholder="Write team size"
+      formControlName="numberInput"></cv-gen-number-input>
 
     <cv-gen-select-input
-    label="{{'LABELS.SPECIALIZATION' | translate}}"
-    placeholder="Select spec"
-    formControlName="selectInput"
-    [options]="specialization"
-    [errorMessages]="errorMessages"></cv-gen-select-input>
+      label="{{'LABELS.SPECIALIZATION' | translate}}"
+      placeholder="Select spec"
+      formControlName="selectInput"
+      [options]="specialization"></cv-gen-select-input>
 
     <cv-gen-date-input
-    label="Date"
-    placeholder="Select Date"
-    formControlName="dateInput"
-    [errorMessages]="errorMessages"></cv-gen-date-input>
+      label="{{'LABELS.DATE_START' | translate}}"
+      placeholder="Select Date"
+      formControlName="dateInput"></cv-gen-date-input>
 
     <cv-gen-chips-input
-    label="{{'LABELS.SKILLS' | translate}}"
-    placeholder="Enter your skills"
-    formControlName="chipsInput"
-    [errorMessages]="errorMessages"></cv-gen-chips-input>
+      label="{{'LABELS.SKILLS' | translate}}"
+      placeholder="Enter your skills"
+      formControlName="chipsInput"></cv-gen-chips-input>
 
     <cv-gen-textarea-input
-    label="{{'LABELS.DESCRIPTION' | translate}}"
-    placeholder="Write description"
-    formControlName="textareaInput"
-    [errorMessages]="errorMessages"></cv-gen-textarea-input>
+      label="{{'LABELS.DESCRIPTION' | translate}}"
+      placeholder="Write description"
+      formControlName="textareaInput"></cv-gen-textarea-input>
 
     <p-button (click)="submitProjects()">Submit</p-button>
   </form>

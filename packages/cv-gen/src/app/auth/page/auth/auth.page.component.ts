@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -12,14 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./auth.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthPageComponent implements OnInit {
-  public errorMessages = {
-    required: '',
-    email: '',
-    minlength: '',
-    maxlength: '',
-  };
-
+export class AuthPageComponent {
   public specialization = ['Angular', 'React', 'Vue'];
 
   public authForm = this.fb.group({
@@ -39,21 +32,6 @@ export class AuthPageComponent implements OnInit {
     private translateService: TranslateService,
     private fb: FormBuilder,
   ) {}
-
-  public ngOnInit() {
-    this.translateService
-      .get('ERROR_MESSAGES.REQUIRED', { value: 'Field' })
-      .subscribe((res) => (this.errorMessages.required = res));
-    this.translateService
-      .get('ERROR_MESSAGES.EMAIL')
-      .subscribe((res) => (this.errorMessages.email = res));
-    this.translateService
-      .get('ERROR_MESSAGES.MIN_LENGTH', { value: 8 })
-      .subscribe((res) => (this.errorMessages.minlength = res));
-    this.translateService
-      .get('ERROR_MESSAGES.MAX_LENGTH', { value: 255 })
-      .subscribe((res) => (this.errorMessages.maxlength = res));
-  }
 
   public submitAuth() {
     if (this.authForm.invalid) {

@@ -3,15 +3,18 @@
   <textarea
     pInputTextarea
     id="textareaInput"
-    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
     [rows]="rows"
     [cols]="cols"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
     [placeholder]="placeholder"
     [autoResize]="true"
     [formControl]="control"></textarea>
   <ng-template [ngIf]="control.errors && control.dirty">
-    <small class="error">
-      {{control.errors | getErrorMessage : errorMessages}}
+    <small
+      class="error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
     </small>
   </ng-template>
 </div>

@@ -1,18 +1,23 @@
 <div class="flex-layout">
+  <h2>{{'APPLICATION' | translate}}</h2>
   <label htmlFor="inputText">{{label}}</label>
   <span [ngClass]="leftIcon ? 'p-input-icon-left' : ''">
-    <ng-template [ngIf]="leftIcon">
-      <i [class]="leftIcon"></i>
+    <ng-template [ngIf]="leftIcon"><i [class]="leftIcon"></i>
     </ng-template>
     <input
-    id="inputText"
-    type="text"
-    pInputText
-    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
-    [placeholder]="placeholder"
-    [formControl]="control">
+      id="inputText"
+      type="text"
+      pInputText
+      [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+      [placeholder]="placeholder"
+      [formControl]="control">
   </span>
   <ng-template [ngIf]="control.errors && control.dirty">
-    <small class="error">{{control.errors | getErrorMessage : errorMessages}}</small>
+    <small
+      class="error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
   </ng-template>
 </div>

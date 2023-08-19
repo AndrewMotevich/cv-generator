@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { PasswordModule } from 'primeng/password';
 import { PasswordInputComponent } from './password-input.component';
-import { GetErrorMessagePipe } from '../../get-error-message.pipe';
+import { GetErrorMessagePipe } from '../../shared/pipes/get-error-message.pipe';
+import { ChildTranslateModule } from '../../shared/translate/child-translate.module';
 
 @NgModule({
   declarations: [PasswordInputComponent],
@@ -15,6 +16,7 @@ import { GetErrorMessagePipe } from '../../get-error-message.pipe';
     InputNumberModule,
     PasswordModule,
     GetErrorMessagePipe,
+    ChildTranslateModule
   ],
   exports: [PasswordInputComponent],
 })

@@ -19,7 +19,6 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
 export class TextInputComponent extends BaseInputClass
   implements ControlValueAccessor, DoCheck
 {
-  @Input() public errorMessages: { [key: string]: string };
   @Input() public placeholder: string;
   @Input() public label: string;
   @Input() public leftIcon: string;
@@ -27,7 +26,7 @@ export class TextInputComponent extends BaseInputClass
 
   constructor(
     @Self() @Optional() ngControl: NgControl,
-    cdRef: ChangeDetectorRef
+    cdRef: ChangeDetectorRef,
   ) {
     super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;

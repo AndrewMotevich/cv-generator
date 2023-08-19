@@ -2,12 +2,15 @@
   <label htmlFor="chipsInput">{{label}}</label>
   <p-chips
     separator=","
-    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
     [placeholder]="placeholder"
     [formControl]="control"></p-chips>
   <ng-template [ngIf]="control.errors && control.dirty">
-    <small class="error">
-      {{control.errors | getErrorMessage : errorMessages}}
+    <small
+      class="error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
     </small>
   </ng-template>
 </div>

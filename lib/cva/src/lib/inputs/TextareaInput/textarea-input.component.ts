@@ -8,7 +8,6 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['./textarea-input.component.scss'],
 })
 export class TextareaInputComponent extends BaseInputClass implements DoCheck {
-  @Input() public errorMessages: { [key: string]: string };
   @Input() public label: string;
   @Input() public placeholder: string;
   @Input() public rows = 5;

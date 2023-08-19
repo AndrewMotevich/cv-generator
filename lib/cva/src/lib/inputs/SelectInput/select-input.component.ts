@@ -8,7 +8,6 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
   styleUrls: ['./select-input.component.scss'],
 })
 export class SelectInputComponent extends BaseInputClass implements DoCheck{
-  @Input() public errorMessages: { [key: string]: string };
   @Input() label: string
   @Input() placeholder: string
   @Input() options: unknown[]

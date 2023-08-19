@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ChipsModule } from 'primeng/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipsInputComponent } from './chips-input.component';
-import { GetErrorMessagePipe } from '../../get-error-message.pipe';
+import { GetErrorMessagePipe } from '../../shared/pipes/get-error-message.pipe';
+import { ChildTranslateModule } from '../../shared/translate/child-translate.module';
 
 @NgModule({
   declarations: [ChipsInputComponent],
@@ -13,6 +14,7 @@ import { GetErrorMessagePipe } from '../../get-error-message.pipe';
     FormsModule,
     ReactiveFormsModule,
     GetErrorMessagePipe,
+    ChildTranslateModule,
   ],
   exports: [ChipsInputComponent],
 })

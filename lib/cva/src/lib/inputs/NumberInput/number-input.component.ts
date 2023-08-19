@@ -15,7 +15,6 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['./number-input.component.scss'],
 })
 export class NumberInputComponent extends BaseInputClass implements DoCheck {
-  @Input() public errorMessages: { [key: string]: string };
   @Input() label: string;
   @Input() placeholder: string;
   @Input() options: unknown[];

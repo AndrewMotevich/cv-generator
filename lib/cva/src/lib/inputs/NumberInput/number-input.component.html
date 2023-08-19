@@ -3,13 +3,16 @@
   <p-inputNumber
     id="inputNumber"
     mode="decimal"
-    [class]="control.dirty? 'ng-invalid ng-dirty' : ''"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
     [useGrouping]="false"
     [placeholder]="placeholder"
     [formControl]="control"></p-inputNumber>
   <ng-template [ngIf]="control.errors && control.dirty">
-    <small class="error">
-      {{control.errors | getErrorMessage : errorMessages}}
+    <small
+      class="error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
     </small>
   </ng-template>
 </div>

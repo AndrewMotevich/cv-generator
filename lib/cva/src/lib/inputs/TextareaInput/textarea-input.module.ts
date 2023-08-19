@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextareaInputComponent } from './textarea-input.component';
-import { GetErrorMessagePipe } from '../../get-error-message.pipe';
+import { GetErrorMessagePipe } from '../../shared/pipes/get-error-message.pipe';
+import { ChildTranslateModule } from '../../shared/translate/child-translate.module';
 
 @NgModule({
   declarations: [TextareaInputComponent],
@@ -12,7 +13,8 @@ import { GetErrorMessagePipe } from '../../get-error-message.pipe';
     InputTextareaModule,
     FormsModule,
     ReactiveFormsModule,
-    GetErrorMessagePipe
+    GetErrorMessagePipe,
+    ChildTranslateModule
   ],
   exports: [TextareaInputComponent],
 })

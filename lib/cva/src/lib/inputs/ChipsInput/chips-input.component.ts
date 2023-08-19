@@ -15,7 +15,6 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
   styleUrls: ['./chips-input.component.scss'],
 })
 export class ChipsInputComponent extends BaseInputClass implements DoCheck {
-  @Input() public errorMessages: { [key: string]: string };
   @Input() public label: string;
   @Input() public placeholder: string;
 

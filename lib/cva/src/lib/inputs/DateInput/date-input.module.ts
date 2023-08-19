@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateInputComponent } from './date-input.component';
-import { GetErrorMessagePipe } from '../../get-error-message.pipe';
+import { GetErrorMessagePipe } from '../../shared/pipes/get-error-message.pipe';
+import { ChildTranslateModule } from '../../shared/translate/child-translate.module';
 
 @NgModule({
   declarations: [DateInputComponent],
@@ -13,6 +14,7 @@ import { GetErrorMessagePipe } from '../../get-error-message.pipe';
     FormsModule,
     ReactiveFormsModule,
     GetErrorMessagePipe,
+    ChildTranslateModule,
   ],
   exports: [DateInputComponent],
 })

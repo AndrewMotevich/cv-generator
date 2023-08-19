@@ -1,5 +1,5 @@
 {
-  "APPLICATION": "CV-Gen",
+  "APPLICATION": "CV-Gen-ru",
   "LABELS": {
     "EMAIL": "Почта",
     "PASSWORD": "Пароль",
@@ -7,12 +7,13 @@
     "SPECIALIZATION": "Специализация",
     "SKILLS": "Навыки",
     "DESCRIPTION": "Описание",
-    "TEAM_SIZE": "Размер команды"
+    "TEAM_SIZE": "Размер команды",
+    "DATE_START": "Дата начала"
   },
   "ERROR_MESSAGES": {
-    "REQUIRED": "{{value}} обязателен!",
+    "REQUIRED": "Поле {{label}} обязателен!",
     "EMAIL": "Неправильная почта!",
-    "MIN_LENGTH": "Минимальная длина {{value}}!",
-    "MAX_LENGTH": "Максимальная длина {{value}}!"
+    "MIN_LENGTH": "Минимальная длина {{minlength}}!",
+    "MAX_LENGTH": "Максимальная длина {{maxlength}}!"
   }
 }

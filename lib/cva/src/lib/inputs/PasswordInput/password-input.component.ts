@@ -8,7 +8,6 @@ import { NgControl } from '@angular/forms';
   styleUrls: ['./password-input.component.scss'],
 })
 export class PasswordInputComponent extends BaseInputClass implements DoCheck {
-  @Input() public errorMessages: { [key: string]: string };
   @Input() label: string
   @Input() placeholder: string
   @Input() options: unknown[]
