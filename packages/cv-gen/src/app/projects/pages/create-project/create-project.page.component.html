@@ -1,1 +1,9 @@
-<p>create-project.page works!</p>
+<form [formGroup]="mainForm">
+  <div formArrayName="customForms">
+    <div *ngFor="let formGroup of customForms.controls; let i = index" [formGroupName]="i">
+      <cv-gen-project-form formControlName="customForm"></cv-gen-project-form>
+    </div>
+  </div>
+  <button (click)="addCustomForm()">Add Form</button>
+  <button (click)="submitProjectForm()">Submit</button>
+</form>
