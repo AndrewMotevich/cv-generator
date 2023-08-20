@@ -45,8 +45,8 @@ model CV {
 model Project {
   id               Int              @id @default(autoincrement())
   projectName      String
-  startDate        DateTime
-  endDate          DateTime
+  startDate        DateTime?
+  endDate          DateTime?
   teamSize         Int              @default(1)
   techStack        Skill[]
   description      String
@@ -59,20 +59,20 @@ model Project {
 
 model Skill {
   id       Int       @id @default(autoincrement())
-  name     String
+  name     String    @unique
   cvs      CV[]
   projects Project[]
 }
 
 model TeamRole {
   id       Int       @id @default(autoincrement())
-  name     String
+  name     String    @unique
   projects Project[]
 }
 
 model Responsibility {
   id       Int       @id @default(autoincrement())
-  name     String
+  name     String    @unique
   projects Project[]
 }
 

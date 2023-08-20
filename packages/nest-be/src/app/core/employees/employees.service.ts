@@ -20,21 +20,23 @@ export class EmployeesService {
   }
 
   async addEmployee(dto: EmployeeDto) {
-    const departmentId = await this.departmentService.addUniqDepartment(
-      dto.department
-    );
-    const specializationId =
-      await this.specializationService.addUniqSpecialization(
-        dto.specialization
-      );
-
     return await this.dataBaseService.employee.create({
       data: {
         email: dto.email,
         firstName: dto.firstName,
         lastName: dto.lastName,
-        departmentId: departmentId,
-        specializationId: specializationId,
+        department: {
+          connectOrCreate: {
+            where: { name: dto.department },
+            create: { name: dto.department },
+          },
+        },
+        specialization: {
+          connectOrCreate: {
+            where: { name: dto.specialization },
+            create: { name: dto.specialization },
+          },
+        },
       },
     });
   }

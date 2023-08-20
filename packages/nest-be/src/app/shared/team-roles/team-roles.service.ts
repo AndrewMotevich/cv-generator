@@ -5,17 +5,19 @@ import { DatabaseService } from '../../database/database.service';
 export class TeamRolesService {
   constructor(private dataBaseService: DatabaseService) {}
 
-  async addUniqTeamRole(teamRole: string) {
-    const isTeamRole = await this.dataBaseService.teamRole.findFirst({
-      where: { name: teamRole },
-    });
-
-    if (isTeamRole) return isTeamRole.id;
-
-    return (
-      await this.dataBaseService.teamRole.create({
+  async addUniqTeamRoles(teamRoles: string[]) {
+    return await teamRoles.map(async (teamRole) => {
+      const isTeamRole =
+        await this.dataBaseService.teamRole.findFirst({
+          where: { name: teamRole },
+        });
+      if (isTeamRole) {
+        return isTeamRole.id
+      }
+      const newTeamRole = await this.dataBaseService.teamRole.create({
         data: { name: teamRole },
-      })
-    ).id;
+      });
+      return newTeamRole.id
+    });
   }
 }

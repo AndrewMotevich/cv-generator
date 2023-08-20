@@ -1,9 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { Public } from '../../auth/auth.guard';
 import { DatabaseService } from '../../database/database.service';
 
-@Public()
 @ApiTags('SHARED')
 @Controller('team-roles')
 export class TeamRolesController {
@@ -11,6 +9,6 @@ export class TeamRolesController {
 
   @Get()
   async getData() {
-    return await this.databaseService.skill.findMany();
+    return await this.databaseService.teamRole.findMany();
   }
 }

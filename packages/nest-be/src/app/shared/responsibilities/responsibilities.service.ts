@@ -5,17 +5,24 @@ import { DatabaseService } from '../../database/database.service';
 export class ResponsibilitiesService {
   constructor(private dataBaseService: DatabaseService) {}
 
-  async addUniqResponsibility(responsibility: string) {
-    const isResponsibility = await this.dataBaseService.responsibility.findFirst({
-      where: { name: responsibility },
+  async addUniqResponsibilities(responsibilities: string[]) {
+    const responsibilitiesArray: number[] = []
+
+    await responsibilities.forEach(async (responsibility) => {
+      const isResponsibility =
+        await this.dataBaseService.responsibility.findFirst({
+          where: { name: responsibility },
+        });
+      if (isResponsibility) {
+        responsibilitiesArray.push(isResponsibility.id)
+        return
+      }
+      const newResponsibility = await this.dataBaseService.responsibility.create({
+        data: { name: responsibility },
+      });
+      return responsibilitiesArray.push(newResponsibility.id)
     });
 
-    if (isResponsibility) return isResponsibility.id;
-
-    return (
-      await this.dataBaseService.responsibility.create({
-        data: { name: responsibility },
-      })
-    ).id;
+    return await responsibilitiesArray
   }
 }

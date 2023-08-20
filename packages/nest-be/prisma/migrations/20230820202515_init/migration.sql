@@ -3,7 +3,7 @@ CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "refreshToken" TEXT NOT NULL
+    "refreshToken" TEXT
 );
 
 -- CreateTable
@@ -11,7 +11,11 @@ CREATE TABLE "employees" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "email" TEXT NOT NULL
+    "email" TEXT NOT NULL,
+    "departmentId" INTEGER NOT NULL,
+    "specializationId" INTEGER NOT NULL,
+    CONSTRAINT "employees_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "Department" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "employees_specializationId_fkey" FOREIGN KEY ("specializationId") REFERENCES "Specialization" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -28,8 +32,8 @@ CREATE TABLE "cvs" (
 CREATE TABLE "projects" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "projectName" TEXT NOT NULL,
-    "startDate" DATETIME NOT NULL,
-    "endDate" DATETIME NOT NULL,
+    "startDate" DATETIME,
+    "endDate" DATETIME,
     "teamSize" INTEGER NOT NULL DEFAULT 1,
     "description" TEXT NOT NULL
 );
@@ -69,14 +73,6 @@ CREATE TABLE "Department" (
 CREATE TABLE "Specialization" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL
-);
-
--- CreateTable
-CREATE TABLE "_EmployeeToSpecialization" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
-    CONSTRAINT "_EmployeeToSpecialization_A_fkey" FOREIGN KEY ("A") REFERENCES "employees" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_EmployeeToSpecialization_B_fkey" FOREIGN KEY ("B") REFERENCES "Specialization" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -127,14 +123,6 @@ CREATE TABLE "_ProjectToTeamRole" (
     CONSTRAINT "_ProjectToTeamRole_B_fkey" FOREIGN KEY ("B") REFERENCES "TeamRole" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- CreateTable
-CREATE TABLE "_DepartmentToEmployee" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
-    CONSTRAINT "_DepartmentToEmployee_A_fkey" FOREIGN KEY ("A") REFERENCES "Department" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_DepartmentToEmployee_B_fkey" FOREIGN KEY ("B") REFERENCES "employees" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -142,7 +130,13 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "employees_email_key" ON "employees"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "employees_firstName_lastName_key" ON "employees"("firstName", "lastName");
+CREATE UNIQUE INDEX "Skill_name_key" ON "Skill"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "TeamRole_name_key" ON "TeamRole"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Responsibility_name_key" ON "Responsibility"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Language_name_key" ON "Language"("name");
@@ -152,12 +146,6 @@ CREATE UNIQUE INDEX "Department_name_key" ON "Department"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Specialization_name_key" ON "Specialization"("name");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_EmployeeToSpecialization_AB_unique" ON "_EmployeeToSpecialization"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_EmployeeToSpecialization_B_index" ON "_EmployeeToSpecialization"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CVToLanguage_AB_unique" ON "_CVToLanguage"("A", "B");
@@ -194,9 +182,3 @@ CREATE UNIQUE INDEX "_ProjectToTeamRole_AB_unique" ON "_ProjectToTeamRole"("A", 
 
 -- CreateIndex
 CREATE INDEX "_ProjectToTeamRole_B_index" ON "_ProjectToTeamRole"("B");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_DepartmentToEmployee_AB_unique" ON "_DepartmentToEmployee"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_DepartmentToEmployee_B_index" ON "_DepartmentToEmployee"("B");

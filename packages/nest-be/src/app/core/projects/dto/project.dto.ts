@@ -1,14 +1,27 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsArray, IsDate, IsNumber, IsString } from 'class-validator';
 
-export class UserDto {
+export class ProjectDto {
   @IsString()
   projectName: string;
-  startDate: unknown;
-  endDate: unknown;
+
+  @IsString()
+  description: string;
+
+  // @IsDate()
+  startDate?: Date;
+
+  // @IsDate()
+  endDate?: Date;
+
   @IsNumber()
   teamSize: number;
-  techStack: unknown;
-  description: unknown;
-  responsibilities: unknown;
-  teamRoles: unknown;
+
+  @IsArray()
+  techStack: string[];
+
+  @IsArray()
+  responsibilities: string[];
+
+  @IsArray()
+  teamRoles: string[];
 }
