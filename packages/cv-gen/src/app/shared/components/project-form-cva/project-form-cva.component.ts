@@ -26,7 +26,7 @@ import { InputTextModule } from 'primeng/inputtext';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectFormComponent
-  implements ControlValueAccessor, OnInit, DoCheck
+  implements ControlValueAccessor, OnInit
 {
   public projectForm = this.formBuilder.group({
     firstName: '',
@@ -60,17 +60,5 @@ export class ProjectFormComponent
 
   public registerOnTouched(fn: (val: unknown) => void) {
     this.onTouch = fn;
-  }
-
-  public ngDoCheck() {
-    if (this.ngControl.control.errors) {
-      // this.control.setErrors(this.ngControl.control.errors);
-      this.cdRef.markForCheck();
-    }
-    if (this.ngControl.control?.dirty) {
-      // this.control.markAsDirty();
-    } else {
-      // this.control.markAsPristine();
-    }
   }
 }

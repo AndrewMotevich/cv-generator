@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { ProjectDto } from './dto/project.dto';
+import { transformProjectDto } from '../../database/helpers/transform-project-dto.helper';
 
 @Injectable()
 export class ProjectsService {
@@ -9,52 +10,20 @@ export class ProjectsService {
   async getProjects() {
     try {
       return this.dataBaseService.project.findMany({
-        take: 10,
         include: { techStack: true, responsibilities: true, teamRoles: true },
       });
     } catch (error) {
-      throw new BadRequestException(error.message)
+      throw new BadRequestException(error.message);
     }
   }
 
   async addProject(dto: ProjectDto) {
     try {
-      const teamRoles = dto.teamRoles.map((teamRole) => ({
-        where: { name: teamRole.toLocaleLowerCase() },
-        create: { name: teamRole.toLocaleLowerCase() },
-      }));
-
-      const responsibilities = dto.responsibilities.map((responsibility) => ({
-        where: { name: responsibility.toLocaleLowerCase() },
-        create: { name: responsibility.toLocaleLowerCase() },
-      }));
-
-      const techStack = dto.techStack.map((skill) => ({
-        where: { name: skill.toLocaleLowerCase() },
-        create: { name: skill.toLocaleLowerCase() },
-      }));
-
       return await this.dataBaseService.project.create({
-        data: {
-          projectName: dto.projectName,
-          description: dto.description,
-          startDate: dto.startDate,
-          endDate: dto.endDate,
-          teamSize: dto.teamSize,
-          teamRoles: {
-            connectOrCreate: teamRoles
-          },
-          responsibilities: {
-            connectOrCreate: responsibilities
-          },
-          techStack: {
-            connectOrCreate: techStack
-          },
-        },
+        data: transformProjectDto(dto),
       });
-
     } catch (error) {
-      throw new BadRequestException(error.message)
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -62,7 +31,7 @@ export class ProjectsService {
     try {
       return this.dataBaseService.project.delete({ where: { id: id } });
     } catch (error) {
-      throw new BadRequestException(error.message)
+      throw new BadRequestException(error.message);
     }
   }
 }

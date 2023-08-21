@@ -24,22 +24,25 @@ model Employee {
   departmentId     Int
   specializationId Int
   cvs              CV[]
-
-  @@map("employees")
 }
 
 model CV {
-  id           Int        @id @default(autoincrement())
-  name         String
-  employeeInfo Employee   @relation(fields: [employeeId], references: [id])
-  employeeId   Int
-  language     Language[]
-  skills       Skill[]
-  projects     Project[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id        Int        @id @default(autoincrement())
+  cvName    String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  language  Language[]
+  skills    Skill[]
 
-  @@map("cvs")
+  firstName      String
+  lastName       String
+  email          String
+  department     Department[]
+  specialization Specialization[]
+
+  employeeInfo Employee     @relation(fields: [employeeId], references: [id])
+  employeeId   Int
+  cvsProjects  CvsProject[]
 }
 
 model Project {
@@ -52,28 +55,41 @@ model Project {
   description      String
   responsibilities Responsibility[]
   teamRoles        TeamRole[]
-  cvs              CV[]
+}
 
-  @@map("projects")
+model CvsProject {
+  id               Int              @id @default(autoincrement())
+  projectName      String
+  startDate        DateTime?
+  endDate          DateTime?
+  teamSize         Int              @default(1)
+  techStack        Skill[]
+  description      String
+  responsibilities Responsibility[]
+  teamRoles        TeamRole[]
+  cvs              CV[]
 }
 
 model Skill {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  cvs      CV[]
-  projects Project[]
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  cvs        CV[]
+  projects   Project[]
+  cvsProject CvsProject[]
 }
 
 model TeamRole {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  projects Project[]
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  projects   Project[]
+  cvsProject CvsProject[]
 }
 
 model Responsibility {
-  id       Int       @id @default(autoincrement())
-  name     String    @unique
-  projects Project[]
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  projects   Project[]
+  cvsProject CvsProject[]
 }
 
 model Language {
@@ -87,10 +103,12 @@ model Department {
   id        Int        @id @default(autoincrement())
   name      String     @unique
   employees Employee[]
+  cvs       CV[]
 }
 
 model Specialization {
   id        Int        @id @default(autoincrement())
   name      String     @unique
   employees Employee[]
+  cvs       CV[]
 }

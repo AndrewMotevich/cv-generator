@@ -1,8 +1,16 @@
 import { IsString } from 'class-validator';
+import { ProjectDto } from '../../projects/dto/project.dto';
+
+abstract class Language {
+  name: string;
+  level: string;
+}
 
 export class CvDto {
   @IsString()
   cvName: string;
+  language: Language[];
+  skills: string[];
 
   @IsString()
   firstName: string;
@@ -16,9 +24,5 @@ export class CvDto {
   specialization: string;
 
   employeeId: number;
-  language: unknown;
-  skills: string[];
-  projects: unknown;
-  createdAt: unknown;
-  updatedAt: unknown;
+  projects: ProjectDto[];
 }

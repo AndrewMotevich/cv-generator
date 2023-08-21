@@ -7,10 +7,10 @@ export class ProjectDto {
   @IsString()
   description: string;
 
-  @IsDate()
+  // @IsDate()
   startDate?: Date;
 
-  @IsDate()
+  // @IsDate()
   endDate?: Date;
 
   @IsNumber()

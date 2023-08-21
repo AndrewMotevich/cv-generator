@@ -13,7 +13,9 @@ import {
 import { EmployeeDto } from './dto/employee.dto';
 import { EmployeesService } from './employees.service';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Public } from '../../auth/auth.guard';
 
+@Public()
 @ApiBearerAuth()
 @ApiTags('EMPLOYEES')
 @Controller('employees')

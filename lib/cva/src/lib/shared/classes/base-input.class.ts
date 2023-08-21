@@ -10,7 +10,7 @@ export class BaseInputClass implements OnInit, DoCheck {
 
   constructor(
     protected ngControl: NgControl,
-    protected cdRef: ChangeDetectorRef
+    protected cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
