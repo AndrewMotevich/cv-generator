@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from './users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { Response, Request } from 'express';
@@ -15,20 +19,24 @@ export class AuthService {
   ) {}
 
   async signIn(username: string, pass: string, response: Response) {
-    const user = await this.usersService.findOne(username);
-    if (!(await bcrypt.compare(pass, user?.password))) {
-      throw new UnauthorizedException();
+    try {
+      const user = await this.usersService.findOne(username);
+      if (!(await bcrypt.compare(pass, user?.password))) {
+        throw new UnauthorizedException();
+      }
+      const payload = { email: user.email };
+      const tokens = await this.getTokens(payload, response);
+      this.usersService.updateRefreshToken(tokens.refresh_token);
+      return tokens;
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
     }
-    const payload = { email: user.email };
-    const tokens = await this.getTokens(payload, response);
-    this.usersService.updateRefreshToken(tokens.refresh_token);
-    return tokens;
   }
 
   async refresh(request: Request, response: Response) {
     const token = request.cookies.refresh;
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('No token!');
     }
     try {
       const payload = await this.jwtService.verifyAsync(token, {
@@ -42,30 +50,34 @@ export class AuthService {
       await this.usersService.updateRefreshToken(tokens.refresh_token);
       return tokens;
     } catch {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Incorrect token!');
     }
   }
 
   private async getTokens(payload: { email: string }, response: Response) {
-    const accessToken = await this.jwtService.signAsync(
-      { email: payload.email },
-      JWT_ACCESS_OPTIONS
-    );
-    const refreshToken = await this.jwtService.signAsync(
-      { email: payload.email },
-      JWT_REFRESH_OPTIONS
-    );
+    try {
+      const accessToken = await this.jwtService.signAsync(
+        { email: payload.email },
+        JWT_ACCESS_OPTIONS
+      );
+      const refreshToken = await this.jwtService.signAsync(
+        { email: payload.email },
+        JWT_REFRESH_OPTIONS
+      );
 
-    response.cookie('refresh', refreshToken, {
-      httpOnly: true,
-      sameSite: 'none',
-      secure: true,
-      maxAge: this.oneDayInMilliseconds,
-    });
+      response.cookie('refresh', refreshToken, {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+        maxAge: this.oneDayInMilliseconds,
+      });
 
-    return {
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    };
+      return {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

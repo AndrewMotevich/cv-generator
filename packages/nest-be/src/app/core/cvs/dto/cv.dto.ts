@@ -2,11 +2,22 @@ import { IsString } from 'class-validator';
 
 export class CvDto {
   @IsString()
-  name: string;
-  employeeInfo: unknown;
+  cvName: string;
+
+  @IsString()
+  firstName: string;
+  @IsString()
+  lastName: string;
+  @IsString()
+  email: string;
+  @IsString()
+  department: string;
+  @IsString()
+  specialization: string;
+
   employeeId: number;
   language: unknown;
-  skills: unknown;
+  skills: string[];
   projects: unknown;
   createdAt: unknown;
   updatedAt: unknown;
