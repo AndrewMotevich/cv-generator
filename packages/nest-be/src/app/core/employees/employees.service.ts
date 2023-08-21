@@ -1,15 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { EmployeeDto } from './dto/employee.dto';
-import { DepartmentService } from '../../shared/department/department.service';
-import { SpecializationService } from '../../shared/specialization/specialization.service';
 
 @Injectable()
 export class EmployeesService {
   constructor(
     private dataBaseService: DatabaseService,
-    private departmentService: DepartmentService,
-    private specializationService: SpecializationService
   ) {}
 
   async getEmployees() {
