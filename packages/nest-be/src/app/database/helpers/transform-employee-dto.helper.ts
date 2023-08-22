@@ -19,3 +19,21 @@ export function transformEmployeeDto(dto: EmployeeDto) {
     },
   };
 }
+
+export function transformEmployeePartial(dto: Partial<EmployeeDto>) {
+  return {
+    ...dto,
+    department: {
+      connectOrCreate: {
+        where: { name: dto.department.toLowerCase() },
+        create: { name: dto.department.toLowerCase() },
+      },
+    },
+    specialization: {
+      connectOrCreate: {
+        where: { name: dto.specialization.toLowerCase() },
+        create: { name: dto.specialization.toLowerCase() },
+      },
+    },
+  };
+}
