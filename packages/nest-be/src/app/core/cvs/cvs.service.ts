@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Cv, CvDto } from './dto/cv.dto';
-import { transformCvDto } from '../../database/helpers/transform-cv-dto';
+import { transformCvDto, transformCvPartial } from '../../database/helpers/transform-cv-dto';
 import { cvOutput } from './dto/cv.output';
 
 @Injectable()
@@ -18,7 +18,18 @@ export class CvsService {
     }
   }
 
-  async addCv(dto: CvDto) {
+  async getCvById(id: number): Promise<Cv> {
+    try {
+      return this.dataBaseService.cV.findFirst({
+        where: { id: id },
+        select: cvOutput,
+      });
+    } catch (error) {
+      throw new BadRequestException(error.code);
+    }
+  }
+
+  async addCv(dto: CvDto): Promise<Cv> {
     try {
       return await this.dataBaseService.cV.create({
         data: transformCvDto(dto),
@@ -29,7 +40,19 @@ export class CvsService {
     }
   }
 
-  async deleteCv(id: number) {
+  async updateCv(id: number, dto: CvDto): Promise<Cv> {
+    try {
+      return await this.dataBaseService.cV.update({
+        where: { id: id },
+        data: transformCvPartial(dto),
+        select: cvOutput,
+      });
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  async deleteCv(id: number): Promise<Cv> {
     try {
       return this.dataBaseService.cV.delete({
         where: { id: id },

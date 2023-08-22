@@ -17,6 +17,7 @@ import {
   ApiInternalServerErrorResponse,
   ApiOperation,
   ApiTags,
+  ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ProjectDto } from './dto/project.dto';
 import { Public } from '../../auth/auth.guard';
@@ -31,6 +32,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Get projects' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -42,6 +44,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Get project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -53,6 +56,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Add project' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -66,6 +70,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Update project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -81,6 +86,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Delete project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
