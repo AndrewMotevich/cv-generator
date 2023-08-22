@@ -1,10 +1,30 @@
-<form [formGroup]="projectForm">
-  <div>
-    <label for="firstName">First Name</label>
-    <input pInputText type="text" id="firstName" formControlName="firstName" />
-  </div>
-  <div>
-    <label for="lastName">Last Name</label>
-    <input pInputText type="text" id="lastName" formControlName="lastName" />
-  </div>
+<form
+  [formGroup]="form">
+  <cv-gen-number-input
+    label="{{'LABELS.TEAM_SIZE' | translate}}"
+    placeholder="Write team size"
+    formControlName="numberInput"></cv-gen-number-input>
+
+  <cv-gen-select-input
+    label="{{'LABELS.SPECIALIZATION' | translate}}"
+    placeholder="Select spec"
+    formControlName="selectInput"
+    [options]="specialization"></cv-gen-select-input>
+
+  <cv-gen-date-input
+    label="{{'LABELS.DATE_START' | translate}}"
+    placeholder="Select Date"
+    formControlName="dateInput"></cv-gen-date-input>
+
+  <cv-gen-chips-input
+    label="{{'LABELS.SKILLS' | translate}}"
+    placeholder="Enter your skills"
+    formControlName="chipsInput"></cv-gen-chips-input>
+
+  <cv-gen-textarea-input
+    label="{{'LABELS.DESCRIPTION' | translate}}"
+    placeholder="Write description"
+    formControlName="textareaInput"></cv-gen-textarea-input>
+
+  <p-button (click)="submitProjects()">Submit</p-button>
 </form>

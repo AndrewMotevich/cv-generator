@@ -1,1 +1,14 @@
-<p>auth-form works!</p>
+<form [formGroup]="authForm">
+  <cv-gen-text-input
+    label="{{'LABELS.EMAIL' | translate}}"
+    placeholder="Enter Email"
+    formControlName="textInput"
+    leftIcon="pi pi-search"></cv-gen-text-input>
+
+  <cv-gen-password-input
+    label="{{'LABELS.PASSWORD' | translate}}"
+    placeholder="Enter password"
+    formControlName="passwordInput"></cv-gen-password-input>
+
+  <p-button (click)="submitAuth()">Submit</p-button>
+</form>
