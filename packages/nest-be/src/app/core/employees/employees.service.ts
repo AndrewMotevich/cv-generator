@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Employee, EmployeeDto } from './dto/employee.dto';
 import { transformEmployeeDto, transformEmployeePartial } from '../../database/helpers/transform-employee-dto.helper';
@@ -10,7 +10,7 @@ export class EmployeesService {
 
   async getEmployees(): Promise<Employee[]> {
     try {
-      return this.dataBaseService.employee.findMany({
+      return await this.dataBaseService.employee.findMany({
         select: employeeOutput,
       });
     } catch (error) {
@@ -20,11 +20,12 @@ export class EmployeesService {
 
   async getEmployeeById(id: number): Promise<Employee> {
     try {
-      return this.dataBaseService.employee.findFirst({
+      return await this.dataBaseService.employee.findFirstOrThrow({
         where: { id: id },
         select: employeeOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }
@@ -48,17 +49,19 @@ export class EmployeesService {
         select: employeeOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }
 
   async deleteEmployee(id: number): Promise<Employee> {
     try {
-      return this.dataBaseService.employee.delete({
+      return await this.dataBaseService.employee.delete({
         where: { id: id },
         select: employeeOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }

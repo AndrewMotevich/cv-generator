@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Project, ProjectDto } from './dto/project.dto';
 import {
@@ -13,7 +13,7 @@ export class ProjectsService {
 
   async getProjects(): Promise<Project[]> {
     try {
-      return this.dataBaseService.project.findMany({
+      return await this.dataBaseService.project.findMany({
         select: projectOutput,
       });
     } catch (error) {
@@ -23,11 +23,12 @@ export class ProjectsService {
 
   async getProjectById(id: number): Promise<Project> {
     try {
-      return this.dataBaseService.project.findFirst({
+      return await this.dataBaseService.project.findFirstOrThrow({
         where: { id: id },
         select: projectOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.code);
     }
   }
@@ -51,18 +52,20 @@ export class ProjectsService {
         select: projectOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }
 
   async deleteProject(id: number): Promise<Project> {
     try {
-      return this.dataBaseService.project.delete({
+      return await this.dataBaseService.project.delete({
         where: { id: id },
         select: projectOutput,
       });
     } catch (error) {
-      throw new BadRequestException(error.message);
+      if (error.code === "P2025") throw new NotFoundException(error.message)
+      throw new BadRequestException(error.code);
     }
   }
 }

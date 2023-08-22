@@ -1,10 +1,8 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CvsService } from './cvs.service';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiInternalServerErrorResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { CvDto } from './dto/cv.dto';
-import { Public } from '../../auth/auth.guard';
 
-@Public()
 @ApiBearerAuth()
 @ApiTags('CVS')
 @Controller('cvs')
@@ -26,6 +24,7 @@ export class CvsController {
   @ApiOperation({ summary: 'Get cv by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -52,6 +51,7 @@ export class CvsController {
   @ApiOperation({ summary: 'Update cv by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -69,6 +69,7 @@ export class CvsController {
   @ApiOperation({ summary: 'Delete cv by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,

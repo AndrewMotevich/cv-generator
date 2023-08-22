@@ -15,15 +15,14 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiInternalServerErrorResponse,
+  ApiNotFoundResponse,
   ApiOperation,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ProjectDto } from './dto/project.dto';
-import { Public } from '../../auth/auth.guard';
 import { Error } from '../../shared/shared.dto';
 
-@Public()
 @ApiBearerAuth()
 @ApiTags('PROJECTS')
 @Controller('projects')
@@ -45,6 +44,7 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Get project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -71,6 +71,7 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Update project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -87,6 +88,7 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Delete project by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,

@@ -13,7 +13,7 @@ import { UserDto } from './dto/user.dto';
 import { Public } from '../auth.guard';
 import { Error } from '../../shared/shared.dto';
 
-@Public()
+// @Public()
 @ApiBearerAuth()
 @ApiTags('USER')
 @Controller('users')
@@ -22,7 +22,6 @@ export class UserController {
 
   @Get()
   @ApiOperation({ summary: 'Get all users' })
-  @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
@@ -34,6 +33,7 @@ export class UserController {
 
   @Post()
   @ApiOperation({ summary: 'Add new user' })
+  @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',

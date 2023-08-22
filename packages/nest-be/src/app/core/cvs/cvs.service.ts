@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Cv, CvDto } from './dto/cv.dto';
 import { transformCvDto, transformCvPartial } from '../../database/helpers/transform-cv-dto';
@@ -10,7 +10,7 @@ export class CvsService {
 
   async getCvs(): Promise<Cv[]> {
     try {
-      return this.dataBaseService.cV.findMany({
+      return await this.dataBaseService.cV.findMany({
         select: cvOutput,
       });
     } catch (error) {
@@ -20,11 +20,12 @@ export class CvsService {
 
   async getCvById(id: number): Promise<Cv> {
     try {
-      return this.dataBaseService.cV.findFirst({
+      return await this.dataBaseService.cV.findFirstOrThrow({
         where: { id: id },
         select: cvOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.code);
     }
   }
@@ -48,17 +49,19 @@ export class CvsService {
         select: cvOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }
 
   async deleteCv(id: number): Promise<Cv> {
     try {
-      return this.dataBaseService.cV.delete({
+      return await this.dataBaseService.cV.delete({
         where: { id: id },
         select: cvOutput,
       });
     } catch (error) {
+      if (error.code === "P2025") throw new NotFoundException(error.message)
       throw new BadRequestException(error.message);
     }
   }

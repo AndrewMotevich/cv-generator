@@ -13,10 +13,8 @@ import {
 } from '@nestjs/common';
 import { EmployeeDto } from './dto/employee.dto';
 import { EmployeesService } from './employees.service';
-import { ApiBadRequestResponse, ApiBearerAuth, ApiInternalServerErrorResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
-import { Public } from '../../auth/auth.guard';
+import { ApiBadRequestResponse, ApiBearerAuth, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOperation, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 
-@Public()
 @ApiBearerAuth()
 @ApiTags('EMPLOYEES')
 @Controller('employees')
@@ -38,6 +36,7 @@ export class EmployeesController {
   @ApiOperation({ summary: 'Get employee by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -66,6 +65,7 @@ export class EmployeesController {
   @ApiOperation({ summary: 'Update employee by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -82,6 +82,7 @@ export class EmployeesController {
   @ApiOperation({ summary: 'Delete employee by id' })
   @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
   @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiNotFoundResponse({ description: 'Not found Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,
@@ -91,9 +92,6 @@ export class EmployeesController {
   async deleteEmployee(@Param('id', new ParseIntPipe()) id: number) {
     const res = await this.employeesService
       .deleteEmployee(id)
-      .catch((error) => {
-        throw new BadRequestException(error);
-      });
     return res;
   }
 }
