@@ -1,5 +1,5 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserDto } from './dto/user.dto';
+import { BadRequestException, ForbiddenException, Injectable} from '@nestjs/common';
+import { User, UserDto } from './dto/user.dto';
 import { DatabaseService } from '../../database/database.service';
 import bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -12,7 +12,7 @@ export class UsersService {
     private jwtService: JwtService
   ) {}
 
-  async addUser(email: string, password: string) {
+  async addUser(email: string, password: string): Promise<User> {
     try {
       const hashPassword = await bcrypt.hash(password, 5);
       return await this.databaseService.user.create({
@@ -23,7 +23,7 @@ export class UsersService {
     }
   }
 
-  async getUsers() {
+  async getUsers(): Promise<User[]> {
     try {
       return await this.databaseService.user.findMany();
     } catch (error) {
@@ -38,7 +38,7 @@ export class UsersService {
         select: { refreshToken: true },
       });
     } catch (error) {
-      throw new UnauthorizedException(error.message)
+      throw new ForbiddenException(error.message)
     }
   }
 
@@ -57,7 +57,7 @@ export class UsersService {
         data: { refreshToken: newToken },
       });
     } catch (error) {
-      throw new UnauthorizedException(error.message)
+      throw new ForbiddenException(error.message)
     }
   }
 
@@ -65,7 +65,7 @@ export class UsersService {
     try {
       return await this.databaseService.user.findFirst({ where: { email } });
     } catch (error) {
-      throw new UnauthorizedException(error.message)
+      throw new ForbiddenException(error.message)
     }
   }
 }

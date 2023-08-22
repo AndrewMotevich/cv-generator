@@ -1,15 +1,26 @@
 import { IsString } from 'class-validator';
 import { ProjectDto } from '../../projects/dto/project.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
-abstract class Language {
+enum Level {
+  A1 = 'A1',
+  A2 = 'A2',
+  B1 = 'B1',
+  B2 = 'B2',
+  C1 = 'C1',
+  C2 = 'C2',
+}
+
+class LanguageDto {
   name: string;
+  @ApiProperty({ enum: Level })
   level: string;
 }
 
 export class CvDto {
   @IsString()
   cvName: string;
-  language: Language[];
+  language: LanguageDto[];
   skills: string[];
 
   @IsString()

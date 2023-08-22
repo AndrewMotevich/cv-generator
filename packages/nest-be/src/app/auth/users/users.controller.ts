@@ -1,31 +1,44 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { UsersService } from './users.service';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiInternalServerErrorResponse,
+  ApiOperation,
+  ApiTags,
+  ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { UserDto } from './dto/user.dto';
 import { Public } from '../auth.guard';
+import { Error } from '../../shared/shared.dto';
 
 @Public()
+@ApiBearerAuth()
 @ApiTags('USER')
 @Controller('users')
 export class UserController {
   constructor(private readonly usersService: UsersService) {}
 
-  @HttpCode(HttpStatus.OK)
   @Get()
+  @ApiOperation({ summary: 'Get all users' })
+  @ApiBadRequestResponse({ description: 'Bad request Error', type: Error })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Error,
+  })
   getUsers() {
     return this.usersService.getUsers();
   }
 
-  @HttpCode(HttpStatus.OK)
   @Post()
+  @ApiOperation({ summary: 'Add new user' })
+  @ApiUnauthorizedResponse({ description: 'Unauthorized Error', type: Error })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Error,
+  })
   signIn(@Body() user: UserDto) {
     return this.usersService.addUser(user.email, user.password);
   }

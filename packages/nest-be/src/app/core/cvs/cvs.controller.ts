@@ -1,13 +1,8 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CvsService } from './cvs.service';
-import { ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CvDto } from './dto/cv.dto';
 import { Public } from '../../auth/auth.guard';
-
-class Cat {
-  id: number;
-  name: string;
-}
 
 @Public()
 @ApiBearerAuth()
@@ -21,10 +16,6 @@ export class CvsController {
     return this.cvsService.getCvs();
   }
 
-  @ApiCreatedResponse({
-    description: 'The record has been successfully created.',
-    type: Cat,
-  })
   @UsePipes(new ValidationPipe())
   @Post('')
   async createCv(@Body() dto: CvDto) {

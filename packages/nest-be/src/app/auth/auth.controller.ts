@@ -1,27 +1,31 @@
-import {
-  Body,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Req,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiInternalServerErrorResponse,
+  ApiOperation,
+  ApiTags,
+  ApiForbiddenResponse,
+} from '@nestjs/swagger';
 import { UserDto } from './users/dto/user.dto';
 import { Public } from './auth.guard';
 import { Response, Request } from 'express';
+import { Error } from '../shared/shared.dto';
 
+@Public()
 @ApiTags('AUTH')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Public()
-  @HttpCode(HttpStatus.OK)
+  @ApiBody({ type: UserDto })
+  @ApiOperation({ summary: 'Sign in and get tokens' })
+  @ApiForbiddenResponse({ description: 'Forbidden Error', type: Error })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Error,
+  })
   @Post('login')
   signIn(
     @Res({ passthrough: true }) response: Response,
@@ -34,8 +38,12 @@ export class AuthController {
     );
   }
 
-  @Public()
-  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Refresh tokens' })
+  @ApiForbiddenResponse({ description: 'Forbidden Error', type: Error})
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Error,
+  })
   @Get('refresh')
   refresh(
     @Req() request: Request,

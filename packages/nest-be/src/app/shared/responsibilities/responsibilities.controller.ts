@@ -1,7 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Public } from '../../auth/auth.guard';
 import { DatabaseService } from '../../database/database.service';
+import { Shared } from '../shared.dto';
 
 @Public()
 @ApiTags('SHARED')
@@ -9,8 +10,9 @@ import { DatabaseService } from '../../database/database.service';
 export class ResponsibilitiesController {
   constructor(private databaseService: DatabaseService) {}
 
+  @ApiOperation({ summary: 'Receive all responsibilities' })
   @Get()
-  async getData() {
+  async getData(): Promise<Shared[]> {
     return await this.databaseService.responsibility.findMany();
   }
 }
