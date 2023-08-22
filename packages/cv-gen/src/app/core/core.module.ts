@@ -8,6 +8,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,13 @@ import { TranslateModule } from '@ngx-translate/core';
     SidebarComponent,
     HeaderComponent,
   ],
-  imports: [CommonModule, CoreRoutingModule, TranslateModule],
+  imports: [
+    CommonModule,
+    CoreRoutingModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputSwitchModule,
+  ],
 })
 export class CoreModule {}
