@@ -1,16 +1,15 @@
-import { IsArray, IsDate, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsNumber, IsString } from 'class-validator';
+import { Shared } from '../../../shared/shared.dto';
 
 export class ProjectDto {
   @IsString()
   projectName: string;
 
   @IsString()
-  description: string;
+  description?: string;
 
-  // @IsDate()
   startDate?: Date;
 
-  // @IsDate()
   endDate?: Date;
 
   @IsNumber()
@@ -24,4 +23,16 @@ export class ProjectDto {
 
   @IsArray()
   teamRoles: string[];
+}
+
+export class Project {
+  id: number;
+  projectName?: string;
+  description?: string;
+  startDate?: Date;
+  endDate?: Date;
+  teamSize?: number;
+  techStack?: Shared[];
+  responsibilities?: Shared[];
+  teamRoles?: Shared[];
 }

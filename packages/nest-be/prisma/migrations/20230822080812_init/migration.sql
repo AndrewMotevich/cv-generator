@@ -22,12 +22,14 @@ CREATE TABLE "Employee" (
 CREATE TABLE "CV" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "cvName" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "departmentId" INTEGER NOT NULL,
+    "specializationId" INTEGER NOT NULL,
     "employeeId" INTEGER NOT NULL,
+    CONSTRAINT "CV_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "Department" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "CV_specializationId_fkey" FOREIGN KEY ("specializationId") REFERENCES "Specialization" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "CV_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "Employee" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -38,7 +40,7 @@ CREATE TABLE "Project" (
     "startDate" DATETIME,
     "endDate" DATETIME,
     "teamSize" INTEGER NOT NULL DEFAULT 1,
-    "description" TEXT NOT NULL
+    "description" TEXT
 );
 
 -- CreateTable
@@ -48,7 +50,7 @@ CREATE TABLE "CvsProject" (
     "startDate" DATETIME,
     "endDate" DATETIME,
     "teamSize" INTEGER NOT NULL DEFAULT 1,
-    "description" TEXT NOT NULL
+    "description" TEXT
 );
 
 -- CreateTable
@@ -102,22 +104,6 @@ CREATE TABLE "_CVToSkill" (
     "B" INTEGER NOT NULL,
     CONSTRAINT "_CVToSkill_A_fkey" FOREIGN KEY ("A") REFERENCES "CV" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT "_CVToSkill_B_fkey" FOREIGN KEY ("B") REFERENCES "Skill" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "_CVToDepartment" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
-    CONSTRAINT "_CVToDepartment_A_fkey" FOREIGN KEY ("A") REFERENCES "CV" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_CVToDepartment_B_fkey" FOREIGN KEY ("B") REFERENCES "Department" ("id") ON DELETE CASCADE ON UPDATE CASCADE
-);
-
--- CreateTable
-CREATE TABLE "_CVToSpecialization" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
-    CONSTRAINT "_CVToSpecialization_A_fkey" FOREIGN KEY ("A") REFERENCES "CV" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_CVToSpecialization_B_fkey" FOREIGN KEY ("B") REFERENCES "Specialization" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -211,18 +197,6 @@ CREATE UNIQUE INDEX "_CVToSkill_AB_unique" ON "_CVToSkill"("A", "B");
 
 -- CreateIndex
 CREATE INDEX "_CVToSkill_B_index" ON "_CVToSkill"("B");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_CVToDepartment_AB_unique" ON "_CVToDepartment"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_CVToDepartment_B_index" ON "_CVToDepartment"("B");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_CVToSpecialization_AB_unique" ON "_CVToSpecialization"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_CVToSpecialization_B_index" ON "_CVToSpecialization"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CVToCvsProject_AB_unique" ON "_CVToCvsProject"("A", "B");

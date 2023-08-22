@@ -29,16 +29,18 @@ model Employee {
 model CV {
   id        Int        @id @default(autoincrement())
   cvName    String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  // createdAt DateTime   @default(now())
+  // updatedAt DateTime   @updatedAt
   language  Language[]
   skills    Skill[]
 
   firstName      String
   lastName       String
   email          String
-  department     Department[]
-  specialization Specialization[]
+  department       Department     @relation(fields: [departmentId], references: [id])
+  specialization   Specialization @relation(fields: [specializationId], references: [id])
+  departmentId     Int
+  specializationId Int
 
   employeeInfo Employee     @relation(fields: [employeeId], references: [id])
   employeeId   Int
@@ -52,7 +54,7 @@ model Project {
   endDate          DateTime?
   teamSize         Int              @default(1)
   techStack        Skill[]
-  description      String
+  description      String?
   responsibilities Responsibility[]
   teamRoles        TeamRole[]
 }
@@ -64,7 +66,7 @@ model CvsProject {
   endDate          DateTime?
   teamSize         Int              @default(1)
   techStack        Skill[]
-  description      String
+  description      String?
   responsibilities Responsibility[]
   teamRoles        TeamRole[]
   cvs              CV[]
