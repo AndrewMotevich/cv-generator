@@ -10,8 +10,9 @@ import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 })
 export class AuthFormComponent {
   public authForm = this.fb.group({
-    textInput: ['', [Validators.required, Validators.email]],
-    passwordInput: ['', [Validators.required, Validators.minLength(8)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    rememberMe: [false]
   });
 
   constructor(

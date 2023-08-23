@@ -9,6 +9,7 @@ import { PasswordInputModule, TextInputModule } from '@cva/my-cva-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [AuthPageComponent, AuthFormComponent],
@@ -21,7 +22,8 @@ import { MenuModule } from 'primeng/menu';
     ButtonModule,
     PasswordInputModule,
     TextInputModule,
-    MenuModule
+    MenuModule,
+    CheckboxModule,
   ],
 })
 export class AuthModule {}

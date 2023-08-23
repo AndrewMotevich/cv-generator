@@ -4,6 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--surface-ground);
+  background-image: url('../../../../assets/images/auth-background.png');
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
 }
 .lang-button{
   position: absolute;

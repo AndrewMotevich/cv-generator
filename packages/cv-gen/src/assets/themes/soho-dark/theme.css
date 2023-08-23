@@ -52,6 +52,7 @@
 }
 
 .p-component {
+  width: 100%;
   font-family: Lato, Helvetica, sans-serif;
   font-size: 1rem;
   font-weight: normal;
@@ -548,6 +549,10 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
   outline: 0 none;
   outline-offset: 0;
   box-shadow: 0 0 0 1px #e0d8fc;
+}
+
+.p-calendar{
+  display: flex !important;
 }
 
 p-calendar.p-calendar-clearable .p-inputtext {
@@ -1165,6 +1170,7 @@ p-inputswitch.ng-dirty.ng-invalid > .p-inputswitch {
 }
 
 .p-inputtext {
+  width: 100%;
   font-family: Lato, Helvetica, sans-serif;
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.87);
@@ -1885,6 +1891,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 
 .p-button {
+  justify-content: center;
   color: #1c1d26;
   background: #b19df7;
   border: 1px solid #b19df7;

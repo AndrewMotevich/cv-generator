@@ -4,12 +4,17 @@
   <cv-gen-text-input
     label="{{'LABELS.EMAIL' | translate}}"
     placeholder="{{'PLACEHOLDERS.EMAIL'| translate}}"
-    formControlName="textInput"></cv-gen-text-input>
+    formControlName="email"></cv-gen-text-input>
 
   <cv-gen-password-input
     label="{{'LABELS.PASSWORD' | translate}}"
     placeholder="{{'PLACEHOLDERS.PASSWORD'| translate}}"
-    formControlName="passwordInput"></cv-gen-password-input>
+    formControlName="password"></cv-gen-password-input>
+
+  <div class="remember-wrapper">
+    <p-checkbox formControlName="rememberMe" [binary]="true" inputId="remember-me"></p-checkbox>
+    <label for="remember-me">Remember me</label>
+  </div>
 
   <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>
