@@ -9,7 +9,7 @@
     [editable]="true"></p-dropdown>
   <ng-template [ngIf]="control.errors && control.dirty">
     <small
-      class="error"
+      class="p-error"
       translate
       [translateParams]="{ label, maxlength, minlength }">
       {{control.errors | getErrorMessage}}

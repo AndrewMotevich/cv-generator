@@ -15,5 +15,12 @@
     "EMAIL": "Неправильная почта!",
     "MIN_LENGTH": "Минимальная длина {{minlength}}!",
     "MAX_LENGTH": "Максимальная длина {{maxlength}}!"
+  },
+  "PLACEHOLDERS": {
+    "EMAIL": "Введите свою почту",
+    "PASSWORD": "Введите свой пароль"
+  },
+  "BUTTONS": {
+    "LOG-IN": "Войти"
   }
 }

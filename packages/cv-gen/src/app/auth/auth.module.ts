@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PasswordInputModule, TextInputModule } from '@cva/my-cva-lib';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [AuthPageComponent, AuthFormComponent],
@@ -20,6 +21,7 @@ import { ButtonModule } from 'primeng/button';
     ButtonModule,
     PasswordInputModule,
     TextInputModule,
+    MenuModule
   ],
 })
 export class AuthModule {}

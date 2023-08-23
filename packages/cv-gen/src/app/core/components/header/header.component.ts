@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ThemeService } from '../../../theme.service';
-import { FormControl } from '@angular/forms';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { BehaviorSubject } from 'rxjs';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-header',
   templateUrl: './header.component.html',
@@ -9,14 +11,17 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  public darkTheme = new FormControl(true);
+  public isDarkTheme: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   constructor(private themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.darkTheme.valueChanges.subscribe((value) => {
-      if (value) this.themeService.switchTheme('soho-dark');
-      else this.themeService.switchTheme('soho-light');
+    this.isDarkTheme.subscribe((value) => {
+      this.themeService.switchTheme(value);
     });
+  }
+
+  switchTheme() {
+    this.isDarkTheme.next(!this.isDarkTheme.getValue());
   }
 }

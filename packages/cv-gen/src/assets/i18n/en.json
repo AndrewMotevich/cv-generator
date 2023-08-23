@@ -15,5 +15,12 @@
     "EMAIL": "Invalid email!",
     "MIN_LENGTH": "Min length {{minlength}}!",
     "MAX_LENGTH": "Max length {{maxlength}}!"
+  },
+  "PLACEHOLDERS": {
+    "EMAIL": "Enter your email",
+    "PASSWORD": "Enter your password"
+  },
+  "BUTTONS": {
+    "LOG-IN": "Log-in"
   }
 }

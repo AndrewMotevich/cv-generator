@@ -1,3 +1,18 @@
-<div>
+<main class="main-wrapper">
   <cv-gen-auth-form></cv-gen-auth-form>
-</div>
+
+  <p-button
+    class="lang-button"
+    icon="pi pi-globe"
+    styleClass="p-button-rounded p-button-text p-button-lg"
+    (click)="menu.toggle($event)"></p-button>
+  <p-button
+    class="theme-button"
+    [icon]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"
+    styleClass="p-button-rounded p-button-text p-button-lg"
+    (click)="switchTheme()"></p-button>
+  <p-menu
+    #menu
+    [model]="items"
+    [popup]="true"></p-menu>
+</main>

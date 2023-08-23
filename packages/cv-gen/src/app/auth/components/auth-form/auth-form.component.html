@@ -1,14 +1,15 @@
-<form [formGroup]="authForm">
+<form
+  [formGroup]="authForm"
+  class="auth-form-wrapper">
   <cv-gen-text-input
     label="{{'LABELS.EMAIL' | translate}}"
-    placeholder="Enter Email"
-    formControlName="textInput"
-    leftIcon="pi pi-search"></cv-gen-text-input>
+    placeholder="{{'PLACEHOLDERS.EMAIL'| translate}}"
+    formControlName="textInput"></cv-gen-text-input>
 
   <cv-gen-password-input
     label="{{'LABELS.PASSWORD' | translate}}"
-    placeholder="Enter password"
+    placeholder="{{'PLACEHOLDERS.PASSWORD'| translate}}"
     formControlName="passwordInput"></cv-gen-password-input>
 
-  <p-button (click)="submitAuth()">Submit</p-button>
+  <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>

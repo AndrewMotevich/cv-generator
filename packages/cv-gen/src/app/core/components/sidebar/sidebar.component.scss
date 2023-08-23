@@ -1,0 +1,15 @@
+.aside-wrapper {
+  width: 20rem;
+  height: 100%;
+  background-color: var(--surface-d);
+}
+nav {
+  display: flex;
+  flex-direction: column;
+}
+ul {
+  list-style-type: none;
+}
+li:hover {
+  cursor: pointer;
+}

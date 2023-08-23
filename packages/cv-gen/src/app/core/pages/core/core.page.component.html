@@ -1,11 +1,12 @@
-<cv-gen-header></cv-gen-header>
-<div style="display: flex">
-  <cv-gen-side-bar></cv-gen-side-bar>
-  <div style="display: flex; flex-direction: column;">
-    <cv-gen-breadcrumbs></cv-gen-breadcrumbs>
-    <div style="border: 2px solid black; height: 10rem">
-      <h3>router outlet:</h3>
-      <router-outlet></router-outlet>
+<div class="page-wrapper">
+  <cv-gen-header></cv-gen-header>
+  <main class="main-wrapper">
+    <cv-gen-side-bar></cv-gen-side-bar>
+    <div class="content-wrapper">
+      <cv-gen-breadcrumbs></cv-gen-breadcrumbs>
+      <div class="content-container">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-  </div>
+  </main>
 </div>
