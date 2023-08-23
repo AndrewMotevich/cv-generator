@@ -1,4 +1,3 @@
 <cv-gen-base-table1
   [cols]="cols"
-  [data]="data"
-  [rowCallback]="alertFirstName"></cv-gen-base-table1>
+  [data]="data" (itemInfo)="log($event)"></cv-gen-base-table1>

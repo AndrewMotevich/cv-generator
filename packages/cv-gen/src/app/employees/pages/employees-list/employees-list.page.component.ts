@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IEmployee } from '../../models/employee.model';
 import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -20,7 +21,10 @@ export class EmployeesListPageComponent {
     { field: 'specialization', header: 'Specialization' },
   ];
 
-  alertFirstName(data: unknown){
-    alert((data as IEmployee).firstName)
+  constructor(private router: Router) {}
+
+  log(data: unknown) {
+    this.router.navigate(['employees', 'create']);
+    console.log(data);
   }
 }

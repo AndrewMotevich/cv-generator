@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { IColumns } from '../../interfaces/shared.interfeces';
@@ -14,5 +14,9 @@ import { IColumns } from '../../interfaces/shared.interfeces';
 export class BaseTable1Component {
   @Input() data: unknown[];
   @Input() cols: IColumns[];
-  @Input() rowCallback: (rowData: {[key: string]: unknown}) => void;
+  @Output() itemInfo = new EventEmitter<unknown>()
+
+  sendItemInfo(info: unknown) {
+    this.itemInfo.emit(info)
+  }
 }
