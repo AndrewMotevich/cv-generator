@@ -1,11 +1,22 @@
-.page-wrapper{
+@import '../../../../sass/abstracts/variables';
+@import '../../../../sass/abstracts/mixins';
+
+.page-wrapper {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--surface-ground);
 }
-.main-wrapper{
+.main-wrapper {
   display: flex;
   height: 100%;
+  @include respond-to('small') {
+    .side-bar {
+      display: none;
+    }
+    .breadcrumbs {
+      display: none;
+    }
+  }
 }

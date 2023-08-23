@@ -22,5 +22,13 @@
   },
   "BUTTONS": {
     "LOG-IN": "Log-in"
+  },
+  "HEADER": {
+    "NAVIGATION": "Navigation",
+    "EMPLOYEES": "Employees",
+    "PROJECTS": "Projects",
+    "SETTINGS": "Settings",
+    "THEME": "Switch theme",
+    "ABOUT": "About"
   }
 }

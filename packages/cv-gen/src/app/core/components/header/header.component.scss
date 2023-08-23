@@ -1,5 +1,77 @@
+@import '../../../../sass/abstracts/variables';
+@import '../../../../sass/abstracts/mixins';
+
+header {
+  background-color: var(--highlight-bg);
+  color: #ffffff;
+}
+
 .header-wrapper {
+  margin: 0 1rem;
+  height: 5rem;
   display: flex;
   align-items: center;
-  background-color: var(--surface-d);
+  justify-content: space-between;
+  .settings-button{
+    display: none;
+  }
+  .bars-button{
+    display: none;
+  }
+  @include respond-to("small") {
+    justify-content: space-between;
+    .header-buttons{
+      display: none;
+    }
+    .bars-button{
+      order: 1;
+      display: block;
+    }
+    .logo-wrapper{
+      order: 2;
+    }
+    .settings-button{
+      order: 3;
+      display: block;
+    }
+  }
+  @include respond-to("medium") {
+    h1 {
+      font-size: 1rem;
+    }
+  }
+}
+
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cv-logo {
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../../../../assets/images/cv-icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.header-buttons{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navigation-link{
+  margin-left: 2rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  &:hover {
+    cursor: pointer;
+    color: var(--highlight-text-color);
+  }
 }

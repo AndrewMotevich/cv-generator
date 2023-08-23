@@ -22,5 +22,13 @@
   },
   "BUTTONS": {
     "LOG-IN": "Войти"
+  },
+  "HEADER": {
+    "NAVIGATION": "Навигация",
+    "EMPLOYEES": "Работники",
+    "PROJECTS": "Проекты",
+    "SETTINGS": "Настройки",
+    "THEME": "Изменить тему",
+    "ABOUT": "Описание"
   }
 }

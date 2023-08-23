@@ -1,8 +1,99 @@
-<header class="header-wrapper">
-  <h1>{{'APPLICATION' | translate}}</h1>
-  <p-button
-  class="theme-button"
-  [icon]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"
-  styleClass="p-button-rounded p-button-text p-button-lg"
-  (click)="switchTheme()"></p-button>
+<header>
+  <div class="header-wrapper">
+    <div class="logo-wrapper">
+      <span class="cv-logo"></span>
+      <h1>{{'APPLICATION' | translate}}</h1>
+    </div>
+
+    <div class="header-buttons">
+      <p-button
+        icon="pi pi-search"
+        styleClass="p-button-rounded p-button-text"></p-button>
+      <p-button
+        icon="pi pi-question-circle"
+        styleClass="p-button-rounded p-button-text"
+        routerLink="/about"></p-button>
+      <p-button
+        icon="pi pi-bell"
+        styleClass="p-button-rounded p-button-text"></p-button>
+      <p-avatar
+        image="https://primefaces.org/cdn/primeng/images/demo/avatar/onyamalimba.png"
+        styleClass="mr-2"
+        size="large"
+        shape="circle"></p-avatar>
+      <h3>Admin</h3>
+      <p-button
+        [icon]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"
+        styleClass="p-button-rounded p-button-text"
+        (click)="switchTheme()"></p-button>
+      <p-button
+        icon="pi pi-globe"
+        styleClass="p-button-rounded p-button-text"
+        (click)="langMenu.toggle($event)"></p-button>
+    </div>
+
+    <p-button
+      class="bars-button"
+      icon="pi pi-bars"
+      styleClass="p-button-rounded p-button-text"
+      (click)="isNavigationSidebarVisible = true"></p-button>
+
+    <p-button
+      class="settings-button"
+      icon="pi pi-cog"
+      styleClass="p-button-rounded p-button-text"
+      (click)="isSettingsSidebarVisible = true"></p-button>
+  </div>
 </header>
+
+<p-menu
+  #langMenu
+  [model]="langItems"
+  [popup]="true"></p-menu>
+
+<p-sidebar
+  [(visible)]="isNavigationSidebarVisible"
+  position="left">
+  <ng-template pTemplate="header">
+    <h2>{{'HEADER.NAVIGATION' | translate}}</h2>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <nav>
+      <ul>
+        <li
+          class="navigation-link"
+          routerLink="employees"><i class="pi pi-briefcase"></i><span>{{'HEADER.EMPLOYEES' | translate}}</span></li>
+        <li
+          class="navigation-link"
+          routerLink="projects"><i class="pi pi-server"></i><span>{{'HEADER.PROJECTS' | translate}}</span></li>
+      </ul>
+    </nav>
+  </ng-template>
+</p-sidebar>
+
+<p-sidebar
+  [(visible)]="isSettingsSidebarVisible"
+  position="right">
+  <ng-template pTemplate="header">
+    <h2>{{'HEADER.SETTINGS' | translate}}</h2>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <ul>
+      <hr>
+      <li
+        class="navigation-link"
+        (click)="switchLanguage('en')"><i class="pi pi-globe"></i><span>En</span></li>
+      <li
+        class="navigation-link"
+        (click)="switchLanguage('ru')"><i class="pi pi-globe"></i><span>Ru</span></li>
+      <hr>
+      <li
+        class="navigation-link"
+        (click)="switchTheme()"><i [class]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"></i><span>{{'HEADER.THEME' | translate}}</span></li>
+      <hr>
+      <li
+        class="navigation-link"
+        routerLink="about"><i class="pi pi-question-circle"></i><span>{{'HEADER.ABOUT' | translate}}</span></li>
+    </ul>
+  </ng-template>
+</p-sidebar>
