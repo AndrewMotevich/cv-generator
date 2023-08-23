@@ -1,0 +1,24 @@
+.about-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.about-content {
+  max-width: 40rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.home-button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+.link-buttons {
+  display: flex;
+  gap: 1rem;
+}
