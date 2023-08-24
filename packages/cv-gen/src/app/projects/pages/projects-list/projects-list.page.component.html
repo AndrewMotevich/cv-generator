@@ -1,9 +1,20 @@
-<cv-gen-base-table2>
-  <tr header>
-    <th *ngFor="let col of cols">{{ col.header }}</th>
-  </tr>
-  <tr class="table-row" body *ngFor="let project of projects" (click)="alert(project.id)">
-    <td>{{project.id}}</td>
-    <td style="color:blue">{{project.projectName}}</td>
-  </tr>
-</cv-gen-base-table2>
+<div class="employee-list-page-wrapper">
+  <div class="add-employee-button">
+    <p-button
+      icon="pi pi-plus"
+      label="Add"
+      routerLink="/projects/create"></p-button>
+  </div>
+  <div class="table-wrapper">
+    <cv-gen-base-table2>
+      <tr header>
+        <th *ngFor="let col of cols">{{ col.header }}</th>
+      </tr>
+      <tr class="table-row" body *ngFor="let project of projects" (click)="navigate(project)">
+        <td>{{project.id}}</td>
+        <td>{{project.projectName}}</td>
+        <td>{{project.description}}</td>
+      </tr>
+    </cv-gen-base-table2>
+  </div>
+</div>

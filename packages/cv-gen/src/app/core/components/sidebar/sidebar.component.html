@@ -1,8 +1,20 @@
 <aside class="aside-wrapper">
   <nav>
     <ul>
-      <li class="navigation-link" routerLink="employees"><i class="pi pi-briefcase"></i><span>Employees</span></li>
-      <li class="navigation-link" routerLink="projects"><i class="pi pi-server"></i><span>Projects</span></li>
+      <li
+        class="navigation-link"
+        routerLink="employees"><i class="pi pi-briefcase"></i><span *ngIf="!isSidebarCollapsed">Employees</span></li>
+      <li
+        class="navigation-link"
+        routerLink="projects"><i class="pi pi-server"></i><span *ngIf="!isSidebarCollapsed">Projects</span></li>
     </ul>
   </nav>
+  <div class="aside-footer">
+    <hr>
+    <p-button
+      class="aside-footer-button"
+      styleClass="p-button-outlined p-button p-button-text p-button-raised"
+      [icon]="!isSidebarCollapsed ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"
+      (click)="isSidebarCollapsed = !isSidebarCollapsed"></p-button>
+  </div>
 </aside>

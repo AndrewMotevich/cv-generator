@@ -1,0 +1,12 @@
+.employee-list-page-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table-wrapper {
+  background-color: var(--surface-overlay);
+}
+.add-employee-button {
+  width: 5rem;
+  align-self: flex-end;
+}

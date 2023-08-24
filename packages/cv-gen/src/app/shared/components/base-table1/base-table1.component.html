@@ -1,7 +1,6 @@
 <p-table
   [columns]="cols"
-  [value]="data"
-  [tableStyle]="{ 'min-width': '50rem' }">
+  [value]="data">
   <ng-template
     pTemplate="header"
     let-columns>
@@ -13,7 +12,9 @@
     pTemplate="body"
     let-rowData
     let-columns="columns">
-    <tr class="table-row" (click)="sendItemInfo(rowData)">
+    <tr
+      class="table-row"
+      (click)="sendItemInfo(rowData)">
       <td *ngFor="let col of columns">{{ rowData[col.field] }}</td>
     </tr>
   </ng-template>

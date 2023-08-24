@@ -1,6 +1,18 @@
 .table-row {
   &:hover {
-    background-color: aquamarine;
+    background-color: #b19df7;
     cursor: pointer;
   }
+}
+.employee-list-page-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.table-wrapper {
+  background-color: var(--surface-overlay);
+}
+.add-employee-button {
+  width: 5rem;
+  align-self: flex-end;
 }

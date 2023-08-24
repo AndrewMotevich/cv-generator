@@ -9,6 +9,8 @@ import { BaseTable2Component } from '../shared/components/base-table2/base-table
 import { ProjectFormComponent } from '../shared/components/project-form-cva/project-form-cva.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     ProjectListPageComponent,
@@ -22,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProjectRoutingModule,
     ProjectRoutingModule,
     BaseTable2Component,
-    ProjectFormComponent
+    ProjectFormComponent,
+    ButtonModule,
   ],
 })
 export class ProjectsModule {}

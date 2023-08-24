@@ -7,12 +7,19 @@ import { CreateEmployeePageComponent } from './pages/create-employee/create-empl
 import { EditEmployeePageComponent } from './pages/edit-employee/edit-employee.page.component';
 import { BaseTable1Component } from '../shared/components/base-table1/base-table1.component';
 
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     EmployeesListPageComponent,
     CreateEmployeePageComponent,
     EditEmployeePageComponent,
   ],
-  imports: [CommonModule, EmployeesRoutingModule, BaseTable1Component],
+  imports: [
+    CommonModule,
+    EmployeesRoutingModule,
+    BaseTable1Component,
+    ButtonModule,
+  ],
 })
 export class EmployeesModule {}

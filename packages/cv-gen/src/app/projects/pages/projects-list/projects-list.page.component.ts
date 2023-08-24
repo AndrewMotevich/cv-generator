@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { IProject } from '../../models/project.model';
 import { projectsMock } from '../../../ngrx/projects/mock/projects.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cv-gen-project-list.page',
@@ -14,9 +15,12 @@ export class ProjectListPageComponent {
   cols: IColumns[] = [
     {field: "id", header: "Id"},
     {field: "projectName", header: "Project Name"},
+    {field: "description", header: "Description"},
   ]
 
-  alert(any: unknown){
-    alert(any)
+  constructor(private router: Router){}
+
+  navigate(data: IProject){
+    this.router.navigate(['projects', 'edit', data.id])
   }
 }

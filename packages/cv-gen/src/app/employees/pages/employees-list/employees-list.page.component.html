@@ -1,3 +1,14 @@
-<cv-gen-base-table1
-  [cols]="cols"
-  [data]="data" (itemInfo)="log($event)"></cv-gen-base-table1>
+<div class="employee-list-page-wrapper">
+  <div class="add-employee-button">
+    <p-button
+      icon="pi pi-plus"
+      label="Add"
+      routerLink="/employees/create"></p-button>
+  </div>
+  <div class="table-wrapper">
+    <cv-gen-base-table1
+      [cols]="cols"
+      [data]="data"
+      (itemInfo)="navigate($event)"></cv-gen-base-table1>
+  </div>
+</div>

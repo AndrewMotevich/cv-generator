@@ -23,8 +23,7 @@ export class EmployeesListPageComponent {
 
   constructor(private router: Router) {}
 
-  log(data: unknown) {
-    this.router.navigate(['employees', 'create']);
-    console.log(data);
+  navigate(data: unknown) {
+    this.router.navigate(['employees', 'edit', (data as {id: number}).id]);
   }
 }
