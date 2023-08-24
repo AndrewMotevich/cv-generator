@@ -4,6 +4,7 @@ import { projectsMock } from '../../../ngrx/projects/mock/projects.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { Router } from '@angular/router';
 import { CREATE_PROJECTS, EDIT_PROJECTS, PROJECTS } from '../../../shared/constants/routing-paths.consts';
+import { ProjectColumns } from '../../constants/project-columns.const';
 
 @Component({
   selector: 'cv-gen-project-list.page',
@@ -13,11 +14,7 @@ import { CREATE_PROJECTS, EDIT_PROJECTS, PROJECTS } from '../../../shared/consta
 })
 export class ProjectListPageComponent {
   projects: IProject[] = projectsMock
-  cols: IColumns[] = [
-    {field: "id", header: "Id"},
-    {field: "projectName", header: "Project Name"},
-    {field: "description", header: "Description"},
-  ]
+  cols: IColumns[] = ProjectColumns
 
   public addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath
 

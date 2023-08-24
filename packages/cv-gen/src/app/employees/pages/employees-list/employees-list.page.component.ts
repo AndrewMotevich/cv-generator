@@ -4,6 +4,7 @@ import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { Router } from '@angular/router';
 import { EDIT_EMPLOYEES, EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
+import { EmployeesColumns } from '../../constants/employees-columns.const';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -14,13 +15,7 @@ import { EDIT_EMPLOYEES, EMPLOYEES } from '../../../shared/constants/routing-pat
 export class EmployeesListPageComponent {
   data: IEmployee[] = employeesMock;
 
-  cols: IColumns[] = [
-    { field: 'firstName', header: 'First name' },
-    { field: 'lastName', header: 'Last name' },
-    { field: 'email', header: 'Email' },
-    { field: 'department', header: 'Department' },
-    { field: 'specialization', header: 'Specialization' },
-  ];
+  cols: IColumns[] = EmployeesColumns
 
   public addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath
 
