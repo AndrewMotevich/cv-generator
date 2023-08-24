@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
+import { HOME } from '../../constants/routing-paths.consts';
 
 @Component({
   selector: 'cv-gen-about.page',
@@ -11,4 +12,6 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./about.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutPageComponent {}
+export class AboutPageComponent {
+  public homePath = HOME.fullPath
+}

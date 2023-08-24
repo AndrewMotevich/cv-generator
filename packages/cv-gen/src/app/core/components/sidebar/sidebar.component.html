@@ -3,10 +3,10 @@
     <ul>
       <li
         class="navigation-link"
-        routerLink="employees"><i class="pi pi-briefcase"></i><span *ngIf="!isSidebarCollapsed">Employees</span></li>
+        [routerLink]="employeesPath"><i class="pi pi-briefcase"></i><span *ngIf="!isSidebarCollapsed">Employees</span></li>
       <li
         class="navigation-link"
-        routerLink="projects"><i class="pi pi-server"></i><span *ngIf="!isSidebarCollapsed">Projects</span></li>
+        [routerLink]="projectsPath"><i class="pi pi-server"></i><span *ngIf="!isSidebarCollapsed">Projects</span></li>
     </ul>
   </nav>
   <div class="aside-footer">

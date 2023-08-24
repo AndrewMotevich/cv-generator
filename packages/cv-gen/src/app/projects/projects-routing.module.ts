@@ -5,12 +5,12 @@ import { ProjectListPageComponent } from './pages/projects-list/projects-list.pa
 import { CreateProjectPageComponent } from './pages/create-project/create-project.page.component';
 import { EditProjectPageComponent } from './pages/edit-project/edit-project.page.component';
 
-import { BASE, CREATE, EDIT } from '../shared/constants/routing-paths.consts';
+import { BASE, CREATE_PROJECTS, EDIT_PROJECTS, ID } from '../shared/constants/routing-paths.consts';
 
 const projectsRoutes: Routes = [
   { path: BASE.path, component: ProjectListPageComponent },
-  { path: CREATE.path, component: CreateProjectPageComponent },
-  { path: EDIT.path, component: EditProjectPageComponent },
+  { path: CREATE_PROJECTS.path, component: CreateProjectPageComponent },
+  { path: EDIT_PROJECTS.path + ID.fullPath, component: EditProjectPageComponent },
   { path: '**', redirectTo: BASE.path, pathMatch: 'full' },
 ];
 

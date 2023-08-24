@@ -4,6 +4,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { BehaviorSubject } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { TranslateService } from '@ngx-translate/core';
+import { ABOUT } from '../../../shared/constants/routing-paths.consts';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -29,6 +30,8 @@ export class HeaderComponent implements OnInit {
       command: () => { this.switchLanguage('ru')},
     },
   ];
+
+  public aboutPath = ABOUT.path
 
   constructor(
     private translateService: TranslateService,

@@ -30,12 +30,27 @@ export const EMPLOYEES: IRoutingPath = {
   fullPath: '/employees',
 };
 
-export const CREATE: IRoutingPath = {
+export const CREATE_PROJECTS: IRoutingPath = {
   path: 'create',
   fullPath: '/create',
 };
 
-export const EDIT: IRoutingPath = {
-  path: 'edit/:id',
-  fullPath: '/edit/:id',
+export const CREATE_EMPLOYEES: IRoutingPath = {
+  path: 'create',
+  fullPath: '/create',
 };
+
+export const EDIT_PROJECTS: IRoutingPath = {
+  path: 'edit',
+  fullPath: '/edit',
+};
+
+export const EDIT_EMPLOYEES: IRoutingPath = {
+  path: 'edit',
+  fullPath: '/edit',
+};
+
+export const ID: IRoutingPath = {
+  path: ':id',
+  fullPath: '/:id'
+}

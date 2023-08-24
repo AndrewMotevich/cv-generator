@@ -3,7 +3,7 @@ import { IEmployee } from '../../models/employee.model';
 import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { Router } from '@angular/router';
-import { EDIT, EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
+import { EDIT_EMPLOYEES, EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -22,9 +22,12 @@ export class EmployeesListPageComponent {
     { field: 'specialization', header: 'Specialization' },
   ];
 
+  public addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath
+
   constructor(private router: Router) {}
 
   navigateToEdit(data: unknown) {
-    this.router.navigate([EMPLOYEES.path, EDIT.path, (data as {id: number}).id]);
+    console.log(EMPLOYEES.path, EDIT_EMPLOYEES.path, (data as {id: number}).id)
+    this.router.navigate([EMPLOYEES.path, EDIT_EMPLOYEES.path, (data as {id: number}).id]);
   }
 }
