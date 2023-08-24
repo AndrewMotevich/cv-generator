@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AboutPageComponent } from './shared/pages/about/about.page.component';
 import { NotFoundPageComponent } from './shared/pages/not-found/not-found.page.component';
+import { authGuard } from './auth/guards/auth.guard';
 
 import {
   ABOUT,
@@ -20,6 +21,7 @@ const rootRoutes: Routes = [
   {
     path: HOME.path,
     loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    canLoad: [authGuard]
   },
   { path: ABOUT.path, component: AboutPageComponent },
   { path: BASE.path, redirectTo: EMPLOYEES.path, pathMatch: 'full' },

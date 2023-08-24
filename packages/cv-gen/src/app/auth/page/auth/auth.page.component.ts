@@ -27,7 +27,7 @@ export class AuthPageComponent implements OnInit {
 
   constructor(
     private translateService: TranslateService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
   ) {}
 
   ngOnInit(): void {

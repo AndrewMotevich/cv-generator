@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       label: 'Ru',
-      command: () => this.switchLanguage('ru'),
+      command: () => { this.switchLanguage('ru')},
     },
   ];
 
