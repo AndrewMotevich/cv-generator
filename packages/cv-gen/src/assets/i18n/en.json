@@ -8,7 +8,8 @@
     "SKILLS": "Skills",
     "DESCRIPTION": "Description",
     "TEAM_SIZE": "Team size",
-    "DATE_START": "Date start"
+    "DATE_START": "Date start",
+    "REMEMBER_ME": "Remember me"
   },
   "ERROR_MESSAGES": {
     "REQUIRED": "{{label}} is required!",

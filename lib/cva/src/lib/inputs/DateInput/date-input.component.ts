@@ -1,7 +1,7 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DoCheck,
   Input,
   Optional,
   Self,
@@ -13,8 +13,9 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
   selector: 'cv-gen-date-input',
   templateUrl: './date-input.component.html',
   styleUrls: ['./date-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DateInputComponent extends BaseInputClass implements DoCheck {
+export class DateInputComponent extends BaseInputClass {
   @Input() public label: string;
   @Input() public placeholder: string;
 

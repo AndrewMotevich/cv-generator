@@ -8,7 +8,8 @@
     "SKILLS": "Навыки",
     "DESCRIPTION": "Описание",
     "TEAM_SIZE": "Размер команды",
-    "DATE_START": "Дата начала"
+    "DATE_START": "Дата начала",
+    "REMEMBER_ME": "Запомнить меня"
   },
   "ERROR_MESSAGES": {
     "REQUIRED": "Поле {{label}} обязателен!",

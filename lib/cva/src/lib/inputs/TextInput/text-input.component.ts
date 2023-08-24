@@ -2,12 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DoCheck,
   Input,
   Optional,
-  Self,
+  Self
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
 @Component({
@@ -16,8 +15,8 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
   styleUrls: ['./text-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextInputComponent extends BaseInputClass
-  implements ControlValueAccessor, DoCheck
+export class TextInputComponent
+  extends BaseInputClass
 {
   @Input() public placeholder: string;
   @Input() public label: string;
@@ -26,7 +25,7 @@ export class TextInputComponent extends BaseInputClass
 
   constructor(
     @Self() @Optional() ngControl: NgControl,
-    cdRef: ChangeDetectorRef,
+    cdRef: ChangeDetectorRef
   ) {
     super(ngControl, cdRef);
     this.ngControl.valueAccessor = this;

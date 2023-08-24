@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, Input, Optional, Self } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, Optional, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { BaseInputClass } from '../../shared/classes/base-input.class';
 
@@ -6,8 +6,9 @@ import { BaseInputClass } from '../../shared/classes/base-input.class';
   selector: 'cv-gen-select-input',
   templateUrl: './select-input.component.html',
   styleUrls: ['./select-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectInputComponent extends BaseInputClass implements DoCheck{
+export class SelectInputComponent extends BaseInputClass{
   @Input() label: string
   @Input() placeholder: string
   @Input() options: unknown[]

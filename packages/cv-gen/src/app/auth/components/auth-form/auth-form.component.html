@@ -11,10 +11,9 @@
     placeholder="{{'PLACEHOLDERS.PASSWORD'| translate}}"
     formControlName="password"></cv-gen-password-input>
 
-  <div class="remember-wrapper">
-    <p-checkbox formControlName="rememberMe" [binary]="true" inputId="remember-me"></p-checkbox>
-    <label for="remember-me">Remember me</label>
-  </div>
+  <cv-gen-checkbox-input
+    label="{{'LABELS.REMEMBER_ME' | translate}}"
+    formControlName="rememberMe"></cv-gen-checkbox-input>
 
   <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>
