@@ -22,14 +22,8 @@
         size="large"
         shape="circle"></p-avatar>
       <h3>Admin</h3>
-      <p-button
-        [icon]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"
-        styleClass="p-button-rounded p-button-text"
-        (click)="switchTheme()"></p-button>
-      <p-button
-        icon="pi pi-globe"
-        styleClass="p-button-rounded p-button-text"
-        (click)="langMenu.toggle($event)"></p-button>
+      <cv-gen-theme-button></cv-gen-theme-button>
+      <cv-gen-language-button></cv-gen-language-button>
     </div>
 
     <p-button
@@ -46,54 +40,6 @@
   </div>
 </header>
 
-<p-menu
-  #langMenu
-  [model]="langItems"
-  [popup]="true"></p-menu>
-
-<p-sidebar
-  [(visible)]="isNavigationSidebarVisible"
-  position="left">
-  <ng-template pTemplate="header">
-    <h2>{{'HEADER.NAVIGATION' | translate}}</h2>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <nav>
-      <ul>
-        <li
-          class="navigation-link"
-          routerLink="employees"><i class="pi pi-briefcase"></i><span>{{'HEADER.EMPLOYEES' | translate}}</span></li>
-        <li
-          class="navigation-link"
-          routerLink="projects"><i class="pi pi-server"></i><span>{{'HEADER.PROJECTS' | translate}}</span></li>
-      </ul>
-    </nav>
-  </ng-template>
-</p-sidebar>
-
-<p-sidebar
-  [(visible)]="isSettingsSidebarVisible"
-  position="right">
-  <ng-template pTemplate="header">
-    <h2>{{'HEADER.SETTINGS' | translate}}</h2>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <ul>
-      <hr>
-      <li
-        class="navigation-link"
-        (click)="switchLanguage('en')"><i class="pi pi-globe"></i><span>En</span></li>
-      <li
-        class="navigation-link"
-        (click)="switchLanguage('ru')"><i class="pi pi-globe"></i><span>Ru</span></li>
-      <hr>
-      <li
-        class="navigation-link"
-        (click)="switchTheme()"><i [class]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"></i><span>{{'HEADER.THEME' | translate}}</span></li>
-      <hr>
-      <li
-        class="navigation-link"
-        routerLink="about"><i class="pi pi-question-circle"></i><span>{{'HEADER.ABOUT' | translate}}</span></li>
-    </ul>
-  </ng-template>
-</p-sidebar>
+<cv-gen-mobile-sidebars
+  [isNavigationSidebarVisible]="isNavigationSidebarVisible"
+  [isSettingsSidebarVisible]="isSettingsSidebarVisible"></cv-gen-mobile-sidebars>

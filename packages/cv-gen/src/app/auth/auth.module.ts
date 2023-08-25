@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { AuthRoutingModule } from './auth-routing.module';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { AuthPageComponent } from './page/auth/auth.page.component';
-import { AuthRoutingModule } from './auth-routing.module';
 
-import { TranslateModule } from '@ngx-translate/core';
-import { CheckboxInputModule, PasswordInputModule, TextInputModule } from '@cva/my-cva-lib';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CheckboxInputModule, PasswordInputModule, TextInputModule } from '@cva/my-cva-lib';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
+import { LanguageButtonComponent } from '../shared/components/language-button/language-button.component';
+import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
 
 @NgModule({
   declarations: [AuthPageComponent, AuthFormComponent],
@@ -21,7 +23,9 @@ import { MenuModule } from 'primeng/menu';
     PasswordInputModule,
     TextInputModule,
     MenuModule,
-    CheckboxInputModule
+    CheckboxInputModule,
+    LanguageButtonComponent,
+    ThemeButtonComponent
   ],
 })
 export class AuthModule {}

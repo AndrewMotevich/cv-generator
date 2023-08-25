@@ -8,5 +8,5 @@ export const authGuard = () => {
 
   // if(authService.isLogin) router.navigate(['employees'])
   // else router.navigate(['auth'])
-  return authService.isLogin;
+  return authService.isAuthenticate();
 };

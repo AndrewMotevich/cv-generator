@@ -13,12 +13,16 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
+import { MobileSidebarsComponent } from './components/mobile-sidebars/mobile-sidebars.component';
+import { LanguageButtonComponent } from '../shared/components/language-button/language-button.component';
+import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
 
 @NgModule({
   declarations: [
     CorePageComponent,
     BreadcrumbsComponent,
     SidebarComponent,
+    MobileSidebarsComponent,
     HeaderComponent,
   ],
   imports: [
@@ -31,6 +35,8 @@ import { AvatarModule } from 'primeng/avatar';
     ButtonModule,
     MenuModule,
     AvatarModule,
+    LanguageButtonComponent,
+    ThemeButtonComponent
   ],
 })
 export class CoreModule {}

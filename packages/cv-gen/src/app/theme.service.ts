@@ -1,18 +1,28 @@
-import { DOCUMENT } from "@angular/common";
-import { Inject, Injectable } from "@angular/core";
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { BehaviorSubject } from 'rxjs';
 
+@UntilDestroy({ checkProperties: true })
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
-  constructor(@Inject(DOCUMENT) private document: Document){}
+  public isDarkTheme: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
-  public switchTheme(isDark: boolean){
-    const themeLink = this.document.getElementById('app-theme') as HTMLLinkElement
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.isDarkTheme.subscribe((value) => {
+      const themeLink = this.document.getElementById(
+        'app-theme'
+      ) as HTMLLinkElement;
+      if (themeLink) {
+        if (value) themeLink.href = 'soho-dark.css';
+        else themeLink.href = 'soho-light.css';
+      }
+    });
+  }
 
-    if (themeLink){
-      if(isDark) themeLink.href = 'soho-dark.css'
-      else themeLink.href = 'soho-light.css'
-    }
+  public switchTheme() {
+    this.isDarkTheme.next(!this.isDarkTheme.getValue());
   }
 }
