@@ -1,9 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { ITokenCredentials as ITokenData } from './auth.reducer';
+import { ITokenData } from '../../shared/interfaces/token-data.interface';
+import { ICredentials } from '../../shared/interfaces/credentials.interface';
 
 export const logIn = createAction(
-  '[Auth] Init',
-  props<{ credentials: { email: string; password: string } }>()
+  '[Auth] LogIn',
+  props<{ credentials: ICredentials }>()
 );
 
 export const refreshToken = createAction(
@@ -12,5 +13,5 @@ export const refreshToken = createAction(
 
 export const logInSuccess = createAction(
   '[auth/API] Auth Success',
-  props<{ credentials: ITokenData }>()
+  props<{ tokenData: ITokenData }>()
 );

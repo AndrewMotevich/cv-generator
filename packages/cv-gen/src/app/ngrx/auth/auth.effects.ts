@@ -15,9 +15,8 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(AuthActions.logIn),
       mergeMap((caughtAction) => {
-        const { email, password } = caughtAction.credentials;
-        return this.authApiService.logIn(email, password).pipe(
-          map((res) => AuthActions.logInSuccess({ credentials: res }))
+        return this.authApiService.logIn(caughtAction.credentials).pipe(
+          map((res) => AuthActions.logInSuccess({ tokenData: res }))
           //TODO: add error handler
         );
       })
@@ -29,7 +28,7 @@ export class AuthEffects {
       ofType(AuthActions.refreshToken),
       mergeMap(() =>
         this.authApiService.refresh().pipe(
-          map((res) => AuthActions.logInSuccess({ credentials: res }))
+          map((res) => AuthActions.logInSuccess({ tokenData: res }))
           //TODO: add error handler
         )
       )

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AuthRoutingModule } from './auth-routing.module';
-import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { AuthPageComponent } from './page/auth/auth.page.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +12,7 @@ import { LanguageButtonComponent } from '../shared/components/language-button/la
 import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
 
 @NgModule({
-  declarations: [AuthPageComponent, AuthFormComponent],
+  declarations: [AuthPageComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
