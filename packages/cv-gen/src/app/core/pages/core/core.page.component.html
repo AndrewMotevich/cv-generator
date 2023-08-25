@@ -1,12 +1,13 @@
-<div class="page-wrapper">
-  <cv-gen-header></cv-gen-header>
-  <main class="main-wrapper">
-    <cv-gen-side-bar class="side-bar"></cv-gen-side-bar>
-    <div class="content-wrapper">
-      <cv-gen-breadcrumbs class="breadcrumbs"></cv-gen-breadcrumbs>
-      <div class="content-container">
-        <router-outlet></router-outlet>
-      </div>
+<cv-gen-header></cv-gen-header>
+
+<main class="main-wrapper">
+  <cv-gen-side-bar></cv-gen-side-bar>
+
+  <div class="content-wrapper">
+    <cv-gen-breadcrumbs class="breadcrumbs"></cv-gen-breadcrumbs>
+
+    <div id="style-2" class="content-container">
+      <router-outlet></router-outlet>
     </div>
-  </main>
-</div>
+  </div>
+</main>

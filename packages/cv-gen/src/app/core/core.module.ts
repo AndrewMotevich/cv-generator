@@ -16,6 +16,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { MobileSidebarsComponent } from './components/mobile-sidebars/mobile-sidebars.component';
 import { LanguageButtonComponent } from '../shared/components/language-button/language-button.component';
 import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
+import { CollapseSidebarDirective } from './directives/collapse-sidebar.directive';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ThemeButtonComponent } from '../shared/components/theme-button/theme-bu
     SidebarComponent,
     MobileSidebarsComponent,
     HeaderComponent,
+    CollapseSidebarDirective
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,7 @@ import { ThemeButtonComponent } from '../shared/components/theme-button/theme-bu
     MenuModule,
     AvatarModule,
     LanguageButtonComponent,
-    ThemeButtonComponent
+    ThemeButtonComponent,
   ],
 })
 export class CoreModule {}

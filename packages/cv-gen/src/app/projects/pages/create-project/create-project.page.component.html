@@ -1,5 +1,5 @@
 <form [formGroup]="mainForm">
-  <div formArrayName="customForms">
+  <div formArrayName="customForms" class="custom-form">
     <div *ngFor="let formGroup of customForms.controls; let i = index" [formGroupName]="i">
       <cv-gen-project-form formControlName="customForm"></cv-gen-project-form>
     </div>

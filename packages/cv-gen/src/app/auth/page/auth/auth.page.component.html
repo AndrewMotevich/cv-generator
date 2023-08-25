@@ -1,5 +1,4 @@
-<main class="main-wrapper">
-  <form
+<form
   [formGroup]="authForm"
   class="auth-form-wrapper">
   <cv-gen-text-input
@@ -19,8 +18,6 @@
   <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>
 
+<cv-gen-language-button class="lang-button"></cv-gen-language-button>
 
-  <cv-gen-language-button></cv-gen-language-button>
-
-  <cv-gen-theme-button></cv-gen-theme-button>
-</main>
+<cv-gen-theme-button class="theme-button"></cv-gen-theme-button>

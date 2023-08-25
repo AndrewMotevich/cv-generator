@@ -1,11 +1,20 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
+  Component,
+  OnInit,
   Optional,
   Self,
-  OnInit,
 } from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   ChipsInputModule,
   DateInputModule,
@@ -15,19 +24,9 @@ import {
   TextInputModule,
   TextareaModule,
 } from '@cva/my-cva-lib';
-import { CommonModule } from '@angular/common';
-import {
-  ControlValueAccessor,
-  FormControl,
-  FormsModule,
-  NgControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { markAllAsDirty } from '../../utils/mark-as-dirty.util';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 import { BaseCvaForm } from '../../classes/base-cva-form.class';
 
 @Component({
@@ -68,13 +67,5 @@ export class ProjectFormComponent extends BaseCvaForm implements ControlValueAcc
     };
     super(ngControl, projectsControls, cdRef)
     this.ngControl.valueAccessor = this;
-  }
-
-  public submitProjects() {
-    if (this.form.invalid) {
-      markAllAsDirty(this.form.controls);
-      return;
-    }
-    console.log(this.form.getRawValue());
   }
 }
