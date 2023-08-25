@@ -2,6 +2,9 @@ import { Injectable } from "@angular/core";
 
 @Injectable({providedIn: "root"})
 export class AuthService {
-  public isLogin = true
-  // isAuthenticate()
+  private isLogin = true
+
+  public isAuthenticate(){
+    return this.isLogin
+  }
 }

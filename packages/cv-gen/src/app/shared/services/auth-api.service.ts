@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { API_PATH } from 'packages/cv-gen/src/environments/environment.development';
+import { API_PATH } from '../../../environments/environment.development';
 import { map } from 'rxjs';
-import { parseJwt } from '../../shared/utils/parse-jwt.util';
+import { parseJwt } from '../utils/parse-jwt.util';
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
@@ -20,7 +20,6 @@ export class AuthApiService {
           return { access_token: res.access_token, exp: exp };
         })
       );
-    // TODO: handle errors
   }
 
   public refresh() {
@@ -32,6 +31,5 @@ export class AuthApiService {
           return { access_token: res.access_token, exp: exp };
         })
       );
-    // TODO: handle errors
   }
 }
