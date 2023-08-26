@@ -3,7 +3,7 @@ import { ITokenData } from '../../shared/interfaces/token-data.interface';
 import { ICredentials } from '../../shared/interfaces/credentials.interface';
 
 export const logIn = createAction(
-  '[Auth] LogIn',
+  '[Auth] Log In',
   props<{ credentials: ICredentials }>()
 );
 
@@ -12,6 +12,6 @@ export const refreshToken = createAction(
 );
 
 export const logInSuccess = createAction(
-  '[auth/API] Auth Success',
+  '[Auth] Log In Success',
   props<{ tokenData: ITokenData }>()
 );

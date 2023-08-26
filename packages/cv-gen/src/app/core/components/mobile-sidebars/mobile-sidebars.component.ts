@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ThemeService } from '../../../theme.service';
 import { Observable } from 'rxjs';
@@ -9,22 +14,26 @@ import { Observable } from 'rxjs';
   styleUrls: ['./mobile-sidebars.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MobileSidebarsComponent {
+export class MobileSidebarsComponent implements OnInit {
   @Input() public isSettingsSidebarVisible = false;
   @Input() public isNavigationSidebarVisible = false;
 
-  public isDarkTheme: Observable<boolean> = this.themeService.isDarkTheme
+  public isDarkTheme: Observable<boolean>;
 
   constructor(
     private translateService: TranslateService,
     private themeService: ThemeService
   ) {}
 
-  public switchLanguage(lang: string) {
+  public ngOnInit(): void {
+    this.isDarkTheme = this.themeService.getIsDarkTheme();
+  }
+
+  public switchLanguage(lang: string): void {
     this.translateService.use(lang);
   }
 
-  public switchTheme(){
-    this.themeService.switchTheme()
+  public switchTheme(): void {
+    this.themeService.switchTheme();
   }
 }

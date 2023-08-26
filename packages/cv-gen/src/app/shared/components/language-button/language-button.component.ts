@@ -19,7 +19,7 @@ import { MenuModule } from 'primeng/menu';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageButtonComponent {
-  public items: MenuItem[] = [
+  public readonly items: MenuItem[] = [
     {
       label: 'En',
       command: () => this.switchLanguage('en'),

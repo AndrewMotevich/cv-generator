@@ -3,7 +3,11 @@ import { IProject } from '../../models/project.model';
 import { projectsMock } from '../../../ngrx/projects/mock/projects.mock';
 import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { Router } from '@angular/router';
-import { CREATE_PROJECTS, EDIT_PROJECTS, PROJECTS } from '../../../shared/constants/routing-paths.consts';
+import {
+  CREATE_PROJECTS,
+  EDIT_PROJECTS,
+  PROJECTS,
+} from '../../../shared/constants/routing-paths.consts';
 import { ProjectColumns } from '../../constants/project-columns.const';
 
 @Component({
@@ -13,14 +17,14 @@ import { ProjectColumns } from '../../constants/project-columns.const';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListPageComponent {
-  projects: IProject[] = projectsMock
-  cols: IColumns[] = ProjectColumns
+  public projects: IProject[] = projectsMock;
 
-  public addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath
+  public readonly cols: IColumns[] = ProjectColumns;
+  public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
 
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
 
-  public navigateToEdit(data: IProject){
-    this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id])
+  public navigateToEdit(data: IProject) {
+    this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id]);
   }
 }

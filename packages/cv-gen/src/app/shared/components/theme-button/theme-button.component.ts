@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Observable } from 'rxjs';
 import { ThemeService } from '../../../theme.service';
@@ -12,12 +12,16 @@ import { ThemeService } from '../../../theme.service';
   styleUrls: ['./theme-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ThemeButtonComponent {
-  public isDarkTheme: Observable<boolean> = this.themeService.isDarkTheme;
+export class ThemeButtonComponent implements OnInit {
+  public isDarkTheme: Observable<boolean>;
 
   constructor(private themeService: ThemeService) {}
 
-  public switchTheme() {
+  public ngOnInit(): void {
+    this.isDarkTheme = this.themeService.getIsDarkTheme();
+  }
+
+  public switchTheme(): void {
     this.themeService.switchTheme();
   }
 }

@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./core.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CorePageComponent {}
+export class CorePageComponent {
+  public middleBreakpoint = 980
+}

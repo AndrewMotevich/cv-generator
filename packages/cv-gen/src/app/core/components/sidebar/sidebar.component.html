@@ -1,12 +1,16 @@
-<aside>
+<aside [cvGenCollapseSidebar]="isSidebarCollapsed">
   <nav>
     <ul>
       <li
         class="navigation-link"
-        [routerLink]="employeesPath"><i class="pi pi-briefcase"></i><span>Employees</span></li>
+        [routerLink]="employeesPath">
+        <i class="pi pi-briefcase"></i>
+        <span>Employees</span></li>
       <li
         class="navigation-link"
-        [routerLink]="projectsPath"><i class="pi pi-server"></i><span>Projects</span></li>
+        [routerLink]="projectsPath">
+        <i class="pi pi-server"></i>
+        <span #list>Projects</span></li>
     </ul>
   </nav>
   <div class="aside-footer">
@@ -14,7 +18,7 @@
     <p-button
       class="aside-footer-button"
       styleClass="p-button-outlined p-button p-button-text p-button-raised"
-      [icon]="!isSidebarCollapsed ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"
-      (click)="isSidebarCollapsed = !isSidebarCollapsed"></p-button>
+      [icon]="'pi pi-window-minimize'"
+      (click)="isSidebarCollapsed.next(!isSidebarCollapsed.getValue())"></p-button>
   </div>
 </aside>
