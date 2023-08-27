@@ -10,7 +10,8 @@ import { debounceTime, fromEvent } from 'rxjs';
 
 @Directive({ selector: '[cvGenHideElement]' })
 export class HideElementDirective implements OnInit, AfterViewInit {
-  @Input() cvGenHideElement: number;
+  @Input('cvGenHideElement') breakpoint: number;
+  @Input() isMobile = false;
 
   private isCreated = false;
 
@@ -19,27 +20,21 @@ export class HideElementDirective implements OnInit, AfterViewInit {
   ngOnInit(): void {
     fromEvent(window, 'resize')
       .pipe(debounceTime(500))
-      .subscribe((res) => {
-        const size = (res.target as Window).innerWidth;
-        if (size > this.cvGenHideElement) {
-          if (!this.isCreated) {
-            this.renderer.setStyle(
-              this.element.nativeElement,
-              'display',
-              'block'
-            );
-            this.isCreated = true;
-          }
-        } else {
-          this.renderer.setStyle(this.element.nativeElement, 'display', 'none');
-          this.isCreated = false;
-        }
+      .subscribe(() => {
+        this.manageElementVisibility();
       });
   }
 
   ngAfterViewInit() {
-    const initInnerWidth = window.innerWidth;
-    if (initInnerWidth > this.cvGenHideElement) {
+    this.manageElementVisibility();
+  }
+
+  private manageElementVisibility() {
+    const comparedValues = {
+      firstValue: this.isMobile ? this.breakpoint : window.innerWidth,
+      secondValue: this.isMobile ? window.innerWidth : this.breakpoint,
+    };
+    if (comparedValues.firstValue > comparedValues.secondValue) {
       if (!this.isCreated) {
         this.renderer.setStyle(this.element.nativeElement, 'display', 'block');
         this.isCreated = true;

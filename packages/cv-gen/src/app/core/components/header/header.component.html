@@ -1,9 +1,12 @@
 <header>
-    <div class="logo-wrapper">
-      <span class="cv-logo"></span>
-      <h1>{{'APPLICATION' | translate}}</h1>
-    </div>
+  <div class="logo-wrapper">
+    <span class="cv-logo"></span>
+    <h1>{{'APPLICATION' | translate}}</h1>
+  </div>
 
+  <div
+    class="header-buttons-wrapper"
+    [cvGenHideElement]="middleBreakpoint">
     <div class="header-buttons">
       <p-button
         icon="pi pi-search"
@@ -24,18 +27,23 @@
       <cv-gen-theme-button></cv-gen-theme-button>
       <cv-gen-language-button></cv-gen-language-button>
     </div>
+  </div>
 
-    <p-button
-      class="bars-button"
-      icon="pi pi-bars"
-      styleClass="p-button-rounded p-button-text"
-      (click)="isNavigationSidebarVisible = true"></p-button>
+  <p-button
+    class="bars-button"
+    icon="pi pi-bars"
+    styleClass="p-button-rounded p-button-text"
+    [cvGenHideElement]="middleBreakpoint"
+    [isMobile]="true"
+    (click)="isNavigationSidebarVisible = true"></p-button>
 
-    <p-button
-      class="settings-button"
-      icon="pi pi-cog"
-      styleClass="p-button-rounded p-button-text"
-      (click)="isSettingsSidebarVisible = true"></p-button>
+  <p-button
+    class="settings-button"
+    icon="pi pi-cog"
+    styleClass="p-button-rounded p-button-text"
+    [cvGenHideElement]="middleBreakpoint"
+    [isMobile]="true"
+    (click)="isSettingsSidebarVisible = true"></p-button>
 </header>
 
 <cv-gen-mobile-sidebars

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
 
 @Component({
   selector: 'cv-gen-core.page',
@@ -7,5 +8,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorePageComponent {
-  public middleBreakpoint = 980
+  public middleBreakpoint = BREAKPOINTS.medium;
 }

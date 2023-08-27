@@ -17,7 +17,7 @@ import { MobileSidebarsComponent } from './components/mobile-sidebars/mobile-sid
 import { LanguageButtonComponent } from '../shared/components/language-button/language-button.component';
 import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
 import { CollapseSidebarDirective } from './directives/collapse-sidebar.directive';
-import { HideElementDirective } from '../shared/directives/hide-elem.directive';
+import { HideElementDirective } from '../shared/directives/show-hide-elem.directive';
 
 @NgModule({
   declarations: [

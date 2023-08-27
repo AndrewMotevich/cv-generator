@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { ABOUT } from '../../../shared/constants/routing-paths.consts';
+import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -15,4 +16,6 @@ export class HeaderComponent {
   public isSettingsSidebarVisible = false;
 
   public aboutPath = ABOUT.path;
+
+  public middleBreakpoint = BREAKPOINTS.medium
 }

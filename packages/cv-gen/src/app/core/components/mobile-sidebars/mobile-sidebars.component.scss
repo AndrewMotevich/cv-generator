@@ -1,0 +1,11 @@
+.navigation-link{
+  margin-left: 2rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  &:hover, &:active {
+    color: var(--highlight-text-color);
+  }
+}

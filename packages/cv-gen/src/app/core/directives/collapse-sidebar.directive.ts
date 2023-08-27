@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 export class CollapseSidebarDirective implements OnInit {
   @Input() public cvGenCollapseSidebar: Observable<boolean>;
 
-  spanElements: HTMLElement[];
+  private spanElements: HTMLElement[];
 
   constructor(private element: ElementRef, private renderer: Renderer2) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.spanElements = this.element.nativeElement.querySelectorAll('span');
     this.cvGenCollapseSidebar.subscribe((value) => {
       if (value) {
