@@ -16,7 +16,6 @@ import { AvatarModule } from 'primeng/avatar';
 import { MobileSidebarsComponent } from './components/mobile-sidebars/mobile-sidebars.component';
 import { LanguageButtonComponent } from '../shared/components/language-button/language-button.component';
 import { ThemeButtonComponent } from '../shared/components/theme-button/theme-button.component';
-import { CollapseSidebarDirective } from './directives/collapse-sidebar.directive';
 import { HideElementDirective } from '../shared/directives/show-hide-elem.directive';
 
 @NgModule({
@@ -26,8 +25,7 @@ import { HideElementDirective } from '../shared/directives/show-hide-elem.direct
     SidebarComponent,
     MobileSidebarsComponent,
     HeaderComponent,
-    CollapseSidebarDirective,
-    HideElementDirective
+    HideElementDirective,
   ],
   imports: [
     CommonModule,

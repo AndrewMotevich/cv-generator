@@ -1,9 +1,11 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  OnInit
-} from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   EMPLOYEES,
   PROJECTS,
@@ -14,15 +16,31 @@ import {
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('openClose', [
+      state(
+        'open',
+        style({
+          width: '15rem',
+        })
+      ),
+      state(
+        'closed',
+        style({
+          width: '5rem',
+        })
+      ),
+      transition('open <=> closed', [animate('1s')]),
+    ]),
+  ],
 })
-export class SidebarComponent implements OnInit {
-  public isSidebarCollapsed: BehaviorSubject<boolean>;
+export class SidebarComponent {
+  public isSidebarOpen = true;
 
   public readonly projectsPath = PROJECTS.path;
   public readonly employeesPath = EMPLOYEES.path;
 
-  public ngOnInit(): void {
-    this.isSidebarCollapsed = new BehaviorSubject(false);
-    console.log('dsf')
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 }

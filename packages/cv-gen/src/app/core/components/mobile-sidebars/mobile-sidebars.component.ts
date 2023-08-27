@@ -1,13 +1,16 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ThemeService } from '../../../theme.service';
-import { Observable } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-mobile-sidebars',
   templateUrl: './mobile-sidebars.component.html',
@@ -15,18 +18,30 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileSidebarsComponent implements OnInit {
-  @Input() public isSettingsSidebarVisible = false;
-  @Input() public isNavigationSidebarVisible = false;
+  @Input() public isSettingsObservable: BehaviorSubject<boolean>
+  @Input() public isNavigationObservable: BehaviorSubject<boolean>
+
+  public isSettingsVisible = false
+  public isNavigationVisible = false
 
   public isDarkTheme: Observable<boolean>;
 
   constructor(
     private translateService: TranslateService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
     this.isDarkTheme = this.themeService.getIsDarkTheme();
+    this.isNavigationObservable.subscribe(value => {
+      this.isNavigationVisible = value
+      this.cdr.markForCheck()
+    })
+    this.isSettingsObservable.subscribe(value => {
+      this.isSettingsVisible = value
+      this.cdr.markForCheck()
+    })
   }
 
   public switchLanguage(lang: string): void {

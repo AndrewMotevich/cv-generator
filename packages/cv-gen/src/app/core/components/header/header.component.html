@@ -35,7 +35,7 @@
     styleClass="p-button-rounded p-button-text"
     [cvGenHideElement]="middleBreakpoint"
     [isMobile]="true"
-    (click)="isNavigationSidebarVisible = true"></p-button>
+    (click)="isNavigationObservable.next(!isNavigationObservable.getValue())"></p-button>
 
   <p-button
     class="settings-button"
@@ -43,9 +43,10 @@
     styleClass="p-button-rounded p-button-text"
     [cvGenHideElement]="middleBreakpoint"
     [isMobile]="true"
-    (click)="isSettingsSidebarVisible = true"></p-button>
+    (click)="isSettingsObservable.next(!isSettingsObservable.getValue())"></p-button>
 </header>
 
 <cv-gen-mobile-sidebars
-  [isNavigationSidebarVisible]="isNavigationSidebarVisible"
-  [isSettingsSidebarVisible]="isSettingsSidebarVisible"></cv-gen-mobile-sidebars>
+[isSettingsObservable]="isSettingsObservable"
+[isNavigationObservable]="isNavigationObservable"
+></cv-gen-mobile-sidebars>

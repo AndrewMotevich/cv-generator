@@ -1,6 +1,8 @@
 <p-sidebar
-  [(visible)]="isNavigationSidebarVisible"
-  position="left">
+  [(visible)]="isNavigationVisible"
+  (onHide)="isNavigationObservable.next(false)"
+  position="left"
+  >
   <ng-template pTemplate="header">
     <h2>{{'HEADER.NAVIGATION' | translate}}</h2>
   </ng-template>
@@ -19,7 +21,8 @@
 </p-sidebar>
 
 <p-sidebar
-  [(visible)]="isSettingsSidebarVisible"
+  [(visible)]="isSettingsVisible"
+  (onHide)="isSettingsObservable.next(false)"
   position="right">
   <ng-template pTemplate="header">
     <h2>{{'HEADER.SETTINGS' | translate}}</h2>
