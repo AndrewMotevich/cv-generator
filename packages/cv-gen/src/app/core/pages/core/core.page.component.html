@@ -1,11 +1,11 @@
 <cv-gen-header></cv-gen-header>
 
 <main class="main-wrapper">
-  <cv-gen-side-bar [cvGenHideElement]="middleBreakpoint"></cv-gen-side-bar>
+  <cv-gen-side-bar *cvGenHideElement="{breakpoint: middleBreakpoint}"></cv-gen-side-bar>
 
   <div class="content-wrapper">
     <cv-gen-breadcrumbs
-      [cvGenHideElement]="middleBreakpoint"
+      *cvGenHideElement="{breakpoint: middleBreakpoint}"
       class="breadcrumbs"></cv-gen-breadcrumbs>
 
     <div

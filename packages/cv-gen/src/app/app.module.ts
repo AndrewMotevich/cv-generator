@@ -12,9 +12,7 @@ import {
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AuthInterceptor } from './shared/interceptors/authorization.interceptor';
-import { AuthenticateInterceptor } from './shared/interceptors/authenticate.interceptor';
-import { RefreshInterceptor } from './shared/interceptors/refresh.interceptor';
+import { AuthorizationInterceptor } from './shared/interceptors/authorization.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,17 +34,7 @@ import { RefreshInterceptor } from './shared/interceptors/refresh.interceptor';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthenticateInterceptor,
-      multi: true,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RefreshInterceptor,
+      useClass: AuthorizationInterceptor,
       multi: true,
     },
   ],

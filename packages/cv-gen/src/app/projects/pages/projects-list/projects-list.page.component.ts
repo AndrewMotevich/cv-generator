@@ -10,7 +10,9 @@ import {
 } from '../../../shared/constants/routing-paths.consts';
 import { ProjectColumns } from '../../constants/project-columns.const';
 import { ProjectsApiService } from '../../../shared/services/projects-api.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-project-list.page',
   templateUrl: './projects-list.page.component.html',
@@ -24,7 +26,7 @@ export class ProjectListPageComponent {
   public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
 
   constructor(private router: Router, private projectsService: ProjectsApiService) {
-    this.projectsService.getProjects().subscribe(res => console.log(res))
+    this.projectsService.getProjects().pipe(untilDestroyed(this)).subscribe(res => console.log(res))
   }
 
   public navigateToEdit(data: IProject) {

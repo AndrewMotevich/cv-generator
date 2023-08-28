@@ -5,14 +5,13 @@
   </div>
 
   <div
-    class="header-buttons-wrapper"
-    [cvGenHideElement]="middleBreakpoint">
+    *cvGenHideElement="{breakpoint: middleBreakpoint}"
+    class="header-buttons-wrapper">
     <div class="header-buttons">
       <p-button
         icon="pi pi-search"
         styleClass="p-button-rounded p-button-text"
-        (click)="logOut()"
-        ></p-button>
+        (click)="logOut()"></p-button>
       <p-button
         icon="pi pi-question-circle"
         styleClass="p-button-rounded p-button-text"
@@ -35,20 +34,17 @@
     class="bars-button"
     icon="pi pi-bars"
     styleClass="p-button-rounded p-button-text"
-    [cvGenHideElement]="middleBreakpoint"
-    [isMobile]="true"
+    *cvGenHideElement="{breakpoint: middleBreakpoint, isMobile: true}"
     (click)="isNavigationObservable.next(!isNavigationObservable.getValue())"></p-button>
 
   <p-button
     class="settings-button"
     icon="pi pi-cog"
     styleClass="p-button-rounded p-button-text"
-    [cvGenHideElement]="middleBreakpoint"
-    [isMobile]="true"
+    *cvGenHideElement="{breakpoint: middleBreakpoint, isMobile: true}"
     (click)="isSettingsObservable.next(!isSettingsObservable.getValue())"></p-button>
 </header>
 
 <cv-gen-mobile-sidebars
-[isSettingsObservable]="isSettingsObservable"
-[isNavigationObservable]="isNavigationObservable"
-></cv-gen-mobile-sidebars>
+  [isSettingsObservable]="isSettingsObservable"
+  [isNavigationObservable]="isNavigationObservable"></cv-gen-mobile-sidebars>

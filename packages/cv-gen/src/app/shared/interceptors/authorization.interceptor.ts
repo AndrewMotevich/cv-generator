@@ -5,13 +5,12 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, mergeMap } from 'rxjs';
-import { API_PATH } from '../../../environments/environment.development';
+import { Observable, filter, mergeMap, take } from 'rxjs';
 import { AuthFacade } from '../../ngrx/auth/auth.facade';
 import { AuthApiService } from '../services/auth-api.service';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthorizationInterceptor implements HttpInterceptor {
   constructor(
     private authFacade: AuthFacade,
     private authApi: AuthApiService
@@ -22,37 +21,40 @@ export class AuthInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     if (
-      httpRequest.url.includes(`${API_PATH}/projects`) ||
-      httpRequest.url.includes(`${API_PATH}/employees`)
+      httpRequest.url.includes('i18n') ||
+      httpRequest.url.includes('login') ||
+      httpRequest.url.includes('refresh')
     ) {
-      return this.authFacade.token$.pipe(
-        mergeMap((tokenData) => {
-          const milliseconds = tokenData.expires * 1000;
-
-          if (milliseconds < Date.now()) {
-            return this.authApi.refresh().pipe(
-              mergeMap((newTokenData) => {
-                const newToken = `Bearer ${newTokenData.accessToken}`;
-                // this.authFacade.refreshToken(newTokenData);
-                return next.handle(
-                  httpRequest.clone({
-                    headers: httpRequest.headers.set('Authorization', newToken),
-                  })
-                );
-              })
-            );
-          } else {
-            const token = `Bearer ${tokenData.accessToken}`;
-            return next.handle(
-              httpRequest.clone({
-                headers: httpRequest.headers.set('Authorization', token),
-              })
-            );
-          }
-        })
-      );
+      return next.handle(httpRequest);
     }
+    return this.authFacade.token$.pipe(
+      filter(Boolean),
+      take(1),
+      mergeMap((tokenData) => {
+        if (tokenData.expires < Date.now()) {
+          return this.authApi.refresh().pipe(
+            mergeMap((newTokenData) => {
+              this.authFacade.refreshToken(newTokenData);
+              return this.handle(next, httpRequest, newTokenData.accessToken);
+            })
+          );
+        } else {
+          return this.handle(next, httpRequest, tokenData.accessToken);
+        }
+      })
+    );
+  }
 
-    return next.handle(httpRequest);
+  private handle(
+    next: HttpHandler,
+    httpRequest: HttpRequest<unknown>,
+    accessToken: string
+  ) {
+    const token = `Bearer ${accessToken}`;
+    return next.handle(
+      httpRequest.clone({
+        headers: httpRequest.headers.set('Authorization', token),
+      })
+    );
   }
 }

@@ -19,7 +19,7 @@ export class AuthApiService {
       .pipe(
         map((res) => {
           const exp = parseJwt(res.access_token).exp;
-          return { accessToken: res.access_token, expires: exp };
+          return { accessToken: res.access_token, expires: exp * 1000};
         })
       );
   }
@@ -32,7 +32,7 @@ export class AuthApiService {
       .pipe(
         map((res) => {
           const exp = parseJwt(res.access_token).exp;
-          return { accessToken: res.access_token, expires: exp };
+          return { accessToken: res.access_token, expires: exp * 1000 };
         })
       );
   }
