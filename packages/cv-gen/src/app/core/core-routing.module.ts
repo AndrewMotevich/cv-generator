@@ -6,8 +6,14 @@ import {
   EMPLOYEES,
   PROJECTS,
 } from '../shared/constants/routing-paths.consts';
+import { authGuard } from '../auth/guards/auth.guard';
 
 const homeRoutes: Routes = [
+  {
+    path: BASE.path,
+    redirectTo: EMPLOYEES.path,
+    pathMatch: 'full',
+  },
   {
     path: BASE.path,
     component: CorePageComponent,
@@ -16,6 +22,7 @@ const homeRoutes: Routes = [
         path: PROJECTS.path,
         loadChildren: () =>
           import('../projects/projects.module').then((m) => m.ProjectsModule),
+        canMatch: [() => authGuard()],
       },
       {
         path: EMPLOYEES.path,
@@ -23,6 +30,7 @@ const homeRoutes: Routes = [
           import('../employees/employees.module').then(
             (m) => m.EmployeesModule
           ),
+        canMatch: [() => authGuard()],
       },
     ],
   },

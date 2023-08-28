@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -18,11 +18,11 @@ import { UntilDestroy } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MobileSidebarsComponent implements OnInit {
-  @Input() public isSettingsObservable: BehaviorSubject<boolean>
-  @Input() public isNavigationObservable: BehaviorSubject<boolean>
+  @Input() public isSettingsObservable: BehaviorSubject<boolean>;
+  @Input() public isNavigationObservable: BehaviorSubject<boolean>;
 
-  public isSettingsVisible = false
-  public isNavigationVisible = false
+  public isSettingsVisible = false;
+  public isNavigationVisible = false;
 
   public isDarkTheme: Observable<boolean>;
 
@@ -34,14 +34,14 @@ export class MobileSidebarsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.isDarkTheme = this.themeService.getIsDarkTheme();
-    this.isNavigationObservable.subscribe(value => {
-      this.isNavigationVisible = value
-      this.cdr.markForCheck()
-    })
-    this.isSettingsObservable.subscribe(value => {
-      this.isSettingsVisible = value
-      this.cdr.markForCheck()
-    })
+    this.isNavigationObservable.subscribe((value) => {
+      this.isNavigationVisible = value;
+      this.cdr.markForCheck();
+    });
+    this.isSettingsObservable.subscribe((value) => {
+      this.isSettingsVisible = value;
+      this.cdr.markForCheck();
+    });
   }
 
   public switchLanguage(lang: string): void {

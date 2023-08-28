@@ -3,6 +3,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { ABOUT } from '../../../shared/constants/routing-paths.consts';
 import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
 import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -15,7 +16,12 @@ export class HeaderComponent {
   public isSettingsObservable = new BehaviorSubject<boolean>(false);
   public isNavigationObservable = new BehaviorSubject<boolean>(false);
 
-  public aboutPath = ABOUT.path;
+  public readonly aboutPath = ABOUT.path;
+  public readonly middleBreakpoint = BREAKPOINTS.medium
 
-  public middleBreakpoint = BREAKPOINTS.medium
+  constructor(private authService: AuthService){}
+
+  logOut(){
+    this.authService.logOut()
+  }
 }

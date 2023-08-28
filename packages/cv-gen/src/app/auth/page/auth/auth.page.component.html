@@ -13,7 +13,7 @@
 
   <cv-gen-checkbox-input
     label="{{'LABELS.REMEMBER_ME' | translate}}"
-    formControlName="rememberMe"></cv-gen-checkbox-input>
+    [formControl]="rememberMe"></cv-gen-checkbox-input>
 
   <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>
