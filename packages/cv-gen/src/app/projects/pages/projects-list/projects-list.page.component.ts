@@ -9,6 +9,7 @@ import {
   PROJECTS,
 } from '../../../shared/constants/routing-paths.consts';
 import { ProjectColumns } from '../../constants/project-columns.const';
+import { ProjectsApiService } from '../../../shared/services/projects-api.service';
 
 @Component({
   selector: 'cv-gen-project-list.page',
@@ -22,7 +23,9 @@ export class ProjectListPageComponent {
   public readonly cols: IColumns[] = ProjectColumns;
   public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private projectsService: ProjectsApiService) {
+    this.projectsService.getProjects().subscribe(res => console.log(res))
+  }
 
   public navigateToEdit(data: IProject) {
     this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id]);

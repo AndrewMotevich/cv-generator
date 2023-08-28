@@ -6,7 +6,7 @@ export const TOKEN_FEATURE_KEY = 'token';
 
 export const initialAuthState = {
     accessToken: '',
-    expires: ''
+    expires: 0
 }
 
 export const AuthReducer = createReducer(

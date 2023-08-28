@@ -13,9 +13,7 @@ export class AuthService {
     return this.isLogin.getValue();
   }
 
-  public setIsLogin(rememberMe = false): BehaviorSubject<boolean> {
-    if (rememberMe) localStorage.setItem('rememberMe', 'true');
-    else localStorage.setItem('rememberMe', 'false');
+  public setIsLogin(): BehaviorSubject<boolean> {
     return this.isLogin;
   }
 

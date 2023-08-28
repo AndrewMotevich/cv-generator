@@ -5,6 +5,7 @@ import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { Router } from '@angular/router';
 import { EDIT_EMPLOYEES, EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
+import { EmployeesApiService } from '../../../shared/services/employees-api.service';
 
 @Component({
   selector: 'cv-gen-employees-list.page',
@@ -13,16 +14,16 @@ import { EmployeesColumns } from '../../constants/employees-columns.const';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesListPageComponent {
-  data: IEmployee[] = employeesMock;
+  public data: IEmployee[] = employeesMock;
+  public cols: IColumns[] = EmployeesColumns
 
-  cols: IColumns[] = EmployeesColumns
+  public readonly addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath
 
-  public addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath
+  constructor(private router: Router, private employeesApiService: EmployeesApiService) {
+    this.employeesApiService.getEmployees().subscribe(res => console.log(res))
+  }
 
-  constructor(private router: Router) {}
-
-  navigateToEdit(data: unknown) {
-    console.log(EMPLOYEES.path, EDIT_EMPLOYEES.path, (data as {id: number}).id)
+  public navigateToEdit(data: unknown) {
     this.router.navigate([EMPLOYEES.path, EDIT_EMPLOYEES.path, (data as {id: number}).id]);
   }
 }

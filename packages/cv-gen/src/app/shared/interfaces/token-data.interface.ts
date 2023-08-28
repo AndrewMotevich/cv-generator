@@ -1,4 +1,4 @@
 export interface ITokenData {
   accessToken: string,
-  expires: string
+  expires: number
 }

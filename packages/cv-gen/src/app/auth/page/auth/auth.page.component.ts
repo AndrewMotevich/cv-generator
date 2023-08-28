@@ -2,9 +2,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthFacade } from '../../../ngrx/auth/auth.facade';
 import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
-import { AuthService } from '../../../shared/services/auth.service';
-import { Router } from '@angular/router';
-import { EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
 
 @Component({
   selector: 'cv-gen-auth.page',
@@ -18,14 +15,9 @@ export class AuthPageComponent {
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  public rememberMe = new FormControl<boolean>(false)
+  public rememberMe = new FormControl<boolean>(false);
 
-  constructor(
-    private fb: FormBuilder,
-    private authFacade: AuthFacade,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private fb: FormBuilder, private authFacade: AuthFacade) {}
 
   public submitAuth() {
     if (this.authForm.invalid) {
@@ -33,7 +25,5 @@ export class AuthPageComponent {
       return;
     }
     this.authFacade.logIn(this.authForm.getRawValue());
-    this.authService.setIsLogin(this.rememberMe.value).next(true);
-    this.router.navigate([EMPLOYEES.path]);
   }
 }
