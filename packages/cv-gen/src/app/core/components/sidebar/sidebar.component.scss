@@ -1,3 +1,5 @@
+@import '../../../../styles/abstracts/variables';
+
 :host {
   display: block;
   height: 100%;
@@ -12,7 +14,7 @@ aside {
   flex-direction: column;
   justify-content: space-between;
   z-index: 1;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow;
 }
 i {
   font-size: 1.5rem;

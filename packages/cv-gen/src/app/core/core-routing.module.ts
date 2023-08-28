@@ -6,7 +6,7 @@ import {
   EMPLOYEES,
   PROJECTS,
 } from '../shared/constants/routing-paths.consts';
-import { authGuard } from '../auth/guards/auth.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 
 const homeRoutes: Routes = [
   {

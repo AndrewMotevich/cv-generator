@@ -23,12 +23,12 @@
           "node_modules/primeng/resources/primeng.min.css",
           "packages/cv-gen/src/styles.scss",
           {
-            "input": "packages/cv-gen/src/sass/themes/soho-dark/theme.css",
+            "input": "packages/cv-gen/src/styles/themes/soho-dark/theme.scss",
             "bundleName": "soho-dark",
             "inject": false
           },
           {
-            "input": "packages/cv-gen/src/sass/themes/soho-light/theme.css",
+            "input": "packages/cv-gen/src/styles/themes/soho-light/theme.scss",
             "bundleName": "soho-light",
             "inject": false
           }

@@ -1,5 +1,4 @@
-@import '../../../../sass/abstracts/variables';
-@import '../../../../sass/abstracts/mixins';
+@import '../../../../styles/abstracts/variables';
 
 :host {
   display: block;
@@ -17,7 +16,7 @@ header {
   justify-content: space-between;
   position: relative;
   color: #ffffff;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: $shadow;
   z-index: 3;
 }
 

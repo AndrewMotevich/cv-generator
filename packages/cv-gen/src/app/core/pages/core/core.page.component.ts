@@ -8,5 +8,5 @@ import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CorePageComponent {
-  public middleBreakpoint = BREAKPOINTS.medium;
+  public readonly middleBreakpoint = BREAKPOINTS.medium;
 }
