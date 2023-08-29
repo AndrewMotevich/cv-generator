@@ -14,6 +14,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastModule } from 'primeng/toast';
 import { AuthorizationInterceptor } from './shared/interceptors/authorization.interceptor';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ import { AuthorizationInterceptor } from './shared/interceptors/authorization.in
       useClass: AuthorizationInterceptor,
       multi: true,
     },
+    MessageService
   ],
   bootstrap: [AppComponent],
 })
