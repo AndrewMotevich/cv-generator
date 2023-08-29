@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
-import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../environments/environment.development';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { TranslateService } from '@ngx-translate/core';
+import { PrimeNGConfig } from 'primeng/api';
+import { environment } from '../environments/environment.development';
+import { ThemeService } from './theme.service';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -14,7 +15,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {

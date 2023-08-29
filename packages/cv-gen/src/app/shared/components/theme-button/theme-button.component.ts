@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ButtonModule } from 'primeng/button';
-import { Observable } from 'rxjs';
-import { ThemeService } from '../../../theme.service';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
+import { Theme } from '../../enums/theme.enum';
 
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-theme-button',
   standalone: true,
@@ -13,15 +15,22 @@ import { ThemeService } from '../../../theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ThemeButtonComponent implements OnInit {
-  public isDarkTheme: Observable<boolean>;
+  public theme: Theme;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private coreFacade: CoreFacade) {}
 
   public ngOnInit(): void {
-    this.isDarkTheme = this.themeService.getIsDarkTheme();
+    this.coreFacade.theme$.pipe(untilDestroyed(this)).subscribe((theme) => {
+      this.theme = theme;
+    });
   }
 
   public switchTheme(): void {
-    this.themeService.switchTheme();
+    console.log(this.theme);
+    if (this.theme === Theme.dark) {
+      this.coreFacade.setTheme(Theme.light);
+    } else {
+      this.coreFacade.setTheme(Theme.dark);
+    }
   }
 }

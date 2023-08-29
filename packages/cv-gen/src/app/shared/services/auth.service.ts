@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CoreFacade } from '../../ngrx/core/core.facade';
 import { AUTH } from '../constants/routing-paths.consts';
 
+@UntilDestroy()
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private isLogin = new BehaviorSubject(false);
+  private isLogin = false;
 
-  constructor(private router: Router) {}
-
-  public isAuthenticate(): boolean {
-    return this.isLogin.getValue();
+  constructor(private router: Router, private coreFacade: CoreFacade) {
+    this.coreFacade.isLogin$.pipe(untilDestroyed(this)).subscribe((value) => {
+      this.isLogin = value;
+    });
   }
 
-  public setIsLogin(): BehaviorSubject<boolean> {
+  public isAuthenticate() {
     return this.isLogin;
   }
 
   public logOut() {
-    this.isLogin.next(false);
     this.router.navigate([AUTH.path]);
   }
 }

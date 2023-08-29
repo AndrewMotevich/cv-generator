@@ -1,8 +1,7 @@
 <p-sidebar
   [(visible)]="isNavigationVisible"
   (onHide)="isNavigationObservable.next(false)"
-  position="left"
-  >
+  position="left">
   <ng-template pTemplate="header">
     <h2>{{'HEADER.NAVIGATION' | translate}}</h2>
   </ng-template>
@@ -32,14 +31,14 @@
       <hr>
       <li
         class="navigation-link"
-        (click)="switchLanguage('en')"><i class="pi pi-globe"></i><span>En</span></li>
+        (click)="switchLanguage(language.en)"><i class="pi pi-globe"></i><span>En</span></li>
       <li
         class="navigation-link"
-        (click)="switchLanguage('ru')"><i class="pi pi-globe"></i><span>Ru</span></li>
+        (click)="switchLanguage(language.ru)"><i class="pi pi-globe"></i><span>Ru</span></li>
       <hr>
       <li
         class="navigation-link"
-        (click)="switchTheme()"><i [class]="(isDarkTheme | async) ? 'pi pi-moon': 'pi pi-sun'"></i><span>{{'HEADER.THEME' | translate}}</span></li>
+        (click)="switchTheme()"><i [class]="(theme === 'dark') ? 'pi pi-moon': 'pi pi-sun'"></i><span>{{'HEADER.THEME' | translate}}</span></li>
       <hr>
       <li
         class="navigation-link"
