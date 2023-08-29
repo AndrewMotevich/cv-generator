@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IEmployee } from '../../models/employee.model';
-import { employeesMock } from '../../../ngrx/employees/mock/employees.mock';
-import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EDIT_EMPLOYEES, EMPLOYEES } from '../../../shared/constants/routing-paths.consts';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
+import {
+  EDIT_EMPLOYEES,
+  EMPLOYEES,
+} from '../../../shared/constants/routing-paths.consts';
+import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
-import { EmployeesApiService } from '../../../shared/services/employees-api.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { IEmployee } from '../../models/employee.model';
+import { Observable } from 'rxjs';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -15,17 +18,27 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./employees-list.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeesListPageComponent {
-  public data: IEmployee[] = employeesMock;
-  public cols: IColumns[] = EmployeesColumns
+export class EmployeesListPageComponent implements OnInit {
+  public data: Observable<IEmployee[]>;
+  public cols: IColumns[] = EmployeesColumns;
 
-  public readonly addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath
+  public readonly addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath;
 
-  constructor(private router: Router, private employeesApiService: EmployeesApiService) {
-    this.employeesApiService.getEmployees().pipe(untilDestroyed(this)).subscribe(res => console.log(res))
+  constructor(
+    private router: Router,
+    private employeesFacade: EmployeesFacade
+  ) {}
+
+  ngOnInit() {
+    this.employeesFacade.getEmployees();
+    this.data = this.employeesFacade.allEmployees$;
   }
 
   public navigateToEdit(data: unknown) {
-    this.router.navigate([EMPLOYEES.path, EDIT_EMPLOYEES.path, (data as {id: number}).id]);
+    this.router.navigate([
+      EMPLOYEES.path,
+      EDIT_EMPLOYEES.path,
+      (data as { id: number }).id,
+    ]);
   }
 }

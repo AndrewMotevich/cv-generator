@@ -9,21 +9,15 @@ import * as EmployeesSelectors from './employees.selectors';
 export class EmployeesFacade {
   private readonly store = inject(Store);
 
-  /**
-   * Combine pieces of state using createSelector,
-   * and expose them as observables through the facade.
-   */
   loaded$ = this.store.pipe(select(EmployeesSelectors.selectEmployeesLoaded));
+
   allEmployees$ = this.store.pipe(
     select(EmployeesSelectors.selectAllEmployees)
   );
+
   selectedEmployees$ = this.store.pipe(select(EmployeesSelectors.selectEntity));
 
-  /**
-   * Use the initialization action to perform one
-   * or more tasks in your Effects.
-   */
-  init() {
-    this.store.dispatch(EmployeesActions.initEmployees());
+  getEmployees() {
+    this.store.dispatch(EmployeesActions.getEmployees());
   }
 }

@@ -2,30 +2,21 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import * as EmployeesActions from './employees.actions';
-
-export interface EmployeesEntity {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  department: string;
-  specialization: string;
-}
+import { IEmployee } from '../../employees/models/employee.model';
 
 export const EMPLOYEES_FEATURE_KEY = 'employees';
 
-export interface EmployeesState extends EntityState<EmployeesEntity> {
-  selectedId?: string | number; // which Employees record has been selected
-  loaded: boolean; // has the Employees list been loaded
-  error?: string | null; // last known error (if any)
+export interface EmployeesState extends EntityState<IEmployee> {
+  selectedId?: string | number;
+  loaded: boolean;
+  error?: string | null;
 }
 
-export const employeesAdapter: EntityAdapter<EmployeesEntity> =
-  createEntityAdapter<EmployeesEntity>();
+export const employeesAdapter: EntityAdapter<IEmployee> =
+  createEntityAdapter<IEmployee>();
 
 export const initialEmployeesState: EmployeesState =
   employeesAdapter.getInitialState({
-    // set initial required properties
     loaded: false,
   });
 

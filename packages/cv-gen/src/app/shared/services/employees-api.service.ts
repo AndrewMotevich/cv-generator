@@ -8,6 +8,6 @@ export class EmployeesApiService {
   constructor(private http: HttpClient) {}
 
   public getEmployees() {
-    return this.http.get<IEmployee>(`${API_PATH}/employees`);
+    return this.http.get<IEmployee[]>(`${API_PATH}/employees`);
   }
 }

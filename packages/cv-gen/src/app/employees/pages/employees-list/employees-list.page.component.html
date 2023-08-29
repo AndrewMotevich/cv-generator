@@ -8,7 +8,7 @@
   <div class="table-wrapper">
     <cv-gen-base-table1
       [cols]="cols"
-      [data]="data"
+      [data]="data | async"
       (itemInfo)="navigateToEdit($event)"></cv-gen-base-table1>
   </div>
 </div>
