@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { ABOUT } from '../../../shared/constants/routing-paths.consts';
-import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
 import { BehaviorSubject } from 'rxjs';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthFacade } from '../../../ngrx/auth/auth.facade';
+import { BREAKPOINTS } from '../../../shared/constants/breakpoints.consts';
+import { ABOUT } from '../../../shared/constants/routing-paths.consts';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -19,9 +19,9 @@ export class HeaderComponent {
   public readonly aboutPath = ABOUT.path;
   public readonly middleBreakpoint = BREAKPOINTS.medium
 
-  constructor(private authService: AuthService){}
+  constructor(private authFacade: AuthFacade){}
 
   logOut(){
-    this.authService.logOut()
+    this.authFacade.logOut()
   }
 }

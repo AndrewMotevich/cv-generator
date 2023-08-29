@@ -3,8 +3,8 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 import { TranslateService } from '@ngx-translate/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { environment } from '../environments/environment.development';
+import { AuthFacade } from './ngrx/auth/auth.facade';
 import { ThemeService } from './theme.service';
-import { AuthService } from './shared/services/auth.service';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -18,12 +18,12 @@ export class AppComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private translateService: TranslateService,
     private themeService: ThemeService,
-    private authService: AuthService
+    private authFacade: AuthFacade
   ) {}
 
   ngOnInit() {
     this.translateService.use(environment.DEFAULT_LOCALE);
     this.primengConfig.ripple = true;
-    this.authService.initialRefresh()
+    this.authFacade.initialRefreshToken();
   }
 }

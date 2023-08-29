@@ -22,7 +22,7 @@ const homeRoutes: Routes = [
         path: PROJECTS.path,
         loadChildren: () =>
           import('../projects/projects.module').then((m) => m.ProjectsModule),
-        canMatch: [() => authGuard()],
+        canMatch: [authGuard],
       },
       {
         path: EMPLOYEES.path,
@@ -30,7 +30,7 @@ const homeRoutes: Routes = [
           import('../employees/employees.module').then(
             (m) => m.EmployeesModule
           ),
-        canMatch: [() => authGuard()],
+        canMatch: [authGuard],
       },
     ],
   },
