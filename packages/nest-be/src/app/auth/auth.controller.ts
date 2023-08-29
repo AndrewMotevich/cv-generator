@@ -38,8 +38,19 @@ export class AuthController {
     );
   }
 
+  @ApiOperation({ summary: 'Log out and clear cookie' })
+  @ApiForbiddenResponse({ description: 'Forbidden Error', type: Error })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Error,
+  })
+  @Get('logout')
+  logOut(@Res({ passthrough: true }) response: Response) {
+    this.authService.logOut(response);
+  }
+
   @ApiOperation({ summary: 'Refresh tokens' })
-  @ApiForbiddenResponse({ description: 'Forbidden Error', type: Error})
+  @ApiForbiddenResponse({ description: 'Forbidden Error', type: Error })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Error,

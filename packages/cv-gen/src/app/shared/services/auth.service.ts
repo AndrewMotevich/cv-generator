@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthFacade } from '../../ngrx/auth/auth.facade';
 import { CoreFacade } from '../../ngrx/core/core.facade';
-import { AUTH } from '../constants/routing-paths.consts';
 
 @UntilDestroy()
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isLogin = false;
 
-  constructor(private router: Router, private coreFacade: CoreFacade) {
+  constructor(
+    private coreFacade: CoreFacade,
+    private authFacade: AuthFacade
+  ) {
     this.coreFacade.isLogin$.pipe(untilDestroyed(this)).subscribe((value) => {
       this.isLogin = value;
     });
@@ -19,7 +21,11 @@ export class AuthService {
     return this.isLogin;
   }
 
+  public initialRefresh() {
+    this.authFacade.initialRefreshToken();
+  }
+
   public logOut() {
-    this.router.navigate([AUTH.path]);
+    this.authFacade.logOut();
   }
 }

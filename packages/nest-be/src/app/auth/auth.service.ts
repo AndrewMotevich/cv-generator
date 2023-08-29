@@ -37,6 +37,16 @@ export class AuthService {
     }
   }
 
+  logOut(response: Response){
+    response.cookie('refresh', '', {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: this.oneDayInMilliseconds,
+    });
+    return {message: 'Refresh cookie cleared'}
+  }
+
   async refresh(request: Request, response: Response): Promise<Tokens> {
     const token = request.cookies.refresh;
     if (!token) {

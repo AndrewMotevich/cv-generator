@@ -24,6 +24,12 @@ export class AuthApiService {
       );
   }
 
+  public logOut(){
+    return this.http.get(`${API_PATH}/auth/logout`, {
+      withCredentials: true,
+    })
+  }
+
   public refresh() {
     return this.http
       .get<{ access_token: string }>(`${API_PATH}/auth/refresh`, {

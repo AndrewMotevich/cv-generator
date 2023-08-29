@@ -13,10 +13,18 @@ export class AuthFacade {
   public token$ = this.store.select(AuthSelectors.selectTokenState);
 
   public logIn(credentials: ICredentials) {
-    this.store.dispatch(AuthActions.logIn({credentials}));
+    this.store.dispatch(AuthActions.logIn({ credentials }));
+  }
+
+  public logOut() {
+    this.store.dispatch(AuthActions.logOut());
   }
 
   public refreshToken(tokenData: ITokenData) {
-    this.store.dispatch(AuthActions.logInSuccess({tokenData}));
+    this.store.dispatch(AuthActions.logInSuccess({ tokenData }));
+  }
+
+  public initialRefreshToken() {
+    this.store.dispatch(AuthActions.refreshToken());
   }
 }

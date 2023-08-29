@@ -12,6 +12,7 @@ import {
 } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ToastModule } from 'primeng/toast';
 import { AuthorizationInterceptor } from './shared/interceptors/authorization.interceptor';
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AuthorizationInterceptor } from './shared/interceptors/authorization.in
       },
       useDefaultLang: false,
     }),
+    ToastModule
   ],
   providers: [
     {
