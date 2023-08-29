@@ -1,4 +1,4 @@
-import { IColumns } from "../../shared/interfaces/shared.interfeces";
+import { IColumns } from "../../shared/interfaces/columns.interfeces";
 
 export const ProjectColumns: IColumns[] = [
   {field: "id", header: "Id"},

@@ -23,7 +23,7 @@ export const initialEmployeesState: EmployeesState =
 export const EmployeesReducer = createReducer(
   initialEmployeesState,
   on(EmployeesActions.loadEmployeesSuccess, (state, { employees }) => {
-    console.log(employees);
+    console.log('EMPLOYEES: ', employees);
     return employeesAdapter.setAll(employees, { ...state, loaded: true });
   }),
   on(EmployeesActions.loadEmployeesFailure, (state, { error }) => ({

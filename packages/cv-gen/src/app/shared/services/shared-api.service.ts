@@ -1,32 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATH } from '../../../environments/environment.development';
+import { IShared } from '../interfaces/shared.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SharedApiService {
   constructor(private http: HttpClient) {}
 
   public getSpecializations() {
-    return this.http.get(`${API_PATH}/specializations`);
+    return this.http.get<IShared[]>(`${API_PATH}/specializations`);
   }
 
   public getDepartments() {
-    return this.http.get(`${API_PATH}/departments`);
+    return this.http.get<IShared[]>(`${API_PATH}/departments`);
   }
 
   public getSkills() {
-    return this.http.get(`${API_PATH}/skills`);
+    return this.http.get<IShared[]>(`${API_PATH}/skills`);
   }
 
   public getTeamRoles() {
-    return this.http.get(`${API_PATH}/team-roles`);
+    return this.http.get<IShared[]>(`${API_PATH}/team-roles`);
   }
 
   public getResponsibilities() {
-    return this.http.get(`${API_PATH}/responsibilities`);
+    return this.http.get<IShared[]>(`${API_PATH}/responsibilities`);
   }
 
   public getLanguages() {
-    return this.http.get(`${API_PATH}/languages`);
+    return this.http.get<IShared[]>(`${API_PATH}/languages`);
   }
 }

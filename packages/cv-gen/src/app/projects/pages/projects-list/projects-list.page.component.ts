@@ -8,7 +8,7 @@ import {
   EDIT_PROJECTS,
   PROJECTS,
 } from '../../../shared/constants/routing-paths.consts';
-import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { ProjectColumns } from '../../constants/project-columns.const';
 import { IProject } from '../../models/project.model';
 

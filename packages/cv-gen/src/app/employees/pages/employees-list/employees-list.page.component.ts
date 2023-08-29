@@ -6,10 +6,11 @@ import {
   EDIT_EMPLOYEES,
   EMPLOYEES,
 } from '../../../shared/constants/routing-paths.consts';
-import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
 import { IEmployee } from '../../models/employee.model';
 import { Observable } from 'rxjs';
+import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -26,10 +27,12 @@ export class EmployeesListPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private employeesFacade: EmployeesFacade
+    private employeesFacade: EmployeesFacade,
+    private cvsFacade: CvsFacade
   ) {}
 
   ngOnInit() {
+    this.cvsFacade.getCvs();
     this.employeesFacade.getEmployees();
     this.data = this.employeesFacade.allEmployees$;
   }

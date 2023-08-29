@@ -17,7 +17,7 @@ export const initialState: ICoreState = {
   isLogin: false,
 };
 
-export const coreReducer = createReducer(
+export const CoreReducer = createReducer(
   initialState,
   on(CoreActions.setTheme, (state, action) => ({
     ...state,

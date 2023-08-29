@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { IColumns } from '../../interfaces/shared.interfeces';
+import { IColumns } from '../../interfaces/columns.interfeces';
 
 @Component({
   selector: 'cv-gen-base-table1',
