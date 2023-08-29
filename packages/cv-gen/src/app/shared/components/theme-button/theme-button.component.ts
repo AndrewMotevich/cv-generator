@@ -26,7 +26,6 @@ export class ThemeButtonComponent implements OnInit {
   }
 
   public switchTheme(): void {
-    console.log(this.theme);
     if (this.theme === Theme.dark) {
       this.coreFacade.setTheme(Theme.light);
     } else {

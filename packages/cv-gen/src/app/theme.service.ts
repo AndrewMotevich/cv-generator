@@ -1,8 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { Store } from '@ngrx/store';
-import { selectTheme } from './ngrx/core/core.selectors';
+import { CoreFacade } from './ngrx/core/core.facade';
 import { Theme } from './shared/enums/theme.enum';
 
 @UntilDestroy({ checkProperties: true })
@@ -10,11 +9,11 @@ import { Theme } from './shared/enums/theme.enum';
   providedIn: 'root',
 })
 export class ThemeService {
-  private theme = this.store.select(selectTheme);
+  private theme = this.coreFacade.theme$;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private store: Store
+    private coreFacade: CoreFacade
   ) {
     this.theme.pipe(untilDestroyed(this)).subscribe((theme) => {
       const themeLink = this.document.getElementById(

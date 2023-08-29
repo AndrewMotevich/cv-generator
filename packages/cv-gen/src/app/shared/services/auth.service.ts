@@ -25,6 +25,7 @@ export class AuthService {
     this.authFacade.initialRefreshToken();
   }
 
+  //deprecated used in header (can use facade)
   public logOut() {
     this.authFacade.logOut();
   }
