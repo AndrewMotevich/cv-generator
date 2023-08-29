@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { IProject } from '../../models/project.model';
-import { projectsMock } from '../../../ngrx/projects/mock/projects.mock';
-import { IColumns } from '../../../shared/interfaces/shared.interfeces';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UntilDestroy } from '@ngneat/until-destroy';
+import { Observable } from 'rxjs';
+import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 import {
   CREATE_PROJECTS,
   EDIT_PROJECTS,
   PROJECTS,
 } from '../../../shared/constants/routing-paths.consts';
+import { IColumns } from '../../../shared/interfaces/shared.interfeces';
 import { ProjectColumns } from '../../constants/project-columns.const';
-import { ProjectsApiService } from '../../../shared/services/projects-api.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { IProject } from '../../models/project.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -19,14 +19,17 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./projects-list.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectListPageComponent {
-  public projects: IProject[] = projectsMock;
+export class ProjectListPageComponent implements OnInit {
+  public projects: Observable<IProject[]>;
 
   public readonly cols: IColumns[] = ProjectColumns;
   public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
 
-  constructor(private router: Router, private projectsService: ProjectsApiService) {
-    this.projectsService.getProjects().pipe(untilDestroyed(this)).subscribe(res => console.log(res))
+  constructor(private router: Router, private projectsFacade: ProjectsFacade) {}
+
+  public ngOnInit() {
+    this.projects = this.projectsFacade.allProjects$;
+    this.projectsFacade.getProjects();
   }
 
   public navigateToEdit(data: IProject) {

@@ -10,7 +10,7 @@
       <tr header>
         <th *ngFor="let col of cols">{{ col.header }}</th>
       </tr>
-      <tr class="table-row" body *ngFor="let project of projects" (click)="navigateToEdit(project)">
+      <tr class="table-row" body *ngFor="let project of projects | async" (click)="navigateToEdit(project)">
         <td>{{project.id}}</td>
         <td>{{project.projectName}}</td>
         <td>{{project.description}}</td>
