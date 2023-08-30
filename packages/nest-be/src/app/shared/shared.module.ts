@@ -6,6 +6,7 @@ import { DatabaseModule } from '../database/database.module';
 import { DepartmentsController } from './departments/departments.controller';
 import { SpecializationController } from './specializations/specializations.controller';
 import { LanguagesController } from './languages/languages.controller';
+import { SharedController } from './shared.controller';
 
 @Module({
   imports: [DatabaseModule],
@@ -15,7 +16,8 @@ import { LanguagesController } from './languages/languages.controller';
     SkillsController,
     TeamRolesController,
     ResponsibilitiesController,
-    LanguagesController
+    LanguagesController,
+    SharedController,
   ],
 })
 export class SharedModule {}

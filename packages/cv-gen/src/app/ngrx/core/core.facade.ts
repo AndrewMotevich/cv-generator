@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { CoreActions } from './core.actions';
+import * as CoreActions from './core.actions';
 import * as CoreSelectors from './core.selectors';
 import { Theme } from '../../shared/enums/theme.enum';
 import { Language } from '../../shared/enums/language.enum';

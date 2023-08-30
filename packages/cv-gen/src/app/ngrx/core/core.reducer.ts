@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Language } from '../../shared/enums/language.enum';
 import { Theme } from '../../shared/enums/theme.enum';
-import { CoreActions } from './core.actions';
+import * as CoreActions from './core.actions';
 
 export const CORE_FEATURE_KEY = 'core';
 

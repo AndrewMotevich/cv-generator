@@ -1,13 +1,13 @@
-import { createActionGroup, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Language } from '../../shared/enums/language.enum';
 import { Theme } from '../../shared/enums/theme.enum';
 
-// Todo decompose
-export const CoreActions = createActionGroup({
-  source: 'Core',
-  events: {
-    'Set theme': props<{ theme: Theme }>(),
-    'Set language': props<{ language: Language }>(),
-    'Set isLogin': props<{ isLogin: boolean }>(),
-  },
-});
+export const setTheme = createAction(
+  '[Core] Set theme', props<{ theme: Theme }>()
+)
+export const setLanguage = createAction(
+  '[Core] Set language', props<{ language: Language }>()
+)
+export const setIsLogin = createAction(
+  '[Core] Set isLogin', props<{ isLogin: boolean }>()
+)

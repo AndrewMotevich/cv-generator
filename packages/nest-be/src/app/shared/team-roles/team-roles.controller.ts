@@ -2,7 +2,9 @@ import { Controller, Get } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { DatabaseService } from '../../database/database.service';
 import { Shared } from '../shared.dto';
+import { Public } from '../../auth/auth.guard';
 
+@Public()
 @ApiTags('SHARED')
 @Controller('team-roles')
 export class TeamRolesController {
