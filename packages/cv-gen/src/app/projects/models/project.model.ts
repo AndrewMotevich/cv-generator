@@ -1,15 +1,4 @@
-import { IShared } from "../../shared/interfaces/shared.interfaces";
-export interface IProjectTransformed {
-  id: number;
-  projectName: string;
-  startDate: Date;
-  endDate: Date;
-  teamSize: number;
-  techStack: string;
-  description: string;
-  responsibilities: string;
-  teamRoles: string;
-}
+import { IShared } from '../../shared/interfaces/shared.interfaces';
 
 export interface IProject {
   id: number;
@@ -23,13 +12,20 @@ export interface IProject {
   teamRoles: IShared[];
 }
 
-export interface IProjectDto {
-  projectName: string;
-  startDate: Date;
-  endDate: Date;
-  teamSize: number;
+export type ProjectTransformed = Omit<
+  IProject,
+  'techStack' | 'responsibilities' | 'teamRoles'
+> & {
+  techStack: string;
+  responsibilities: string;
+  teamRoles: string;
+};
+
+export type ProjectDto = Omit<
+  IProject,
+  'techStack' | 'responsibilities' | 'teamRoles'
+> & {
   techStack: string[];
-  description: string;
   responsibilities: string[];
   teamRoles: string[];
-}
+};

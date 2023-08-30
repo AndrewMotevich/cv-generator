@@ -2,18 +2,18 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import * as ProjectsActions from './projects.actions';
-import { IProjectTransformed } from '../../projects/models/project.model';
+import { ProjectTransformed } from '../../projects/models/project.model';
 
 export const PROJECT_FEATURE_KEY = 'projects';
 
-export interface ProjectsState extends EntityState<IProjectTransformed> {
+export interface ProjectsState extends EntityState<ProjectTransformed> {
   selectedId?: string | number;
   loaded: boolean;
   error?: string | null;
 }
 
-export const projectsAdapter: EntityAdapter<IProjectTransformed> =
-  createEntityAdapter<IProjectTransformed>();
+export const projectsAdapter: EntityAdapter<ProjectTransformed> =
+  createEntityAdapter<ProjectTransformed>();
 
 export const initialProjectsState: ProjectsState =
   projectsAdapter.getInitialState({

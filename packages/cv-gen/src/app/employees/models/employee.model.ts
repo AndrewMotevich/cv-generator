@@ -1,14 +1,5 @@
 import { IShared } from '../../shared/interfaces/shared.interfaces';
 
-export interface IEmployeeTransformed {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  department: string;
-  specialization: string;
-}
-
 export interface IEmployee {
   id: number;
   firstName: string;
@@ -18,10 +9,12 @@ export interface IEmployee {
   specialization: IShared;
 }
 
-export interface IEmployeeDto {
-  firstName: string;
-  lastName: string;
-  email: string;
+export type EmployeeTransformed = Omit<
+  IEmployee,
+  'department' | 'specialization'
+> & {
   department: string;
-  specialization: string
-}
+  specialization: string;
+};
+
+export type EmployeeDto = Omit<EmployeeTransformed, 'id'>;

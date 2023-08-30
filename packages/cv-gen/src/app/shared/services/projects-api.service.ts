@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATH } from '../../../environments/environment.development';
 import {
-  IProjectTransformed,
+  ProjectTransformed,
   IProject,
-  IProjectDto,
+  ProjectDto,
 } from '../../projects/models/project.model';
 import { map } from 'rxjs';
 
@@ -21,11 +21,11 @@ export class ProjectsApiService {
       .pipe(map((projects) => this.projectsAdapter.transformDto(projects)));
   }
 
-  public addProject(body: IProjectDto) {
+  public addProject(body: ProjectDto) {
     return this.http.post<IProject>(`${API_PATH}/projects`, body);
   }
 
-  public updateProject(id: number, body: IProjectDto) {
+  public updateProject(id: number, body: ProjectDto) {
     return this.http.put<IProject>(`${API_PATH}/projects/${id}`, body);
   }
 
@@ -36,7 +36,7 @@ export class ProjectsApiService {
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsDtoAdapter {
-  public transformDto(dto: IProject[]): IProjectTransformed[] {
+  public transformDto(dto: IProject[]): ProjectTransformed[] {
     return dto.map((project) => ({
       ...project,
       teamRoles: project.teamRoles.map((role) => role.name).join(', '),

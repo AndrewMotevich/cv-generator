@@ -2,18 +2,18 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import * as EmployeesActions from './employees.actions';
-import { IEmployeeTransformed } from '../../employees/models/employee.model';
+import { EmployeeTransformed } from '../../employees/models/employee.model';
 
 export const EMPLOYEES_FEATURE_KEY = 'employees';
 
-export interface EmployeesState extends EntityState<IEmployeeTransformed> {
+export interface EmployeesState extends EntityState<EmployeeTransformed> {
   selectedId?: string | number;
   loaded: boolean;
   error?: string | null;
 }
 
-export const employeesAdapter: EntityAdapter<IEmployeeTransformed> =
-  createEntityAdapter<IEmployeeTransformed>();
+export const employeesAdapter: EntityAdapter<EmployeeTransformed> =
+  createEntityAdapter<EmployeeTransformed>();
 
 export const initialEmployeesState: EmployeesState =
   employeesAdapter.getInitialState({

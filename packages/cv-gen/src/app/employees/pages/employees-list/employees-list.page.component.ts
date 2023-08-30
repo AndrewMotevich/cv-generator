@@ -8,7 +8,7 @@ import {
 } from '../../../shared/constants/routing-paths.consts';
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
-import { IEmployeeTransformed } from '../../models/employee.model';
+import { EmployeeTransformed } from '../../models/employee.model';
 import { Observable } from 'rxjs';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
@@ -21,7 +21,7 @@ import { SharedFacade } from '../../../ngrx/shared/shared.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesListPageComponent implements OnInit {
-  public data: Observable<IEmployeeTransformed[]>;
+  public data: Observable<EmployeeTransformed[]>;
   public cols: IColumns[] = EmployeesColumns;
 
   public readonly addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath;
