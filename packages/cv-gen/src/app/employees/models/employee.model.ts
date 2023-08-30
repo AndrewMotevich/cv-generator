@@ -1,6 +1,6 @@
 import { IShared } from '../../shared/interfaces/shared.interfaces';
 
-export interface IEmployee {
+export interface IEmployeeTransformed {
   id: number;
   firstName: string;
   lastName: string;
@@ -9,11 +9,19 @@ export interface IEmployee {
   specialization: string;
 }
 
-export interface IEmployeeDto {
+export interface IEmployee {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   department: IShared;
   specialization: IShared;
+}
+
+export interface IEmployeeDto {
+  firstName: string;
+  lastName: string;
+  email: string;
+  department: string;
+  specialization: string
 }

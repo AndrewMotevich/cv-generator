@@ -1,5 +1,5 @@
-import { Shared } from '../../../../../nest-be/src/app/shared/shared.dto';
-export interface IProject {
+import { IShared } from "../../shared/interfaces/shared.interfaces";
+export interface IProjectTransformed {
   id: number;
   projectName: string;
   startDate: Date;
@@ -11,14 +11,25 @@ export interface IProject {
   teamRoles: string;
 }
 
-export interface IProjectDto {
+export interface IProject {
   id: number;
   projectName: string;
   startDate: Date;
   endDate: Date;
   teamSize: number;
-  techStack: Shared[];
+  techStack: IShared[];
   description: string;
-  responsibilities: Shared[];
-  teamRoles: Shared[];
+  responsibilities: IShared[];
+  teamRoles: IShared[];
+}
+
+export interface IProjectDto {
+  projectName: string;
+  startDate: Date;
+  endDate: Date;
+  teamSize: number;
+  techStack: string[];
+  description: string;
+  responsibilities: string[];
+  teamRoles: string[];
 }

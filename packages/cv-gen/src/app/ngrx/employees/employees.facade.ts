@@ -10,13 +10,13 @@ export class EmployeesFacade {
 
   loaded$ = this.store.pipe(select(EmployeesSelectors.selectEmployeesLoaded));
 
-  allEmployees$ = this.store.pipe(
+  employeesList$ = this.store.pipe(
     select(EmployeesSelectors.selectAllEmployees)
   );
 
   selectedEmployees$ = this.store.pipe(select(EmployeesSelectors.selectEntity));
 
-  getEmployees() {
+  loadEmployees() {
     this.store.dispatch(EmployeesActions.getEmployees());
   }
 }

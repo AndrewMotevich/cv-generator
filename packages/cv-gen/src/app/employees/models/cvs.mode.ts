@@ -1,4 +1,4 @@
-import { IProjectDto } from '../../projects/models/project.model';
+import { IProject } from '../../projects/models/project.model';
 import { Language } from '../../shared/interfaces/language.interface';
 import { IShared } from '../../shared/interfaces/shared.interfaces';
 
@@ -17,5 +17,9 @@ export interface ICv {
   specializationId: number;
 
   employeeId: number;
-  cvsProjects: IProjectDto[];
+  cvsProjects: IProject[];
+}
+
+export interface ICvDto {
+  cvName: string;
 }

@@ -6,10 +6,15 @@
     "DEPARTMENT": "Департамент",
     "SPECIALIZATION": "Специализация",
     "SKILLS": "Навыки",
+    "TECH_STACK": "Технологии",
     "DESCRIPTION": "Описание",
     "TEAM_SIZE": "Размер команды",
-    "DATE_START": "Дата начала",
-    "REMEMBER_ME": "Запомнить меня"
+    "START_DATE": "Дата начала",
+    "REMEMBER_ME": "Запомнить меня",
+    "TEAM_ROLES": "Рол(ь/и) в команде",
+    "RESPONSIBILITIES": "Ответственность",
+    "PROJECT_NAME": "Имя проекта",
+    "END_DATE": "Дата завершения"
   },
   "ERROR_MESSAGES": {
     "REQUIRED": "Поле {{label}} обязателен!",

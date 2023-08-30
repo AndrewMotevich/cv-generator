@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { IEmployee } from '../../employees/models/employee.model';
+import { IEmployeeTransformed } from '../../employees/models/employee.model';
 
 export const getEmployees = createAction('[Employees Page] Get Employees');
 
 export const loadEmployeesSuccess = createAction(
   '[Employees/API] Load Employees Success',
-  props<{ employees: IEmployee[] }>()
+  props<{ employees: IEmployeeTransformed[] }>()
 );
 
 export const loadEmployeesFailure = createAction(

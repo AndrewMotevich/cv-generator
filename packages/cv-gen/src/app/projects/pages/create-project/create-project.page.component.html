@@ -1,9 +1,5 @@
-<form [formGroup]="mainForm">
-  <div formArrayName="customForms" class="custom-form">
-    <div *ngFor="let formGroup of customForms.controls; let i = index" [formGroupName]="i">
-      <cv-gen-project-form formControlName="customForm"></cv-gen-project-form>
-    </div>
-  </div>
-  <button (click)="addCustomForm()">Add Form</button>
-  <button (click)="submitProjectForm()">Submit</button>
+<p-button label="Save" (click)="submitProjectForm()"></p-button>
+<p-button label="Clear" (click)="clearProjectForm()"></p-button>
+<form [formGroup]="projectForm">
+  <cv-gen-project-form formControlName="cvaForm"></cv-gen-project-form>
 </form>

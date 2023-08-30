@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Directive, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, DoCheck, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgControl } from '@angular/forms';
+import { markAllAsDirty } from '../utils/mark-as-dirty.util';
 
 @Directive()
-export class BaseCvaForm implements OnInit {
+export class BaseCvaForm implements OnInit, DoCheck {
   public form: FormGroup;
 
   private onChange: (val: unknown) => void;
@@ -32,5 +33,13 @@ export class BaseCvaForm implements OnInit {
 
   public registerOnTouched(fn: (val: unknown) => void) {
     this.onTouch = fn;
+  }
+
+  public ngDoCheck() {
+    if (this.ngControl.invalid) {
+      markAllAsDirty(this.form.controls);
+      this.cdRef.markForCheck()
+      return;
+    }
   }
 }

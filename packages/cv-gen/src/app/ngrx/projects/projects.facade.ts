@@ -10,13 +10,13 @@ export class ProjectsFacade {
 
   loaded$ = this.store.pipe(select(ProjectsSelectors.selectProjectsLoaded));
 
-  allProjects$ = this.store.pipe(
+  projectsList$ = this.store.pipe(
     select(ProjectsSelectors.selectAllProjects)
   );
 
-  selectedProjects$ = this.store.pipe(select(ProjectsSelectors.selectEntity));
+  selectedProject$ = this.store.pipe(select(ProjectsSelectors.selectEntity));
 
-  getProjects() {
+  loadProjects() {
     this.store.dispatch(ProjectsActions.getProjects());
   }
 }

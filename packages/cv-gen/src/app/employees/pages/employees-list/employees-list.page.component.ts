@@ -8,7 +8,7 @@ import {
 } from '../../../shared/constants/routing-paths.consts';
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
-import { IEmployee } from '../../models/employee.model';
+import { IEmployeeTransformed } from '../../models/employee.model';
 import { Observable } from 'rxjs';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
@@ -21,7 +21,7 @@ import { SharedFacade } from '../../../ngrx/shared/shared.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesListPageComponent implements OnInit {
-  public data: Observable<IEmployee[]>;
+  public data: Observable<IEmployeeTransformed[]>;
   public cols: IColumns[] = EmployeesColumns;
 
   public readonly addEmployeePath = EMPLOYEES.fullPath + EMPLOYEES.fullPath;
@@ -35,9 +35,9 @@ export class EmployeesListPageComponent implements OnInit {
 
   ngOnInit() {
     this.sharedFacade.getAllShared()
-    this.cvsFacade.getCvs();
-    this.employeesFacade.getEmployees();
-    this.data = this.employeesFacade.allEmployees$;
+    this.cvsFacade.loadCvs();
+    this.employeesFacade.loadEmployees();
+    this.data = this.employeesFacade.employeesList$;
   }
 
   public navigateToEdit(data: unknown) {

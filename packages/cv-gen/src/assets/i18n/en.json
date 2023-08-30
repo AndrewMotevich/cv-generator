@@ -6,10 +6,15 @@
     "DEPARTMENT": "Department",
     "SPECIALIZATION": "Specialization",
     "SKILLS": "Skills",
+    "TECH_STACK": "Tech stack",
     "DESCRIPTION": "Description",
     "TEAM_SIZE": "Team size",
-    "DATE_START": "Date start",
-    "REMEMBER_ME": "Remember me"
+    "START_DATE": "Date start",
+    "REMEMBER_ME": "Remember me",
+    "TEAM_ROLES": "Team roles",
+    "RESPONSIBILITIES": "Responsibilities",
+    "PROJECT_NAME": "Project name",
+    "END_DATE": "Date end"
   },
   "ERROR_MESSAGES": {
     "REQUIRED": "{{label}} is required!",

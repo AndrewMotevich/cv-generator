@@ -5,7 +5,7 @@ import {
   Component,
   OnInit,
   Optional,
-  Self,
+  Self
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -51,21 +51,30 @@ import { BaseCvaForm } from '../../classes/base-cva-form.class';
   styleUrls: ['./project-form-cva.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectFormComponent extends BaseCvaForm implements ControlValueAccessor, OnInit {
-  public specialization = ['Angular', 'React', 'Vue'];
-
+export class ProjectFormComponent
+  extends BaseCvaForm
+  implements ControlValueAccessor, OnInit
+{
   constructor(
     @Self() @Optional() ngControl: NgControl,
-    cdRef: ChangeDetectorRef,
+    cdRef: ChangeDetectorRef
   ) {
-    const projectsControls: {[key: string]: FormControl} = {
-      selectInput: new FormControl('', { validators: Validators.required }),
-      dateInput: new FormControl('', { validators: Validators.required }),
-      chipsInput: new FormControl('', { validators: Validators.required }),
-      textareaInput: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      numberInput: new FormControl('', { validators: Validators.required }),
+    const projectsControls: { [key: string]: FormControl } = {
+      projectName: new FormControl('', { validators: Validators.required }),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255),
+      ]),
+      startDate: new FormControl('', { validators: Validators.required }),
+      endDate: new FormControl('', { validators: Validators.required }),
+      teamSize: new FormControl('', { validators: Validators.required }),
+      techStack: new FormControl('', { validators: Validators.required }),
+      responsibilities: new FormControl('', {
+        validators: Validators.required,
+      }),
+      teamRoles: new FormControl('', { validators: Validators.required }),
     };
-    super(ngControl, projectsControls, cdRef)
+    super(ngControl, projectsControls, cdRef);
     this.ngControl.valueAccessor = this;
   }
 }

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 
 @Component({
   selector: 'cv-gen-create-project.page',
@@ -8,33 +9,21 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateProjectPageComponent {
-  mainForm: FormGroup;
+  public projectForm = this.formBuilder.group({
+    cvaForm: ['', Validators.required]
+  })
 
-  get customForms(): FormArray {
-    return this.mainForm.get('customForms') as FormArray;
-  }
+  constructor(private formBuilder: FormBuilder) {}
 
-  constructor(private formBuilder: FormBuilder) {
-    this.mainForm = this.formBuilder.group({
-      customForms: this.formBuilder.array([]),
-    });
-  }
-
-  addCustomForm() {
-    const formArray = this.mainForm.get('customForms') as FormArray;
-    formArray.push(this.createCustomForm());
-  }
-
-  createCustomForm() {
-    return this.formBuilder.group({
-      customForm: null,
-    });
-  }
-
-  submitProjectForm(){
-    if(this.mainForm.invalid){
+  public submitProjectForm() {
+    if(this.projectForm.invalid){
+      markAllAsDirty(this.projectForm.controls)
       return
     }
-    console.log(this.mainForm.getRawValue())
+    console.log(this.projectForm.getRawValue());
+  }
+
+  public clearProjectForm(){
+    this.projectForm.controls.cvaForm.patchValue('')
   }
 }

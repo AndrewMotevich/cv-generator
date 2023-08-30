@@ -10,13 +10,13 @@ export class CvsFacade {
 
   loaded$ = this.store.pipe(select(CvsSelectors.selectCvsLoaded));
 
-  allCvs$ = this.store.pipe(
+  cvsList$ = this.store.pipe(
     select(CvsSelectors.selectAllCvs)
   );
 
   selectedCvs$ = this.store.pipe(select(CvsSelectors.selectEntity));
 
-  getCvs() {
+  loadCvs() {
     this.store.dispatch(CvsActions.getCvs());
   }
 }

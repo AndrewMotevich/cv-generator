@@ -10,7 +10,7 @@ import {
 } from '../../../shared/constants/routing-paths.consts';
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { ProjectColumns } from '../../constants/project-columns.const';
-import { IProject } from '../../models/project.model';
+import { IProjectTransformed } from '../../models/project.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -20,7 +20,7 @@ import { IProject } from '../../models/project.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListPageComponent implements OnInit {
-  public projects: Observable<IProject[]>;
+  public projects: Observable<IProjectTransformed[]>;
 
   public readonly cols: IColumns[] = ProjectColumns;
   public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
@@ -28,11 +28,11 @@ export class ProjectListPageComponent implements OnInit {
   constructor(private router: Router, private projectsFacade: ProjectsFacade) {}
 
   public ngOnInit() {
-    this.projects = this.projectsFacade.allProjects$;
-    this.projectsFacade.getProjects();
+    this.projectsFacade.loadProjects();
+    this.projects = this.projectsFacade.projectsList$;
   }
 
-  public navigateToEdit(data: IProject) {
+  public navigateToEdit(data: IProjectTransformed) {
     this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id]);
   }
 }
