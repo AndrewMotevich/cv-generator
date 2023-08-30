@@ -11,6 +11,7 @@ import { EmployeesColumns } from '../../constants/employees-columns.const';
 import { IEmployee } from '../../models/employee.model';
 import { Observable } from 'rxjs';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
+import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -28,10 +29,12 @@ export class EmployeesListPageComponent implements OnInit {
   constructor(
     private router: Router,
     private employeesFacade: EmployeesFacade,
-    private cvsFacade: CvsFacade
+    private cvsFacade: CvsFacade,
+    private sharedFacade: SharedFacade
   ) {}
 
   ngOnInit() {
+    this.sharedFacade.getAllShared()
     this.cvsFacade.getCvs();
     this.employeesFacade.getEmployees();
     this.data = this.employeesFacade.allEmployees$;

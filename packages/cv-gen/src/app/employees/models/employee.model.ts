@@ -1,4 +1,4 @@
-import { IShared } from '../../shared/interfaces/shared.interface';
+import { IShared } from '../../shared/interfaces/shared.interfaces';
 
 export interface IEmployee {
   id: number;

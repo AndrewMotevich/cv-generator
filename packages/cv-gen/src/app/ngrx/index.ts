@@ -18,6 +18,9 @@ import { ProjectsEffects } from './projects/projects.effects';
 import { CvsReducer } from './cvs/cvs.reducer';
 import { CvsFacade } from './cvs/cvs.facade';
 import { CvsEffects } from './cvs/cvs.effects';
+import { SharedReducer } from './shared/shared.reducer';
+import { SharedFacade } from './shared/shared.facade';
+import { SharedEffects } from './shared/shared.effects';
 
 export const STORE = {
   routing: routerReducer,
@@ -26,6 +29,7 @@ export const STORE = {
   core: CoreReducer,
   projects: ProjectsReducer,
   cvs: CvsReducer,
+  shared: SharedReducer,
 };
 
 export const FACADES = [
@@ -34,6 +38,7 @@ export const FACADES = [
   CoreFacade,
   ProjectsFacade,
   CvsFacade,
+  SharedFacade,
 ];
 
 export const EFFECTS = [
@@ -41,4 +46,5 @@ export const EFFECTS = [
   AuthEffects,
   ProjectsEffects,
   CvsEffects,
+  SharedEffects,
 ];
