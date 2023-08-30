@@ -1,12 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  PROJECT_FEATURE_KEY,
   ProjectsState,
-  projectsAdapter,
+  projectsAdapter
 } from './projects.reducer';
 
-export const selectProjectsState = createFeatureSelector<ProjectsState>(
-  PROJECT_FEATURE_KEY
+export const selectProjects = createFeatureSelector<{
+  projects: ProjectsState;
+}>('common');
+
+export const selectProjectsState = createSelector(
+  selectProjects,
+  (state) => state.projects
 );
 
 const { selectAll, selectEntities } = projectsAdapter.getSelectors();

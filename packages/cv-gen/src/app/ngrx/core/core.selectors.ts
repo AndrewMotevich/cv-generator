@@ -1,8 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CORE_FEATURE_KEY, ICoreState } from './core.reducer';
 
-export const selectCoreState =
-  createFeatureSelector<ICoreState>(CORE_FEATURE_KEY);
+export const selectCore =
+  createFeatureSelector<{core: ICoreState}>(CORE_FEATURE_KEY);
+
+export const selectCoreState = createSelector(
+  selectCore,
+  (state) => state.core
+);
 
 export const selectLanguage = createSelector(
   selectCoreState,

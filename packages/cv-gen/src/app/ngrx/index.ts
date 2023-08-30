@@ -1,4 +1,5 @@
 import { routerReducer } from '@ngrx/router-store';
+import { combineReducers } from '@ngrx/store';
 
 import { EmployeesEffects } from './employees/employees.effects';
 import { EmployeesFacade } from './employees/employees.facade';
@@ -24,12 +25,16 @@ import { SharedEffects } from './shared/shared.effects';
 
 export const STORE = {
   routing: routerReducer,
-  employees: EmployeesReducer,
-  token: AuthReducer,
-  core: CoreReducer,
-  projects: ProjectsReducer,
-  cvs: CvsReducer,
-  shared: SharedReducer,
+  common: combineReducers({
+    employees: EmployeesReducer,
+    projects: ProjectsReducer,
+    cvs: CvsReducer,
+    shared: SharedReducer,
+  }),
+  core: combineReducers({
+    token: AuthReducer,
+    core: CoreReducer,
+  }),
 };
 
 export const FACADES = [

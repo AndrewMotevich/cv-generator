@@ -1,9 +1,14 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { SHARED_FEATURE_KEY } from './shared.reducer';
 import { ISharedAll } from '../../shared/interfaces/shared.interfaces';
 
-export const selectAllSharedState =
-  createFeatureSelector<ISharedAll>(SHARED_FEATURE_KEY);
+export const selectAllShared = createFeatureSelector<{ shared: ISharedAll }>(
+  'common'
+);
+
+export const selectAllSharedState = createSelector(
+  selectAllShared,
+  (state) => state.shared
+);
 
 export const selectDepartments = createSelector(
   selectAllSharedState,

@@ -1,12 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
-  CVS_FEATURE_KEY,
   CvsState,
-  cvsAdapter,
+  cvsAdapter
 } from './cvs.reducer';
 
-export const selectCvsState = createFeatureSelector<CvsState>(
-  CVS_FEATURE_KEY
+export const selectCvs = createFeatureSelector<{ cvs: CvsState}>(
+  'common'
+);
+
+export const selectCvsState = createSelector(
+  selectCvs,
+  (state) => state.cvs
 );
 
 const { selectAll, selectEntities } = cvsAdapter.getSelectors();
