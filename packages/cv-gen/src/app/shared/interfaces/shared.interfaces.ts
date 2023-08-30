@@ -6,10 +6,10 @@ export interface IShared {
 }
 
 export interface ISharedAll {
-  departments: IShared[];
-  specializations: IShared[];
-  skills: IShared[];
-  teamRoles: IShared[];
-  responsibilities: IShared[];
-  languages: Language[]
+  departments?: IShared[];
+  specializations?: IShared[];
+  skills?: IShared[];
+  teamRoles?: IShared[];
+  responsibilities?: IShared[];
+  languages?: Language[]
 }

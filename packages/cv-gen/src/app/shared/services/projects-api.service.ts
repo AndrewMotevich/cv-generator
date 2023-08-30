@@ -12,13 +12,12 @@ import { map } from 'rxjs';
 export class ProjectsApiService {
   constructor(
     private http: HttpClient,
-    private projectsAdapter: ProjectsDtoAdapter
   ) {}
 
   public getProjects() {
     return this.http
       .get<IProject[]>(`${API_PATH}/projects`)
-      .pipe(map((projects) => this.projectsAdapter.transformDto(projects)));
+      .pipe(map((projects) => this.transformDto(projects)));
   }
 
   public addProject(body: ProjectDto) {
@@ -32,11 +31,8 @@ export class ProjectsApiService {
   public deleteProject(id: number) {
     return this.http.delete<IProject>(`${API_PATH}/projects/${id}`);
   }
-}
 
-@Injectable({ providedIn: 'root' })
-export class ProjectsDtoAdapter {
-  public transformDto(dto: IProject[]): ProjectTransformed[] {
+  private transformDto(dto: IProject[]): ProjectTransformed[] {
     return dto.map((project) => ({
       ...project,
       teamRoles: project.teamRoles.map((role) => role.name).join(', '),
