@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 
 @Component({
@@ -10,20 +10,17 @@ import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 })
 export class CreateProjectPageComponent {
   public projectForm = this.formBuilder.group({
-    cvaForm: ['', Validators.required]
-  })
+    cvaForm: [null],
+  });
 
   constructor(private formBuilder: FormBuilder) {}
 
   public submitProjectForm() {
-    if(this.projectForm.invalid){
-      markAllAsDirty(this.projectForm.controls)
-      return
+    if (this.projectForm.invalid) {
+      markAllAsDirty(this.projectForm.controls);
+      this.projectForm.controls.cvaForm.markAsTouched()
+      return;
     }
-    console.log(this.projectForm.getRawValue());
-  }
-
-  public clearProjectForm(){
-    this.projectForm.controls.cvaForm.patchValue('')
+    alert(JSON.stringify(this.projectForm.getRawValue()));
   }
 }

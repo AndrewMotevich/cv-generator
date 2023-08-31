@@ -5,12 +5,12 @@ import { FormControl, NgControl, ValidationErrors } from '@angular/forms';
 export class BaseInputClass implements OnInit, DoCheck {
   public control: FormControl = new FormControl('');
 
-  public maxlength: number
-  public minlength: number
+  public maxlength: number;
+  public minlength: number;
 
   constructor(
     protected ngControl: NgControl,
-    protected cdRef: ChangeDetectorRef,
+    protected cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -36,19 +36,23 @@ export class BaseInputClass implements OnInit, DoCheck {
 
   public ngDoCheck() {
     if (this.ngControl.control.errors) {
-      this.setValidatorsValues(this.ngControl.control.errors)
+      this.setValidatorsValues(this.ngControl.control.errors);
       this.control.setErrors(this.ngControl.control.errors);
-      this.cdRef.markForCheck();
     }
     if (this.ngControl.control?.dirty) {
       this.control.markAsDirty();
     } else {
       this.control.markAsPristine();
     }
+    this.cdRef.markForCheck();
   }
 
-  private setValidatorsValues(error: ValidationErrors){
-    if (error['minlength']) {this.minlength = error['minlength']?.requiredLength}
-    if (error['maxlength']) {this.maxlength = error['maxlength']?.requiredLength}
+  private setValidatorsValues(error: ValidationErrors) {
+    if (error['minlength']) {
+      this.minlength = error['minlength']?.requiredLength;
+    }
+    if (error['maxlength']) {
+      this.maxlength = error['maxlength']?.requiredLength;
+    }
   }
 }
