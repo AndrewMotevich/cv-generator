@@ -15,22 +15,13 @@ export class ProjectsApiService {
   public getProjects() {
     return this.http
       .get<IProject[]>(`${API_PATH}/projects`)
-      .pipe(map((projects) => this.transformDto(projects)));
+      .pipe(map((projects) => this.transformProjectsDto(projects)));
   }
 
   public getProjectById(id: number) {
-    return this.http.get<IProject>(`${API_PATH}/projects/${id}`).pipe(
-      map((project) => ({
-        ...project,
-        startDate: new Date(project.startDate),
-        endDate: new Date(project.endDate),
-        teamRoles: project.teamRoles.map((role) => role.name),
-        responsibilities: project.responsibilities.map(
-          (responsibilities) => responsibilities.name
-        ),
-        techStack: project.techStack.map((skill) => skill.name),
-      }))
-    );
+    return this.http
+      .get<IProject>(`${API_PATH}/projects/${id}`)
+      .pipe(map((project) => this.transformSelectedProjectDto(project)));
   }
 
   public addProject(body: ProjectDto) {
@@ -45,7 +36,7 @@ export class ProjectsApiService {
     return this.http.delete<IProject>(`${API_PATH}/projects/${id}`);
   }
 
-  private transformDto(dto: IProject[]): ProjectTransformed[] {
+  private transformProjectsDto(dto: IProject[]): ProjectTransformed[] {
     return dto.map((project) => ({
       ...project,
       teamRoles: project.teamRoles.map((role) => role.name).join(', '),
@@ -54,5 +45,16 @@ export class ProjectsApiService {
         .join(', '),
       techStack: project.techStack.map((skill) => skill.name).join(', '),
     }));
+  }
+
+  private transformSelectedProjectDto(project: IProject): ProjectDto {
+    return {
+      ...project,
+      teamRoles: project.teamRoles.map((role) => role.name),
+      responsibilities: project.responsibilities.map(
+        (responsibilities) => responsibilities.name
+      ),
+      techStack: project.techStack.map((skill) => skill.name),
+    };
   }
 }
