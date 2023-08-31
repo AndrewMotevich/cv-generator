@@ -10,14 +10,27 @@ import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsApiService {
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   public getProjects() {
     return this.http
       .get<IProject[]>(`${API_PATH}/projects`)
       .pipe(map((projects) => this.transformDto(projects)));
+  }
+
+  public getProjectById(id: number) {
+    return this.http.get<IProject>(`${API_PATH}/projects/${id}`).pipe(
+      map((project) => ({
+        ...project,
+        startDate: new Date(project.startDate),
+        endDate: new Date(project.endDate),
+        teamRoles: project.teamRoles.map((role) => role.name),
+        responsibilities: project.responsibilities.map(
+          (responsibilities) => responsibilities.name
+        ),
+        techStack: project.techStack.map((skill) => skill.name),
+      }))
+    );
   }
 
   public addProject(body: ProjectDto) {

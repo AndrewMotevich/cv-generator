@@ -11,9 +11,13 @@
         <th *ngFor="let col of cols">{{ col.header }}</th>
       </tr>
       <tr class="table-row" body *ngFor="let project of projects | async" (click)="navigateToEdit(project)">
-        <td>{{project.id}}</td>
         <td>{{project.projectName}}</td>
-        <td>{{project.description}}</td>
+        <td>{{project.techStack}}</td>
+        <td>{{project.teamRoles}}</td>
+        <td>{{project.responsibilities}}</td>
+        <td>{{project.teamSize}}</td>
+        <td>{{project.startDate | date}}</td>
+        <td>{{project.endDate | date}}</td>
       </tr>
     </cv-gen-base-table2>
   </div>

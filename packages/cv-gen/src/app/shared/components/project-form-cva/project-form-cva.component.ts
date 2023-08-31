@@ -65,8 +65,8 @@ export class ProjectFormComponent
         Validators.required,
         Validators.maxLength(255),
       ]),
-      startDate: new FormControl('', { validators: Validators.required }),
-      endDate: new FormControl('', { validators: Validators.required }),
+      startDate: new FormControl<Date>(null, { validators: Validators.required }),
+      endDate: new FormControl<Date>(null, { validators: Validators.required }),
       teamSize: new FormControl('', { validators: Validators.required }),
       techStack: new FormControl('', { validators: Validators.required }),
       responsibilities: new FormControl('', {

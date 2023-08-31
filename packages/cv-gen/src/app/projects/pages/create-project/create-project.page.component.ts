@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
+import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 
 @Component({
   selector: 'cv-gen-create-project.page',
@@ -10,17 +11,22 @@ import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 })
 export class CreateProjectPageComponent {
   public projectForm = this.formBuilder.group({
-    cvaForm: [null],
+    cvaForm: [{}],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private projectsFacade: ProjectsFacade
+  ) {}
 
   public submitProjectForm() {
     if (this.projectForm.invalid) {
       markAllAsDirty(this.projectForm.controls);
-      this.projectForm.controls.cvaForm.markAsTouched()
+      this.projectForm.controls.cvaForm.markAsTouched();
       return;
     }
-    alert(JSON.stringify(this.projectForm.getRawValue()));
+    this.projectsFacade.addProject(
+      this.projectForm.controls.cvaForm.getRawValue()
+    );
   }
 }

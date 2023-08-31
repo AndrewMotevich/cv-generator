@@ -35,13 +35,7 @@ export const selectProjectsEntities = createSelector(
   (state: ProjectsState) => selectEntities(state)
 );
 
-export const selectSelectedId = createSelector(
+export const selectSelectedProject = createSelector(
   selectProjectsState,
-  (state: ProjectsState) => state.selectedId
-);
-
-export const selectEntity = createSelector(
-  selectProjectsEntities,
-  selectSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+  (state: ProjectsState) => state.selectedProject
 );

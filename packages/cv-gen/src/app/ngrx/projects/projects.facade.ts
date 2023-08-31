@@ -3,20 +3,41 @@ import { select, Store } from '@ngrx/store';
 
 import * as ProjectsActions from './projects.actions';
 import * as ProjectsSelectors from './projects.selectors';
+import { ProjectDto } from '../../projects/models/project.model';
 
 @Injectable()
 export class ProjectsFacade {
   private readonly store = inject(Store);
 
-  loaded$ = this.store.pipe(select(ProjectsSelectors.selectProjectsLoaded));
+  public loaded$ = this.store.pipe(
+    select(ProjectsSelectors.selectProjectsLoaded)
+  );
 
-  projectsList$ = this.store.pipe(
+  public projectsList$ = this.store.pipe(
     select(ProjectsSelectors.selectAllProjects)
   );
 
-  selectedProject$ = this.store.pipe(select(ProjectsSelectors.selectEntity));
+  public selectedProject$ = this.store.pipe(
+    select(ProjectsSelectors.selectSelectedProject)
+  );
 
-  loadProjects() {
+  public loadProjects() {
     this.store.dispatch(ProjectsActions.getProjects());
+  }
+
+  public addProject(project: ProjectDto) {
+    this.store.dispatch(ProjectsActions.addProject({ project }));
+  }
+
+  public getProjectById(id: number) {
+    this.store.dispatch(ProjectsActions.getProjectById({ id }));
+  }
+
+  public updateProject(id: number, project: ProjectDto) {
+    this.store.dispatch(ProjectsActions.updateProject({ id, project }));
+  }
+
+  public deleteProject(id: number) {
+    this.store.dispatch(ProjectsActions.deleteProject({ id }));
   }
 }
