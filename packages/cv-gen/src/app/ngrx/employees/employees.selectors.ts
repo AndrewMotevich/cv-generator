@@ -1,8 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  EmployeesState,
-  employeesAdapter
-} from './employees.reducer';
+import { EmployeesState, employeesAdapter } from './employees.reducer';
 
 export const selectEmployees = createFeatureSelector<{
   employees: EmployeesState;
@@ -35,13 +32,7 @@ export const selectEmployeesEntities = createSelector(
   (state: EmployeesState) => selectEntities(state)
 );
 
-export const selectSelectedId = createSelector(
+export const selectSelectedEmployee = createSelector(
   selectEmployeesState,
-  (state: EmployeesState) => state.selectedId
-);
-
-export const selectEntity = createSelector(
-  selectEmployeesEntities,
-  selectSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
+  (state: EmployeesState) => state.selectedEmployee
 );

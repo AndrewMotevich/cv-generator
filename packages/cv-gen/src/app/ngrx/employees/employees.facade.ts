@@ -3,20 +3,41 @@ import { select, Store } from '@ngrx/store';
 
 import * as EmployeesActions from './employees.actions';
 import * as EmployeesSelectors from './employees.selectors';
+import { EmployeeDto } from '../../employees/models/employee.model';
 
 @Injectable()
 export class EmployeesFacade {
   private readonly store = inject(Store);
 
-  loaded$ = this.store.pipe(select(EmployeesSelectors.selectEmployeesLoaded));
+  public loaded$ = this.store.pipe(
+    select(EmployeesSelectors.selectEmployeesLoaded)
+  );
 
-  employeesList$ = this.store.pipe(
+  public employeesList$ = this.store.pipe(
     select(EmployeesSelectors.selectAllEmployees)
   );
 
-  selectedEmployees$ = this.store.pipe(select(EmployeesSelectors.selectEntity));
+  public selectedEmployee$ = this.store.pipe(
+    select(EmployeesSelectors.selectSelectedEmployee)
+  );
 
-  loadEmployees() {
+  public loadEmployees() {
     this.store.dispatch(EmployeesActions.getEmployees());
+  }
+
+  public addEmployee(employee: EmployeeDto) {
+    this.store.dispatch(EmployeesActions.addEmployee({ employee }));
+  }
+
+  public getEmployeeById(id: number) {
+    this.store.dispatch(EmployeesActions.getEmployeeById({ id }));
+  }
+
+  public updateEmployee(id: number, employee: EmployeeDto) {
+    this.store.dispatch(EmployeesActions.updateEmployee({ id, employee }));
+  }
+
+  public deleteEmployee(id: number) {
+    this.store.dispatch(EmployeesActions.deleteEmployee({ id }));
   }
 }

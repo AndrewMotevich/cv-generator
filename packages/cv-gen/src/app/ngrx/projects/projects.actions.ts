@@ -5,7 +5,7 @@ import {
 } from '../../projects/models/project.model';
 
 //Get projects
-export const getProjects = createAction('[Projects Page] Get Projects');
+export const getProjects = createAction('[Projects/Page] Get Projects');
 
 export const loadProjectsSuccess = createAction(
   '[Projects/API] Load Projects Success',
@@ -19,7 +19,7 @@ export const loadProjectsFailure = createAction(
 
 //Get selected project by Id
 export const getProjectById = createAction(
-  '[Projects Page] Get selected Project by id',
+  '[Projects/Page] Get selected Project by id',
   props<{ id: number }>()
 );
 
@@ -35,7 +35,7 @@ export const loadProjectByIdFailure = createAction(
 
 // Add new project
 export const addProject = createAction(
-  '[Projects/API] Add Project',
+  '[Projects/Page] Add Project',
   props<{ project: ProjectDto }>()
 );
 
@@ -50,7 +50,7 @@ export const addProjectFailure = createAction(
 
 // Update project
 export const updateProject = createAction(
-  '[Projects/API] Update Project',
+  '[Projects/Page] Update Project',
   props<{ id: number; project: ProjectDto }>()
 );
 
@@ -65,7 +65,7 @@ export const updateProjectFailure = createAction(
 
 // Delete project
 export const deleteProject = createAction(
-  '[Projects/API] Delete Project',
+  '[Projects/Page] Delete Project',
   props<{ id: number }>()
 );
 
