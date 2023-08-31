@@ -1,7 +1,22 @@
-<p-button
-  label="Save"
-  (click)="submitProjectForm()"></p-button>
-<p-button
-  label="Delete"
-  (click)="deleteProject()"></p-button>
-<cv-gen-project-form [formControl]="cvaProjectForm"></cv-gen-project-form>
+<cv-gen-project-form [formControl]="cvaProjectForm">
+  <div class="button-wrapper">
+    <div class="buttons-container">
+      <div>
+        <p-button
+          label="Save"
+          (click)="submitProjectForm()"></p-button>
+      </div>
+      <div>
+        <p-button
+          label="Clear"
+          (click)="clearProjectForm()"></p-button>
+      </div>
+    </div>
+    <div class="delete-button">
+      <p-button
+        icon="pi pi-trash"
+        styleClass="p-button-rounded p-button-text p-button-raised"
+        (click)="deleteProject()"></p-button>
+    </div>
+  </div>
+</cv-gen-project-form>

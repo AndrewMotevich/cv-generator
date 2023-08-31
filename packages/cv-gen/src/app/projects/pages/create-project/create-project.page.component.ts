@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 
 @Component({
@@ -9,11 +9,9 @@ import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateProjectPageComponent {
-  // make control
-  public cvaProjectForm = new FormControl(null)
+  public cvaProjectForm = new FormControl(null);
 
   constructor(
-    private formBuilder: FormBuilder,
     private projectsFacade: ProjectsFacade
   ) {}
 
@@ -22,8 +20,19 @@ export class CreateProjectPageComponent {
       this.cvaProjectForm.markAsTouched();
       return;
     }
-    this.projectsFacade.addProject(
-      this.cvaProjectForm.getRawValue()
-    );
+    this.projectsFacade.addProject(this.cvaProjectForm.getRawValue());
+  }
+
+  public clearProjectForm() {
+    this.cvaProjectForm.setValue({
+      projectName: null,
+      startDate: null,
+      endDate: null,
+      teamSize: null,
+      techStack: [],
+      description: null,
+      responsibilities: [],
+      teamRoles: [],
+    });
   }
 }

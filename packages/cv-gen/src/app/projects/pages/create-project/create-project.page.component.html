@@ -1,4 +1,14 @@
-<p-button
-  label="Save"
-  (click)="submitProjectForm()"></p-button>
-<cv-gen-project-form [formControl]="cvaProjectForm"></cv-gen-project-form>
+<cv-gen-project-form [formControl]="cvaProjectForm">
+  <div class="button-wrapper">
+    <div>
+      <p-button
+        label="Save"
+        (click)="submitProjectForm()"></p-button>
+    </div>
+    <div>
+      <p-button
+        label="Clear"
+        (click)="clearProjectForm()"></p-button>
+    </div>
+  </div>
+</cv-gen-project-form>

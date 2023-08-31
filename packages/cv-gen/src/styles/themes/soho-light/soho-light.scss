@@ -2710,7 +2710,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-width: 0 0 1px 0;
   font-weight: 700;
   color: #708da9;
-  background: #eff3f8;
+  background: var(--highlight-bg);
   transition: box-shadow 0.2s;
 }
 .p-datatable .p-datatable-tfoot > tr > td {

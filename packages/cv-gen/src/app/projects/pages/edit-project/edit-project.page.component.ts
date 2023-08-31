@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
@@ -17,7 +17,6 @@ export class EditProjectPageComponent implements OnInit {
   private id: number;
 
   constructor(
-    private formBuilder: FormBuilder,
     private projectsFacade: ProjectsFacade,
     private route: ActivatedRoute
   ) {}
@@ -48,5 +47,18 @@ export class EditProjectPageComponent implements OnInit {
 
   public deleteProject() {
     this.projectsFacade.deleteProject(this.id);
+  }
+
+  public clearProjectForm() {
+    this.cvaProjectForm.setValue({
+      projectName: null,
+      startDate: null,
+      endDate: null,
+      teamSize: null,
+      techStack: [],
+      description: null,
+      responsibilities: [],
+      teamRoles: [],
+    });
   }
 }
