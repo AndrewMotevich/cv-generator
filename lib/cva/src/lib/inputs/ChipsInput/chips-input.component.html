@@ -1,10 +1,12 @@
 <div class="flex-layout">
   <label htmlFor="chipsInput">{{label}}</label>
-  <p-chips
-    separator=","
-    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+  <p-autoComplete
     [placeholder]="placeholder"
-    [formControl]="control"></p-chips>
+    [formControl]="control"
+    [suggestions]="filteredSuggestions"
+    (completeMethod)="filterSuggestions($event)"
+    [multiple]="true"
+    (keydown.enter)="onKeyEnter()"></p-autoComplete>
   <ng-template [ngIf]="control.errors && control.dirty">
     <small
       class="p-error"

@@ -5,7 +5,7 @@ import {
   Component,
   OnInit,
   Optional,
-  Self
+  Self,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -28,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { BaseCvaForm } from '../../classes/base-cva-form.class';
+import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 
 @Component({
   selector: 'cv-gen-project-form',
@@ -55,9 +56,14 @@ export class ProjectFormComponent
   extends BaseCvaForm
   implements ControlValueAccessor, OnInit
 {
+  public techStack$ = this.sharedFacade.skills$
+  public responsibilities$ = this.sharedFacade.responsibilities$
+  public teamRoles$ = this.sharedFacade.teamRoles$
+
   constructor(
     @Self() @Optional() ngControl: NgControl,
-    cdRef: ChangeDetectorRef
+    cdRef: ChangeDetectorRef,
+    private sharedFacade: SharedFacade
   ) {
     const projectsControls: { [key: string]: FormControl } = {
       projectName: new FormControl('', { validators: Validators.required }),
@@ -65,7 +71,9 @@ export class ProjectFormComponent
         Validators.required,
         Validators.maxLength(255),
       ]),
-      startDate: new FormControl<Date>(null, { validators: Validators.required }),
+      startDate: new FormControl<Date>(null, {
+        validators: Validators.required,
+      }),
       endDate: new FormControl<Date>(null, { validators: Validators.required }),
       teamSize: new FormControl('', { validators: Validators.required }),
       techStack: new FormControl('', { validators: Validators.required }),
@@ -76,5 +84,6 @@ export class ProjectFormComponent
     };
     super(ngControl, projectsControls, cdRef);
     this.ngControl.valueAccessor = this;
+    this.sharedFacade.getAllShared();
   }
 }

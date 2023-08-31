@@ -27,16 +27,19 @@
   <cv-gen-chips-input
     label="{{'LABELS.TECH_STACK' | translate}}"
     placeholder="Enter project tech-stack"
-    formControlName="techStack"></cv-gen-chips-input>
+    formControlName="techStack"
+    [suggestions]="techStack$ | async"></cv-gen-chips-input>
 
   <cv-gen-chips-input
     label="{{'LABELS.RESPONSIBILITIES' | translate}}"
     placeholder="Enter responsibilities"
-    formControlName="responsibilities"></cv-gen-chips-input>
+    formControlName="responsibilities"
+    [suggestions]="responsibilities$ | async"></cv-gen-chips-input>
 
   <cv-gen-chips-input
     label="{{'LABELS.TEAM_ROLES' | translate}}"
     placeholder="Enter team-roles"
-    formControlName="teamRoles"></cv-gen-chips-input>
+    formControlName="teamRoles"
+    [suggestions]="teamRoles$ | async"></cv-gen-chips-input>
 
 </form>
