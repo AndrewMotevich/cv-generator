@@ -1,0 +1,17 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/abstracts/mixins';
+
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  @include respond-to('medium') {
+    grid-template-columns: 1fr;
+  }
+}
+.button-wrapper {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}

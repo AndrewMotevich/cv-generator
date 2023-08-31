@@ -10,14 +10,13 @@ export const selectAllSharedState = createSelector(
   (state) => state.shared
 );
 
-export const selectDepartments = createSelector(
-  selectAllSharedState,
-  (state) => state.departments
+export const selectDepartments = createSelector(selectAllSharedState, (state) =>
+  state.departments.map((department) => department.name)
 );
 
 export const selectSpecializations = createSelector(
   selectAllSharedState,
-  (state) => state.specializations
+  (state) => state.specializations.map((specialization) => specialization.name)
 );
 
 export const selectSkills = createSelector(

@@ -1,18 +1,28 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { EmployeesRoutingModule } from './employees-routing.module';
 
-import { EmployeesListPageComponent } from './pages/employees-list/employees-list.page.component';
-import { CreateEmployeePageComponent } from './pages/create-employee/create-employee.page.component';
-import { EditEmployeePageComponent } from './pages/edit-employee/edit-employee.page.component';
 import { BaseTable1Component } from '../shared/components/base-table1/base-table1.component';
-
-import { ButtonModule } from 'primeng/button';
 import { ProjectFormComponent } from '../shared/components/project-form-cva/project-form-cva.component';
 import { CvFormComponent } from './components/cv-form/cv-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CvsSidebarComponent } from './components/cvs-sidebar/cvs-sidebar.component';
+import { EmployeeInfoFormComponent } from './components/employee-info-form/employee-info-form.component';
+import { CreateEmployeePageComponent } from './pages/create-employee/create-employee.page.component';
+import { EditEmployeePageComponent } from './pages/edit-employee/edit-employee.page.component';
+import { EmployeesListPageComponent } from './pages/employees-list/employees-list.page.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
+import { TabViewModule } from 'primeng/tabview';
+
+
+import {
+  ChipsInputModule,
+  SelectInputModule,
+  TextInputModule,
+} from '@cva/my-cva-lib';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -20,16 +30,23 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     CreateEmployeePageComponent,
     EditEmployeePageComponent,
     CvFormComponent,
+    EmployeeInfoFormComponent,
+    CvsSidebarComponent,
+    CvFormComponent,
   ],
   imports: [
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
     EmployeesRoutingModule,
     BaseTable1Component,
-    ButtonModule,
     ProjectFormComponent,
+    TranslateModule,
+    ButtonModule,
     AutoCompleteModule,
+    TabViewModule,
+    TextInputModule,
+    ChipsInputModule,
+    SelectInputModule,
   ],
 })
 export class EmployeesModule {}

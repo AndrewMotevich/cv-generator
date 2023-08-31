@@ -1,1 +1,41 @@
-<p>info-form works!</p>
+<form [formGroup]="employeeForm">
+  <cv-gen-text-input
+    label="First name"
+    placeholder="Enter your first name"
+    formControlName="firstName"></cv-gen-text-input>
+
+  <cv-gen-text-input
+    label="Last name"
+    placeholder="Enter your last name"
+    formControlName="lastName"></cv-gen-text-input>
+
+  <cv-gen-text-input
+    label="Email"
+    placeholder="Enter your email"
+    formControlName="email"></cv-gen-text-input>
+
+  <cv-gen-select-input
+    label="Department"
+    placeholder="Select your department"
+    formControlName="department"
+    [options]="departments$ | async"></cv-gen-select-input>
+
+  <cv-gen-select-input
+    label="Specialization"
+    placeholder="Select your specialization"
+    formControlName="specialization"
+    [options]="specializations$ | async"></cv-gen-select-input>
+</form>
+
+<div class="button-wrapper">
+  <div>
+    <p-button
+      label="Save"
+      (click)="submitEmployeeForm()"></p-button>
+  </div>
+  <div>
+    <p-button
+      label="Clear"
+      (click)="clearEmployeeForm()"></p-button>
+  </div>
+</div>
