@@ -7,9 +7,9 @@ import * as ProjectsActions from './projects.actions';
 export const PROJECT_FEATURE_KEY = 'projects';
 
 export interface ProjectsState extends EntityState<ProjectTransformed> {
-  selectedProject?: ProjectDto;
+  selectedProject: ProjectDto;
   loaded: boolean;
-  error?: string | null;
+  error: string | null;
 }
 
 export const projectsAdapter: EntityAdapter<ProjectTransformed> =
@@ -17,6 +17,8 @@ export const projectsAdapter: EntityAdapter<ProjectTransformed> =
 
 export const initialProjectsState: ProjectsState =
   projectsAdapter.getInitialState({
+    selectedProject: null,
+    error: null,
     loaded: false,
   });
 

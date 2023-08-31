@@ -1,5 +1,7 @@
-<p-button label="Save" (click)="submitProjectForm()"></p-button>
-<p-button label="Delete" (click)="deleteProject()"></p-button>
-<form [formGroup]="projectForm">
-  <cv-gen-project-form formControlName="cvaForm"></cv-gen-project-form>
-</form>
+<p-button
+  label="Save"
+  (click)="submitProjectForm()"></p-button>
+<p-button
+  label="Delete"
+  (click)="deleteProject()"></p-button>
+<cv-gen-project-form [formControl]="cvaProjectForm"></cv-gen-project-form>

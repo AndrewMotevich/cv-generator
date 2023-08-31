@@ -10,22 +10,26 @@ import { BaseTable1Component } from '../shared/components/base-table1/base-table
 import { ButtonModule } from 'primeng/button';
 import { ProjectFormComponent } from '../shared/components/project-form-cva/project-form-cva.component';
 import { CvFormComponent } from './components/cv-form/cv-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
     EmployeesListPageComponent,
     CreateEmployeePageComponent,
     EditEmployeePageComponent,
-    CvFormComponent
+    CvFormComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     EmployeesRoutingModule,
     BaseTable1Component,
     ButtonModule,
-    ProjectFormComponent
+    ProjectFormComponent,
+    AutoCompleteModule,
   ],
 })
 export class EmployeesModule {}

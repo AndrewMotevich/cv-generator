@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
-import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 
 @UntilDestroy()
 @Component({
@@ -13,9 +12,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProjectPageComponent implements OnInit {
-  public projectForm = this.formBuilder.group({
-    cvaForm: [null],
-  });
+  public cvaProjectForm = new FormControl(null);
 
   private id: number;
 
@@ -32,21 +29,20 @@ export class EditProjectPageComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((project) => {
         console.log(project);
-        this.projectForm.controls.cvaForm.setValue({
+        this.cvaProjectForm.setValue({
           ...project,
         });
       });
   }
 
   public submitProjectForm() {
-    if (this.projectForm.invalid) {
-      markAllAsDirty(this.projectForm.controls);
-      this.projectForm.controls.cvaForm.markAsTouched();
+    if (this.cvaProjectForm.invalid) {
+      this.cvaProjectForm.markAsTouched();
       return;
     }
     this.projectsFacade.updateProject(
       this.id,
-      this.projectForm.controls.cvaForm.getRawValue()
+      this.cvaProjectForm.getRawValue()
     );
   }
 

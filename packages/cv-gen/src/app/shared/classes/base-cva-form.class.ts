@@ -37,7 +37,7 @@ export class BaseCvaForm implements OnInit, DoCheck {
 
   public ngDoCheck() {
     if (this.form.invalid) {
-      this.ngControl.control.setErrors({ custom: 'Error' }, {emitEvent: false});
+      this.ngControl.control.setErrors({ cvaFormError : true });
       if (this.ngControl.control.touched) {
         markAllAsDirty(this.form.controls);
         this.cdRef.markForCheck();
