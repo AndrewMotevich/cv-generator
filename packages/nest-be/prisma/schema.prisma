@@ -27,22 +27,22 @@ model Employee {
 }
 
 model CV {
-  id        Int        @id @default(autoincrement())
-  cvName    String
+  id       Int        @id @default(autoincrement())
+  cvName   String
   // createdAt DateTime   @default(now())
   // updatedAt DateTime   @updatedAt
-  language  Language[]
-  skills    Skill[]
+  language Language[]
+  skills   Skill[]
 
-  firstName      String
-  lastName       String
-  email          String
+  firstName        String
+  lastName         String
+  email            String
   department       Department     @relation(fields: [departmentId], references: [id])
   specialization   Specialization @relation(fields: [specializationId], references: [id])
   departmentId     Int
   specializationId Int
 
-  employeeInfo Employee     @relation(fields: [employeeId], references: [id])
+  employeeInfo Employee     @relation(fields: [employeeId], references: [id], onDelete: Cascade)
   employeeId   Int
   cvsProjects  CvsProject[]
 }
