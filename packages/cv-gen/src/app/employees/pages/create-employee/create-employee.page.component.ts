@@ -31,5 +31,6 @@ export class CreateEmployeePageComponent {
       department: '',
       specialization: '',
     });
+    this.cvaEmployeeInfoForm.updateValueAndValidity()
   }
 }

@@ -36,10 +36,21 @@
 
   <div formArrayName="projects">
     <div
-      *ngFor="let formGroup of projects.controls; let i = index"
-      [formGroupName]="i">
+      *ngFor="let formGroup of projects.controls; let index = index"
+      [formGroupName]="index">
       <p-accordion>
-        <p-accordionTab header="Project">
+        <p-accordionTab [header]="">
+          <ng-template pTemplate="header">
+            <div class="accordion-header-wrapper">
+                <span class="vertical-align-middle">{{'Project ' + (index + 1)}}</span>
+                <div class="delete-button">
+                  <p-button
+                    icon="pi pi-trash"
+                    styleClass="p-button-rounded p-button-text p-button-raised"
+                    (click)="deleteProjectForm(index)"></p-button>
+                </div>
+            </div>
+        </ng-template>
           <cv-gen-project-form formControlName="project"></cv-gen-project-form>
         </p-accordionTab>
       </p-accordion>

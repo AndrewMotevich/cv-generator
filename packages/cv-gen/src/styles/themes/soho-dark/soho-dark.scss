@@ -297,6 +297,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 }
 
 .p-datepicker {
+  top: -100% !important;
   padding: 0.5rem;
   background: #282936;
   color: rgba(255, 255, 255, 0.87);

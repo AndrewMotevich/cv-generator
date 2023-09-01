@@ -301,6 +301,8 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
 }
 
 .p-datepicker {
+  top: -100% !important;
+  position: absolute;
   padding: 0.5rem;
   background: linear-gradient(90deg, #7254f3 0%, #9554f3 100%);
   color: #ffffff;

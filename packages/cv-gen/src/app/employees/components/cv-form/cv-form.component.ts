@@ -58,8 +58,13 @@ export class CvFormComponent
     this.sharedFacade.getAllShared();
   }
 
-  addProjectForm() {
+  public addProjectForm() {
     const formArray = this.form.get('projects') as FormArray;
     formArray.push(new FormGroup({ project: new FormControl(null) }));
+  }
+
+  public deleteProjectForm(index: number) {
+    const formArray = this.form.get('projects') as FormArray;
+    formArray.removeAt(index);
   }
 }

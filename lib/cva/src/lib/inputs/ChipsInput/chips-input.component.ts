@@ -25,8 +25,6 @@ export class ChipsInputComponent extends BaseInputClass implements OnInit {
   @Input() public placeholder: string;
   @Input() public suggestions: { name: string }[] = [];
 
-  countries: unknown[] | undefined;
-
   filteredSuggestions: unknown[] | undefined;
 
   constructor(
