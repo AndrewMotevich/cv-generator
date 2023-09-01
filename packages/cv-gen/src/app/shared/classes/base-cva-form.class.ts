@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Directive, DoCheck, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgControl } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, NgControl } from '@angular/forms';
 import { markAllAsDirty } from '../utils/mark-as-dirty.util';
 
 @Directive()
@@ -11,7 +11,7 @@ export class BaseCvaForm implements OnInit, DoCheck {
 
   constructor(
     protected ngControl: NgControl,
-    private formControls: { [key: string]: FormControl },
+    private formControls: { [key: string]: FormControl | FormArray },
     protected cdRef: ChangeDetectorRef
   ) {
     this.form = new FormGroup(this.formControls);

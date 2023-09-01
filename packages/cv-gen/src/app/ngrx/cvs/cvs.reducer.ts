@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
 import * as CvsActions from './cvs.actions';
-import { ICv } from '../../employees/models/cvs.mode';
+import { ICv } from '../../employees/models/cvs.model';
 
 export const CVS_FEATURE_KEY = 'cvs';
 

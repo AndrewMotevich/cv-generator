@@ -3,3 +3,5 @@ export interface Language {
   level: string;
   name: string;
 }
+
+export type LanguageDto = Omit<Language, 'id'>

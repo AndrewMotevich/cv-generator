@@ -11,6 +11,8 @@ import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 export class CreateEmployeePageComponent {
   public cvaEmployeeInfoForm = new FormControl(null);
 
+  public cvaCvForm = new FormControl(null);
+
   constructor(private employeesFacade: EmployeesFacade) {}
 
   public submitEmployeeForm() {

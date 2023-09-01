@@ -1,9 +1,50 @@
-<form [formGroup]="mainForm">
-  <div formArrayName="customForms" class="custom-form">
-    <div *ngFor="let formGroup of customForms.controls; let i = index" [formGroupName]="i">
-      <cv-gen-project-form formControlName="customForm"></cv-gen-project-form>
+<form [formGroup]="form">
+  <div class="employee-info">
+    <cv-gen-text-input
+      label="First name"
+      placeholder="Enter your first name"
+      formControlName="firstName"></cv-gen-text-input>
+
+    <cv-gen-text-input
+      label="Last name"
+      placeholder="Enter your last name"
+      formControlName="lastName"></cv-gen-text-input>
+
+    <cv-gen-text-input
+      label="Email"
+      placeholder="Enter your email"
+      formControlName="email"></cv-gen-text-input>
+
+    <cv-gen-select-input
+      label="Department"
+      placeholder="Select your department"
+      formControlName="department"
+      [options]="departments$ | async"></cv-gen-select-input>
+
+    <cv-gen-select-input
+      label="Specialization"
+      placeholder="Select your specialization"
+      formControlName="specialization"
+      [options]="specializations$ | async"></cv-gen-select-input>
+  </div>
+
+  <div class="add-button">
+    <p-button
+      label="Add Project"
+      (click)="addProjectForm()"></p-button>
+  </div>
+
+  <div formArrayName="projects">
+    <div
+      *ngFor="let formGroup of projects.controls; let i = index"
+      [formGroupName]="i">
+      <p-accordion>
+        <p-accordionTab header="Project">
+          <cv-gen-project-form formControlName="project"></cv-gen-project-form>
+        </p-accordionTab>
+      </p-accordion>
     </div>
   </div>
-  <button (click)="addCustomForm()">Add Form</button>
-  <button (click)="submitProjectForm()">Submit</button>
+
 </form>
+<ng-content></ng-content>

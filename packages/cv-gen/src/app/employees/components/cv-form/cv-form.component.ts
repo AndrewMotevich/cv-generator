@@ -1,5 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormArray,
+  FormControl,
+  FormGroup,
+  NgControl,
+  Validators,
+} from '@angular/forms';
+import { SharedFacade } from '../../../ngrx/shared/shared.facade';
+import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 
 @Component({
   selector: 'cv-gen-cv-form',
@@ -7,34 +21,45 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./cv-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CvFormComponent {
-  mainForm: FormGroup;
+export class CvFormComponent
+  extends BaseCvaForm
+  implements ControlValueAccessor, OnInit
+{
+  public departments$ = this.sharedFacade.departments$;
+  public specializations$ = this.sharedFacade.specializations$;
 
-  get customForms(): FormArray {
-    return this.mainForm.get('customForms') as FormArray;
+  get projects(): FormArray {
+    return this.form.get('projects') as FormArray;
   }
 
-  constructor(private formBuilder: FormBuilder) {
-    this.mainForm = this.formBuilder.group({
-      customForms: this.formBuilder.array([]),
-    });
+  constructor(
+    private sharedFacade: SharedFacade,
+    public override ngControl: NgControl,
+    private cdr: ChangeDetectorRef
+  ) {
+    const cvControls = {
+      cvName: new FormControl('', Validators.required),
+      language: new FormControl([], Validators.required),
+      skills: new FormControl([], Validators.required),
+
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+      }),
+      department: new FormControl('', Validators.required),
+      specialization: new FormControl('', Validators.required),
+
+      employeeId: new FormControl<number>(null, Validators.required),
+      projects: new FormArray([]),
+    };
+    super(ngControl, cvControls, cdr);
+    this.ngControl.valueAccessor = this;
+    this.sharedFacade.getAllShared();
   }
 
-  addCustomForm() {
-    const formArray = this.mainForm.get('customForms') as FormArray;
-    formArray.push(this.createCustomForm());
-  }
-
-  createCustomForm() {
-    return this.formBuilder.group({
-      customForm: null,
-    });
-  }
-
-  submitProjectForm(){
-    if(this.mainForm.invalid){
-      return
-    }
-    console.log(this.mainForm.getRawValue())
+  addProjectForm() {
+    const formArray = this.form.get('projects') as FormArray;
+    formArray.push(new FormGroup({ project: new FormControl(null) }));
   }
 }

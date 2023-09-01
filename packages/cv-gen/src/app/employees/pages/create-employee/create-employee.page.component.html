@@ -17,8 +17,10 @@
       </cv-gen-info-form>
     </p-tabPanel>
     <p-tabPanel header="CV">
-      <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>
-      <cv-gen-cv-form></cv-gen-cv-form>
+      <div class="cv-wrapper">
+        <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>
+        <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
+      </div>
     </p-tabPanel>
   </p-tabView>
 </div>

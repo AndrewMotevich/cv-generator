@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
-
+import { AccordionModule } from 'primeng/accordion';
 
 import {
   ChipsInputModule,
@@ -47,6 +47,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TextInputModule,
     ChipsInputModule,
     SelectInputModule,
+    AccordionModule,
   ],
 })
 export class EmployeesModule {}

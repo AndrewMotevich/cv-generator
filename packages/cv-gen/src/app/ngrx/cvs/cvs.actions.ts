@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ICv } from '../../employees/models/cvs.mode';
+import { ICv } from '../../employees/models/cvs.model';
 
 export const getCvs = createAction('[Cvs Component] Get Cvs');
 
