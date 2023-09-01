@@ -23,7 +23,7 @@ export class EditProjectPageComponent implements OnInit {
 
   public ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.projectsFacade.getProjectById(this.id);
+    this.projectsFacade.loadProjectById(this.id);
     this.projectsFacade.selectedProject$
       .pipe(untilDestroyed(this))
       .subscribe((project) => {

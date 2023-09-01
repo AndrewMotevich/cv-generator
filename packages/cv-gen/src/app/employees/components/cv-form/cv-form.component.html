@@ -26,12 +26,26 @@
       placeholder="Select your specialization"
       formControlName="specialization"
       [options]="specializations$ | async"></cv-gen-select-input>
+
+    <cv-gen-chips-input
+      label="Skills"
+      placeholder="Enter your skills"
+      formControlName="skills"
+      [suggestions]="skills$ | async"></cv-gen-chips-input>
   </div>
 
-  <div class="add-button">
-    <p-button
-      label="Add Project"
-      (click)="addProjectForm()"></p-button>
+  <div class="add-project-wrapper">
+    <div class="add-button">
+      <p-button
+        label="Add Project"
+        (click)="addProjectForm()"></p-button>
+    </div>
+    <cv-gen-select-input
+      label="Project"
+      placeholder="Select project"
+      [formControl]="selectedProjectControl"
+      optionLabel="projectName"
+      [options]="projectsOptions$ | async"></cv-gen-select-input>
   </div>
 
   <div formArrayName="projects">
@@ -39,19 +53,19 @@
       *ngFor="let formGroup of projects.controls; let index = index"
       [formGroupName]="index">
       <p-accordion>
-        <p-accordionTab [header]="">
+        <p-accordionTab [header]>
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
-                <span class="vertical-align-middle">{{'Project ' + (index + 1)}}</span>
-                <div class="delete-button">
-                  <p-button
-                    icon="pi pi-trash"
-                    styleClass="p-button-rounded p-button-text p-button-raised"
-                    (click)="deleteProjectForm(index)"></p-button>
-                </div>
+              <span class="vertical-align-middle">{{projectForm.projectName}}</span>
+              <div class="delete-button">
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-rounded p-button-text p-button-raised p-button-sm"
+                  (click)="deleteProjectForm(index)"></p-button>
+              </div>
             </div>
-        </ng-template>
-          <cv-gen-project-form formControlName="project"></cv-gen-project-form>
+          </ng-template>
+          <cv-gen-project-form formControlName="project" #projectForm></cv-gen-project-form>
         </p-accordionTab>
       </p-accordion>
     </div>

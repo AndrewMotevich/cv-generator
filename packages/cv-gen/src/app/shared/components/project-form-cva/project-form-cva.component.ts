@@ -56,6 +56,7 @@ export class ProjectFormComponent
   extends BaseCvaForm
   implements ControlValueAccessor, OnInit
 {
+  public projectName = 'Project'
   public techStack$ = this.sharedFacade.skills$
   public responsibilities$ = this.sharedFacade.responsibilities$
   public teamRoles$ = this.sharedFacade.teamRoles$
@@ -85,5 +86,11 @@ export class ProjectFormComponent
     super(ngControl, projectsControls, cdRef);
     this.ngControl.valueAccessor = this;
     this.sharedFacade.getAllShared();
+
+    // it is necessary?????
+    projectsControls['projectName'].registerOnChange(() => {
+      this.projectName = projectsControls['projectName'].value
+    })
+    projectsControls['projectName'].valueChanges.subscribe(name => this.projectName = name)
   }
 }

@@ -1,8 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  ProjectsState,
-  projectsAdapter
-} from './projects.reducer';
+import { ProjectsState, projectsAdapter } from './projects.reducer';
 
 export const selectProjects = createFeatureSelector<{
   projects: ProjectsState;

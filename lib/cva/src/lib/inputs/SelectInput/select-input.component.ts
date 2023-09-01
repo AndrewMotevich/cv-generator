@@ -12,6 +12,7 @@ export class SelectInputComponent extends BaseInputClass{
   @Input() label: string
   @Input() placeholder: string
   @Input() options: unknown[]
+  @Input() optionLabel: string
 
   constructor(
     @Self() @Optional() ngControl: NgControl,

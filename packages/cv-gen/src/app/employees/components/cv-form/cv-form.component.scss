@@ -19,11 +19,17 @@ form {
     grid-template-columns: 1fr;
   }
 }
-.add-button {
-  width: 10rem;
+.add-project-wrapper{
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  .add-button {
+    width: 10rem;
+  }
 }
 .accordion-header-wrapper{
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
