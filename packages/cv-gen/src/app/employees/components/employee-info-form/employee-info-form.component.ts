@@ -1,7 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NgControl,
+  Validators,
+} from '@angular/forms';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
-import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
+import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 
 @Component({
   selector: 'cv-gen-info-form',
@@ -9,29 +19,29 @@ import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
   styleUrls: ['./employee-info-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeeInfoFormComponent {
-  public employeeForm = this.formBuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', { validators: [Validators.required, Validators.email]}],
-    department: ['', Validators.required],
-    specialization: ['', Validators.required],
-  })
+export class EmployeeInfoFormComponent
+  extends BaseCvaForm
+  implements ControlValueAccessor, OnInit
+{
+  public departments$ = this.sharedFacade.departments$;
+  public specializations$ = this.sharedFacade.specializations$;
 
-  public departments$ = this.sharedFacade.departments$
-  public specializations$ = this.sharedFacade.specializations$
-
-  constructor(private formBuilder: FormBuilder, private sharedFacade: SharedFacade){}
-
-  public submitEmployeeForm() {
-    if (this.employeeForm.invalid) {
-      markAllAsDirty(this.employeeForm.controls)
-      return;
-    }
-    console.log(this.employeeForm.getRawValue())
-  }
-
-  public clearEmployeeForm() {
-    this.employeeForm.reset()
+  constructor(
+    private sharedFacade: SharedFacade,
+    public override ngControl: NgControl,
+    private cdr: ChangeDetectorRef
+  ) {
+    const employeeControls = {
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email],
+      }),
+      department: new FormControl('', Validators.required),
+      specialization: new FormControl('', Validators.required),
+    };
+    super(ngControl, employeeControls, cdr);
+    this.ngControl.valueAccessor = this;
+    this.sharedFacade.getAllShared();
   }
 }

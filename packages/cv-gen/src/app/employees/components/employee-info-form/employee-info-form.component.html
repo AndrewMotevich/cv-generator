@@ -1,4 +1,4 @@
-<form [formGroup]="employeeForm">
+<form [formGroup]="form">
   <cv-gen-text-input
     label="First name"
     placeholder="Enter your first name"
@@ -26,16 +26,4 @@
     formControlName="specialization"
     [options]="specializations$ | async"></cv-gen-select-input>
 </form>
-
-<div class="button-wrapper">
-  <div>
-    <p-button
-      label="Save"
-      (click)="submitEmployeeForm()"></p-button>
-  </div>
-  <div>
-    <p-button
-      label="Clear"
-      (click)="clearEmployeeForm()"></p-button>
-  </div>
-</div>
+<ng-content></ng-content>

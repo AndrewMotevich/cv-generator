@@ -1,7 +1,20 @@
 <div class="page-wrapper">
   <p-tabView class="page-wrapper">
     <p-tabPanel header="Info">
-      <cv-gen-info-form></cv-gen-info-form>
+      <cv-gen-info-form [formControl]="cvaEmployeeInfoForm">
+        <div class="button-wrapper">
+          <div>
+            <p-button
+              label="Save"
+              (click)="submitEmployeeForm()"></p-button>
+          </div>
+          <div>
+            <p-button
+              label="Clear"
+              (click)="clearEmployeeForm()"></p-button>
+          </div>
+        </div>
+      </cv-gen-info-form>
     </p-tabPanel>
     <p-tabPanel header="CV">
       <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>

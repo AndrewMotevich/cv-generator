@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
-import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
-import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import {
   CREATE_EMPLOYEES,
   EDIT_EMPLOYEES,
@@ -30,13 +28,9 @@ export class EmployeesListPageComponent implements OnInit {
   constructor(
     private router: Router,
     private employeesFacade: EmployeesFacade,
-    private cvsFacade: CvsFacade,
-    private sharedFacade: SharedFacade
   ) {}
 
   ngOnInit() {
-    this.sharedFacade.getAllShared();
-    this.cvsFacade.loadCvs();
     this.employeesFacade.loadEmployees();
     this.data = this.employeesFacade.employeesList$;
   }

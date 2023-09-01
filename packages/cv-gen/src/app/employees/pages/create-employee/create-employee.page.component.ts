@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 
 @Component({
   selector: 'cv-gen-create-employee.page',
@@ -6,4 +8,26 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./create-employee.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateEmployeePageComponent {}
+export class CreateEmployeePageComponent {
+  public cvaEmployeeInfoForm = new FormControl(null);
+
+  constructor(private employeesFacade: EmployeesFacade) {}
+
+  public submitEmployeeForm() {
+    if (this.cvaEmployeeInfoForm.invalid) {
+      this.cvaEmployeeInfoForm.markAsTouched();
+      return;
+    }
+    this.employeesFacade.addEmployee(this.cvaEmployeeInfoForm.getRawValue());
+  }
+
+  public clearEmployeeForm() {
+    this.cvaEmployeeInfoForm.setValue({
+      firstName: '',
+      lastName: '',
+      email: '',
+      department: '',
+      specialization: '',
+    });
+  }
+}

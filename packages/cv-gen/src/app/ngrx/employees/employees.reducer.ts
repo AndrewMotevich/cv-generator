@@ -33,7 +33,11 @@ export const EmployeesReducer = createReducer(
   }),
   on(EmployeesActions.loadEmployeeByIdSuccess, (state, { employee }) => {
     return { ...state, selectedEmployee: employee };
-  })
+  }),
+  on(EmployeesActions.addEmployeeFailure, (state, { error }) => ({
+    ...state,
+    error,
+  }))
   // on(EmployeesActions.loadEmployeesFailure, (state, { error }) => ({
   //   ...state,
   //   error,

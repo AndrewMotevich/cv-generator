@@ -5,5 +5,5 @@ export const JWT_REFRESH_OPTIONS = {
 
 export const JWT_ACCESS_OPTIONS = {
   secret: process.env.JWT_ACCESS_SECRET,
-  expiresIn: '30s',
+  expiresIn: '5m',
 };

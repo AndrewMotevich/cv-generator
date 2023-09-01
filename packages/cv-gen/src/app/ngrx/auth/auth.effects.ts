@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { AUTH, EMPLOYEES } from '../../shared/constants/routing-paths.consts';
 import { AuthApiService } from '../../shared/services/auth-api.service';
-import { ErrorsApiService } from '../../shared/services/errors-api.service';
+import { ToastMessageService } from '../../shared/services/toast-messages.service';
 import { CoreFacade } from '../core/core.facade';
 import * as AuthActions from './auth.actions';
 
@@ -15,7 +15,7 @@ export class AuthEffects {
     private authApiService: AuthApiService,
     private coreFacade: CoreFacade,
     private router: Router,
-    private errorsService: ErrorsApiService
+    private errorsService: ToastMessageService
   ) {}
 
   public login$ = createEffect(() =>
