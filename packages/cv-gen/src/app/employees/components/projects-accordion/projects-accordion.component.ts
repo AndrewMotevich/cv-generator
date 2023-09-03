@@ -19,7 +19,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 export class ProjectsAccordionComponent implements OnInit {
   @Input() form: FormGroup;
 
-  public projectsOptions$ = this.projectsFacade.projectsOptions$;
+  public projectsOptions$ = this.projectsFacade.projectsNames$;
 
   public selectedProjectControl = new FormControl<
     Pick<ProjectDto, 'id' | 'projectName'>

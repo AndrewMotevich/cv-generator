@@ -21,4 +21,54 @@ export class CvsEffects {
       })
     )
   );
+
+  getById$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CvsActions.getCvById),
+    switchMap((action) => this.cvsService.getCvById(action.id)),
+    map((cv) => CvsActions.loadCvByIdSuccess({ cv })),
+    catchError((error) => {
+      console.error('Error', error);
+      return of(CvsActions.loadCvsFailure({ error }));
+    })
+  )
+);
+
+post$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CvsActions.addCv),
+    switchMap((action) => this.cvsService.addCv(action.cv)),
+    map(() => CvsActions.addCvSuccess()),
+    catchError((error) => {
+      console.error('Error', error);
+      return of(CvsActions.addCvFailure({ error }));
+    })
+  )
+);
+
+put$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CvsActions.updateCv),
+    switchMap((action) =>
+      this.cvsService.updateCv(action.id, action.cv)
+    ),
+    map(() => CvsActions.updateCvSuccess()),
+    catchError((error) => {
+      console.error('Error', error);
+      return of(CvsActions.updateCvFailure({ error }));
+    })
+  )
+);
+
+delete$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(CvsActions.deleteCv),
+    switchMap((action) => this.cvsService.deleteCv(action.id)),
+    map(() => CvsActions.deleteCvSuccess()),
+    catchError((error) => {
+      console.error('Error', error);
+      return of(CvsActions.deleteCvFailure({ error }));
+    })
+  )
+);
 }

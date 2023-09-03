@@ -35,13 +35,8 @@ export const selectCvsEntities = createSelector(
   (state: CvsState) => selectEntities(state)
 );
 
-export const selectSelectedId = createSelector(
+export const selectSelectedCv = createSelector(
   selectCvsState,
-  (state: CvsState) => state.selectedId
+  (state: CvsState) => state.selectedCv
 );
 
-export const selectEntity = createSelector(
-  selectCvsEntities,
-  selectSelectedId,
-  (entities, selectedId) => (selectedId ? entities[selectedId] : undefined)
-);

@@ -19,7 +19,7 @@ export class ProjectsFacade {
     select(ProjectsSelectors.selectAllProjects)
   );
 
-  public projectsOptions$ = this.store.pipe(
+  public projectsNames$ = this.store.pipe(
     select(ProjectsSelectors.selectAllProjects),
     map((projects) =>
       projects.map((project) => ({

@@ -38,7 +38,16 @@ export const swaggerConfig = new DocumentBuilder()
     <p>You cant add cv without relation to employee. Please, check <b>'employeeId'</b> property if something goes wrong!</p>
     </details>
     <details>
-    <summary><b>All types of errors in the project!</b></summary>
+    <summary><b>Can't refresh?</b></summary>
+    <p>Check that you add "withCredentials: true" option in your request!!!</p>
+    </details>
+    <details>
+    <summary><b>Be aware!!!</b></summary>
+    <p>The projects in CV do not have relation to Projects collection?</p>
+    <p>...</p>
+    </details>
+    <details>
+    <summary><b>All types of errors!</b></summary>
     <p><b>Note:</b> Every time read error message! That can help you to resolve a problem.</p>
     <p><b>400</b> Bad request Error. Check you body or parameters!</p>
     <p><b>401</b> Unauthorized Error. Happened if you haven't got an access-token or have incorrect token. You should log-in/sign-in or refresh tokens!</p>

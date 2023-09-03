@@ -19,7 +19,7 @@ export class ProjectsApiService {
     return this.http
       .get<IProject[]>(`${API_PATH}/projects`)
       .pipe(
-        map((projects) => this.projectsAdapter.transformProjectsDto(projects))
+        map((projects) => this.projectsAdapter.transformDtoToTransformed(projects))
       );
   }
 
@@ -28,7 +28,7 @@ export class ProjectsApiService {
       .get<IProject>(`${API_PATH}/projects/${id}`)
       .pipe(
         map((project) =>
-          this.projectsAdapter.transformSelectedProjectDto(project)
+          this.projectsAdapter.transformIProjectToProjectDto(project)
         )
       );
   }

@@ -7,7 +7,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsAdapter {
-  public transformProjectsDto(dto: IProject[]): ProjectTransformed[] {
+  public transformDtoToTransformed(dto: IProject[]): ProjectTransformed[] {
     return dto.map((project) => ({
       ...project,
       teamRoles: project.teamRoles.map((role) => role.name).join(', '),
@@ -18,7 +18,7 @@ export class ProjectsAdapter {
     }));
   }
 
-  public transformSelectedProjectDto(project: IProject): ProjectDto {
+  public transformIProjectToProjectDto(project: IProject): ProjectDto {
     return {
       ...project,
       startDate: new Date(project.startDate),
@@ -31,9 +31,7 @@ export class ProjectsAdapter {
     };
   }
 
-  public transformTransformedToDto(
-    project: ProjectTransformed
-  ): ProjectDto {
+  public transformTransformedToDto(project: ProjectTransformed): ProjectDto {
     return {
       ...project,
       startDate: new Date(project.startDate),
