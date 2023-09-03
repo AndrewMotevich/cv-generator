@@ -1,4 +1,5 @@
 <form [formGroup]="form">
+  <h3>Info:</h3>
   <div class="employee-info">
     <cv-gen-text-input
       label="First name"
@@ -34,14 +35,15 @@
       [suggestions]="skills$ | async"></cv-gen-chips-input>
   </div>
 
-  <div class="add-project-wrapper">
+  <h3>Projects:</h3>
+  <div class="add-wrapper">
     <div class="add-button">
       <p-button
-        label="Add Project"
+        icon="pi pi-plus"
+        label="Add"
         (click)="addProjectForm()"></p-button>
     </div>
     <cv-gen-select-input
-      label="Project"
       placeholder="Select project"
       [formControl]="selectedProjectControl"
       optionLabel="projectName"
@@ -50,8 +52,8 @@
 
   <div formArrayName="projects">
     <div
-      *ngFor="let formGroup of projects.controls; let index = index"
-      [formGroupName]="index">
+      *ngFor="let formControl of projects.controls; let index = index"
+      >
       <p-accordion>
         <p-accordionTab [header]>
           <ng-template pTemplate="header">
@@ -65,7 +67,57 @@
               </div>
             </div>
           </ng-template>
-          <cv-gen-project-form formControlName="project" #projectForm></cv-gen-project-form>
+
+          <cv-gen-project-form
+            [formControlName]="index"
+            #projectForm></cv-gen-project-form>
+
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+
+  <h3>Languages:</h3>
+  <div class="add-wrapper">
+    <div class="add-button">
+      <p-button
+        icon="pi pi-plus"
+        label="Add"
+        (click)="addLanguageForm()"></p-button>
+    </div>
+  </div>
+
+  <div formArrayName="language">
+    <div
+      *ngFor="let formGroup of language.controls; let index = index"
+      [formGroupName]="index">
+      <p-accordion>
+        <p-accordionTab [header]>
+          <ng-template pTemplate="header">
+            <div class="accordion-header-wrapper">
+              <span class="vertical-align-middle">{{langName.control.value.name || langName.control.value}}</span>
+              <div class="delete-button">
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-rounded p-button-text p-button-raised p-button-sm"
+                  (click)="deleteLanguageForm(index)"></p-button>
+              </div>
+            </div>
+          </ng-template>
+
+            <cv-gen-select-input
+              #langName
+              label="Language"
+              placeholder="Enter language"
+              formControlName="name"
+              optionLabel="name"
+              [options]="languages$ | async"></cv-gen-select-input>
+            <cv-gen-select-input
+              label="Level"
+              placeholder="Select your level"
+              formControlName="level"
+              [options]="levels"></cv-gen-select-input>
+
         </p-accordionTab>
       </p-accordion>
     </div>

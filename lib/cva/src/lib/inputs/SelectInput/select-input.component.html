@@ -12,7 +12,7 @@
     <small
       class="p-error"
       translate
-      [translateParams]="{ label, maxlength, minlength }">
+      [translateParams]="{ label: label || 'Field', maxlength, minlength }">
       {{control.errors | getErrorMessage}}
     </small>
   </ng-template>

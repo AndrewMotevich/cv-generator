@@ -33,4 +33,12 @@ export class CreateEmployeePageComponent {
     });
     this.cvaEmployeeInfoForm.updateValueAndValidity()
   }
+
+  public submitCvForm() {
+    if (this.cvaCvForm.invalid) {
+      this.cvaCvForm.markAsTouched();
+      return;
+    }
+    console.log(this.cvaCvForm.getRawValue());
+  }
 }

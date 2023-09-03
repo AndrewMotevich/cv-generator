@@ -19,12 +19,12 @@ form {
     grid-template-columns: 1fr;
   }
 }
-.add-project-wrapper{
+.add-wrapper{
   display: flex;
   gap: 1rem;
-  align-items: flex-end;
+  align-items: flex-start;
   .add-button {
-    width: 10rem;
+    width: 5rem;
   }
 }
 .accordion-header-wrapper{

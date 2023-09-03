@@ -17,6 +17,7 @@ import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { ProjectDto } from '../../../projects/models/project.model';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
+import { LangLevel } from '../../../shared/enums/language.enum';
 
 @UntilDestroy()
 @Component({
@@ -32,7 +33,11 @@ export class CvFormComponent
   public departments$ = this.sharedFacade.departments$;
   public specializations$ = this.sharedFacade.specializations$;
   public skills$ = this.sharedFacade.skills$;
+  public languages$ = this.sharedFacade.languages$;
+
   public projectsOptions$ = this.projectsFacade.projectsOptions$;
+
+  public levels = Object.values(LangLevel);
 
   public selectedProjectControl = new FormControl<
     Pick<ProjectDto, 'id' | 'projectName'>
@@ -42,6 +47,10 @@ export class CvFormComponent
     return this.form.get('projects') as FormArray;
   }
 
+  get language(): FormArray {
+    return this.form.get('language') as FormArray;
+  }
+
   constructor(
     private projectsFacade: ProjectsFacade,
     private sharedFacade: SharedFacade,
@@ -49,8 +58,8 @@ export class CvFormComponent
     private cdr: ChangeDetectorRef
   ) {
     const cvControls = {
-      cvName: new FormControl('', Validators.required),
-      language: new FormControl([], Validators.required),
+      cvName: new FormControl('Cv', Validators.required),
+      language: new FormArray([]),
       skills: new FormControl([], Validators.required),
 
       firstName: new FormControl('', Validators.required),
@@ -61,7 +70,7 @@ export class CvFormComponent
       department: new FormControl('', Validators.required),
       specialization: new FormControl('', Validators.required),
 
-      employeeId: new FormControl<number>(null, Validators.required),
+      employeeId: new FormControl<number>(5, Validators.required),
       projects: new FormArray([]),
     };
     super(ngControl, cvControls, cdr);
@@ -81,8 +90,9 @@ export class CvFormComponent
       .subscribe((project) => {
         const formArray = this.form.get('projects') as FormArray;
         formArray.push(
-          new FormGroup({
-            project: new FormControl(project),
+          new FormControl({
+            ...project,
+            id: null,
           })
         );
       });
@@ -90,6 +100,21 @@ export class CvFormComponent
 
   public deleteProjectForm(index: number) {
     const formArray = this.form.get('projects') as FormArray;
+    formArray.removeAt(index);
+  }
+
+  public addLanguageForm() {
+    const formArray = this.form.get('language') as FormArray;
+    formArray.push(
+      new FormGroup({
+        name: new FormControl('Language', Validators.required),
+        level: new FormControl('A1', Validators.required),
+      })
+    );
+  }
+
+  public deleteLanguageForm(index: number) {
+    const formArray = this.form.get('language') as FormArray;
     formArray.removeAt(index);
   }
 }
