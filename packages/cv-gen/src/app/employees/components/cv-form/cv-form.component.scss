@@ -19,17 +19,3 @@ form {
     grid-template-columns: 1fr;
   }
 }
-.add-wrapper{
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-  .add-button {
-    width: 5rem;
-  }
-}
-.accordion-header-wrapper{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}

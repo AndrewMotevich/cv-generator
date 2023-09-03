@@ -1,0 +1,41 @@
+<form [formGroup]="form">
+  <h3>Projects:</h3>
+  <div class="add-wrapper">
+    <div class="add-button">
+      <p-button
+        icon="pi pi-plus"
+        label="Add"
+        (click)="addProjectForm()"></p-button>
+    </div>
+    <cv-gen-select-input
+      placeholder="Select project"
+      [formControl]="selectedProjectControl"
+      optionLabel="projectName"
+      [options]="projectsOptions$ | async"></cv-gen-select-input>
+  </div>
+
+  <div formArrayName="projects">
+    <div *ngFor="let formControl of projects.controls; let index = index">
+      <p-accordion>
+        <p-accordionTab [header]>
+          <ng-template pTemplate="header">
+            <div class="accordion-header-wrapper">
+              <span class="vertical-align-middle">{{projectForm.projectName}}</span>
+              <div class="delete-button">
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-rounded p-button-text p-button-raised p-button-sm"
+                  (click)="deleteProjectForm(index)"></p-button>
+              </div>
+            </div>
+          </ng-template>
+
+          <cv-gen-project-form
+            [formControlName]="index"
+            #projectForm></cv-gen-project-form>
+
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</form>

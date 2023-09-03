@@ -12,10 +12,10 @@ import { EditEmployeePageComponent } from './pages/edit-employee/edit-employee.p
 import { EmployeesListPageComponent } from './pages/employees-list/employees-list.page.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
-import { AccordionModule } from 'primeng/accordion';
 
 import {
   ChipsInputModule,
@@ -23,6 +23,8 @@ import {
   TextInputModule,
 } from '@cva/my-cva-lib';
 import { TranslateModule } from '@ngx-translate/core';
+import { LanguageAccordionComponent } from './components/language-accordion/language-accordion.component';
+import { ProjectsAccordionComponent } from './components/projects-accordion/projects-accordion.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { TranslateModule } from '@ngx-translate/core';
     EmployeeInfoFormComponent,
     CvsSidebarComponent,
     CvFormComponent,
+    LanguageAccordionComponent,
+    ProjectsAccordionComponent,
   ],
   imports: [
     CommonModule,
