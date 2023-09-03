@@ -59,4 +59,12 @@ export class EditEmployeePageComponent implements OnInit {
       specialization: '',
     });
   }
+
+  public submitCvForm() {
+    if (this.cvaCvForm.invalid) {
+      this.cvaCvForm.markAsTouched();
+      return;
+    }
+    console.log(this.cvaCvForm.getRawValue());
+  }
 }

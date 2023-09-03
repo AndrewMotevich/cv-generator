@@ -11,8 +11,6 @@ import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 export class CreateEmployeePageComponent {
   public cvaEmployeeInfoForm = new FormControl(null);
 
-  public cvaCvForm = new FormControl(null);
-
   constructor(private employeesFacade: EmployeesFacade) {}
 
   public submitEmployeeForm() {
@@ -32,13 +30,5 @@ export class CreateEmployeePageComponent {
       specialization: '',
     });
     this.cvaEmployeeInfoForm.updateValueAndValidity()
-  }
-
-  public submitCvForm() {
-    if (this.cvaCvForm.invalid) {
-      this.cvaCvForm.markAsTouched();
-      return;
-    }
-    console.log(this.cvaCvForm.getRawValue());
   }
 }
