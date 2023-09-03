@@ -1,10 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
-import { Project, ProjectDto } from './dto/project.dto';
 import {
-  transformProjectDto,
-  transformProjectPartial,
+  transformProjectDto
 } from '../../database/helpers/transform-project-dto.helper';
+import { Project, ProjectDto } from './dto/project.dto';
 import { projectOutput } from './dto/project.output';
 
 @Injectable()
@@ -44,11 +43,11 @@ export class ProjectsService {
     }
   }
 
-  async updateProject(id: number, dto: Partial<ProjectDto>): Promise<Project> {
+  async updateProject(id: number, dto: ProjectDto): Promise<Project> {
     try {
       return await this.dataBaseService.project.update({
         where: { id: id },
-        data: transformProjectPartial(dto),
+        data: transformProjectDto(dto),
         select: projectOutput,
       });
     } catch (error) {
