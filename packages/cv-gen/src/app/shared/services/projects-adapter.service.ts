@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import {
   IProject,
   ProjectDto,
-  ProjectTransformed,
+  ProjectTableData,
 } from '../../projects/models/project.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsAdapter {
-  public transformDtoToTransformed(dto: IProject[]): ProjectTransformed[] {
+  public transformDtoToTableData(dto: IProject[]): ProjectTableData[] {
     return dto.map((project) => ({
       ...project,
       teamRoles: project.teamRoles.map((role) => role.name).join(', '),
@@ -31,7 +31,7 @@ export class ProjectsAdapter {
     };
   }
 
-  public transformTransformedToDto(project: ProjectTransformed): ProjectDto {
+  public transformToDto(project: ProjectTableData): ProjectDto {
     return {
       ...project,
       startDate: new Date(project.startDate),

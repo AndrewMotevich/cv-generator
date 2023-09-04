@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {
   ProjectDto,
-  ProjectTransformed
+  ProjectTableData
 } from '../../projects/models/project.model';
 
 //Get projects
@@ -9,7 +9,7 @@ export const getProjects = createAction('[Projects/Page] Get Projects');
 
 export const loadProjectsSuccess = createAction(
   '[Projects/API] Load Projects Success',
-  props<{ projects: ProjectTransformed[] }>()
+  props<{ projects: ProjectTableData[] }>()
 );
 
 export const loadProjectsFailure = createAction(

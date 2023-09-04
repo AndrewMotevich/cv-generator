@@ -27,8 +27,8 @@ import {
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { BaseCvaForm } from '../../classes/base-cva-form.class';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
+import { BaseCvaForm } from '../../classes/base-cva-form.class';
 
 @Component({
   selector: 'cv-gen-project-form',
@@ -86,11 +86,5 @@ export class ProjectFormComponent
     super(ngControl, projectsControls, cdRef);
     this.ngControl.valueAccessor = this;
     this.sharedFacade.getAllShared();
-
-    // it is necessary?????
-    projectsControls['projectName'].registerOnChange(() => {
-      this.projectName = projectsControls['projectName'].value
-    })
-    projectsControls['projectName'].valueChanges.subscribe(name => this.projectName = name)
   }
 }

@@ -17,7 +17,7 @@ export class LanguageAccordionComponent {
   public languages$ = this.sharedFacade.languages$;
   public levels = Object.values(LangLevel);
 
-  get language(): FormArray {
+  get languageFormArray(): FormArray {
     return this.form.get('language') as FormArray;
   }
 

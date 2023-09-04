@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 import {
@@ -12,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 
@@ -24,14 +27,17 @@ import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 })
 export class CvFormComponent
   extends BaseCvaForm
-  implements ControlValueAccessor, OnInit
+  implements ControlValueAccessor, OnInit, AfterViewInit
 {
+  @Input() employeeId: number;
+
   public departments$ = this.sharedFacade.departments$;
   public specializations$ = this.sharedFacade.specializations$;
   public skills$ = this.sharedFacade.skills$;
 
   constructor(
     private sharedFacade: SharedFacade,
+    private employeesFacade: EmployeesFacade,
     public override ngControl: NgControl,
     private cdr: ChangeDetectorRef
   ) {
@@ -48,11 +54,15 @@ export class CvFormComponent
       department: new FormControl('', Validators.required),
       specialization: new FormControl('', Validators.required),
 
-      employeeId: new FormControl<number>(5, Validators.required),
+      employeeId: new FormControl<number>(null, Validators.required),
       projects: new FormArray([]),
     };
     super(ngControl, cvControls, cdr);
     this.ngControl.valueAccessor = this;
     this.sharedFacade.getAllShared();
+  }
+
+  public ngAfterViewInit() {
+    this.form.controls['employeeId'].setValue(this.employeeId);
   }
 }

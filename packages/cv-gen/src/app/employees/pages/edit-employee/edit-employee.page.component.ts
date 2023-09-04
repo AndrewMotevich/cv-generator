@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 
 @UntilDestroy()
@@ -16,9 +17,10 @@ export class EditEmployeePageComponent implements OnInit {
 
   public cvaCvForm = new FormControl(null);
 
-  private id: number;
+  public id: number;
 
   constructor(
+    private cvsFacade: CvsFacade,
     private employeesFacade: EmployeesFacade,
     private route: ActivatedRoute
   ) {}
@@ -60,11 +62,18 @@ export class EditEmployeePageComponent implements OnInit {
     });
   }
 
+  public selectCv(id: number) {
+    this.cvsFacade.loadCvById(id);
+    this.cvsFacade.selectedCvs$.pipe(untilDestroyed(this)).subscribe((cv) => {
+      this.cvaCvForm.setValue(cv);
+    });
+  }
+
   public submitCvForm() {
     if (this.cvaCvForm.invalid) {
       this.cvaCvForm.markAsTouched();
       return;
     }
-    console.log(this.cvaCvForm.getRawValue());
+    this.cvsFacade.addCv(this.cvaCvForm.getRawValue());
   }
 }

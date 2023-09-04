@@ -19,7 +19,7 @@ export class ProjectsApiService {
     return this.http
       .get<IProject[]>(`${API_PATH}/projects`)
       .pipe(
-        map((projects) => this.projectsAdapter.transformDtoToTransformed(projects))
+        map((projects) => this.projectsAdapter.transformDtoToTableData(projects))
       );
   }
 

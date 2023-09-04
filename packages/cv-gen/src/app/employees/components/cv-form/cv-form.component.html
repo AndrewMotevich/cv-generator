@@ -1,48 +1,50 @@
-<form [formGroup]="form">
-  <cv-gen-text-input
-    label="CV name"
-    placeholder="Enter cvName"
-    formControlName="cvName"></cv-gen-text-input>
-
-  <h3>Info:</h3>
-  <div class="employee-info">
+<div class="form-wrapper">
+  <form [formGroup]="form">
     <cv-gen-text-input
-      label="First name"
-      placeholder="Enter your first name"
-      formControlName="firstName"></cv-gen-text-input>
+      label="CV name"
+      placeholder="Enter cvName"
+      formControlName="cvName"></cv-gen-text-input>
 
-    <cv-gen-text-input
-      label="Last name"
-      placeholder="Enter your last name"
-      formControlName="lastName"></cv-gen-text-input>
+    <h3>Info:</h3>
+    <div class="employee-info">
+      <cv-gen-text-input
+        label="First name"
+        placeholder="Enter your first name"
+        formControlName="firstName"></cv-gen-text-input>
 
-    <cv-gen-text-input
-      label="Email"
-      placeholder="Enter your email"
-      formControlName="email"></cv-gen-text-input>
+      <cv-gen-text-input
+        label="Last name"
+        placeholder="Enter your last name"
+        formControlName="lastName"></cv-gen-text-input>
 
-    <cv-gen-select-input
-      label="Department"
-      placeholder="Select your department"
-      formControlName="department"
-      [options]="departments$ | async"></cv-gen-select-input>
+      <cv-gen-text-input
+        label="Email"
+        placeholder="Enter your email"
+        formControlName="email"></cv-gen-text-input>
 
-    <cv-gen-select-input
-      label="Specialization"
-      placeholder="Select your specialization"
-      formControlName="specialization"
-      [options]="specializations$ | async"></cv-gen-select-input>
+      <cv-gen-select-input
+        label="Department"
+        placeholder="Select your department"
+        formControlName="department"
+        [options]="departments$ | async"></cv-gen-select-input>
 
-    <cv-gen-chips-input
-      label="Skills"
-      placeholder="Enter your skills"
-      formControlName="skills"
-      [suggestions]="skills$ | async"></cv-gen-chips-input>
-  </div>
+      <cv-gen-select-input
+        label="Specialization"
+        placeholder="Select your specialization"
+        formControlName="specialization"
+        [options]="specializations$ | async"></cv-gen-select-input>
 
-  <cv-gen-projects-accordion [form]="form"></cv-gen-projects-accordion>
+      <cv-gen-chips-input
+        label="Skills"
+        placeholder="Enter your skills"
+        formControlName="skills"
+        [suggestions]="skills$ | async"></cv-gen-chips-input>
+    </div>
 
-  <cv-gen-language-accordion [form]="form"></cv-gen-language-accordion>
+    <cv-gen-projects-accordion [form]="form"></cv-gen-projects-accordion>
 
-</form>
-<ng-content></ng-content>
+    <cv-gen-language-accordion [form]="form"></cv-gen-language-accordion>
+
+  </form>
+  <ng-content></ng-content>
+</div>

@@ -1,1 +1,17 @@
-<div class="sidebar-wrapeer">SideBar</div>
+<div>
+  <div *ngFor="let cv of cvsNames | async">
+    <div class="cv-item" (click)="selectCv(cv.id)">
+      <span>{{cv.cvName}}</span>
+      <p-button
+        icon="pi pi-trash"
+        styleClass="p-button-rounded p-button-text p-button-sm"
+        (click)="deleteCv($event, cv)"></p-button>
+    </div>
+    <p-divider></p-divider>
+  </div>
+</div>
+
+<p-button
+  icon="pi pi-plus"
+  styleClass="p-button-rounded p-button-outlined p-button-lg"
+  (click)="addNewCv()"></p-button>

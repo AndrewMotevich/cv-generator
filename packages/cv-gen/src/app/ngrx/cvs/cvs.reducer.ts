@@ -29,7 +29,7 @@ export const CvsReducer = createReducer(
     return cvsAdapter.setAll(cvs, { ...state, loaded: true });
   }),
   on(CvsActions.loadCvByIdSuccess, (state, { cv }) => {
-    return {...state, selectedProject: cv}
+    return {...state, selectedCv: cv}
   }),
   on(CvsActions.loadCvsFailure, (state, { error }) => ({
     ...state,

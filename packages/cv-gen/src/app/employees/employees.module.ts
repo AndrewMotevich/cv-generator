@@ -16,6 +16,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
+import { DividerModule } from 'primeng/divider';
 
 import {
   ChipsInputModule,
@@ -47,6 +48,7 @@ import { ProjectsAccordionComponent } from './components/projects-accordion/proj
     TranslateModule,
     ButtonModule,
     AutoCompleteModule,
+    DividerModule,
     TabViewModule,
     TextInputModule,
     ChipsInputModule,

@@ -12,7 +12,7 @@ export interface IProject {
   teamRoles: IShared[];
 }
 
-export type ProjectTransformed = Omit<
+export type ProjectTableData = Omit<
   IProject,
   'techStack' | 'responsibilities' | 'teamRoles'
 > & {

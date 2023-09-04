@@ -15,12 +15,12 @@
   </div>
 
   <div formArrayName="projects">
-    <div *ngFor="let formControl of projects.controls; let index = index">
+    <div *ngFor="let formControl of projectsFormArray.controls; let index = index">
       <p-accordion>
         <p-accordionTab [header]>
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
-              <span class="vertical-align-middle">{{projectForm.projectName}}</span>
+              <span class="vertical-align-middle">{{formControl?.value?.projectName}}</span>
               <div class="delete-button">
                 <p-button
                   icon="pi pi-trash"

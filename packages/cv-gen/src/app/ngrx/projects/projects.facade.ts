@@ -50,7 +50,7 @@ export class ProjectsFacade {
   public getProjectById(id: number) {
     return this.projectsList$.pipe(
       map((projects) => projects.find((project) => project.id === id)),
-      map((project) => this.projectsAdapter.transformTransformedToDto(project))
+      map((project) => this.projectsAdapter.transformToDto(project))
     );
   }
 

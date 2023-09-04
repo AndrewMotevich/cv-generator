@@ -15,6 +15,16 @@ export class CvsFacade {
 
   public cvsList$ = this.store.pipe(select(CvsSelectors.selectAllCvs));
 
+  public cvsNames$ = this.store.pipe(
+    select(CvsSelectors.selectAllCvs),
+    map((cvs) =>
+      cvs.map((cv) => ({
+        cvName: cv.cvName,
+        id: cv.id,
+      }))
+    )
+  );
+
   public selectedCvs$ = this.store.pipe(select(CvsSelectors.selectSelectedCv));
 
   constructor(private cvApiService: CvApiService) {}

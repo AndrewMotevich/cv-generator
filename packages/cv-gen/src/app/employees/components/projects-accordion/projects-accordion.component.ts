@@ -25,7 +25,7 @@ export class ProjectsAccordionComponent implements OnInit {
     Pick<ProjectDto, 'id' | 'projectName'>
   >(null, Validators.required);
 
-  get projects(): FormArray {
+  get projectsFormArray(): FormArray {
     return this.form.get('projects') as FormArray;
   }
 

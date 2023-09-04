@@ -28,8 +28,8 @@
 
     <p-tabPanel header="CV">
       <div class="cv-wrapper">
-        <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>
-        <cv-gen-cv-form [formControl]="cvaCvForm">
+        <cv-gen-cvs-sidebar (selectedId)="selectCv($event)"></cv-gen-cvs-sidebar>
+        <cv-gen-cv-form [formControl]="cvaCvForm" [employeeId]="id">
           <div class="button-wrapper">
             <div>
               <p-button
