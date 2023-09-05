@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
 import { API_PATH } from '../../../environments/environment.development';
 import { CvDto, ICv } from '../../employees/models/cvs.model';
-import { map } from 'rxjs';
 import { ProjectsAdapter } from './projects-adapter.service';
 
 @Injectable({ providedIn: 'root' })
@@ -22,12 +22,18 @@ export class CvApiService {
       .pipe(map((cv) => this.transformICvToCvDto(cv)));
   }
 
-  public addCv(body: CvDto) {
-    return this.http.post<ICv>(`${API_PATH}/cvs`, body);
+  public addCv(cvDto: CvDto) {
+    return this.http.post<ICv>(
+      `${API_PATH}/cvs`,
+      this.transformLanguageInDto(cvDto)
+    );
   }
 
   public updateCv(id: number, cvDto: CvDto) {
-    return this.http.put<ICv>(`${API_PATH}/cvs/${id}`, cvDto);
+    return this.http.put<ICv>(
+      `${API_PATH}/cvs/${id}`,
+      this.transformLanguageInDto(cvDto)
+    );
   }
 
   public deleteCv(id: number) {
@@ -41,8 +47,8 @@ export class CvApiService {
       specialization: cv.specialization.name,
       skills: cv.skills.map((skill) => skill.name),
       language: cv.language.map((lang) => ({
-        name: lang.name,
-        level: lang.level,
+        name: lang.name.name,
+        level: lang.level.name,
       })),
       projects: cv.cvsProjects.map((project) =>
         this.projectsAdapter.transformIProjectToProjectDto(project)
@@ -50,5 +56,15 @@ export class CvApiService {
     };
     delete cvDto.cvsProjects;
     return cvDto;
+  }
+
+  private transformLanguageInDto(cvDto: CvDto) {
+    return {
+      ...cvDto,
+      language: cvDto.language.map((lang) => ({
+        name: { name: lang.name },
+        level: { name: lang.level },
+      })),
+    };
   }
 }

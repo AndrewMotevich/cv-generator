@@ -83,6 +83,7 @@ export class CvFormComponent
         .subscribe((employee) => {
           this.form.patchValue({
             cvName: 'New Cv',
+            skills: [],
             employeeId: this.employeeId,
             ...employee,
           });

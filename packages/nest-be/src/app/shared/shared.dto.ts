@@ -1,5 +1,3 @@
-import { Language } from "../core/cvs/dto/cv.dto";
-
 export class Shared {
   id: number;
   name: string;
@@ -17,5 +15,5 @@ export class ISharedAllProps {
   skills: Shared[];
   teamRoles: Shared[];
   responsibilities: Shared[];
-  languages: Shared[]
+  languages: Shared[];
 }
