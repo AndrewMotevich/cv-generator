@@ -1,4 +1,4 @@
-import { CvDto } from '../../core/cvs/dto/cv.dto';
+import { Cv, CvDto } from '../../core/cvs/dto/cv.dto';
 import { ProjectDto } from '../../core/projects/dto/project.dto';
 import { transformProjectDto } from './transform-project-dto.helper';
 
@@ -48,7 +48,7 @@ function transformProjects(projects: ProjectDto[]) {
   return projects.map((project) => transformProjectDto(project));
 }
 
-export function transformCvPartial(dto: CvDto) {
+export function transformCvPartial(dto: CvDto, prevCv: Cv) {
   const languages = dto?.language?.map((language) => ({
     create: {
       level: language.level.toUpperCase(),
@@ -80,10 +80,13 @@ export function transformCvPartial(dto: CvDto) {
       },
     },
     language: {
-      deleteMany: {},
+      disconnect: prevCv.language.map((elem) => ({ id: elem.id })),
       connectOrCreate: languages,
     },
-    skills: { deleteMany: {}, connectOrCreate: skills },
+    skills: {
+      disconnect: prevCv.skills.map((elem) => ({ id: elem.id })),
+      connectOrCreate: skills,
+    },
     cvsProjects: {
       deleteMany: {},
       create: transformProjects(dto?.projects),

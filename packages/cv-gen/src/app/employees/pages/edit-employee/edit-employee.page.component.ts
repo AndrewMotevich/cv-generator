@@ -17,7 +17,9 @@ export class EditEmployeePageComponent implements OnInit {
 
   public cvaCvForm = new FormControl(null);
 
-  public id: number;
+  public employeeId: number;
+
+  public cvId: number;
 
   public showCvForm = false;
 
@@ -30,8 +32,8 @@ export class EditEmployeePageComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.employeesFacade.getEmployeeById(this.id);
+    this.employeeId = Number(this.route.snapshot.paramMap.get('id'));
+    this.employeesFacade.getEmployeeById(this.employeeId);
     this.employeesFacade.selectedEmployee$
       .pipe(untilDestroyed(this))
       .subscribe((employee) => {
@@ -47,13 +49,13 @@ export class EditEmployeePageComponent implements OnInit {
       return;
     }
     this.employeesFacade.updateEmployee(
-      this.id,
+      this.employeeId,
       this.cvaEmployeeInfoForm.getRawValue()
     );
   }
 
   public deleteEmployee() {
-    this.employeesFacade.deleteEmployee(this.id);
+    this.employeesFacade.deleteEmployee(this.employeeId);
   }
 
   public clearEmployeeInfoForm() {
@@ -69,6 +71,7 @@ export class EditEmployeePageComponent implements OnInit {
   public selectCv(id: number) {
     if (id) {
       this.isNewCv = false;
+      this.cvId = id;
       this.cvsFacade.loadCvById(id);
     } else {
       this.isNewCv = true;
@@ -83,7 +86,7 @@ export class EditEmployeePageComponent implements OnInit {
       return;
     }
     this.cvsFacade.addCv(this.cvaCvForm.getRawValue());
-    this.showCvForm = false
+    this.showCvForm = false;
   }
 
   public updateCvForm() {
@@ -91,6 +94,6 @@ export class EditEmployeePageComponent implements OnInit {
       this.cvaCvForm.markAsTouched();
       return;
     }
-    console.log(this.cvaCvForm.getRawValue());
+    this.cvsFacade.updateCv(this.cvId, this.cvaCvForm.getRawValue());
   }
 }

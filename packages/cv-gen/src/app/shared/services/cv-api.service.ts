@@ -26,8 +26,8 @@ export class CvApiService {
     return this.http.post<ICv>(`${API_PATH}/cvs`, body);
   }
 
-  public updateCv(id: number, body: CvDto) {
-    return this.http.put<ICv>(`${API_PATH}/cvs/${id}`, body);
+  public updateCv(id: number, cvDto: CvDto) {
+    return this.http.put<ICv>(`${API_PATH}/cvs/${id}`, cvDto);
   }
 
   public deleteCv(id: number) {

@@ -1,7 +1,14 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import { Cv, CvDto } from './dto/cv.dto';
-import { transformCvDto, transformCvPartial } from '../../database/helpers/transform-cv-dto';
+import {
+  transformCvDto,
+  transformCvPartial,
+} from '../../database/helpers/transform-cv-dto';
 import { cvOutput } from './dto/cv.output';
 
 @Injectable()
@@ -25,7 +32,7 @@ export class CvsService {
         select: cvOutput,
       });
     } catch (error) {
-      if (error.code === "P2025") throw new NotFoundException(error.message)
+      if (error.code === 'P2025') throw new NotFoundException(error.message);
       throw new BadRequestException(error.code);
     }
   }
@@ -43,13 +50,17 @@ export class CvsService {
 
   async updateCv(id: number, dto: CvDto): Promise<Cv> {
     try {
+      const prevCv = await this.dataBaseService.cV.findFirstOrThrow({
+        where: { id: id },
+        select: cvOutput,
+      });
       return await this.dataBaseService.cV.update({
         where: { id: id },
-        data: transformCvPartial(dto),
+        data: transformCvPartial(dto, prevCv),
         select: cvOutput,
       });
     } catch (error) {
-      if (error.code === "P2025") throw new NotFoundException(error.message)
+      if (error.code === 'P2025') throw new NotFoundException(error.message);
       throw new BadRequestException(error.message);
     }
   }
@@ -61,7 +72,7 @@ export class CvsService {
         select: cvOutput,
       });
     } catch (error) {
-      if (error.code === "P2025") throw new NotFoundException(error.message)
+      if (error.code === 'P2025') throw new NotFoundException(error.message);
       throw new BadRequestException(error.message);
     }
   }

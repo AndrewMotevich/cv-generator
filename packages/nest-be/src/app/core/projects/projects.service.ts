@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { DatabaseService } from '../../database/database.service';
 import {
-  transformProjectDto
+  transformProjectDto, transformProjectPartial
 } from '../../database/helpers/transform-project-dto.helper';
 import { Project, ProjectDto } from './dto/project.dto';
 import { projectOutput } from './dto/project.output';
@@ -45,9 +45,13 @@ export class ProjectsService {
 
   async updateProject(id: number, dto: ProjectDto): Promise<Project> {
     try {
+      const prevProject = await this.dataBaseService.project.findFirstOrThrow({
+        where: { id: id },
+        select: projectOutput,
+      });
       return await this.dataBaseService.project.update({
         where: { id: id },
-        data: transformProjectDto(dto),
+        data: transformProjectPartial(dto, prevProject),
         select: projectOutput,
       });
     } catch (error) {
