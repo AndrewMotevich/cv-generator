@@ -77,16 +77,14 @@ export class CvFormComponent
       formProjectsArray.clear();
 
       cv.language.map((lang) => {
-        this.cdRef.markForCheck();
         formLanguageArray.push(
           new FormGroup({
             name: new FormControl(lang.name, Validators.required),
             level: new FormControl(lang.level, Validators.required),
           })
-        );
-      });
-      cv.projects.map((project) => {
-        delete project.id
+          );
+        });
+        cv.projects.map((project) => {
         formProjectsArray.push(
           new FormControl({
             ...project,
@@ -94,7 +92,7 @@ export class CvFormComponent
         );
       });
 
-      this.cdRef.markForCheck();
+      this.cdRef.detectChanges();
     });
   }
 }

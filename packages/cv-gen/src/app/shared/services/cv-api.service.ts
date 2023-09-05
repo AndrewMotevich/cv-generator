@@ -35,7 +35,7 @@ export class CvApiService {
   }
 
   public transformICvToCvDto(cv: ICv): CvDto {
-    return {
+    const cvDto = {
       ...cv,
       department: cv.department.name,
       specialization: cv.specialization.name,
@@ -48,5 +48,7 @@ export class CvApiService {
         this.projectsAdapter.transformIProjectToProjectDto(project)
       ),
     };
+    delete cvDto.cvsProjects;
+    return cvDto;
   }
 }

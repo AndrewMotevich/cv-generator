@@ -1,6 +1,9 @@
 <div>
   <div *ngFor="let cv of cvsNames">
-    <div class="cv-item" (click)="selectCv(cv)">
+    <div
+      class="cv-item"
+      [ngClass]="{'selected': id === cv.id}"
+      (click)="selectCv(cv)">
       <span>{{cv.cvName}}</span>
       <p-button
         icon="pi pi-trash"

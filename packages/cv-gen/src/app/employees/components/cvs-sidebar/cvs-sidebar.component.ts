@@ -21,6 +21,8 @@ export class CvsSidebarComponent implements OnInit {
   @Output() selectedId: EventEmitter<number> = new EventEmitter();
   public cvsNames: ICvName[];
 
+  public id: number;
+
   constructor(private cvsFacade: CvsFacade, private cdr: ChangeDetectorRef) {}
 
   public ngOnInit() {
@@ -33,22 +35,26 @@ export class CvsSidebarComponent implements OnInit {
 
   public addNewCv() {
     this.selectedId.emit(0);
-    this.cvsNames.push({
-      id: 0,
-      cvName: 'New Cv',
-    });
+    this.id = 0;
+    if (!this.cvsNames.find((elem) => elem.id === 0)) {
+      this.cvsNames.push({
+        id: 0,
+        cvName: 'New Cv',
+      });
+    }
+    return;
   }
 
   public selectCv(cv: ICvName) {
     this.selectedId.emit(cv.id);
+    this.id = cv.id
   }
 
   public deleteCv(event: Event, cv: ICvName) {
     event.stopPropagation();
     if (cv.id) {
       this.cvsFacade.deleteCv(cv.id);
-    }
-    else {
+    } else {
       this.cvsNames = this.cvsNames.filter((elem) => elem.id !== 0);
     }
   }
