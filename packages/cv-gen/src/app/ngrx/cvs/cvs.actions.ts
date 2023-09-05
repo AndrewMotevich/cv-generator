@@ -74,3 +74,7 @@ export const deleteCvFailure = createAction(
   '[Cvs/API] Delete Cv Failure',
   props<{ error: string }>()
 );
+
+export const clearSelectedCv = createAction(
+  '[Cvs/Page] Clear selectedCv'
+)

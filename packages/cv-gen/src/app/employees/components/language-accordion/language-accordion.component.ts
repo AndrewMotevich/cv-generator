@@ -1,20 +1,22 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { LangLevel } from '../../../shared/enums/language.enum';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { map } from 'rxjs';
 
-@UntilDestroy({checkProperties: true})
+@UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-language-accordion',
   templateUrl: './language-accordion.component.html',
   styleUrls: ['./language-accordion.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageAccordionComponent {
   @Input() form: FormGroup;
 
-  public languages$ = this.sharedFacade.languages$;
+  public languages$ = this.sharedFacade.languages$.pipe(
+    map((langs) => langs.map((lang) => lang.name))
+  );
   public levels = Object.values(LangLevel);
 
   get languageFormArray(): FormArray {

@@ -1,20 +1,18 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProjectDto } from '../../../projects/models/project.model';
-import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
+import { ProjectDto } from '../../../projects/models/project.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
   selector: 'cv-gen-projects-accordion',
   templateUrl: './projects-accordion.component.html',
   styleUrls: ['./projects-accordion.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectsAccordionComponent implements OnInit {
   @Input() form: FormGroup;
@@ -45,10 +43,10 @@ export class ProjectsAccordionComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((project) => {
         const formArray = this.form.get('projects') as FormArray;
+        delete project.id
         formArray.push(
           new FormControl({
             ...project,
-            id: null,
           })
         );
       });

@@ -55,4 +55,8 @@ export class CvsFacade {
   public deleteCv(id: number) {
     this.store.dispatch(CvsActions.deleteCv({ id }));
   }
+
+  public clearSelectedCv() {
+    this.store.dispatch(CvsActions.clearSelectedCv());
+  }
 }

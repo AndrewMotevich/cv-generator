@@ -10,11 +10,13 @@ import {
   ControlValueAccessor,
   FormArray,
   FormControl,
+  FormGroup,
   NgControl,
   Validators,
 } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
+import { filter } from 'rxjs';
+import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 
@@ -36,8 +38,8 @@ export class CvFormComponent
   public skills$ = this.sharedFacade.skills$;
 
   constructor(
+    private cvsFacade: CvsFacade,
     private sharedFacade: SharedFacade,
-    private employeesFacade: EmployeesFacade,
     public override ngControl: NgControl,
     private cdr: ChangeDetectorRef
   ) {
@@ -64,5 +66,35 @@ export class CvFormComponent
 
   public ngAfterViewInit() {
     this.form.controls['employeeId'].setValue(this.employeeId);
+
+    this.cvsFacade.selectedCvs$.pipe(filter(Boolean)).subscribe((cv) => {
+      this.form.patchValue(cv);
+
+      const formLanguageArray = this.form.controls['language'] as FormArray;
+      const formProjectsArray = this.form.controls['projects'] as FormArray;
+
+      formLanguageArray.clear();
+      formProjectsArray.clear();
+
+      cv.language.map((lang) => {
+        this.cdRef.markForCheck();
+        formLanguageArray.push(
+          new FormGroup({
+            name: new FormControl(lang.name, Validators.required),
+            level: new FormControl(lang.level, Validators.required),
+          })
+        );
+      });
+      cv.projects.map((project) => {
+        delete project.id
+        formProjectsArray.push(
+          new FormControl({
+            ...project,
+          })
+        );
+      });
+
+      this.cdRef.markForCheck();
+    });
   }
 }

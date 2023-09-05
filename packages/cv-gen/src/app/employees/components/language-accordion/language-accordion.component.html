@@ -18,7 +18,7 @@
         <p-accordionTab [header]>
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
-              <span class="vertical-align-middle">{{langName.control.value || langName.control.value.name}}</span>
+              <span class="vertical-align-middle">{{langName.control.value}}</span>
               <div class="delete-button">
                 <p-button
                   icon="pi pi-trash"
@@ -33,7 +33,6 @@
             label="Language"
             placeholder="Enter language"
             formControlName="name"
-            optionLabel="name"
             [options]="languages$ | async"></cv-gen-select-input>
           <cv-gen-select-input
             label="Level"
