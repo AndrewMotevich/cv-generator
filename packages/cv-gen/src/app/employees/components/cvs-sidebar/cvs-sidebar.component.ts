@@ -19,6 +19,7 @@ import { ICvName } from '../../../shared/interfaces/cv-name.interface';
 })
 export class CvsSidebarComponent implements OnInit {
   @Output() selectedId: EventEmitter<number> = new EventEmitter();
+  @Output() deleteItem: EventEmitter<boolean> = new EventEmitter();
   public cvsNames: ICvName[];
 
   public id: number;
@@ -57,5 +58,6 @@ export class CvsSidebarComponent implements OnInit {
     } else {
       this.cvsNames = this.cvsNames.filter((elem) => elem.id !== 0);
     }
+    this.deleteItem.emit(true)
   }
 }

@@ -81,7 +81,11 @@ export class CvFormComponent
       this.employeesFacade.selectedEmployee$
         .pipe(untilDestroyed(this), filter(Boolean))
         .subscribe((employee) => {
-          this.form.patchValue({ cvName: 'New Cv', ...employee });
+          this.form.patchValue({
+            cvName: 'New Cv',
+            employeeId: this.employeeId,
+            ...employee,
+          });
         });
     }
   }
