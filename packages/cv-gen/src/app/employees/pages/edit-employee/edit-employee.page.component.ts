@@ -21,6 +21,8 @@ export class EditEmployeePageComponent implements OnInit {
 
   public showCvForm = false;
 
+  public isNewCv = false;
+
   constructor(
     private cvsFacade: CvsFacade,
     private employeesFacade: EmployeesFacade,
@@ -65,8 +67,11 @@ export class EditEmployeePageComponent implements OnInit {
   }
 
   public selectCv(id: number) {
-    if(id){
+    if (id) {
+      this.isNewCv = false;
       this.cvsFacade.loadCvById(id);
+    } else {
+      this.isNewCv = true;
     }
     this.showCvForm = true;
   }
