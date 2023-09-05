@@ -30,7 +30,7 @@ CREATE TABLE "CV" (
     "employeeId" INTEGER NOT NULL,
     CONSTRAINT "CV_departmentId_fkey" FOREIGN KEY ("departmentId") REFERENCES "Department" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "CV_specializationId_fkey" FOREIGN KEY ("specializationId") REFERENCES "Specialization" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "CV_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "Employee" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "CV_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "Employee" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -74,8 +74,22 @@ CREATE TABLE "Responsibility" (
 -- CreateTable
 CREATE TABLE "Language" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name" TEXT NOT NULL,
-    "level" TEXT NOT NULL
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Level" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "LanguageInfo" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nameId" INTEGER NOT NULL,
+    "levelId" INTEGER NOT NULL,
+    CONSTRAINT "LanguageInfo_nameId_fkey" FOREIGN KEY ("nameId") REFERENCES "Language" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "LanguageInfo_levelId_fkey" FOREIGN KEY ("levelId") REFERENCES "Level" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -91,11 +105,11 @@ CREATE TABLE "Specialization" (
 );
 
 -- CreateTable
-CREATE TABLE "_CVToLanguage" (
+CREATE TABLE "_CVToLanguageInfo" (
     "A" INTEGER NOT NULL,
     "B" INTEGER NOT NULL,
-    CONSTRAINT "_CVToLanguage_A_fkey" FOREIGN KEY ("A") REFERENCES "CV" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT "_CVToLanguage_B_fkey" FOREIGN KEY ("B") REFERENCES "Language" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "_CVToLanguageInfo_A_fkey" FOREIGN KEY ("A") REFERENCES "CV" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_CVToLanguageInfo_B_fkey" FOREIGN KEY ("B") REFERENCES "LanguageInfo" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -181,16 +195,19 @@ CREATE UNIQUE INDEX "Responsibility_name_key" ON "Responsibility"("name");
 CREATE UNIQUE INDEX "Language_name_key" ON "Language"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Level_name_key" ON "Level"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Department_name_key" ON "Department"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Specialization_name_key" ON "Specialization"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "_CVToLanguage_AB_unique" ON "_CVToLanguage"("A", "B");
+CREATE UNIQUE INDEX "_CVToLanguageInfo_AB_unique" ON "_CVToLanguageInfo"("A", "B");
 
 -- CreateIndex
-CREATE INDEX "_CVToLanguage_B_index" ON "_CVToLanguage"("B");
+CREATE INDEX "_CVToLanguageInfo_B_index" ON "_CVToLanguageInfo"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_CVToSkill_AB_unique" ON "_CVToSkill"("A", "B");

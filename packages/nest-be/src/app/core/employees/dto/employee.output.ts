@@ -10,7 +10,12 @@ export const employeeOutput = {
   cvs: {
     include: {
       department: true,
-      language: true,
+      language: {
+        include: {
+          name: true,
+          level: true
+        }
+      },
       skills: true,
       specialization: true,
       cvsProjects: {

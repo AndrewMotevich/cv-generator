@@ -1,7 +1,6 @@
 import { IsArray, IsNumber, IsString } from 'class-validator';
-import { Project, ProjectDto } from '../../projects/dto/project.dto';
-import { ApiProperty } from '@nestjs/swagger';
 import { Shared } from '../../../shared/shared.dto';
+import { Project, ProjectDto } from '../../projects/dto/project.dto';
 
 export class CvDto {
   @IsString()
@@ -46,23 +45,15 @@ export class Cv {
   cvsProjects?: Project[];
 }
 
-enum Level {
-  A1 = 'A1',
-  A2 = 'A2',
-  B1 = 'B1',
-  B2 = 'B2',
-  C1 = 'C1',
-  C2 = 'C2',
-}
-
 class LanguageDto {
-  name: string;
-  @ApiProperty({ enum: Level })
-  level: string;
+  name: { name: string; }
+  level: { name: string; }
 }
 
 export class Language {
   id: number;
-  name: string;
-  level: string;
+  // name: { id: number; name: string; }
+  // level: { id: number; name: string; }
+  nameId: number;
+  levelId: number;
 }

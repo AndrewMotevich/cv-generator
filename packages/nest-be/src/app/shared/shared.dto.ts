@@ -17,5 +17,5 @@ export class ISharedAllProps {
   skills: Shared[];
   teamRoles: Shared[];
   responsibilities: Shared[];
-  languages: Language[]
+  languages: Shared[]
 }

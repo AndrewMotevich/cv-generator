@@ -6,7 +6,12 @@ export const cvOutput = {
   email: true,
   department: true,
   specialization: true,
-  language: true,
+  language: {
+    include: {
+      name: true,
+      level: true
+    }
+  },
   skills: true,
   employeeId: true,
   departmentId: false,

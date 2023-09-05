@@ -3,14 +3,6 @@ import { ProjectDto } from '../../core/projects/dto/project.dto';
 import { transformProjectDto } from './transform-project-dto.helper';
 
 export function transformCvDto(dto: CvDto) {
-  const languages = dto.language.map((language) => ({
-    create: {
-      level: language.level.toUpperCase(),
-      name: language.name.toLowerCase(),
-    },
-    where: { name: language.name },
-  }));
-
   const skills = dto.skills.map((skill) => ({
     where: { name: skill.toLowerCase() },
     create: { name: skill.toLowerCase() },
@@ -35,7 +27,20 @@ export function transformCvDto(dto: CvDto) {
     },
     employeeInfo: { connect: { id: dto.employeeId } },
     language: {
-      connectOrCreate: languages,
+      create: dto.language.map((lang) => ({
+        name: {
+          connectOrCreate: {
+            where: { name: lang.name.name },
+            create: { name: lang.name.name },
+          },
+        },
+        level: {
+          connectOrCreate: {
+            where: { name: lang.level.name },
+            create: { name: lang.level.name },
+          },
+        },
+      })),
     },
     skills: { connectOrCreate: skills },
     cvsProjects: {
@@ -49,14 +54,6 @@ function transformProjects(projects: ProjectDto[]) {
 }
 
 export function transformCvPartial(dto: CvDto, prevCv: Cv) {
-  const languages = dto?.language?.map((language) => ({
-    create: {
-      level: language.level.toUpperCase(),
-      name: language.name.toLowerCase(),
-    },
-    where: { name: language.name },
-  }));
-
   const skills = dto?.skills?.map((skill) => ({
     where: { name: skill.toLowerCase() },
     create: { name: skill.toLowerCase() },
@@ -80,8 +77,21 @@ export function transformCvPartial(dto: CvDto, prevCv: Cv) {
       },
     },
     language: {
-      disconnect: prevCv.language.map((elem) => ({ id: elem.id })),
-      connectOrCreate: languages,
+      deleteMany: {},
+      create: dto.language.map((lang) => ({
+        name: {
+          connectOrCreate: {
+            where: { name: lang.name.name },
+            create: { name: lang.name.name },
+          },
+        },
+        level: {
+          connectOrCreate: {
+            where: { name: lang.level.name },
+            create: { name: lang.level.name },
+          },
+        },
+      })),
     },
     skills: {
       disconnect: prevCv.skills.map((elem) => ({ id: elem.id })),
