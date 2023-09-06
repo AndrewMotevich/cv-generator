@@ -10,7 +10,7 @@ import {
 } from '../../../shared/constants/routing-paths.consts';
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
-import { EmployeeTransformed } from '../../models/employee.model';
+import { EmployeeTransformed, IEmployee } from '../../models/employee.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -27,7 +27,7 @@ export class EmployeesListPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private employeesFacade: EmployeesFacade,
+    private employeesFacade: EmployeesFacade
   ) {}
 
   ngOnInit() {
@@ -36,10 +36,15 @@ export class EmployeesListPageComponent implements OnInit {
   }
 
   public navigateToEdit(data: unknown) {
-    this.router.navigate([
-      EMPLOYEES.path,
-      EDIT_EMPLOYEES.path,
-      (data as { id: number }).id,
-    ]);
+    const employeeData = data as IEmployee;
+    this.router.navigate(
+      [EMPLOYEES.path, EDIT_EMPLOYEES.path, employeeData.id],
+      {
+        queryParams: {
+          label: `${employeeData.firstName} ${employeeData.lastName}'s profile`,
+          pathName: `${employeeData.firstName} ${employeeData.lastName}`,
+        },
+      }
+    );
   }
 }

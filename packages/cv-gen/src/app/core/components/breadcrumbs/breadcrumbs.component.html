@@ -1,1 +1,19 @@
-<div class="breadcrumbs-wrapper">breadcrumbs</div>
+<div class="breadcrumbs-wrapper">
+  <div class="path">
+    <ul>
+      <li [routerLink]="homeRote">home</li>
+      <span>/</span>
+      <li [routerLink]="title">{{title}}</li>
+      <span *ngIf="paramPathName">/</span>
+      <li *ngIf="paramPathName">{{paramPathName}}</li>
+      <!-- <li
+        *ngFor="let crumb of breadcrumbs; let last = last"
+        (click)="navigate(crumb)">
+        {{ crumb.label }}
+        <span *ngIf="!last">/</span>
+      </li> -->
+    </ul>
+  </div>
+  <h2>{{title}}</h2>
+  <p>{{pageInfo}}</p>
+</div>

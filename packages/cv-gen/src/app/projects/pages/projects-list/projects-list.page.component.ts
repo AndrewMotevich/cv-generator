@@ -33,6 +33,11 @@ export class ProjectListPageComponent implements OnInit {
   }
 
   public navigateToEdit(data: ProjectTableData) {
-    this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id]);
+    this.router.navigate([PROJECTS.path, EDIT_PROJECTS.path, data.id], {
+      queryParams: {
+        label: `${data.projectName} project info`,
+        pathName: `${data.projectName}`,
+      },
+    });
   }
 }

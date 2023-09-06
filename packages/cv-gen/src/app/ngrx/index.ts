@@ -24,7 +24,7 @@ import { SharedFacade } from './shared/shared.facade';
 import { SharedEffects } from './shared/shared.effects';
 
 export const STORE = {
-  routing: routerReducer,
+  router: routerReducer,
   common: combineReducers({
     employees: EmployeesReducer,
     projects: ProjectsReducer,
