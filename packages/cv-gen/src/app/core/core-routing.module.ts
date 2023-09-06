@@ -24,7 +24,7 @@ const homeRoutes: Routes = [
           import('../projects/projects.module').then((m) => m.ProjectsModule),
         canMatch: [authGuard],
         data: {
-          title: "Employees"
+          title: "Projects"
         }
       },
       {
@@ -35,7 +35,7 @@ const homeRoutes: Routes = [
           ),
         canMatch: [authGuard],
         data: {
-          title: "Projects"
+          title: "Employees"
         }
       },
     ],
