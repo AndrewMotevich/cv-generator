@@ -29,8 +29,7 @@ export class AuthEffects {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
-            if (error.status === 403)
-              this.errorsService.showErrorMessage('Forbidden');
+            this.errorsService.showErrorMessage(error.message);
             return of(AuthActions.AuthFailure({ error }));
           })
         );
@@ -49,6 +48,7 @@ export class AuthEffects {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
+            this.errorsService.showErrorMessage(error.message);
             return of(AuthActions.AuthFailure({ error }));
           })
         )
@@ -59,16 +59,16 @@ export class AuthEffects {
   public logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logOut),
-      switchMap(() => this.authApiService.logOut()),
-      map(() => {
-        this.router.navigate([AUTH.path]);
-        return AuthActions.logOutSuccess();
-      }),
-      catchError((error) => {
-        if (error.status === 403)
-          this.errorsService.showErrorMessage('Forbidden');
-        return of(AuthActions.AuthFailure({ error }));
-      })
+      switchMap(() => this.authApiService.logOut().pipe(
+        map(() => {
+          this.router.navigate([AUTH.path]);
+          return AuthActions.logOutSuccess();
+        }),
+        catchError((error) => {
+          this.errorsService.showErrorMessage(error.message);
+          return of(AuthActions.AuthFailure({ error }));
+        })
+      )),
     )
   );
 }
