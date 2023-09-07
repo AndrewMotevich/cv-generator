@@ -2,7 +2,7 @@
   <div *ngFor="let cv of cvsNames">
     <div
       class="cv-item"
-      [ngClass]="{'selected': id === cv.id}"
+      [ngClass]="{'selected': cv.id === cvId}"
       (click)="selectCv(cv)">
       <span>{{cv.cvName}}</span>
       <p-button

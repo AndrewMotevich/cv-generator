@@ -2,13 +2,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   OnInit,
-  Output,
 } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import { ICvName } from '../../../shared/interfaces/cv-name.interface';
+import { EMPTY_CV } from '../../constants/empty-cv.const';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -18,13 +18,15 @@ import { ICvName } from '../../../shared/interfaces/cv-name.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CvsSidebarComponent implements OnInit {
-  @Output() selectedId: EventEmitter<number> = new EventEmitter();
-  @Output() deleteItem: EventEmitter<boolean> = new EventEmitter();
   public cvsNames: ICvName[];
 
-  public id: number;
+  public cvId: number;
 
-  constructor(private cvsFacade: CvsFacade, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private cvsFacade: CvsFacade,
+    private employeeFacade: EmployeesFacade,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   public ngOnInit() {
     this.cvsFacade.loadCvs();
@@ -35,29 +37,30 @@ export class CvsSidebarComponent implements OnInit {
   }
 
   public addNewCv() {
-    this.selectedId.emit(0);
-    this.id = 0;
-    if (!this.cvsNames.find((elem) => elem.id === 0)) {
-      this.cvsNames.push({
-        id: 0,
-        cvName: 'New Cv',
+    const id = Date.now();
+    this.employeeFacade.selectedEmployee$
+      .pipe(untilDestroyed(this))
+      .subscribe((employee) => {
+        this.cvsFacade.addCvInStore({
+          ...EMPTY_CV,
+          ...employee,
+          id,
+          employeeId: employee.id,
+        });
       });
-    }
-    return;
+    this.cvsFacade.setSelectedCv(id);
   }
 
   public selectCv(cv: ICvName) {
-    this.selectedId.emit(cv.id);
-    this.id = cv.id
+    this.cvsFacade.setSelectedCv(cv.id);
+    this.cvId = cv.id;
   }
 
   public deleteCv(event: Event, cv: ICvName) {
     event.stopPropagation();
-    if (cv.id) {
+    if (!cv.isNew) {
       this.cvsFacade.deleteCv(cv.id);
-    } else {
-      this.cvsNames = this.cvsNames.filter((elem) => elem.id !== 0);
     }
-    this.deleteItem.emit(true)
+    this.cvsNames = this.cvsNames.filter((elem) => elem.id !== cv.id);
   }
 }

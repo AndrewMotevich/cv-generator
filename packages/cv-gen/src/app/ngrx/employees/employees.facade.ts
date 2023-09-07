@@ -33,6 +33,10 @@ export class EmployeesFacade {
     this.store.dispatch(EmployeesActions.getEmployeeById({ id }));
   }
 
+  public setSelectedEmployee(employee: EmployeeDto) {
+    this.store.dispatch(EmployeesActions.loadEmployeeByIdSuccess({ employee }));
+  }
+
   public updateEmployee(id: number, employee: EmployeeDto) {
     this.store.dispatch(EmployeesActions.updateEmployee({ id, employee }));
   }

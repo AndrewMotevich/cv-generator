@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
-  OnChanges,
   OnInit,
 } from '@angular/core';
 import {
@@ -15,12 +13,11 @@ import {
   NgControl,
   Validators,
 } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { filter } from 'rxjs';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
-import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -31,17 +28,13 @@ import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 })
 export class CvFormComponent
   extends BaseCvaForm
-  implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges
+  implements ControlValueAccessor, OnInit, AfterViewInit
 {
-  @Input() employeeId: number;
-  @Input() isNewCv: boolean;
-
   public departments$ = this.sharedFacade.departments$;
   public specializations$ = this.sharedFacade.specializations$;
   public skills$ = this.sharedFacade.skills$;
 
   constructor(
-    private employeesFacade: EmployeesFacade,
     private cvsFacade: CvsFacade,
     private sharedFacade: SharedFacade,
     public override ngControl: NgControl,
@@ -68,32 +61,7 @@ export class CvFormComponent
     this.sharedFacade.getAllShared();
   }
 
-  public ngOnChanges() {
-    if (this.isNewCv) {
-      this.form.reset();
-
-      const formLanguageArray = this.form.controls['language'] as FormArray;
-      const formProjectsArray = this.form.controls['projects'] as FormArray;
-
-      formLanguageArray.clear();
-      formProjectsArray.clear();
-
-      this.employeesFacade.selectedEmployee$
-        .pipe(untilDestroyed(this), filter(Boolean))
-        .subscribe((employee) => {
-          this.form.patchValue({
-            cvName: 'New Cv',
-            skills: [],
-            employeeId: this.employeeId,
-            ...employee,
-          });
-        });
-    }
-  }
-
   public ngAfterViewInit() {
-    this.form.controls['employeeId'].setValue(this.employeeId);
-
     this.cvsFacade.selectedCvs$.pipe(filter(Boolean)).subscribe((cv) => {
       this.form.patchValue(cv);
 

@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { CvDto, ICv } from '../../employees/models/cvs.model';
+import { CvDto } from '../../employees/models/cvs.model';
 
 //Get Cvs
 export const getCvs = createAction('[Cvs/Component] Get Cvs');
 
 export const loadCvsSuccess = createAction(
   '[Cvs/API] Load Cvs Success',
-  props<{ cvs: ICv[] }>()
+  props<{ cvs: CvDto[] }>()
 );
 
 export const loadCvsFailure = createAction(
@@ -31,14 +31,14 @@ export const loadCvByIdFailure = createAction(
 );
 
 // Add new cv
-export const addCv = createAction(
-  '[Cvs/Page] Add Cv',
+export const addCv = createAction('[Cvs/Page] Add Cv', props<{ cv: CvDto }>());
+
+export const addCvInStore = createAction(
+  '[Cvs/Page] Update in Store Cv',
   props<{ cv: CvDto }>()
 );
 
-export const addCvSuccess = createAction(
-  '[Cvs/API] Add Cv Success'
-);
+export const addCvSuccess = createAction('[Cvs/API] Add Cv Success');
 
 export const addCvFailure = createAction(
   '[Cvs/API] Add Cv Failure',
@@ -51,9 +51,12 @@ export const updateCv = createAction(
   props<{ id: number; cv: CvDto }>()
 );
 
-export const updateCvSuccess = createAction(
-  '[Cvs/API] Update Cv Success'
+export const updateCvInStore = createAction(
+  '[Cvs/Page] Update in Store Cv',
+  props<{ id: number; cv: CvDto }>()
 );
+
+export const updateCvSuccess = createAction('[Cvs/API] Update Cv Success');
 
 export const updateCvFailure = createAction(
   '[Cvs/API] Update Cv Failure',
@@ -66,15 +69,14 @@ export const deleteCv = createAction(
   props<{ id: number }>()
 );
 
-export const deleteCvSuccess = createAction(
-  '[Cvs/API] Delete Cv Success'
+export const deleteCvInStore = createAction(
+  '[Cvs/Page] Delete Cv',
+  props<{ id: number }>()
 );
+
+export const deleteCvSuccess = createAction('[Cvs/API] Delete Cv Success');
 
 export const deleteCvFailure = createAction(
   '[Cvs/API] Delete Cv Failure',
   props<{ error: string }>()
 );
-
-export const clearSelectedCv = createAction(
-  '[Cvs/Page] Clear selectedCv'
-)

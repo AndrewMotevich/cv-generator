@@ -2,57 +2,27 @@
   <p-tabView class="page-wrapper">
 
     <p-tabPanel header="Info">
-      <cv-gen-info-form [formControl]="cvaEmployeeInfoForm">
-        <div class="button-wrapper">
-          <div class="buttons-container">
-            <div>
-              <p-button
-                label="Save"
-                (click)="submitEmployeeInfoForm()"></p-button>
-            </div>
-            <div>
-              <p-button
-                label="Clear"
-                (click)="clearEmployeeInfoForm()"></p-button>
-            </div>
-          </div>
-          <div class="delete-button">
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-text p-button-raised"
-              (click)="deleteEmployee()"></p-button>
-          </div>
-        </div>
-      </cv-gen-info-form>
+      <cv-gen-info-form [formControl]="cvaEmployeeInfoForm"></cv-gen-info-form>
     </p-tabPanel>
 
     <p-tabPanel header="CV">
       <div class="cv-wrapper">
-        <cv-gen-cvs-sidebar
-          (selectedId)="selectCv($event)"
-          (deleteItem)="showCvForm = false"></cv-gen-cvs-sidebar>
-        <cv-gen-cv-form
-          *ngIf="showCvForm"
-          [formControl]="cvaCvForm"
-          [employeeId]="employeeId"
-          [isNewCv]="isNewCv">
-          <div class="button-wrapper">
-            <div>
-              <p-button
-                label="Save"
-                *ngIf="isNewCv; else updateButton"
-                (click)="submitCvForm()"></p-button>
-            </div>
-          </div>
-        </cv-gen-cv-form>
+        <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>
+        <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
       </div>
     </p-tabPanel>
 
   </p-tabView>
-</div>
 
-<ng-template #updateButton>
-  <p-button
-    label="Update"
-    (click)="updateCvForm()"></p-button>
-</ng-template>
+  <div class="button-wrapper">
+    <div>
+      <p-button label="Save"></p-button>
+    </div>
+    <div class="delete-button">
+      <p-button
+        icon="pi pi-trash"
+        styleClass="p-button-rounded p-button-text p-button-raised"
+        (click)="deleteEmployee()"></p-button>
+    </div>
+  </div>
+</div>

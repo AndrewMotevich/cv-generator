@@ -1,5 +1,5 @@
 export interface ICvName {
-  id?: number;
+  id: number;
   cvName: string;
-  fakeId?: number;
+  isNew?: boolean
 }

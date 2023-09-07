@@ -70,9 +70,6 @@ export class CvsEffects {
       switchMap((action) =>
         this.cvsService.updateCv(action.id, action.cv).pipe(
           map(() => CvsActions.updateCvSuccess()),
-          tap(() => {
-            this.cvsFacade.loadCvs();
-          }),
           catchError((error) => {
             this.errorsService.showErrorMessage(error.message);
             return of(CvsActions.updateCvFailure({ error }));
@@ -88,9 +85,6 @@ export class CvsEffects {
       switchMap((action) =>
         this.cvsService.deleteCv(action.id).pipe(
           map(() => CvsActions.deleteCvSuccess()),
-          tap(() => {
-            this.cvsFacade.loadCvs();
-          }),
           catchError((error) => {
             this.errorsService.showErrorMessage(error.message);
             return of(CvsActions.deleteCvFailure({ error }));

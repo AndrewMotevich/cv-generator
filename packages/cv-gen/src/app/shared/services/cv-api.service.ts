@@ -13,7 +13,9 @@ export class CvApiService {
   ) {}
 
   public getCvs() {
-    return this.http.get<ICv[]>(`${API_PATH}/cvs`);
+    return this.http
+      .get<ICv[]>(`${API_PATH}/cvs`)
+      .pipe(map((cvs) => cvs.map((cv) => this.transformICvToCvDto(cv))));
   }
 
   public getCvById(id: number) {

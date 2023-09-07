@@ -1,18 +1,18 @@
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 
+import { CvDto } from '../../employees/models/cvs.model';
 import * as CvsActions from './cvs.actions';
-import { CvDto, ICv } from '../../employees/models/cvs.model';
 
 export const CVS_FEATURE_KEY = 'cvs';
 
-export interface CvsState extends EntityState<ICv> {
+export interface CvsState extends EntityState<CvDto> {
   selectedCv: CvDto;
   loaded: boolean;
   error: string | null;
 }
 
-export const cvsAdapter: EntityAdapter<ICv> = createEntityAdapter<ICv>();
+export const cvsAdapter: EntityAdapter<CvDto> = createEntityAdapter<CvDto>();
 
 export const initialCvsState: CvsState = cvsAdapter.getInitialState({
   selectedCv: null,
@@ -29,11 +29,15 @@ export const CvsReducer = createReducer(
   on(CvsActions.loadCvByIdSuccess, (state, { cv }) => {
     return { ...state, selectedCv: cv };
   }),
-  on(CvsActions.loadCvsFailure, (state, { error }) => ({
-    ...state,
-    error,
-  })),
-  on(CvsActions.clearSelectedCv, (state) => {
-    return { ...state, selectedCv: null };
+
+  on(CvsActions.addCvInStore, (state, { cv }) => {
+    return cvsAdapter.addOne(cv, state);
+  }),
+
+  on(CvsActions.updateCvInStore, (state, { cv }) => {
+    return cvsAdapter.setOne(cv, state);
+  }),
+  on(CvsActions.deleteCvInStore, (state, { id }) => {
+    return cvsAdapter.removeOne(id, state);
   })
 );

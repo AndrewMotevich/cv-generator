@@ -1,17 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  CvsState,
-  cvsAdapter
-} from './cvs.reducer';
+import { CvDto } from '../../employees/models/cvs.model';
+import { EmployeeDto } from '../../employees/models/employee.model';
+import { selectSelectedEmployee } from '../employees/employees.selectors';
+import { CvsState, cvsAdapter } from './cvs.reducer';
 
-export const selectCvs = createFeatureSelector<{ cvs: CvsState}>(
-  'common'
-);
+export const selectCvs = createFeatureSelector<{ cvs: CvsState }>('common');
 
-export const selectCvsState = createSelector(
-  selectCvs,
-  (state) => state.cvs
-);
+export const selectCvsState = createSelector(selectCvs, (state) => state.cvs);
 
 const { selectAll, selectEntities } = cvsAdapter.getSelectors();
 
@@ -25,9 +20,8 @@ export const selectCvsError = createSelector(
   (state: CvsState) => state.error
 );
 
-export const selectAllCvs = createSelector(
-  selectCvsState,
-  (state: CvsState) => selectAll(state)
+export const selectAllCvs = createSelector(selectCvsState, (state: CvsState) =>
+  selectAll(state)
 );
 
 export const selectCvsEntities = createSelector(
@@ -40,3 +34,13 @@ export const selectSelectedCv = createSelector(
   (state: CvsState) => state.selectedCv
 );
 
+export const selectEmployeesCvs = createSelector(
+  selectSelectedEmployee,
+  selectAllCvs,
+  (selectedEmployee: EmployeeDto, selectedCvs: CvDto[]) => {
+    if (selectedEmployee && selectedCvs) {
+      return selectedCvs.filter((cv) => cv.employeeId === selectedEmployee.id);
+    }
+    return []
+  }
+);

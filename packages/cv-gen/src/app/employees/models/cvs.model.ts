@@ -1,5 +1,8 @@
 import { IProject, ProjectDto } from '../../projects/models/project.model';
-import { Language, LanguageDto } from '../../shared/interfaces/language.interface';
+import {
+  Language,
+  LanguageDto,
+} from '../../shared/interfaces/language.interface';
 import { IShared } from '../../shared/interfaces/shared.interfaces';
 
 export interface ICv {
@@ -20,8 +23,9 @@ export interface ICv {
 
 export type CvDto = Omit<
   ICv,
- 'id' | 'department' | 'specialization' | 'language' | 'skills' | 'cvsProjects'
+  'department' | 'specialization' | 'language' | 'skills' | 'cvsProjects'
 > & {
+  isNew?: boolean,
   department: string;
   specialization: string;
   skills: string[];

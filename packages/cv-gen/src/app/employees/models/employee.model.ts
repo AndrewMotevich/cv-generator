@@ -17,4 +17,6 @@ export type EmployeeTransformed = Omit<
   specialization: string;
 };
 
-export type EmployeeDto = Omit<EmployeeTransformed, 'id'>;
+export type EmployeeDto = Omit<EmployeeTransformed, 'id'> & {
+  id?: number
+};

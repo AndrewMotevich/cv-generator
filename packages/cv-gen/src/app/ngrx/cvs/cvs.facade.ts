@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
+import { map } from 'rxjs';
+import { CvDto } from '../../employees/models/cvs.model';
 import * as CvsActions from './cvs.actions';
 import * as CvsSelectors from './cvs.selectors';
-import { CvDto } from '../../employees/models/cvs.model';
-import { CvApiService } from '../../shared/services/cv-api.service';
-import { map } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Injectable()
 export class CvsFacade {
   private readonly store = inject(Store);
@@ -16,18 +17,21 @@ export class CvsFacade {
   public cvsList$ = this.store.pipe(select(CvsSelectors.selectAllCvs));
 
   public cvsNames$ = this.store.pipe(
-    select(CvsSelectors.selectAllCvs),
+    select(CvsSelectors.selectEmployeesCvs),
     map((cvs) =>
       cvs.map((cv) => ({
         cvName: cv.cvName,
         id: cv.id,
+        isNew: cv.isNew
       }))
     )
   );
 
-  public selectedCvs$ = this.store.pipe(select(CvsSelectors.selectSelectedCv));
+  public selectedEmployeesCvs$ = this.store.pipe(
+    select(CvsSelectors.selectEmployeesCvs)
+  );
 
-  constructor(private cvApiService: CvApiService) {}
+  public selectedCvs$ = this.store.pipe(select(CvsSelectors.selectSelectedCv));
 
   public loadCvs() {
     this.store.dispatch(CvsActions.getCvs());
@@ -41,11 +45,19 @@ export class CvsFacade {
     this.store.dispatch(CvsActions.getCvById({ id }));
   }
 
-  public getCvById(id: number) {
-    return this.cvsList$.pipe(
-      map((cvs) => cvs.find((cv) => cv.id === id)),
-      map((cv) => this.cvApiService.transformICvToCvDto(cv))
-    );
+  public addCvInStore(cv: CvDto) {
+    this.store.dispatch(CvsActions.addCvInStore({ cv }));
+  }
+
+  public setSelectedCv(id: number) {
+    this.cvsList$
+      .pipe(
+        untilDestroyed(this),
+        map((cvs) => cvs.find((cv) => cv.id === id))
+      )
+      .subscribe((cv) => {
+        this.store.dispatch(CvsActions.loadCvByIdSuccess({ cv }));
+      });
   }
 
   public updateCv(id: number, cv: CvDto) {
@@ -54,9 +66,5 @@ export class CvsFacade {
 
   public deleteCv(id: number) {
     this.store.dispatch(CvsActions.deleteCv({ id }));
-  }
-
-  public clearSelectedCv() {
-    this.store.dispatch(CvsActions.clearSelectedCv());
   }
 }
