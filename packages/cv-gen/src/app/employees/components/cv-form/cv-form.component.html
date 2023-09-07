@@ -1,4 +1,6 @@
-<div class="form-wrapper">
+<div
+  class="form-wrapper"
+  *ngIf="showCvForm">
   <form [formGroup]="form">
     <cv-gen-text-input
       label="CV name"

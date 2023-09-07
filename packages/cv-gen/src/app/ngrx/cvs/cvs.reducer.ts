@@ -7,7 +7,7 @@ import * as CvsActions from './cvs.actions';
 export const CVS_FEATURE_KEY = 'cvs';
 
 export interface CvsState extends EntityState<CvDto> {
-  selectedCv: CvDto;
+  selectedCv: CvDto | null;
   loaded: boolean;
   error: string | null;
 }
@@ -37,6 +37,7 @@ export const CvsReducer = createReducer(
   on(CvsActions.updateCvInStore, (state, { cv }) => {
     return cvsAdapter.setOne(cv, state);
   }),
+
   on(CvsActions.deleteCvInStore, (state, { id }) => {
     return cvsAdapter.removeOne(id, state);
   })

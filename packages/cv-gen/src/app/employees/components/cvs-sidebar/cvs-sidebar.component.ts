@@ -57,10 +57,13 @@ export class CvsSidebarComponent implements OnInit {
   }
 
   public deleteCv(event: Event, cv: ICvName) {
+    console.log(cv)
     event.stopPropagation();
     if (!cv.isNew) {
       this.cvsFacade.deleteCv(cv.id);
     }
     this.cvsNames = this.cvsNames.filter((elem) => elem.id !== cv.id);
+    this.cvsFacade.deleteCvInStore(cv.id);
+    this.cvsFacade.setSelectedCv(0);
   }
 }

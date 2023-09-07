@@ -13,8 +13,7 @@ import {
   NgControl,
   Validators,
 } from '@angular/forms';
-import { UntilDestroy } from '@ngneat/until-destroy';
-import { filter } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
@@ -30,6 +29,8 @@ export class CvFormComponent
   extends BaseCvaForm
   implements ControlValueAccessor, OnInit, AfterViewInit
 {
+  public showCvForm = false;
+
   public departments$ = this.sharedFacade.departments$;
   public specializations$ = this.sharedFacade.specializations$;
   public skills$ = this.sharedFacade.skills$;
@@ -62,7 +63,14 @@ export class CvFormComponent
   }
 
   public ngAfterViewInit() {
-    this.cvsFacade.selectedCvs$.pipe(filter(Boolean)).subscribe((cv) => {
+    this.cvsFacade.selectedCvs$.pipe(untilDestroyed(this)).subscribe((cv) => {
+      if (!cv) {
+        this.showCvForm = false;
+        this.cdr.markForCheck()
+        return
+      } else {
+        this.showCvForm = true;
+      }
       this.form.patchValue(cv);
 
       const formLanguageArray = this.form.controls['language'] as FormArray;

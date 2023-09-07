@@ -70,7 +70,7 @@ export const deleteCv = createAction(
 );
 
 export const deleteCvInStore = createAction(
-  '[Cvs/Page] Delete Cv',
+  '[Cvs/Page] Delete Cv in Store',
   props<{ id: number }>()
 );
 

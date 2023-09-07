@@ -22,7 +22,7 @@ export class CvsFacade {
       cvs.map((cv) => ({
         cvName: cv.cvName,
         id: cv.id,
-        isNew: cv.isNew
+        isNew: cv.isNew,
       }))
     )
   );
@@ -50,6 +50,10 @@ export class CvsFacade {
   }
 
   public setSelectedCv(id: number) {
+    if (!id) {
+      this.store.dispatch(CvsActions.loadCvByIdSuccess({ cv: null }));
+      return;
+    }
     this.cvsList$
       .pipe(
         untilDestroyed(this),
@@ -66,5 +70,9 @@ export class CvsFacade {
 
   public deleteCv(id: number) {
     this.store.dispatch(CvsActions.deleteCv({ id }));
+  }
+
+  public deleteCvInStore(id: number) {
+    this.store.dispatch(CvsActions.deleteCvInStore({ id }));
   }
 }
