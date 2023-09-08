@@ -31,7 +31,7 @@ export class CvsFacade {
     select(CvsSelectors.selectEmployeesCvs)
   );
 
-  public selectedCvs$ = this.store.pipe(select(CvsSelectors.selectSelectedCv));
+  public selectedCv$ = this.store.pipe(select(CvsSelectors.selectSelectedCv));
 
   public loadCvs() {
     this.store.dispatch(CvsActions.getCvs());
@@ -66,6 +66,12 @@ export class CvsFacade {
 
   public updateCv(id: number, cv: CvDto) {
     this.store.dispatch(CvsActions.updateCv({ id, cv }));
+  }
+
+  public updateCvInStore(id: number, cv: CvDto) {
+    this.store.dispatch(
+      CvsActions.updateCvInStore({ update: { id, changes: cv } })
+    );
   }
 
   public deleteCv(id: number) {

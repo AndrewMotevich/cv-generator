@@ -6,12 +6,6 @@
       <li [routerLink]="title">{{title}}</li>
       <span *ngIf="paramPathName">/</span>
       <li *ngIf="paramPathName">{{paramPathName}}</li>
-      <!-- <li
-        *ngFor="let crumb of breadcrumbs; let last = last"
-        (click)="navigate(crumb)">
-        {{ crumb.label }}
-        <span *ngIf="!last">/</span>
-      </li> -->
     </ul>
   </div>
   <h2>{{title}}</h2>

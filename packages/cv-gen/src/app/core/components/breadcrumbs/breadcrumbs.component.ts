@@ -7,6 +7,7 @@ import {
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { HOME } from '../../../shared/constants/routing-paths.consts';
+import { IBreadcrumb } from '../../models/breadcrumbs.interface';
 
 @UntilDestroy()
 @Component({
@@ -16,7 +17,7 @@ import { HOME } from '../../../shared/constants/routing-paths.consts';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent implements OnInit {
-  // public breadcrumbs: IBreadcrumb[] = [];
+  public breadcrumbs: IBreadcrumb[] = [];
 
   public title: string;
   public pageInfo: string;
@@ -27,9 +28,6 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(private coreFacade: CoreFacade, private cdr: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
-    // this.coreFacade.selectUrl$.pipe(untilDestroyed(this)).subscribe((value) => {
-    //   console.log('CORE-url: ', value.substring(1).split('/'));
-    // });
     this.coreFacade.selectQueryParams$
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
@@ -48,8 +46,4 @@ export class BreadcrumbsComponent implements OnInit {
         console.log('CORE-data: ', value);
       });
   }
-
-  // public navigate(crumb: IBreadcrumb) {
-  //   console.log(`Navigating to ${crumb.route}`);
-  // }
 }

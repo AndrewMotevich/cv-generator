@@ -25,6 +25,7 @@ export type CvDto = Omit<
   ICv,
   'department' | 'specialization' | 'language' | 'skills' | 'cvsProjects'
 > & {
+  isInvalid?: boolean,
   isNew?: boolean,
   department: string;
   specialization: string;

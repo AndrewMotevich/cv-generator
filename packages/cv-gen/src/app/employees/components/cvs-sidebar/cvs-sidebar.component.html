@@ -3,7 +3,7 @@
     <div
       class="cv-item"
       [ngClass]="{'selected': cv.id === cvId}"
-      (click)="selectCv(cv)">
+      (click)="selectCv(cv.id)">
       <span>{{cv.cvName}}</span>
       <p-button
         icon="pi pi-trash"

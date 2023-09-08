@@ -6,12 +6,11 @@ import {
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormControl,
-  NgControl,
-  Validators,
+  NgControl
 } from '@angular/forms';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
+import { EMPLOYEE_CONTROLS } from '../../constants/employee-form-controls.const';
 
 @Component({
   selector: 'cv-gen-info-form',
@@ -31,16 +30,7 @@ export class EmployeeInfoFormComponent
     public override ngControl: NgControl,
     private cdr: ChangeDetectorRef
   ) {
-    const employeeControls = {
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', {
-        validators: [Validators.required, Validators.email],
-      }),
-      department: new FormControl('', Validators.required),
-      specialization: new FormControl('', Validators.required),
-    };
-    super(ngControl, employeeControls, cdr);
+    super(ngControl, EMPLOYEE_CONTROLS, cdr);
     this.ngControl.valueAccessor = this;
     this.sharedFacade.getAllShared();
   }

@@ -1,9 +1,8 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -17,6 +16,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
+import { CV_CONTROLS } from '../../constants/cv-form-controls.const';
+import { CvDto } from '../../models/cvs.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -27,7 +28,7 @@ import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
 })
 export class CvFormComponent
   extends BaseCvaForm
-  implements ControlValueAccessor, OnInit, AfterViewInit
+  implements ControlValueAccessor, OnInit
 {
   public showCvForm = false;
 
@@ -41,44 +42,55 @@ export class CvFormComponent
     public override ngControl: NgControl,
     private cdr: ChangeDetectorRef
   ) {
-    const cvControls = {
-      cvName: new FormControl('CV', Validators.required),
-      language: new FormArray([]),
-      skills: new FormControl([], Validators.required),
-
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      email: new FormControl('', {
-        validators: [Validators.required, Validators.email],
-      }),
-      department: new FormControl('', Validators.required),
-      specialization: new FormControl('', Validators.required),
-
-      employeeId: new FormControl<number>(null, Validators.required),
-      projects: new FormArray([]),
-    };
-    super(ngControl, cvControls, cdr);
+    super(ngControl, CV_CONTROLS, cdr);
     this.ngControl.valueAccessor = this;
     this.sharedFacade.getAllShared();
   }
 
-  public ngAfterViewInit() {
-    this.cvsFacade.selectedCvs$.pipe(untilDestroyed(this)).subscribe((cv) => {
-      if (!cv) {
-        this.showCvForm = false;
-        this.cdr.markForCheck()
-        return
-      } else {
-        this.showCvForm = true;
-      }
-      this.form.patchValue(cv);
+  public override ngOnInit() {
+    this.form.valueChanges.subscribe(() => {
+      this.onChange(this.form.value);
+    });
 
+    this.cvsFacade.selectedCv$.pipe(untilDestroyed(this)).subscribe((cv) => {
+      this.setFormVisibility(cv);
+      this.form.patchValue(cv);
+      this.setProjectAccordion(cv);
+      this.setLanguageAccordion(cv);
+      this.cdr.detectChanges();
+    });
+  }
+
+  public setFormVisibility(cv: CvDto) {
+    if (!cv) {
+      this.showCvForm = false;
+      return;
+    } else {
+      this.showCvForm = true;
+    }
+    this.cdr.markForCheck();
+  }
+
+  public setProjectAccordion(cv: CvDto) {
+    if (cv) {
+      const formProjectsArray = this.form.get('projects') as FormArray;
+
+      formProjectsArray.clear();
+      cv.projects.map((project) => {
+        formProjectsArray.push(
+          new FormControl({
+            ...project,
+          })
+        );
+      });
+    }
+  }
+
+  public setLanguageAccordion(cv: CvDto) {
+    if (cv) {
       const formLanguageArray = this.form.controls['language'] as FormArray;
-      const formProjectsArray = this.form.controls['projects'] as FormArray;
 
       formLanguageArray.clear();
-      formProjectsArray.clear();
-
       cv.language.map((lang) => {
         formLanguageArray.push(
           new FormGroup({
@@ -87,15 +99,6 @@ export class CvFormComponent
           })
         );
       });
-      cv.projects.map((project) => {
-        formProjectsArray.push(
-          new FormControl({
-            ...project,
-          })
-        );
-      });
-
-      this.cdr.detectChanges();
-    });
+    }
   }
 }

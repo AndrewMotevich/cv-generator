@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { CvDto } from '../../employees/models/cvs.model';
+import { Update } from '@ngrx/entity';
 
 //Get Cvs
 export const getCvs = createAction('[Cvs/Component] Get Cvs');
@@ -34,7 +35,7 @@ export const loadCvByIdFailure = createAction(
 export const addCv = createAction('[Cvs/Page] Add Cv', props<{ cv: CvDto }>());
 
 export const addCvInStore = createAction(
-  '[Cvs/Page] Update in Store Cv',
+  '[Cvs/Page] Add cv in Store',
   props<{ cv: CvDto }>()
 );
 
@@ -53,7 +54,7 @@ export const updateCv = createAction(
 
 export const updateCvInStore = createAction(
   '[Cvs/Page] Update in Store Cv',
-  props<{ id: number; cv: CvDto }>()
+  props<{ update: Update<CvDto>}>()
 );
 
 export const updateCvSuccess = createAction('[Cvs/API] Update Cv Success');

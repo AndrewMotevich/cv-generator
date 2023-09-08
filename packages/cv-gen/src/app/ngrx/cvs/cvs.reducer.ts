@@ -34,8 +34,8 @@ export const CvsReducer = createReducer(
     return cvsAdapter.addOne(cv, state);
   }),
 
-  on(CvsActions.updateCvInStore, (state, { cv }) => {
-    return cvsAdapter.setOne(cv, state);
+  on(CvsActions.updateCvInStore, (state, { update }) => {
+    return cvsAdapter.updateOne(update, state);
   }),
 
   on(CvsActions.deleteCvInStore, (state, { id }) => {

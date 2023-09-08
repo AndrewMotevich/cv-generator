@@ -2,8 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit,
+  DoCheck,
+  Input,
+  OnInit
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
@@ -17,7 +20,8 @@ import { EMPTY_CV } from '../../constants/empty-cv.const';
   styleUrls: ['./cvs-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CvsSidebarComponent implements OnInit {
+export class CvsSidebarComponent implements OnInit, DoCheck {
+  @Input() public cvForm: FormControl;
   public cvsNames: ICvName[];
 
   public cvId: number;
@@ -28,12 +32,20 @@ export class CvsSidebarComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
+
   public ngOnInit() {
     this.cvsFacade.loadCvs();
     this.cvsFacade.cvsNames$.pipe(untilDestroyed(this)).subscribe((cvs) => {
       this.cvsNames = cvs;
       this.cdr.markForCheck();
     });
+  }
+
+  public ngDoCheck(){
+    if (this.cvForm.value) {
+      this.cvsFacade.setSelectedCv(this.cvForm.value.id);
+      this.cvId = this.cvForm.value.id;
+    }
   }
 
   public addNewCv() {
@@ -48,16 +60,21 @@ export class CvsSidebarComponent implements OnInit {
           employeeId: employee.id,
         });
       });
-    this.cvsFacade.setSelectedCv(id);
+    this.selectCv(id);
   }
 
-  public selectCv(cv: ICvName) {
-    this.cvsFacade.setSelectedCv(cv.id);
-    this.cvId = cv.id;
+  public selectCv(id: number) {
+    if (this.cvForm.value) {
+      this.cvsFacade.updateCvInStore(this.cvForm.value.id, {
+        ...this.cvForm.value,
+        isInvalid: this.cvForm.invalid,
+      });
+    }
+    this.cvsFacade.setSelectedCv(id);
+    this.cvId = id;
   }
 
   public deleteCv(event: Event, cv: ICvName) {
-    console.log(cv)
     event.stopPropagation();
     if (!cv.isNew) {
       this.cvsFacade.deleteCv(cv.id);

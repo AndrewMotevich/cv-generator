@@ -1,5 +1,8 @@
 <div class="page-wrapper">
-  <p-tabView class="page-wrapper">
+  <p-tabView
+    class="page-wrapper"
+    [(activeIndex)]="activeTab"
+    (activeIndexChange)="updateCv()">
 
     <p-tabPanel header="Info">
       <cv-gen-info-form [formControl]="cvaEmployeeInfoForm"></cv-gen-info-form>
@@ -7,7 +10,7 @@
 
     <p-tabPanel header="CV">
       <div class="cv-wrapper">
-        <cv-gen-cvs-sidebar></cv-gen-cvs-sidebar>
+        <cv-gen-cvs-sidebar [cvForm]="cvaCvForm"></cv-gen-cvs-sidebar>
         <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
       </div>
     </p-tabPanel>
@@ -16,7 +19,9 @@
 
   <div class="button-wrapper">
     <div>
-      <p-button label="Save"></p-button>
+      <p-button
+        label="Save"
+        (click)="saveEmployeeWithCvs()"></p-button>
     </div>
   </div>
 </div>

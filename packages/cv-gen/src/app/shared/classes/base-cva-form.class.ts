@@ -6,7 +6,7 @@ import { markAllAsDirty } from '../utils/mark-as-dirty.util';
 export class BaseCvaForm implements OnInit, DoCheck {
   public form: FormGroup;
 
-  private onChange: (val: unknown) => void;
+  public onChange: (val: unknown) => void;
   private onTouch: (val: unknown) => void;
 
   constructor(
@@ -37,7 +37,7 @@ export class BaseCvaForm implements OnInit, DoCheck {
 
   public ngDoCheck() {
     if (this.form.invalid) {
-      this.ngControl.control.setErrors({ cvaFormError : true });
+      this.ngControl.control.setErrors({ cvaFormError: true });
       if (this.ngControl.control.touched) {
         markAllAsDirty(this.form.controls);
         this.cdRef.markForCheck();

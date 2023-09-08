@@ -15,6 +15,10 @@ export class ToastMessageService {
   }
 
   public showWarningMessage(message: string) {
-    this.messageService.add({ severity: 'warning', summary: 'Warning', detail: message });
+    this.messageService.add({ severity: 'warn', summary: 'Warning', detail: message });
+  }
+
+  public showInfoMessage(message: string) {
+    this.messageService.add({ severity: 'info', summary: 'Warning', detail: message });
   }
 }
