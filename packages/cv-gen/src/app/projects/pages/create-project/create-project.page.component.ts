@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
+import { BREADCRUMB_PROJECT_CREATE } from '../../constants/breadcrumbs.const';
 
 @Component({
   selector: 'cv-gen-create-project.page',
@@ -8,12 +10,16 @@ import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
   styleUrls: ['./create-project.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateProjectPageComponent {
+export class CreateProjectPageComponent implements OnInit {
   public cvaProjectForm = new FormControl(null);
 
   constructor(
-    private projectsFacade: ProjectsFacade
+    private projectsFacade: ProjectsFacade,
+    private coreFacade: CoreFacade
   ) {}
+  public ngOnInit(): void {
+    this.coreFacade.setBreadcrumbs(BREADCRUMB_PROJECT_CREATE);
+  }
 
   public submitProjectForm() {
     if (this.cvaProjectForm.invalid) {

@@ -40,8 +40,12 @@ export class BaseCvaForm implements OnInit, DoCheck {
       this.ngControl.control.setErrors({ cvaFormError: true });
       if (this.ngControl.control.touched) {
         markAllAsDirty(this.form.controls);
-        this.cdRef.markForCheck();
       }
+      if(this.ngControl.control.untouched){
+        this.form.markAsPristine()
+        console.log('PRISTINE FORM', this.form)
+      }
+      this.cdRef.markForCheck();
     }
   }
 }

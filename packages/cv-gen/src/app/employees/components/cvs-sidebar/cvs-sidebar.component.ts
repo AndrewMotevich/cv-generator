@@ -4,7 +4,7 @@ import {
   Component,
   DoCheck,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -32,7 +32,6 @@ export class CvsSidebarComponent implements OnInit, DoCheck {
     private cdr: ChangeDetectorRef
   ) {}
 
-
   public ngOnInit() {
     this.cvsFacade.loadCvs();
     this.cvsFacade.cvsNames$.pipe(untilDestroyed(this)).subscribe((cvs) => {
@@ -41,7 +40,7 @@ export class CvsSidebarComponent implements OnInit, DoCheck {
     });
   }
 
-  public ngDoCheck(){
+  public ngDoCheck() {
     if (this.cvForm.value) {
       this.cvsFacade.setSelectedCv(this.cvForm.value.id);
       this.cvId = this.cvForm.value.id;
@@ -49,6 +48,7 @@ export class CvsSidebarComponent implements OnInit, DoCheck {
   }
 
   public addNewCv() {
+    this.cvForm.markAsUntouched();
     const id = Date.now();
     this.employeeFacade.selectedEmployee$
       .pipe(untilDestroyed(this))

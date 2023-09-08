@@ -18,5 +18,7 @@ export const setIsLogin = createAction(
 
 export const setBreadcrumbs = createAction(
   '[Core] Set breadcrumbs',
-  props<{ breadcrumbs: IBreadcrumb[] }>()
+  props<{
+    data: { breadcrumbs: IBreadcrumb[]; title: string; pageInfo: string };
+  }>()
 );

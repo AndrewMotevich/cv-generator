@@ -7,6 +7,7 @@ import { IBreadcrumb } from '../../shared/interfaces/breadcrumbs.interface';
 export const CORE_FEATURE_KEY = 'core';
 
 export interface ICoreState {
+  pageData: { title: string; pageInfo: string };
   breadcrumbs: IBreadcrumb[];
   theme: Theme;
   language: Language;
@@ -14,6 +15,7 @@ export interface ICoreState {
 }
 
 export const initialState: ICoreState = {
+  pageData: { title: '', pageInfo: '' },
   breadcrumbs: [],
   theme: Theme.dark,
   language: Language.en,
@@ -37,11 +39,12 @@ export const CoreReducer = createReducer(
   on(CoreActions.setBreadcrumbs, (state, action) => {
     const modBreadcrumb: IBreadcrumb[] = [
       { label: 'Home', route: '/' },
-      ...action.breadcrumbs,
+      ...action.data.breadcrumbs,
     ];
     return {
       ...state,
       breadcrumbs: modBreadcrumb,
+      pageData: { pageInfo: action.data.pageInfo, title: action.data.title },
     };
   })
 );

@@ -1,13 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
-import { HOME } from '../../../shared/constants/routing-paths.consts';
-import { IBreadcrumb } from '../../../shared/interfaces/breadcrumbs.interface';
 
 @UntilDestroy()
 @Component({
@@ -16,18 +9,9 @@ import { IBreadcrumb } from '../../../shared/interfaces/breadcrumbs.interface';
   styleUrls: ['./breadcrumbs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BreadcrumbsComponent implements OnInit {
-  public breadcrumbs: IBreadcrumb[] = [];
+export class BreadcrumbsComponent {
+  public breadcrumbs = this.coreFacade.breadcrumbs$;
+  public pageData = this.coreFacade.pageData$;
 
-  public title: string;
-  public pageInfo: string;
-  public paramPathName: string;
-
-  public readonly homeRote = HOME.path;
-
-  constructor(private coreFacade: CoreFacade, private cdr: ChangeDetectorRef) {}
-
-  public ngOnInit(): void {
-    console.log()
-  }
+  constructor(private coreFacade: CoreFacade) {}
 }

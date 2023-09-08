@@ -2,7 +2,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter } from 'rxjs';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
+import {
+  BREADCRUMB_PROJECT_EDIT
+} from '../../constants/breadcrumbs.const';
 
 @UntilDestroy()
 @Component({
@@ -18,16 +23,17 @@ export class EditProjectPageComponent implements OnInit {
 
   constructor(
     private projectsFacade: ProjectsFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private coreFacade: CoreFacade
   ) {}
 
   public ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.projectsFacade.loadProjectById(this.id);
     this.projectsFacade.selectedProject$
-      .pipe(untilDestroyed(this))
+      .pipe(untilDestroyed(this), filter(Boolean))
       .subscribe((project) => {
-        console.log(project);
+        this.coreFacade.setBreadcrumbs(BREADCRUMB_PROJECT_EDIT(project));
         this.cvaProjectForm.setValue({
           ...project,
         });

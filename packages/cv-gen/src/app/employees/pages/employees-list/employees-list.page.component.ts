@@ -12,6 +12,7 @@ import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
 import { EmployeeTransformed, IEmployee } from '../../models/employee.model';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
+import { BREADCRUMB_EMPLOYEE_LIST } from '../../constants/breadcrumbs.consts';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -36,14 +37,7 @@ export class EmployeesListPageComponent implements OnInit {
   ngOnInit() {
     this.employeesFacade.loadEmployees();
     this.data = this.employeesFacade.employeesList$;
-    this.coreFacade.setBreadcrumbs([
-      {
-        label: 'Employee',
-        route: this.employeePath,
-        pageInfo: 'Employees List',
-        title: 'Employees',
-      },
-    ]);
+    this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_LIST);
   }
 
   public navigateToEdit(data: unknown) {

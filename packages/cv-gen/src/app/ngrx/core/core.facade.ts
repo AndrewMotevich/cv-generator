@@ -13,6 +13,7 @@ export class CoreFacade {
 
   public coreState$ = this.store.select(CoreSelectors.selectCoreState);
 
+  public pageData$ = this.store.select(CoreSelectors.selectPageData);
   public breadcrumbs$ = this.store.select(CoreSelectors.selectBreadcrumbs);
   public theme$ = this.store.select(CoreSelectors.selectTheme);
   public language$ = this.store.select(CoreSelectors.selectLanguage);
@@ -30,7 +31,11 @@ export class CoreFacade {
     this.store.dispatch(CoreActions.setIsLogin({ isLogin }));
   }
 
-  public setBreadcrumbs(breadcrumbs: IBreadcrumb[]) {
-    this.store.dispatch(CoreActions.setBreadcrumbs({ breadcrumbs }));
+  public setBreadcrumbs(data: {
+    breadcrumbs: IBreadcrumb[];
+    title: string;
+    pageInfo: string;
+  }) {
+    this.store.dispatch(CoreActions.setBreadcrumbs({ data }));
   }
 }

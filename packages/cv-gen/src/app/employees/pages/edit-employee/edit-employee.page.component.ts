@@ -2,15 +2,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import {
   EDIT_EMPLOYEES,
-  EMPLOYEES
+  EMPLOYEES,
 } from '../../../shared/constants/routing-paths.consts';
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
+import { BREADCRUMB_EMPLOYEE_EDIT } from '../../constants/breadcrumbs.consts';
 import { CvDto } from '../../models/cvs.model';
 
 @UntilDestroy()
@@ -26,7 +27,7 @@ export class EditEmployeePageComponent implements OnInit {
   public cvaEmployeeInfoForm = new FormControl(null);
   public cvaCvForm = new FormControl(null);
 
-  private readonly employeeCreatePath = EDIT_EMPLOYEES.fullPath;
+  private readonly employeeEditPath = EDIT_EMPLOYEES.fullPath;
   private readonly employeesPath = EMPLOYEES.fullPath;
 
   public employeeId: number;
@@ -42,19 +43,13 @@ export class EditEmployeePageComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.coreFacade.setBreadcrumbs([
-      {
-        label: 'Employee',
-        route: this.employeesPath,
-      },
-    ]);
-
     this.employeeId = Number(this.route.snapshot.paramMap.get('id'));
     this.employeesFacade.getEmployeeById(this.employeeId);
 
     this.employeesFacade.selectedEmployee$
-      .pipe(untilDestroyed(this))
+      .pipe(untilDestroyed(this), filter(Boolean))
       .subscribe((employee) => {
+        this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_EDIT(employee));
         this.cvaEmployeeInfoForm.setValue({
           ...employee,
         });

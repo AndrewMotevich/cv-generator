@@ -1,10 +1,14 @@
 <div class="breadcrumbs-wrapper">
   <div class="path">
     <ul>
-      <li [routerLink]="homeRote">home</li>
-      <span>/</span>
+      <li
+        *ngFor="let crumb of breadcrumbs | async"
+        [routerLink]="crumb.route">
+        {{crumb.label}}
+        <span>/</span>
+      </li>
     </ul>
   </div>
-  <h2>{{title}}</h2>
-  <p>{{pageInfo}}</p>
+  <h2>{{(pageData | async).title}}</h2>
+  <p>{{(pageData | async).pageInfo}}</p>
 </div>

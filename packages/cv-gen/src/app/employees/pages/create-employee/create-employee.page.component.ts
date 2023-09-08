@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
-import { EMPTY_EMPLOYEE } from '../../constants/empty-employee.const';
-import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs';
-import { CvDto } from '../../models/cvs.model';
-import { ToastMessageService } from '../../../shared/services/toast-messages.service';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
+import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import {
   CREATE_EMPLOYEES,
   EMPLOYEES,
 } from '../../../shared/constants/routing-paths.consts';
+import { ToastMessageService } from '../../../shared/services/toast-messages.service';
+import { BREADCRUMB_EMPLOYEE_CREATE } from '../../constants/breadcrumbs.consts';
+import { EMPTY_EMPLOYEE } from '../../constants/empty-employee.const';
+import { CvDto } from '../../models/cvs.model';
 
 @UntilDestroy()
 @Component({
@@ -39,14 +40,7 @@ export class CreateEmployeePageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.coreFacade.setBreadcrumbs([
-      {
-        label: 'Employee',
-        route: this.employeesPath + this.employeeCreatePath,
-        pageInfo: 'Create Employee',
-        title: 'Employees',
-      },
-    ]);
+    this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_CREATE);
     this.employeesFacade.setSelectedEmployee(EMPTY_EMPLOYEE);
     this.cvsFacade.selectedEmployeesCvs$
       .pipe(

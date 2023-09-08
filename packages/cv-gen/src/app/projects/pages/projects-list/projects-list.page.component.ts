@@ -11,6 +11,8 @@ import {
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { ProjectColumns } from '../../constants/project-columns.const';
 import { ProjectTableData } from '../../models/project.model';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
+import { BREADCRUMB_PROJECT_LIST } from '../../constants/breadcrumbs.const';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -25,9 +27,14 @@ export class ProjectListPageComponent implements OnInit {
   public readonly cols: IColumns[] = ProjectColumns;
   public readonly addProjectPath = PROJECTS.fullPath + CREATE_PROJECTS.fullPath;
 
-  constructor(private router: Router, private projectsFacade: ProjectsFacade) {}
+  constructor(
+    private router: Router,
+    private projectsFacade: ProjectsFacade,
+    private coreFacade: CoreFacade
+  ) {}
 
   public ngOnInit() {
+    this.coreFacade.setBreadcrumbs(BREADCRUMB_PROJECT_LIST);
     this.projectsFacade.loadProjects();
     this.projects = this.projectsFacade.projectsList$;
   }
