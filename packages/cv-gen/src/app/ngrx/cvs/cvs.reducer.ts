@@ -23,7 +23,6 @@ export const initialCvsState: CvsState = cvsAdapter.getInitialState({
 export const CvsReducer = createReducer(
   initialCvsState,
   on(CvsActions.loadCvsSuccess, (state, { cvs }) => {
-    console.log('CVS: ', cvs);
     return cvsAdapter.setAll(cvs, { ...state, loaded: true });
   }),
   on(CvsActions.loadCvByIdSuccess, (state, { cv }) => {

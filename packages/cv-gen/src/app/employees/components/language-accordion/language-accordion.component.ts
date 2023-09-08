@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { map } from 'rxjs';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { LangLevel } from '../../../shared/enums/language.enum';
-import { map } from 'rxjs';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -27,6 +27,7 @@ export class LanguageAccordionComponent {
 
   public addLanguageForm() {
     const formArray = this.form.get('language') as FormArray;
+
     formArray.push(
       new FormGroup({
         name: new FormControl('Language', Validators.required),

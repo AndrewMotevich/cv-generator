@@ -4051,6 +4051,12 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-bottom-right-radius: 6px;
 }
 
+// my custom styles
+.p-accordion .invalid {
+  .p-accordion-header:not(.p-disabled) .p-accordion-header-link{
+    border: 1px solid var(--red-500) !important;
+  }
+}
 .p-accordion .p-accordion-header .p-accordion-header-link {
   padding: 0.25rem;
   border: 1px solid #3e4053;

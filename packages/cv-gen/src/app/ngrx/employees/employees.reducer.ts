@@ -28,7 +28,6 @@ export const initialEmployeesState: EmployeesState =
 export const EmployeesReducer = createReducer(
   initialEmployeesState,
   on(EmployeesActions.loadEmployeesSuccess, (state, { employees }) => {
-    console.log('EMPLOYEES: ', employees);
     return employeesAdapter.setAll(employees, { ...state, loaded: true });
   }),
   on(EmployeesActions.loadEmployeeByIdSuccess, (state, { employee }) => {
@@ -38,8 +37,4 @@ export const EmployeesReducer = createReducer(
     ...state,
     error,
   }))
-  // on(EmployeesActions.loadEmployeesFailure, (state, { error }) => ({
-  //   ...state,
-  //   error,
-  // }))
 );

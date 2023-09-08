@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
@@ -43,7 +39,7 @@ export class ProjectsAccordionComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe((project) => {
         const formArray = this.form.get('projects') as FormArray;
-        delete project.id
+        delete project.id;
         formArray.push(
           new FormControl({
             ...project,

@@ -43,7 +43,6 @@ export class BaseCvaForm implements OnInit, DoCheck {
       }
       if(this.ngControl.control.untouched){
         this.form.markAsPristine()
-        console.log('PRISTINE FORM', this.form)
       }
       this.cdRef.markForCheck();
     }

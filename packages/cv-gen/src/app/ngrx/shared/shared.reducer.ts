@@ -16,7 +16,6 @@ export const initialState: ISharedAll = {
 export const SharedReducer = createReducer(
   initialState,
   on(SharedActions.loadAllSharedSuccess, (state, action) => {
-    console.log("SHARED: ", action.sharedCollections)
     return {
       ...state,
       ...action.sharedCollections,

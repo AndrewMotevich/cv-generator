@@ -15,7 +15,7 @@
       *ngFor="let formGroup of languageFormArray.controls; let index = index"
       [formGroupName]="index">
       <p-accordion>
-        <p-accordionTab [header]>
+        <p-accordionTab [header] [ngClass]="{'invalid': formGroup.invalid}">
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
               <span class="vertical-align-middle">{{langName.control.value}}</span>

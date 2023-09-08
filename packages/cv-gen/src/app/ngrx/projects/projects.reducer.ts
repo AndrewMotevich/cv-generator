@@ -25,18 +25,9 @@ export const initialProjectsState: ProjectsState =
 export const ProjectsReducer = createReducer(
   initialProjectsState,
   on(ProjectsActions.loadProjectsSuccess, (state, { projects }) => {
-    console.log('PROJECTS: ', projects);
     return projectsAdapter.setAll(projects, { ...state, loaded: true });
   }),
-  // on(ProjectsActions.loadProjectsFailure, (state, { error }) => ({
-  //   ...state,
-  //   error,
-  // })),
   on(ProjectsActions.loadProjectByIdSuccess, (state, { project }) => {
     return {...state, selectedProject: project}
   }),
-  // on(ProjectsActions.loadProjectByIdFailure, (state, { error }) => ({
-  //   ...state,
-  //   error,
-  // })),
 );
