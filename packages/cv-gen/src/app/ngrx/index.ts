@@ -1,30 +1,28 @@
-import { routerReducer } from '@ngrx/router-store';
 import { combineReducers } from '@ngrx/store';
 
 import { EmployeesEffects } from './employees/employees.effects';
 import { EmployeesFacade } from './employees/employees.facade';
 import { EmployeesReducer } from './employees/employees.reducer';
 
-import { AuthFacade } from './auth/auth.facade';
 import { AuthEffects } from './auth/auth.effects';
+import { AuthFacade } from './auth/auth.facade';
 import { AuthReducer } from './auth/auth.reducer';
 
 import { CoreFacade } from './core/core.facade';
 import { CoreReducer } from './core/core.reducer';
 
-import { ProjectsReducer } from './projects/projects.reducer';
-import { ProjectsFacade } from './projects/projects.facade';
 import { ProjectsEffects } from './projects/projects.effects';
+import { ProjectsFacade } from './projects/projects.facade';
+import { ProjectsReducer } from './projects/projects.reducer';
 
-import { CvsReducer } from './cvs/cvs.reducer';
-import { CvsFacade } from './cvs/cvs.facade';
 import { CvsEffects } from './cvs/cvs.effects';
-import { SharedReducer } from './shared/shared.reducer';
-import { SharedFacade } from './shared/shared.facade';
+import { CvsFacade } from './cvs/cvs.facade';
+import { CvsReducer } from './cvs/cvs.reducer';
 import { SharedEffects } from './shared/shared.effects';
+import { SharedFacade } from './shared/shared.facade';
+import { SharedReducer } from './shared/shared.reducer';
 
 export const STORE = {
-  router: routerReducer,
   common: combineReducers({
     employees: EmployeesReducer,
     projects: ProjectsReducer,

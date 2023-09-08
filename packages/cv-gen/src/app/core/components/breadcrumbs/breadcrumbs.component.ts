@@ -4,10 +4,10 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { HOME } from '../../../shared/constants/routing-paths.consts';
-import { IBreadcrumb } from '../../models/breadcrumbs.interface';
+import { IBreadcrumb } from '../../../shared/interfaces/breadcrumbs.interface';
 
 @UntilDestroy()
 @Component({
@@ -28,22 +28,6 @@ export class BreadcrumbsComponent implements OnInit {
   constructor(private coreFacade: CoreFacade, private cdr: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
-    this.coreFacade.selectQueryParams$
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.pageInfo = value['label'] || '';
-        this.paramPathName = value['pathName'] || '';
-        console.log('CORE-query-params: ', value);
-      });
-    this.coreFacade.selectRouteData$
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        if (!this.pageInfo) {
-          this.pageInfo = value['pageInfo'];
-        }
-        this.title = value['title'] || '';
-        this.cdr.markForCheck();
-        console.log('CORE-data: ', value);
-      });
+    console.log()
   }
 }

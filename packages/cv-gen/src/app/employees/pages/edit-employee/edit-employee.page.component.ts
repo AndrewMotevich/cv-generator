@@ -2,11 +2,16 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
+import { map } from 'rxjs';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
+import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
+import {
+  EDIT_EMPLOYEES,
+  EMPLOYEES
+} from '../../../shared/constants/routing-paths.consts';
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
 import { CvDto } from '../../models/cvs.model';
-import { map } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -21,6 +26,9 @@ export class EditEmployeePageComponent implements OnInit {
   public cvaEmployeeInfoForm = new FormControl(null);
   public cvaCvForm = new FormControl(null);
 
+  private readonly employeeCreatePath = EDIT_EMPLOYEES.fullPath;
+  private readonly employeesPath = EMPLOYEES.fullPath;
+
   public employeeId: number;
 
   private invalidCv: CvDto;
@@ -29,10 +37,18 @@ export class EditEmployeePageComponent implements OnInit {
     private cvsFacade: CvsFacade,
     private messageService: ToastMessageService,
     private employeesFacade: EmployeesFacade,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private coreFacade: CoreFacade
   ) {}
 
   public ngOnInit() {
+    this.coreFacade.setBreadcrumbs([
+      {
+        label: 'Employee',
+        route: this.employeesPath,
+      },
+    ]);
+
     this.employeeId = Number(this.route.snapshot.paramMap.get('id'));
     this.employeesFacade.getEmployeeById(this.employeeId);
 

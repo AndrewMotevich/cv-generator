@@ -16,16 +16,10 @@ const projectsRoutes: Routes = [
   {
     path: BASE.path,
     component: ProjectListPageComponent,
-    data: {
-      pageInfo: 'Projects list',
-    },
   },
   {
     path: CREATE_PROJECTS.path,
     component: CreateProjectPageComponent,
-    data: {
-      pageInfo: 'Create project',
-    },
   },
   {
     path: EDIT_PROJECTS.path + ID.fullPath,

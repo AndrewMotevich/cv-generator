@@ -16,16 +16,10 @@ const employeesRoutes: Routes = [
   {
     path: BASE.path,
     component: EmployeesListPageComponent,
-    data: {
-      pageInfo: 'Employees list',
-    },
   },
   {
     path: CREATE_EMPLOYEES.path,
     component: CreateEmployeePageComponent,
-    data: {
-      pageInfo: 'Create employee',
-    },
   },
   {
     path: EDIT_EMPLOYEES.path + ID.fullPath,

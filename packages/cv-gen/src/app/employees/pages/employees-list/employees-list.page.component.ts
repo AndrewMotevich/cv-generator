@@ -11,6 +11,7 @@ import {
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
 import { EmployeeTransformed, IEmployee } from '../../models/employee.model';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -24,8 +25,10 @@ export class EmployeesListPageComponent implements OnInit {
   public cols: IColumns[] = EmployeesColumns;
 
   public readonly addEmployeePath = CREATE_EMPLOYEES.path;
+  public readonly employeePath = EMPLOYEES.fullPath;
 
   constructor(
+    private coreFacade: CoreFacade,
     private router: Router,
     private employeesFacade: EmployeesFacade
   ) {}
@@ -33,18 +36,22 @@ export class EmployeesListPageComponent implements OnInit {
   ngOnInit() {
     this.employeesFacade.loadEmployees();
     this.data = this.employeesFacade.employeesList$;
+    this.coreFacade.setBreadcrumbs([
+      {
+        label: 'Employee',
+        route: this.employeePath,
+        pageInfo: 'Employees List',
+        title: 'Employees',
+      },
+    ]);
   }
 
   public navigateToEdit(data: unknown) {
     const employeeData = data as IEmployee;
-    this.router.navigate(
-      [EMPLOYEES.path, EDIT_EMPLOYEES.path, employeeData.id],
-      {
-        queryParams: {
-          label: `${employeeData.firstName} ${employeeData.lastName}'s profile`,
-          pathName: `${employeeData.firstName} ${employeeData.lastName}`,
-        },
-      }
-    );
+    this.router.navigate([
+      EMPLOYEES.path,
+      EDIT_EMPLOYEES.path,
+      employeeData.id,
+    ]);
   }
 }

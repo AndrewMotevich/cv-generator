@@ -7,6 +7,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { map } from 'rxjs';
 import { CvDto } from '../../models/cvs.model';
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
+import {
+  CREATE_EMPLOYEES,
+  EMPLOYEES,
+} from '../../../shared/constants/routing-paths.consts';
 
 @UntilDestroy()
 @Component({
@@ -18,18 +23,30 @@ import { ToastMessageService } from '../../../shared/services/toast-messages.ser
 export class CreateEmployeePageComponent implements OnInit {
   public activeTab = 0;
 
+  private readonly employeeCreatePath = CREATE_EMPLOYEES.fullPath;
+  private readonly employeesPath = EMPLOYEES.fullPath;
+
   public cvaEmployeeInfoForm = new FormControl(null);
   public cvaCvForm = new FormControl(null);
 
   private invalidCv: CvDto;
 
   constructor(
+    private coreFacade: CoreFacade,
     private employeesFacade: EmployeesFacade,
     private cvsFacade: CvsFacade,
     private messageService: ToastMessageService
   ) {}
 
   ngOnInit(): void {
+    this.coreFacade.setBreadcrumbs([
+      {
+        label: 'Employee',
+        route: this.employeesPath + this.employeeCreatePath,
+        pageInfo: 'Create Employee',
+        title: 'Employees',
+      },
+    ]);
     this.employeesFacade.setSelectedEmployee(EMPTY_EMPLOYEE);
     this.cvsFacade.selectedEmployeesCvs$
       .pipe(
@@ -44,19 +61,23 @@ export class CreateEmployeePageComponent implements OnInit {
   public saveEmployeeWithCvs() {
     this.updateCv();
     if (this.cvaEmployeeInfoForm.invalid) {
-      this.messageService.showWarningMessage("You should write all Employee data")
+      this.messageService.showWarningMessage(
+        'You should write all Employee data'
+      );
       this.cvaEmployeeInfoForm.markAllAsTouched();
       this.activeTab = 0;
       return;
     }
     if (this.invalidCv) {
-      this.messageService.showWarningMessage("You should enter all Cv data")
+      this.messageService.showWarningMessage('You should enter all Cv data');
       this.activeTab = 1;
       this.cvaCvForm.setValue(this.invalidCv);
       this.cvaCvForm.markAllAsTouched();
       return;
     }
-    this.messageService.showSuccessMessage("Hooray!!! You successfully save Employee and cvs")
+    this.messageService.showSuccessMessage(
+      'Hooray!!! You successfully save Employee and cvs'
+    );
   }
 
   public updateCv() {
