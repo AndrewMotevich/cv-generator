@@ -7,10 +7,12 @@ import { DepartmentsController } from './departments/departments.controller';
 import { SpecializationController } from './specializations/specializations.controller';
 import { LanguagesController } from './languages/languages.controller';
 import { SharedController } from './shared.controller';
+import { LevelsController } from './levels/levels.controller';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [
+    LevelsController,
     SpecializationController,
     DepartmentsController,
     SkillsController,
