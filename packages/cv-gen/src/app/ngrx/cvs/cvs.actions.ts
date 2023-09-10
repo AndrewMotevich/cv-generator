@@ -32,35 +32,34 @@ export const loadCvByIdFailure = createAction(
 );
 
 // Add new cv
-export const addCv = createAction('[Cvs/Page] Add Cv', props<{ cv: CvDto }>());
+export const addCvs = createAction('[Cvs/Page] Add Cvs to back');
 
 export const addCvInStore = createAction(
   '[Cvs/Page] Add cv in Store',
   props<{ cv: CvDto }>()
 );
 
-export const addCvSuccess = createAction('[Cvs/API] Add Cv Success');
+export const addCvsSuccess = createAction('[Cvs/API] Add Cvs to back Success');
 
-export const addCvFailure = createAction(
-  '[Cvs/API] Add Cv Failure',
+export const addCvsFailure = createAction(
+  '[Cvs/API] Add Cvs to back Failure',
   props<{ error: string }>()
 );
 
 // Update cv
-export const updateCv = createAction(
-  '[Cvs/Page] Update Cv',
-  props<{ id: number; cv: CvDto }>()
-);
+export const updateCvs = createAction('[Cvs/Page] Update Cvs at backend');
 
 export const updateCvInStore = createAction(
   '[Cvs/Page] Update in Store Cv',
-  props<{ update: Update<CvDto>}>()
+  props<{ update: Update<CvDto> }>()
 );
 
-export const updateCvSuccess = createAction('[Cvs/API] Update Cv Success');
+export const updateCvsSuccess = createAction(
+  '[Cvs/API] Update Cv at backend Success'
+);
 
-export const updateCvFailure = createAction(
-  '[Cvs/API] Update Cv Failure',
+export const updateCvsFailure = createAction(
+  '[Cvs/API] Update Cvs at backend Failure',
   props<{ error: string }>()
 );
 

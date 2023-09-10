@@ -27,7 +27,14 @@ export class CvsFacade {
     )
   );
 
-  public selectedEmployeesCvs$ = this.store.pipe(
+  public employeeNewCvs$ = this.store.pipe(
+    select(CvsSelectors.selectNewEmployeesCvs)
+  );
+  public employeeOldCvs$ = this.store.pipe(
+    select(CvsSelectors.selectOldEmployeesCvs)
+  );
+
+  public employeesCvs$ = this.store.pipe(
     select(CvsSelectors.selectEmployeesCvs)
   );
 
@@ -37,8 +44,8 @@ export class CvsFacade {
     this.store.dispatch(CvsActions.getCvs());
   }
 
-  public addCv(cv: CvDto) {
-    this.store.dispatch(CvsActions.addCv({ cv }));
+  public addCvs() {
+    this.store.dispatch(CvsActions.addCvs());
   }
 
   public loadCvById(id: number) {
@@ -64,8 +71,8 @@ export class CvsFacade {
       });
   }
 
-  public updateCv(id: number, cv: CvDto) {
-    this.store.dispatch(CvsActions.updateCv({ id, cv }));
+  public updateCvs() {
+    this.store.dispatch(CvsActions.updateCvs());
   }
 
   public updateCvInStore(id: number, cv: CvDto) {

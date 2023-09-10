@@ -42,7 +42,7 @@ export class CreateEmployeePageComponent implements OnInit {
   ngOnInit(): void {
     this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_CREATE);
     this.employeesFacade.setSelectedEmployee(EMPTY_EMPLOYEE);
-    this.cvsFacade.selectedEmployeesCvs$
+    this.cvsFacade.employeesCvs$
       .pipe(
         untilDestroyed(this),
         map((cvs) => cvs.filter((cv) => cv.isInvalid))
@@ -72,6 +72,8 @@ export class CreateEmployeePageComponent implements OnInit {
     this.messageService.showSuccessMessage(
       'Hooray!!! You successfully save Employee and cvs'
     );
+    this.employeesFacade.addEmployee(this.cvaEmployeeInfoForm.getRawValue());
+    this.cvsFacade.addCvs()
   }
 
   public updateCv() {

@@ -55,7 +55,7 @@ export class EditEmployeePageComponent implements OnInit {
         });
       });
 
-    this.cvsFacade.selectedEmployeesCvs$
+    this.cvsFacade.employeesCvs$
       .pipe(
         untilDestroyed(this),
         map((cvs) => cvs.filter((cv) => cv.isInvalid))
@@ -85,6 +85,12 @@ export class EditEmployeePageComponent implements OnInit {
     this.messageService.showSuccessMessage(
       'Hooray!!! You successfully save Employee and cvs'
     );
+    this.employeesFacade.updateEmployee(
+      this.employeeId,
+      this.cvaEmployeeInfoForm.getRawValue()
+    );
+    this.cvsFacade.addCvs();
+    this.cvsFacade.updateCvs();
   }
 
   public updateCv() {

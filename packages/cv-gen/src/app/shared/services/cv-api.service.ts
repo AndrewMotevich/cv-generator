@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { forkJoin, map } from 'rxjs';
 import { API_PATH } from '../../../environments/environment.development';
 import { CvDto, ICv } from '../../employees/models/cvs.model';
 import { ProjectsAdapter } from './projects-adapter.service';
@@ -24,18 +24,23 @@ export class CvApiService {
       .pipe(map((cv) => this.transformICvToCvDto(cv)));
   }
 
-  public addCv(cvDto: CvDto) {
-    return this.http.post<ICv>(
-      `${API_PATH}/cvs`,
-      this.transformLanguageInDto(cvDto)
+  public addCvs(cvDtoArray: CvDto[]) {
+    const observersArray = cvDtoArray.map((cv) =>
+      this.http.post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
     );
+
+    return forkJoin(observersArray);
   }
 
-  public updateCv(id: number, cvDto: CvDto) {
-    return this.http.put<ICv>(
-      `${API_PATH}/cvs/${id}`,
-      this.transformLanguageInDto(cvDto)
+  public updateCvs(cvDtoArray: CvDto[]) {
+    const observersArray = cvDtoArray.map((cv) =>
+      this.http.put<ICv>(
+        `${API_PATH}/cvs/${cv.id}`,
+        this.transformLanguageInDto(cv)
+      )
     );
+
+    return forkJoin(observersArray);
   }
 
   public deleteCv(id: number) {

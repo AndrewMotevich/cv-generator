@@ -24,12 +24,12 @@ export class EmployeesApiService {
       .pipe(map((project) => this.transformSelectedEmployeeDto(project)));
   }
 
-  public addEmployee(body: EmployeeDto) {
-    return this.http.post<IEmployee>(`${API_PATH}/employees`, body);
+  public addEmployee(employeeDto: EmployeeDto) {
+    return this.http.post<IEmployee>(`${API_PATH}/employees`, employeeDto);
   }
 
-  public updateEmployee(id: number, body: EmployeeDto) {
-    return this.http.put<IEmployee>(`${API_PATH}/employees/${id}`, body);
+  public updateEmployee(id: number, employeeDto: EmployeeDto) {
+    return this.http.put<IEmployee>(`${API_PATH}/employees/${id}`, employeeDto);
   }
 
   public deleteEmployee(id: number) {

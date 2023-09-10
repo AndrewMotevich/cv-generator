@@ -46,33 +46,38 @@ export class CvsEffects {
     )
   );
 
-  post$ = createEffect(() =>
+  postMany$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CvsActions.addCv),
-      switchMap((action) =>
-        this.cvsService.addCv(action.cv).pipe(
-          map(() => CvsActions.addCvSuccess()),
+      ofType(CvsActions.addCvs),
+      switchMap(() => this.cvsFacade.employeeNewCvs$),
+      switchMap((cvs) =>
+        this.cvsService.addCvs(cvs).pipe(
+          map(() => CvsActions.addCvsSuccess()),
           tap(() => {
             this.cvsFacade.loadCvs();
           }),
           catchError((error) => {
             this.errorsService.showErrorMessage(error.message);
-            return of(CvsActions.addCvFailure({ error }));
+            return of(CvsActions.addCvsFailure({ error }));
           })
         )
       )
     )
   );
 
-  put$ = createEffect(() =>
+  putMany$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CvsActions.updateCv),
-      switchMap((action) =>
-        this.cvsService.updateCv(action.id, action.cv).pipe(
-          map(() => CvsActions.updateCvSuccess()),
+      ofType(CvsActions.updateCvs),
+      switchMap(() => this.cvsFacade.employeeOldCvs$),
+      switchMap((cvs) =>
+        this.cvsService.updateCvs(cvs).pipe(
+          map(() => CvsActions.updateCvsSuccess()),
+          tap(() => {
+            this.cvsFacade.loadCvs();
+          }),
           catchError((error) => {
             this.errorsService.showErrorMessage(error.message);
-            return of(CvsActions.updateCvFailure({ error }));
+            return of(CvsActions.updateCvsFailure({ error }));
           })
         )
       )

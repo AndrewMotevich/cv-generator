@@ -41,6 +41,26 @@ export const selectEmployeesCvs = createSelector(
     if (selectedEmployee && selectedCvs) {
       return selectedCvs.filter((cv) => cv.employeeId === selectedEmployee.id);
     }
-    return []
+    return [];
+  }
+);
+
+export const selectNewEmployeesCvs = createSelector(
+  selectEmployeesCvs,
+  (newCvs: CvDto[]) => {
+    if (newCvs) {
+      return newCvs.filter((cv) => cv?.isNew);
+    }
+    return [];
+  }
+);
+
+export const selectOldEmployeesCvs = createSelector(
+  selectEmployeesCvs,
+  (newCvs: CvDto[]) => {
+    if (newCvs) {
+      return newCvs.filter((cv) => !cv?.isNew);
+    }
+    return [];
   }
 );

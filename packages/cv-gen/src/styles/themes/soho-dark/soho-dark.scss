@@ -4054,7 +4054,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 // my custom styles
 .p-accordion .invalid {
   .p-accordion-header:not(.p-disabled) .p-accordion-header-link{
-    border: 1px solid var(--red-500) !important;
+    border: 1px solid #ff9a9a !important;
+    background-color: var(--surface-ground) !important;
   }
 }
 .p-accordion .p-accordion-header .p-accordion-header-link {
