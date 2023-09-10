@@ -1,6 +1,11 @@
 {
   "APPLICATION": "CV-Gen-ru",
   "LABELS": {
+    "CV_NAME": "Название резюме",
+    "FIRST_NAME": "Имя",
+    "LAST_NAME": "Фамилия",
+    "LANGUAGE_NAME": "Язык",
+    "LANGUAGE_LEVEL": "Уровень",
     "EMAIL": "Почта",
     "PASSWORD": "Пароль",
     "DEPARTMENT": "Департамент",
@@ -23,18 +28,48 @@
     "MAX_LENGTH": "Максимальная длина {{maxlength}}!"
   },
   "PLACEHOLDERS": {
+    "FIRST_NAME": "Введите свое имя",
+    "LAST_NAME": "Введите свою фамилию",
+    "DEPARTMENT": "Введите свой департамент",
+    "SPECIALIZATION": "Введите свою специализацию",
+    "SKILLS": "Введите свои навыки",
+    "LANGUAGE_NAME": "Введите название языка",
+    "LANGUAGE_LEVEL": "Введите уровень владения",
     "EMAIL": "Введите свою почту",
     "PASSWORD": "Введите свой пароль"
   },
   "BUTTONS": {
-    "LOG-IN": "Войти"
+    "LOG-IN": "Войти",
+    "ADD": "Добавить",
+    "SAVE": "Сохранить"
   },
   "HEADER": {
+    "CV": "Резюме",
+    "INFO": "Инфо",
+    "LANGUAGES": "Языки",
     "NAVIGATION": "Навигация",
-    "EMPLOYEES": "Работники",
+    "EMPLOYEES": "Сотрудники",
     "PROJECTS": "Проекты",
     "SETTINGS": "Настройки",
     "THEME": "Изменить тему",
     "ABOUT": "Описание"
+  },
+  "MESSAGES": {
+    "ERROR": "Ошибка",
+    "SUCCESS": "Успех",
+    "WARNING": "Внимание",
+    "INFO": "Информация",
+    "EMPLOYEES_LOADED_SUCCESS": "Сотрудники загружены успешно",
+    "EMPLOYEES_LOADED_FAILURE": "Сотрудники не были загружены",
+    "EMPLOYEE_LOADED_SUCCESS": "Сотрудник загружен успешно",
+    "EMPLOYEE_LOADED_FAILURE": "Сотрудник не был загружен",
+    "EMPLOYEE_ADDED_SUCCESS": "Сотрудник добавлен успешно",
+    "EMPLOYEE_ADDED_FAILURE": "Сотрудник не добавлен",
+    "EMPLOYEE_UPDATED_SUCCESS": "Сотрудник изменен успешно",
+    "EMPLOYEE_UPDATED_FAILURE": "Сотрудник не изменен",
+    "EMPLOYEE_DELETED_SUCCESS": "Сотрудник удален успешно",
+    "EMPLOYEE_DELETED_FAILURE": "Сотрудник не удален",
+    "EMPLOYEE_VALIDATE_WARNING": "Заполните все поля для сотрудника",
+    "CVS_VALIDATE_WARNING": "Заполните все поля для всех резюме"
   }
 }

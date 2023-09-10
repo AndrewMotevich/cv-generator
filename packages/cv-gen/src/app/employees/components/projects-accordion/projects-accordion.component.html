@@ -1,10 +1,10 @@
 <form [formGroup]="form">
-  <h3>Projects:</h3>
+  <h3>{{"HEADER.PROJECTS"|translate}}</h3>
   <div class="add-wrapper">
     <div class="add-button">
       <p-button
         icon="pi pi-plus"
-        label="Add"
+        [label]="'BUTTONS.ADD' | translate"
         (click)="addProjectForm()"></p-button>
     </div>
     <cv-gen-select-input
@@ -17,7 +17,9 @@
   <div formArrayName="projects">
     <div *ngFor="let formControl of projectsFormArray.controls; let index = index">
       <p-accordion [selectOnFocus]="true">
-        <p-accordionTab [header] [ngClass]="{'invalid': formControl.invalid}">
+        <p-accordionTab
+          [header]
+          [ngClass]="{'invalid': formControl.invalid}">
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
               <span class="vertical-align-middle">{{formControl?.value?.projectName}}</span>

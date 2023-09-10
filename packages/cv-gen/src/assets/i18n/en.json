@@ -1,6 +1,11 @@
 {
   "APPLICATION": "CV-Gen",
   "LABELS": {
+    "CV_NAME": "CV name",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "LANGUAGE_NAME": "Language",
+    "LANGUAGE_LEVEL": "Level",
     "EMAIL": "Email",
     "PASSWORD": "Password",
     "DEPARTMENT": "Department",
@@ -23,18 +28,48 @@
     "MAX_LENGTH": "Max length {{maxlength}}!"
   },
   "PLACEHOLDERS": {
+    "FIRST_NAME": "Enter your first name",
+    "LAST_NAME": "Enter your last name",
+    "DEPARTMENT": "Enter your department",
+    "SPECIALIZATION": "Enter your specialization",
+    "SKILLS": "Enter your skills",
+    "LANGUAGE_NAME": "Enter language name",
+    "LANGUAGE_LEVEL": "Enter language level",
     "EMAIL": "Enter your email",
     "PASSWORD": "Enter your password"
   },
   "BUTTONS": {
-    "LOG-IN": "Log-in"
+    "LOG-IN": "Log-in",
+    "ADD": "Add",
+    "SAVE": "Save"
   },
   "HEADER": {
+    "CV": "CV",
+    "INFO": "Info",
+    "LANGUAGES": "Languages",
     "NAVIGATION": "Navigation",
     "EMPLOYEES": "Employees",
     "PROJECTS": "Projects",
     "SETTINGS": "Settings",
     "THEME": "Switch theme",
     "ABOUT": "About"
+  },
+  "MESSAGES": {
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "WARNING": "Warning",
+    "INFO": "Info",
+    "EMPLOYEES_LOADED_SUCCESS": "Employees loaded success",
+    "EMPLOYEES_LOADED_FAILURE": "Employees loaded failure",
+    "EMPLOYEE_LOADED_SUCCESS": "Employee loaded success",
+    "EMPLOYEE_LOADED_FAILURE": "Employee loaded failure",
+    "EMPLOYEE_ADDED_SUCCESS": "Employee added success",
+    "EMPLOYEE_ADDED_FAILURE": "Employee added failure",
+    "EMPLOYEE_UPDATED_SUCCESS": "Employee updated success",
+    "EMPLOYEE_UPDATED_FAILURE": "Employee updated failure",
+    "EMPLOYEE_DELETED_SUCCESS": "Employee deleted success",
+    "EMPLOYEE_DELETED_FAILURE": "Employee deleted failure",
+    "EMPLOYEE_VALIDATE_WARNING": "You should write all employee data",
+    "CVS_VALIDATE_WARNING": "You should write all cvs data"
   }
 }

@@ -1,11 +1,11 @@
 <form [formGroup]="form">
 
-  <h3>Languages:</h3>
+  <h3>{{"HEADER.LANGUAGES" | translate}}</h3>
   <div class="add-wrapper">
     <div class="add-button">
       <p-button
         icon="pi pi-plus"
-        label="Add"
+        [label]="'BUTTONS.ADD' | translate"
         (click)="addLanguageForm()"></p-button>
     </div>
   </div>
@@ -15,7 +15,9 @@
       *ngFor="let formGroup of languageFormArray.controls; let index = index"
       [formGroupName]="index">
       <p-accordion>
-        <p-accordionTab [header] [ngClass]="{'invalid': formGroup.invalid}">
+        <p-accordionTab
+          [header]
+          [ngClass]="{'invalid': formGroup.invalid}">
           <ng-template pTemplate="header">
             <div class="accordion-header-wrapper">
               <span class="vertical-align-middle">{{langName.control.value}}</span>
@@ -30,13 +32,13 @@
 
           <cv-gen-select-input
             #langName
-            label="Language"
-            placeholder="Enter language"
+            [label]="'LABELS.LANGUAGE_NAME' | translate"
+            [placeholder]="'PLACEHOLDERS.LANGUAGE_NAME' | translate"
             formControlName="name"
             [options]="languages$ | async"></cv-gen-select-input>
           <cv-gen-select-input
-            label="Level"
-            placeholder="Select your level"
+            [label]="'LABELS.LANGUAGE_LEVEL' | translate"
+            [placeholder]="'PLACEHOLDERS.LANGUAGE_LEVEL' | translate"
             formControlName="level"
             [options]="levels"></cv-gen-select-input>
 

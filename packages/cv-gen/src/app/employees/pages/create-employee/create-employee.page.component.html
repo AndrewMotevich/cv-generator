@@ -4,11 +4,11 @@
     [(activeIndex)]="activeTab"
     (activeIndexChange)="updateCv()">
 
-    <p-tabPanel header="Info">
+    <p-tabPanel [header]="'HEADER.INFO' | translate">
       <cv-gen-info-form [formControl]="cvaEmployeeInfoForm"></cv-gen-info-form>
     </p-tabPanel>
 
-    <p-tabPanel header="CV">
+    <p-tabPanel [header]="'HEADER.CV' | translate">
       <div class="cv-wrapper">
         <cv-gen-cvs-sidebar [cvForm]="cvaCvForm"></cv-gen-cvs-sidebar>
         <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
@@ -20,7 +20,7 @@
   <div class="button-wrapper">
     <div>
       <p-button
-        label="Save"
+        [label]="'BUTTONS.SAVE' | translate"
         (click)="saveEmployeeWithCvs()"></p-button>
     </div>
   </div>

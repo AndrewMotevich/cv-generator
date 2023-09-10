@@ -7,9 +7,9 @@ import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import {
-  EDIT_EMPLOYEES,
-  EMPLOYEES,
-} from '../../../shared/constants/routing-paths.consts';
+  CVS_VALIDATE_WARNING,
+  EMPLOYEE_VALIDATE_WARNING,
+} from '../../../shared/constants/toasts-messages.consts';
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
 import { BREADCRUMB_EMPLOYEE_EDIT } from '../../constants/breadcrumbs.consts';
 import { CvDto } from '../../models/cvs.model';
@@ -28,9 +28,6 @@ export class EditEmployeePageComponent implements OnInit {
 
   public cvaEmployeeInfoForm = new FormControl(null);
   public cvaCvForm = new FormControl(null);
-
-  private readonly employeeEditPath = EDIT_EMPLOYEES.fullPath;
-  private readonly employeesPath = EMPLOYEES.fullPath;
 
   public employeeId: number;
 
@@ -70,23 +67,18 @@ export class EditEmployeePageComponent implements OnInit {
   public saveEmployeeWithCvs() {
     this.updateCv();
     if (this.cvaEmployeeInfoForm.invalid) {
-      this.messageService.showWarningMessage(
-        'You should write all Employee data'
-      );
+      this.messageService.showWarningMessage(EMPLOYEE_VALIDATE_WARNING);
       this.cvaEmployeeInfoForm.markAllAsTouched();
       this.activeTab = 0;
       return;
     }
     if (this.invalidCv) {
-      this.messageService.showWarningMessage('You should enter all Cv data');
+      this.messageService.showWarningMessage(CVS_VALIDATE_WARNING);
       this.activeTab = 1;
       this.cvaCvForm.setValue(this.invalidCv);
       this.cvaCvForm.markAllAsTouched();
       return;
     }
-    this.messageService.showSuccessMessage(
-      'Hooray!!! You successfully save Employee and cvs'
-    );
     this.employeesFacade.updateEmployee(
       this.employeeId,
       this.cvaEmployeeInfoForm.getRawValue()
