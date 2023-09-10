@@ -17,6 +17,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
 import { TabViewModule } from 'primeng/tabview';
 import { DividerModule } from 'primeng/divider';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import {
   ChipsInputModule,
@@ -54,6 +55,7 @@ import { ProjectsAccordionComponent } from './components/projects-accordion/proj
     ChipsInputModule,
     SelectInputModule,
     AccordionModule,
+    ProgressSpinnerModule,
   ],
 })
 export class EmployeesModule {}

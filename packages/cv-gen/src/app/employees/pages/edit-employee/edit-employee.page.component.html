@@ -1,4 +1,6 @@
-<div class="page-wrapper">
+<div
+  *ngIf="(loaded$ | async); else spinner"
+  class="page-wrapper">
   <p-tabView
     class="page-wrapper"
     [(activeIndex)]="activeTab"
@@ -31,3 +33,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #spinner>
+  <p-progressSpinner></p-progressSpinner>
+</ng-template>

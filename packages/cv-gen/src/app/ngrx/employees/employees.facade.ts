@@ -44,4 +44,12 @@ export class EmployeesFacade {
   public deleteEmployee(id: number) {
     this.store.dispatch(EmployeesActions.deleteEmployee({ id }));
   }
+
+  public setLoadedFalse() {
+    this.store.dispatch(EmployeesActions.setLoadedFalse());
+  }
+
+  public setLoadedTrue() {
+    this.store.dispatch(EmployeesActions.setLoadedTrue());
+  }
 }

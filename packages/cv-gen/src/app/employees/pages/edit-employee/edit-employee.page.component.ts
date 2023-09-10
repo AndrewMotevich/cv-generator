@@ -22,6 +22,8 @@ import { CvDto } from '../../models/cvs.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditEmployeePageComponent implements OnInit {
+  public loaded$ = this.employeesFacade.loaded$;
+
   public activeTab = 0;
 
   public cvaEmployeeInfoForm = new FormControl(null);

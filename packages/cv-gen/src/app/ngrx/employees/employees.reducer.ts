@@ -28,13 +28,15 @@ export const initialEmployeesState: EmployeesState =
 export const EmployeesReducer = createReducer(
   initialEmployeesState,
   on(EmployeesActions.loadEmployeesSuccess, (state, { employees }) => {
-    return employeesAdapter.setAll(employees, { ...state, loaded: true });
+    return employeesAdapter.setAll(employees, state);
   }),
   on(EmployeesActions.loadEmployeeByIdSuccess, (state, { employee }) => {
     return { ...state, selectedEmployee: employee };
   }),
-  on(EmployeesActions.addEmployeeFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(EmployeesActions.setLoadedFalse, (state) => {
+    return {...state, loaded: false}
+  }),
+  on(EmployeesActions.setLoadedTrue, (state) => {
+    return {...state, loaded: true}
+  }),
 );

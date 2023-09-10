@@ -6,10 +6,12 @@ import { EMPLOYEES } from '../../shared/constants/routing-paths.consts';
 import { EmployeesApiService } from '../../shared/services/employees-api.service';
 import * as EmployeesActions from './employees.actions';
 import { ToastMessageService } from '../../shared/services/toast-messages.service';
+import { EmployeesFacade } from './employees.facade';
 
 @Injectable()
 export class EmployeesEffects {
   constructor(
+    private employeesFacade: EmployeesFacade,
     private employeesService: EmployeesApiService,
     private router: Router,
     private errorsService: ToastMessageService
@@ -20,6 +22,9 @@ export class EmployeesEffects {
   get$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeesActions.getEmployees),
+      tap(() => {
+        this.employeesFacade.setLoadedFalse();
+      }),
       switchMap(() =>
         this.employeesService.getEmployees().pipe(
           map((employees) =>
@@ -30,13 +35,19 @@ export class EmployeesEffects {
             return of(EmployeesActions.loadEmployeesFailure({ error }));
           })
         )
-      )
+      ),
+      tap(() => {
+        this.employeesFacade.setLoadedTrue();
+      })
     )
   );
 
   getById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeesActions.getEmployeeById),
+      tap(() => {
+        this.employeesFacade.setLoadedFalse();
+      }),
       switchMap((action) =>
         this.employeesService.getEmployeeById(action.id).pipe(
           map((employee) =>
@@ -47,7 +58,10 @@ export class EmployeesEffects {
             return of(EmployeesActions.loadEmployeesFailure({ error }));
           })
         )
-      )
+      ),
+      tap(() => {
+        this.employeesFacade.setLoadedTrue();
+      })
     )
   );
 
@@ -87,16 +101,18 @@ export class EmployeesEffects {
   delete$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeesActions.deleteEmployee),
-      switchMap((action) => this.employeesService.deleteEmployee(action.id).pipe(
-        map(() => EmployeesActions.deleteEmployeeSuccess()),
-        tap(() => {
-          this.router.navigate([EMPLOYEES.path]);
-        }),
-        catchError((error) => {
-          this.errorsService.showErrorMessage(error.message);
-          return of(EmployeesActions.deleteEmployeeFailure({ error }));
-        })
-      )),
+      switchMap((action) =>
+        this.employeesService.deleteEmployee(action.id).pipe(
+          map(() => EmployeesActions.deleteEmployeeSuccess()),
+          tap(() => {
+            this.router.navigate([EMPLOYEES.path]);
+          }),
+          catchError((error) => {
+            this.errorsService.showErrorMessage(error.message);
+            return of(EmployeesActions.deleteEmployeeFailure({ error }));
+          })
+        )
+      )
     )
   );
 }

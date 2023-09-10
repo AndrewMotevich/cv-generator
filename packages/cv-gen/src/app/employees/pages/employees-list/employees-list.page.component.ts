@@ -22,6 +22,8 @@ import { BREADCRUMB_EMPLOYEE_LIST } from '../../constants/breadcrumbs.consts';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesListPageComponent implements OnInit {
+  public loaded$ = this.employeesFacade.loaded$
+
   public data: Observable<EmployeeTransformed[]>;
   public cols: IColumns[] = EmployeesColumns;
 
