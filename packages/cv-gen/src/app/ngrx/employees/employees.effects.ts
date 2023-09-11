@@ -31,8 +31,8 @@ export class EmployeesEffects {
     private translateService: TranslateService
   ) {}
 
-  private translatedEmployees = this.translateService.instant('HEADER.EMPLOYEES');
-  private translatedEmployee = this.translateService.instant('HEADER.EMPLOYEE');
+  private translatedEmployees = this.translateService.instant('Employees');
+  private translatedEmployee = this.translateService.instant('Employee');
   private actions$ = inject(Actions);
 
   get$ = createEffect(() =>
@@ -76,11 +76,17 @@ export class EmployeesEffects {
       switchMap((action) =>
         this.employeesService.getEmployeeById(action.id).pipe(
           map((employee) => {
-            this.messageService.showSuccessMessage(VALUE_LOADED_SUCCESS);
+            this.messageService.showSuccessMessage(
+              VALUE_LOADED_SUCCESS,
+              this.translatedEmployee
+            );
             return EmployeesActions.loadEmployeeByIdSuccess({ employee });
           }),
           catchError((error) => {
-            this.messageService.showErrorMessage(VALUE_LOADED_FAILURE);
+            this.messageService.showErrorMessage(
+              VALUE_LOADED_FAILURE,
+              this.translatedEmployee
+            );
             return of(EmployeesActions.loadEmployeesFailure({ error }));
           })
         )
@@ -97,14 +103,20 @@ export class EmployeesEffects {
       switchMap((action) =>
         this.employeesService.addEmployee(action.employee).pipe(
           map(() => {
-            this.messageService.showSuccessMessage(VALUE_ADDED_SUCCESS);
+            this.messageService.showSuccessMessage(
+              VALUE_ADDED_SUCCESS,
+              this.translatedEmployee
+            );
             return EmployeesActions.addEmployeeSuccess();
           }),
           tap(() => {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
-            this.messageService.showErrorMessage(VALUE_ADDED_FAILURE);
+            this.messageService.showErrorMessage(
+              VALUE_ADDED_FAILURE,
+              this.translatedEmployee
+            );
             return of(EmployeesActions.addEmployeeFailure({ error }));
           })
         )
@@ -118,11 +130,17 @@ export class EmployeesEffects {
       switchMap((action) =>
         this.employeesService.updateEmployee(action.id, action.employee).pipe(
           map(() => {
-            this.messageService.showSuccessMessage(VALUE_UPDATED_SUCCESS);
+            this.messageService.showSuccessMessage(
+              VALUE_UPDATED_SUCCESS,
+              this.translatedEmployee
+            );
             return EmployeesActions.updateEmployeeSuccess();
           }),
           catchError((error) => {
-            this.messageService.showErrorMessage(VALUE_UPDATED_FAILURE);
+            this.messageService.showErrorMessage(
+              VALUE_UPDATED_FAILURE,
+              this.translatedEmployee
+            );
             return of(EmployeesActions.updateEmployeeFailure({ error }));
           })
         )
@@ -136,14 +154,20 @@ export class EmployeesEffects {
       switchMap((action) =>
         this.employeesService.deleteEmployee(action.id).pipe(
           map(() => {
-            this.messageService.showSuccessMessage(VALUE_DELETED_SUCCESS);
+            this.messageService.showSuccessMessage(
+              VALUE_DELETED_SUCCESS,
+              this.translatedEmployee
+            );
             return EmployeesActions.deleteEmployeeSuccess();
           }),
           tap(() => {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
-            this.messageService.showErrorMessage(VALUE_DELETED_FAILURE);
+            this.messageService.showErrorMessage(
+              VALUE_DELETED_FAILURE,
+              this.translatedEmployee
+            );
             return of(EmployeesActions.deleteEmployeeFailure({ error }));
           })
         )

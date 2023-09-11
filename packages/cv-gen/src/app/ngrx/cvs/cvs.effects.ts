@@ -1,18 +1,17 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { CvApiService } from '../../shared/services/cv-api.service';
-import * as CvsActions from './cvs.actions';
-import { CvsFacade } from './cvs.facade';
-import { ToastMessageService } from '../../shared/services/toast-messages.service';
 import { TranslateService } from '@ngx-translate/core';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import {
   VALUES_LOADED_FAILURE,
   VALUE_ADDED_FAILURE,
   VALUE_DELETED_FAILURE,
-  VALUE_LOADED_FAILURE,
-  VALUE_UPDATED_FAILURE,
+  VALUE_LOADED_FAILURE
 } from '../../shared/constants/toasts-messages.consts';
+import { CvApiService } from '../../shared/services/cv-api.service';
+import { ToastMessageService } from '../../shared/services/toast-messages.service';
+import * as CvsActions from './cvs.actions';
+import { CvsFacade } from './cvs.facade';
 
 @Injectable()
 export class CvsEffects {
@@ -22,8 +21,8 @@ export class CvsEffects {
     private errorsService: ToastMessageService,
     private translateService: TranslateService
   ) {}
-  private translationCVS = this.translateService.instant('HEADER.CVS');
-  private translationCV = this.translateService.instant('HEADER.CV');
+  private translationCVS = this.translateService.instant('Cvs');
+  private translationCV = this.translateService.instant('Cv');
   private actions$ = inject(Actions);
 
   get$ = createEffect(() =>
@@ -95,10 +94,10 @@ export class CvsEffects {
             this.cvsFacade.loadCvs();
           }),
           catchError((error) => {
-            this.errorsService.showErrorMessage(
-              VALUE_UPDATED_FAILURE,
-              this.translationCV
-            );
+            // this.errorsService.showErrorMessage(
+            //   VALUE_UPDATED_FAILURE,
+            //   this.translationCV
+            // );
             return of(CvsActions.updateCvsFailure({ error }));
           })
         )

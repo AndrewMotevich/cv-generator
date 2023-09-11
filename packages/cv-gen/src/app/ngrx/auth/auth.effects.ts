@@ -50,7 +50,7 @@ export class AuthEffects {
           map((res) => AuthActions.logInSuccess({ tokenData: res })),
           tap(() => {
             this.coreFacade.setIsLogin(true);
-            this.router.navigate([EMPLOYEES.path]);
+            // this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
             this.errorsService.showInfoMessage(AUTH_REFRESH_FAILURE_INFO);

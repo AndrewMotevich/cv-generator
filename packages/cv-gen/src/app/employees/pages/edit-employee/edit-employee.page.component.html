@@ -13,7 +13,17 @@
     <p-tabPanel [header]="'HEADER.CV' | translate">
       <div class="cv-wrapper">
         <cv-gen-cvs-sidebar [cvForm]="cvaCvForm"></cv-gen-cvs-sidebar>
-        <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
+        <cv-gen-cv-form [formControl]="cvaCvForm">
+          <div class="create-pdf-button">
+              <p-button
+                icon="pi pi-file-pdf"
+                styleClass="p-button-danger"
+                label="PDF"
+                (click)="toPDF()"
+                >
+              </p-button>
+          </div>
+        </cv-gen-cv-form>
       </div>
     </p-tabPanel>
 

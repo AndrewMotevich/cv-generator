@@ -15,9 +15,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastModule } from 'primeng/toast';
 import { AuthorizationInterceptor } from './shared/interceptors/authorization.interceptor';
 import { MessageService } from 'primeng/api';
+import { CvHtmlTemplateComponent } from './employees/components/cv-html-template/cv-html-template.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CvHtmlTemplateComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
