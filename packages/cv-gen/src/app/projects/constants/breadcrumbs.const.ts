@@ -11,8 +11,8 @@ export const BREADCRUMB_PROJECT_LIST = {
       route: PROJECTS.fullPath,
     },
   ],
-  title: 'Projects',
-  pageInfo: 'Projects list',
+  title: 'HEADER.PROJECTS',
+  pageInfo: 'BREADCRUMBS.PROJECTS_LIST',
 };
 
 export const BREADCRUMB_PROJECT_CREATE = {
@@ -22,11 +22,11 @@ export const BREADCRUMB_PROJECT_CREATE = {
       route: PROJECTS.fullPath,
     },
   ],
-  title: 'Projects',
-  pageInfo: 'Create Project',
+  title: 'HEADER.PROJECTS',
+  pageInfo: 'BREADCRUMBS.PROJECT_CREATE',
 };
 
-export const BREADCRUMB_PROJECT_EDIT = (projectInfo: ProjectDto) => ({
+export const BREADCRUMB_PROJECT_EDIT_FACTORY = (projectInfo: ProjectDto) => ({
   breadcrumbs: [
     {
       label: 'Projects',
@@ -37,6 +37,6 @@ export const BREADCRUMB_PROJECT_EDIT = (projectInfo: ProjectDto) => ({
       route: PROJECTS.fullPath + EDIT_PROJECTS.fullPath + '/' + projectInfo.id,
     },
   ],
-  title: 'Projects',
+  title: 'HEADER.PROJECTS',
   pageInfo: `${projectInfo.projectName} project info`,
 });

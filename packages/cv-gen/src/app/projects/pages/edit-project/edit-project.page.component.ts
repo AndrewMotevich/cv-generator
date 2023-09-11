@@ -6,7 +6,7 @@ import { filter } from 'rxjs';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { ProjectsFacade } from '../../../ngrx/projects/projects.facade';
 import {
-  BREADCRUMB_PROJECT_EDIT
+  BREADCRUMB_PROJECT_EDIT_FACTORY
 } from '../../constants/breadcrumbs.const';
 
 @UntilDestroy()
@@ -33,7 +33,7 @@ export class EditProjectPageComponent implements OnInit {
     this.projectsFacade.selectedProject$
       .pipe(untilDestroyed(this), filter(Boolean))
       .subscribe((project) => {
-        this.coreFacade.setBreadcrumbs(BREADCRUMB_PROJECT_EDIT(project));
+        this.coreFacade.setBreadcrumbs(BREADCRUMB_PROJECT_EDIT_FACTORY(project));
         this.cvaProjectForm.setValue({
           ...project,
         });

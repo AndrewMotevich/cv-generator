@@ -41,14 +41,18 @@
   "BUTTONS": {
     "LOG-IN": "Log-in",
     "ADD": "Add",
-    "SAVE": "Save"
+    "SAVE": "Save",
+    "CLEAR": "Clear"
   },
   "HEADER": {
     "CV": "CV",
+    "CVS": "CVS",
     "INFO": "Info",
     "LANGUAGES": "Languages",
     "NAVIGATION": "Navigation",
+    "EMPLOYEE": "Employee",
     "EMPLOYEES": "Employees",
+    "PROJECT": "Project",
     "PROJECTS": "Projects",
     "SETTINGS": "Settings",
     "THEME": "Switch theme",
@@ -59,17 +63,26 @@
     "SUCCESS": "Success",
     "WARNING": "Warning",
     "INFO": "Info",
-    "EMPLOYEES_LOADED_SUCCESS": "Employees loaded success",
-    "EMPLOYEES_LOADED_FAILURE": "Employees loaded failure",
-    "EMPLOYEE_LOADED_SUCCESS": "Employee loaded success",
-    "EMPLOYEE_LOADED_FAILURE": "Employee loaded failure",
-    "EMPLOYEE_ADDED_SUCCESS": "Employee added success",
-    "EMPLOYEE_ADDED_FAILURE": "Employee added failure",
-    "EMPLOYEE_UPDATED_SUCCESS": "Employee updated success",
-    "EMPLOYEE_UPDATED_FAILURE": "Employee updated failure",
-    "EMPLOYEE_DELETED_SUCCESS": "Employee deleted success",
-    "EMPLOYEE_DELETED_FAILURE": "Employee deleted failure",
+    "VALUES_LOADED_SUCCESS": "{{value}} loaded success",
+    "VALUES_LOADED_FAILURE": "{{value}} loaded failure",
+    "VALUE_LOADED_SUCCESS": "{{value}} loaded success",
+    "VALUE_LOADED_FAILURE": "{{value}} loaded failure",
+    "VALUE_ADDED_SUCCESS": "{{value}} added success",
+    "VALUE_ADDED_FAILURE": "{{value}} added failure",
+    "VALUE_UPDATED_SUCCESS": "{{value}} updated success",
+    "VALUE_UPDATED_FAILURE": "{{value}} updated failure",
+    "VALUE_DELETED_SUCCESS": "{{value}} deleted success",
+    "VALUE_DELETED_FAILURE": "{{value}} deleted failure",
     "EMPLOYEE_VALIDATE_WARNING": "You should write all employee data",
-    "CVS_VALIDATE_WARNING": "You should write all cvs data"
+    "CVS_VALIDATE_WARNING": "You should write all cvs data",
+    "AUTH_LOGIN_FAILURE": "Login failure, check you credentials!!!",
+    "AUTH_REFRESH_FAILURE_INFO": "Refresh your previous credentials failure! Please, re-login!!!",
+    "AUTH_LOGOUT_FAILURE": "Logout failure!!!"
+  },
+  "BREADCRUMBS": {
+    "EMPLOYEES_LIST": "Employees list",
+    "EMPLOYEE_CREATE": "Create employee",
+    "PROJECTS_LIST": "Projects list",
+    "PROJECT_CREATE": "Create project"
   }
 }

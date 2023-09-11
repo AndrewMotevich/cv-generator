@@ -10,6 +10,7 @@ import { EditProjectPageComponent } from './pages/edit-project/edit-project.page
 import { ProjectListPageComponent } from './pages/projects-list/projects-list.page.component';
 
 import { ButtonModule } from 'primeng/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ButtonModule } from 'primeng/button';
     EditProjectPageComponent,
   ],
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

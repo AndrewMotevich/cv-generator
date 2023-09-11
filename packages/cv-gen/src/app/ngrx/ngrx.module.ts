@@ -7,12 +7,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { EFFECTS, FACADES, STORE } from '.';
-import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],
   imports: [
-    TranslateModule,
     CommonModule,
     StoreModule.forRoot(STORE, {
       metaReducers: [],

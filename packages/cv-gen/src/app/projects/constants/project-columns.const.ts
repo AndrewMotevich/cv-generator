@@ -1,11 +1,11 @@
 import { IColumns } from "../../shared/interfaces/columns.interfeces";
 
 export const ProjectColumns: IColumns[] = [
-  {field: "projectName", header: "Project Name"},
-  {field: "techStack", header: "Tech stack"},
-  {field: "teamRoles", header: "Team roles"},
-  {field: "responsibilities", header: "Responsibilities"},
-  {field: "teamSize", header: "Team size"},
-  {field: "startDate", header: "Start date"},
-  {field: "endDate", header: "End date"},
+  {field: "projectName", header: "LABELS.PROJECT_NAME"},
+  {field: "techStack", header: "LABELS.TECH_STACK"},
+  {field: "teamRoles", header: "LABELS.TEAM_ROLES"},
+  {field: "responsibilities", header: "LABELS.RESPONSIBILITIES"},
+  {field: "teamSize", header: "LABELS.TEAM_SIZE"},
+  {field: "startDate", header: "LABELS.START_DATE"},
+  {field: "endDate", header: "LABELS.END_DATE"},
 ]

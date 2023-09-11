@@ -1,5 +1,5 @@
 {
-  "APPLICATION": "CV-Gen-ru",
+  "APPLICATION": "CV-Gen",
   "LABELS": {
     "CV_NAME": "Название резюме",
     "FIRST_NAME": "Имя",
@@ -41,14 +41,18 @@
   "BUTTONS": {
     "LOG-IN": "Войти",
     "ADD": "Добавить",
-    "SAVE": "Сохранить"
+    "SAVE": "Сохранить",
+    "CLEAR": "Отчистить"
   },
   "HEADER": {
     "CV": "Резюме",
+    "CVS": "Резюме",
     "INFO": "Инфо",
     "LANGUAGES": "Языки",
     "NAVIGATION": "Навигация",
+    "EMPLOYEE": "Сотрудник",
     "EMPLOYEES": "Сотрудники",
+    "PROJECT": "Проект",
     "PROJECTS": "Проекты",
     "SETTINGS": "Настройки",
     "THEME": "Изменить тему",
@@ -59,17 +63,26 @@
     "SUCCESS": "Успех",
     "WARNING": "Внимание",
     "INFO": "Информация",
-    "EMPLOYEES_LOADED_SUCCESS": "Сотрудники загружены успешно",
-    "EMPLOYEES_LOADED_FAILURE": "Сотрудники не были загружены",
-    "EMPLOYEE_LOADED_SUCCESS": "Сотрудник загружен успешно",
-    "EMPLOYEE_LOADED_FAILURE": "Сотрудник не был загружен",
-    "EMPLOYEE_ADDED_SUCCESS": "Сотрудник добавлен успешно",
-    "EMPLOYEE_ADDED_FAILURE": "Сотрудник не добавлен",
-    "EMPLOYEE_UPDATED_SUCCESS": "Сотрудник изменен успешно",
-    "EMPLOYEE_UPDATED_FAILURE": "Сотрудник не изменен",
-    "EMPLOYEE_DELETED_SUCCESS": "Сотрудник удален успешно",
-    "EMPLOYEE_DELETED_FAILURE": "Сотрудник не удален",
+    "VALUES_LOADED_SUCCESS": "{{value}} загружены успешно",
+    "VALUES_LOADED_FAILURE": "{{value}} не были загружены",
+    "VALUE_LOADED_SUCCESS": "{{value}} загружен успешно",
+    "VALUE_LOADED_FAILURE": "{{value}} не был загружен",
+    "VALUE_ADDED_SUCCESS": "{{value}} добавлен успешно",
+    "VALUE_ADDED_FAILURE": "{{value}} не добавлен",
+    "VALUE_UPDATED_SUCCESS": "{{value}} изменен успешно",
+    "VALUE_UPDATED_FAILURE": "{{value}} не изменен",
+    "VALUE_DELETED_SUCCESS": "{{value}} удален успешно",
+    "VALUE_DELETED_FAILURE": "{{value}} не удален",
     "EMPLOYEE_VALIDATE_WARNING": "Заполните все поля для сотрудника",
-    "CVS_VALIDATE_WARNING": "Заполните все поля для всех резюме"
+    "CVS_VALIDATE_WARNING": "Заполните все поля для всех резюме",
+    "AUTH_LOGIN_FAILURE": "Вход неуспешен!!! Проверьте данные для входа",
+    "AUTH_REFRESH_FAILURE_INFO": "Вход по предыдущим данным неуспешен!!! Войдите в приложение снова!",
+    "AUTH_LOGOUT_FAILURE": "Выход из приложения не успешен"
+  },
+  "BREADCRUMBS": {
+    "EMPLOYEES_LIST": "Список сотрудников",
+    "EMPLOYEE_CREATE": "Добавить сотрудника",
+    "PROJECTS_LIST": "Список проектов",
+    "PROJECT_CREATE": "Добавить проект"
   }
 }

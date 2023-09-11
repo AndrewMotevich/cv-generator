@@ -9,9 +9,9 @@ export class ToastMessageService {
     private translateService: TranslateService
   ) {}
 
-  public showErrorMessage(message: string) {
+  public showErrorMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.ERROR');
-    const translatedMessage = this.translateService.instant(message);
+    const translatedMessage = this.translateService.instant(message, {value});
     this.messageService.add({
       severity: 'error',
       summary,
@@ -19,9 +19,9 @@ export class ToastMessageService {
     });
   }
 
-  public showSuccessMessage(message: string) {
+  public showSuccessMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.SUCCESS');
-    const translatedMessage = this.translateService.instant(message);
+    const translatedMessage = this.translateService.instant(message, {value});
     this.messageService.add({
       severity: 'success',
       summary,

@@ -3,19 +3,19 @@
     <div class="buttons-container">
       <div>
         <p-button
-          label="Save"
+          [label]="'BUTTONS.SAVE' | translate"
           (click)="submitProjectForm()"></p-button>
       </div>
       <div>
         <p-button
-          label="Clear"
+          [label]="'BUTTONS.CLEAR' | translate"
           (click)="clearProjectForm()"></p-button>
       </div>
     </div>
     <div class="delete-button">
       <p-button
         icon="pi pi-trash"
-        styleClass="p-button-rounded p-button-text p-button-raised"
+        styleClass="p-button-rounded p-button-danger p-button-raised"
         (click)="deleteProject()"></p-button>
     </div>
   </div>

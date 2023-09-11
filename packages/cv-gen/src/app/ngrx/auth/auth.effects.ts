@@ -7,6 +7,11 @@ import { AuthApiService } from '../../shared/services/auth-api.service';
 import { ToastMessageService } from '../../shared/services/toast-messages.service';
 import { CoreFacade } from '../core/core.facade';
 import * as AuthActions from './auth.actions';
+import {
+  AUTH_LOGIN_FAILURE,
+  AUTH_LOGOUT_FAILURE,
+  AUTH_REFRESH_FAILURE_INFO,
+} from '../../shared/constants/toasts-messages.consts';
 
 @Injectable()
 export class AuthEffects {
@@ -29,7 +34,7 @@ export class AuthEffects {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
-            this.errorsService.showErrorMessage(error.message);
+            this.errorsService.showErrorMessage(AUTH_LOGIN_FAILURE);
             return of(AuthActions.AuthFailure({ error }));
           })
         );
@@ -48,7 +53,7 @@ export class AuthEffects {
             this.router.navigate([EMPLOYEES.path]);
           }),
           catchError((error) => {
-            this.errorsService.showErrorMessage(error.message);
+            this.errorsService.showInfoMessage(AUTH_REFRESH_FAILURE_INFO);
             return of(AuthActions.AuthFailure({ error }));
           })
         )
@@ -59,16 +64,18 @@ export class AuthEffects {
   public logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logOut),
-      switchMap(() => this.authApiService.logOut().pipe(
-        map(() => {
-          this.router.navigate([AUTH.path]);
-          return AuthActions.logOutSuccess();
-        }),
-        catchError((error) => {
-          this.errorsService.showErrorMessage(error.message);
-          return of(AuthActions.AuthFailure({ error }));
-        })
-      )),
+      switchMap(() =>
+        this.authApiService.logOut().pipe(
+          map(() => {
+            this.router.navigate([AUTH.path]);
+            return AuthActions.logOutSuccess();
+          }),
+          catchError((error) => {
+            this.errorsService.showErrorMessage(AUTH_LOGOUT_FAILURE);
+            return of(AuthActions.AuthFailure({ error }));
+          })
+        )
+      )
     )
   );
 }

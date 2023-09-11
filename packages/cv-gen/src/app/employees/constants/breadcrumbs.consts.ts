@@ -8,8 +8,8 @@ export const BREADCRUMB_EMPLOYEE_LIST = {
       route: EMPLOYEES.fullPath,
     },
   ],
-  title: 'Employees',
-  pageInfo: 'Employees list',
+  title: 'HEADER.EMPLOYEES',
+  pageInfo: 'BREADCRUMBS.EMPLOYEES_LIST',
 };
 
 export const BREADCRUMB_EMPLOYEE_CREATE = {
@@ -19,11 +19,11 @@ export const BREADCRUMB_EMPLOYEE_CREATE = {
       route: EMPLOYEES.fullPath,
     },
   ],
-  title: 'Employees',
-  pageInfo: 'Create Employee',
+  title: 'HEADER.EMPLOYEES',
+  pageInfo: 'BREADCRUMBS.EMPLOYEE_CREATE',
 };
 
-export const BREADCRUMB_EMPLOYEE_EDIT = (employeeInfo: EmployeeDto) => ({
+export const BREADCRUMB_EMPLOYEE_EDIT_FACTORY = (employeeInfo: EmployeeDto) => ({
   breadcrumbs: [
     {
       label: 'Employees',
@@ -34,6 +34,6 @@ export const BREADCRUMB_EMPLOYEE_EDIT = (employeeInfo: EmployeeDto) => ({
       route: EMPLOYEES.fullPath + EDIT_EMPLOYEES.fullPath + '/' + employeeInfo.id,
     },
   ],
-  title: 'Employees',
+  title: 'HEADER.EMPLOYEES',
   pageInfo: `${employeeInfo.firstName} ${employeeInfo.lastName}'s profile`,
 })

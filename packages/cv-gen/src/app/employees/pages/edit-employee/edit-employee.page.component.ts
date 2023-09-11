@@ -11,7 +11,7 @@ import {
   EMPLOYEE_VALIDATE_WARNING,
 } from '../../../shared/constants/toasts-messages.consts';
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
-import { BREADCRUMB_EMPLOYEE_EDIT } from '../../constants/breadcrumbs.consts';
+import { BREADCRUMB_EMPLOYEE_EDIT_FACTORY } from '../../constants/breadcrumbs.consts';
 import { CvDto } from '../../models/cvs.model';
 
 @UntilDestroy()
@@ -48,7 +48,7 @@ export class EditEmployeePageComponent implements OnInit {
     this.employeesFacade.selectedEmployee$
       .pipe(untilDestroyed(this), filter(Boolean))
       .subscribe((employee) => {
-        this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_EDIT(employee));
+        this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_EDIT_FACTORY(employee));
         this.cvaEmployeeInfoForm.setValue({
           ...employee,
         });

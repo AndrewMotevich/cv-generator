@@ -2,13 +2,13 @@
   <div class="add-employee-button">
     <p-button
       icon="pi pi-plus"
-      label="Add"
+      [label]="'BUTTONS.ADD' | translate"
       [routerLink]="addProjectPath"></p-button>
   </div>
   <div class="table-wrapper">
     <cv-gen-base-table2>
       <tr header>
-        <th *ngFor="let col of cols">{{ col.header }}</th>
+        <th *ngFor="let col of cols">{{ col.header | translate }}</th>
       </tr>
       <tr class="table-row" body *ngFor="let project of projects | async" (click)="navigateToEdit(project)">
         <td>{{project.projectName}}</td>
