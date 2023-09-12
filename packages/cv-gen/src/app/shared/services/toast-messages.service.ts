@@ -9,7 +9,7 @@ export class ToastMessageService {
     private translateService: TranslateService
   ) {}
 
-  public showErrorMessage(message: string, value?: string) {
+  public showErrorMessage(message: string, value = 'value') {
     const summary = this.translateService.instant('MESSAGES.ERROR');
     const translatedValue = this.translateService.instant(value);
     const translatedMessage = this.translateService.instant(message, {
@@ -22,7 +22,7 @@ export class ToastMessageService {
     });
   }
 
-  public showSuccessMessage(message: string, value?: string) {
+  public showSuccessMessage(message: string, value = 'value') {
     const summary = this.translateService.instant('MESSAGES.SUCCESS');
     const translatedValue = this.translateService.instant(value);
     const translatedMessage = this.translateService.instant(message, {
@@ -35,7 +35,7 @@ export class ToastMessageService {
     });
   }
 
-  public showWarningMessage(message: string, value?: string) {
+  public showWarningMessage(message: string, value = 'value') {
     const summary = this.translateService.instant('MESSAGES.WARNING');
     const translatedValue = this.translateService.instant(value);
     const translatedMessage = this.translateService.instant(message, {
@@ -48,7 +48,7 @@ export class ToastMessageService {
     });
   }
 
-  public showInfoMessage(message: string, value?: string) {
+  public showInfoMessage(message: string, value = 'value') {
     const summary = this.translateService.instant('MESSAGES.INFO');
     const translatedValue = this.translateService.instant(value);
     const translatedMessage = this.translateService.instant(message, {

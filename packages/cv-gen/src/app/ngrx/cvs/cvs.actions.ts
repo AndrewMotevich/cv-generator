@@ -49,6 +49,11 @@ export const addCvsFailure = createAction(
 // Update cv
 export const updateCvs = createAction('[Cvs/Page] Update Cvs at backend');
 
+export const updateNewCvsInStore = createAction(
+  '[Cvs/Page] Update employeeId for new cvs in store',
+  props<{ newCvs: Update<CvDto>[] }>()
+);
+
 export const updateCvInStore = createAction(
   '[Cvs/Page] Update in Store Cv',
   props<{ update: Update<CvDto> }>()
@@ -80,3 +85,5 @@ export const deleteCvFailure = createAction(
   '[Cvs/API] Delete Cv Failure',
   props<{ error: string }>()
 );
+
+export const clearSelectedCv = createAction('[Cvs/Page] Clear selected cv')

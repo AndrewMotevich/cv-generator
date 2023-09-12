@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, take, tap } from 'rxjs';
 import {
   CV,
   CVS,
@@ -57,7 +57,7 @@ export class CvsEffects {
   postMany$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CvsActions.addCvs),
-      switchMap(() => this.cvsFacade.employeeNewCvs$),
+      switchMap(() => this.cvsFacade.employeeNewCvs$.pipe(take(1))),
       switchMap((cvs) =>
         this.cvsService.addCvs(cvs).pipe(
           map(() => CvsActions.addCvsSuccess()),
@@ -76,7 +76,7 @@ export class CvsEffects {
   putMany$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CvsActions.updateCvs),
-      switchMap(() => this.cvsFacade.employeeOldCvs$),
+      switchMap(() => this.cvsFacade.employeeOldCvs$.pipe(take(1))),
       switchMap((cvs) =>
         this.cvsService.updateCvs(cvs).pipe(
           map(() => CvsActions.updateCvsSuccess()),

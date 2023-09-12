@@ -25,6 +25,7 @@ export const CvsReducer = createReducer(
   on(CvsActions.loadCvsSuccess, (state, { cvs }) => {
     return cvsAdapter.setAll(cvs, { ...state, loaded: true });
   }),
+
   on(CvsActions.loadCvByIdSuccess, (state, { cv }) => {
     return { ...state, selectedCv: cv };
   }),
@@ -37,7 +38,15 @@ export const CvsReducer = createReducer(
     return cvsAdapter.updateOne(update, state);
   }),
 
+  on(CvsActions.updateNewCvsInStore, (state, { newCvs }) => {
+    return cvsAdapter.updateMany(newCvs, state);
+  }),
+
   on(CvsActions.deleteCvInStore, (state, { id }) => {
     return cvsAdapter.removeOne(id, state);
+  }),
+
+  on(CvsActions.clearSelectedCv, (state) => {
+    return {...state, selectedCv: null}
   })
 );

@@ -2,9 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  DoCheck,
   Input,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -20,7 +19,7 @@ import { EMPTY_CV } from '../../constants/empty-cv.const';
   styleUrls: ['./cvs-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CvsSidebarComponent implements OnInit, DoCheck {
+export class CvsSidebarComponent implements OnInit {
   @Input() public cvForm: FormControl;
   public cvsNames: ICvName[];
 
@@ -38,13 +37,6 @@ export class CvsSidebarComponent implements OnInit, DoCheck {
       this.cvsNames = cvs;
       this.cdr.markForCheck();
     });
-  }
-
-  public ngDoCheck() {
-    if (this.cvForm.value) {
-      this.cvsFacade.setSelectedCv(this.cvForm.value.id);
-      this.cvId = this.cvForm.value.id;
-    }
   }
 
   public addNewCv() {

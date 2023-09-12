@@ -76,8 +76,8 @@ export class EditEmployeePageComponent implements OnInit {
       this.employeeId,
       this.cvaEmployeeInfoForm.getRawValue()
     );
-    this.cvsFacade.addCvs();
     this.cvsFacade.updateCvs();
+    this.cvsFacade.addCvs();
   }
 
   public updateCv() {

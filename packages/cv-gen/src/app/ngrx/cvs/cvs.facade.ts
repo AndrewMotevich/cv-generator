@@ -1,11 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { map } from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { map, take, tap } from 'rxjs';
 import { CvDto } from '../../employees/models/cvs.model';
 import * as CvsActions from './cvs.actions';
 import * as CvsSelectors from './cvs.selectors';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Injectable()
@@ -64,7 +64,8 @@ export class CvsFacade {
     this.cvsList$
       .pipe(
         untilDestroyed(this),
-        map((cvs) => cvs.find((cv) => cv.id === id))
+        map((cvs) => cvs.find((cv) => cv.id === id)),
+        take(1)
       )
       .subscribe((cv) => {
         this.store.dispatch(CvsActions.loadCvByIdSuccess({ cv }));
@@ -81,11 +82,31 @@ export class CvsFacade {
     );
   }
 
+  public updateNewCvsInStore(employeeId: number) {
+    return this.employeeNewCvs$.pipe(
+      take(1),
+      map((cvs) =>
+        cvs.map((cv) => ({
+          id: cv.id,
+          changes: { employeeId },
+        }))
+      ),
+      tap((newCvs) => {
+        this.store.dispatch(CvsActions.updateNewCvsInStore({ newCvs }));
+        this.store.dispatch(CvsActions.addCvs());
+      })
+    );
+  }
+
   public deleteCv(id: number) {
     this.store.dispatch(CvsActions.deleteCv({ id }));
   }
 
   public deleteCvInStore(id: number) {
     this.store.dispatch(CvsActions.deleteCvInStore({ id }));
+  }
+
+  public clearSelectedCv() {
+    this.store.dispatch(CvsActions.clearSelectedCv());
   }
 }

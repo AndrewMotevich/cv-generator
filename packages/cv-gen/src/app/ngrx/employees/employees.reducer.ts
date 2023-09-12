@@ -31,8 +31,10 @@ export const EmployeesReducer = createReducer(
     return employeesAdapter.setAll(employees, state);
   }),
   on(EmployeesActions.loadEmployeeByIdSuccess, (state, { employee }) => {
-    return { ...state, selectedEmployee: employee };
+    return { ...state, selectedEmployee: employee, loaded: true };
   }),
+
+  //
   on(EmployeesActions.setLoadedFalse, (state) => {
     return {...state, loaded: false}
   }),

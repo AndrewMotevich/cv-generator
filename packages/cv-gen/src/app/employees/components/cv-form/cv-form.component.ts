@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  OnInit
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -16,9 +17,9 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { SharedFacade } from '../../../ngrx/shared/shared.facade';
 import { BaseCvaForm } from '../../../shared/classes/base-cva-form.class';
+import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 import { CV_CONTROLS } from '../../constants/cv-form-controls.const';
 import { CvDto } from '../../models/cvs.model';
-import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -29,7 +30,7 @@ import { markAllAsDirty } from '../../../shared/utils/mark-as-dirty.util';
 })
 export class CvFormComponent
   extends BaseCvaForm
-  implements ControlValueAccessor, OnInit
+  implements ControlValueAccessor, OnInit, OnDestroy
 {
   public showCvForm = false;
 
@@ -85,10 +86,9 @@ export class CvFormComponent
         );
       });
 
-      formProjectsArray.controls.forEach(control => {
-        control.markAllAsTouched(),
-        control.markAsDirty()
-      })
+      formProjectsArray.controls.forEach((control) => {
+        control.markAllAsTouched(), control.markAsDirty();
+      });
     }
   }
 
@@ -106,9 +106,13 @@ export class CvFormComponent
         );
       });
 
-      formLanguageArray.controls.forEach(control => {
-        markAllAsDirty((control as FormGroup).controls)
-      })
+      formLanguageArray.controls.forEach((control) => {
+        markAllAsDirty((control as FormGroup).controls);
+      });
     }
+  }
+
+  public ngOnDestroy() {
+    this.cvsFacade.clearSelectedCv();
   }
 }

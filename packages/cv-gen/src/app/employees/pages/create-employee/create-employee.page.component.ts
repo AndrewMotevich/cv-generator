@@ -36,7 +36,8 @@ export class CreateEmployeePageComponent implements OnInit {
     private messageService: ToastMessageService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.cvaEmployeeInfoForm.setValue(EMPTY_EMPLOYEE);
     this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_CREATE);
     this.employeesFacade.setSelectedEmployee(EMPTY_EMPLOYEE);
     this.cvsFacade.employeesCvs$
@@ -51,21 +52,30 @@ export class CreateEmployeePageComponent implements OnInit {
 
   public saveEmployeeWithCvs() {
     this.updateCv();
+    if (this.isEmployeeFormInvalid()) return;
+    if (this.isCvFormInvalid()) return;
+    this.employeesFacade.addEmployee(this.cvaEmployeeInfoForm.getRawValue());
+  }
+
+  public isEmployeeFormInvalid() {
     if (this.cvaEmployeeInfoForm.invalid) {
       this.messageService.showWarningMessage(EMPLOYEE_VALIDATE_WARNING);
       this.cvaEmployeeInfoForm.markAllAsTouched();
       this.activeTab = 0;
-      return;
+      return true;
     }
+    return false;
+  }
+
+  private isCvFormInvalid() {
     if (this.invalidCv) {
       this.messageService.showWarningMessage(CVS_VALIDATE_WARNING);
       this.activeTab = 1;
       this.cvaCvForm.setValue(this.invalidCv);
       this.cvaCvForm.markAllAsTouched();
-      return;
+      return true;
     }
-    this.employeesFacade.addEmployee(this.cvaEmployeeInfoForm.getRawValue());
-    this.cvsFacade.addCvs();
+    return false;
   }
 
   public updateCv() {

@@ -29,7 +29,9 @@ export class EmployeesApiService {
   }
 
   public updateEmployee(id: number, employeeDto: EmployeeDto) {
-    return this.http.put<IEmployee>(`${API_PATH}/employees/${id}`, employeeDto);
+    const dto = {...employeeDto}
+    delete dto.id
+    return this.http.put<IEmployee>(`${API_PATH}/employees/${id}`, dto);
   }
 
   public deleteEmployee(id: number) {

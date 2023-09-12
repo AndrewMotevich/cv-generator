@@ -21,10 +21,12 @@ import { EmployeesApiService } from '../../shared/services/employees-api.service
 import { ToastMessageService } from '../../shared/services/toast-messages.service';
 import * as EmployeesActions from './employees.actions';
 import { EmployeesFacade } from './employees.facade';
+import { CvsFacade } from '../cvs/cvs.facade';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeesEffects {
   constructor(
+    private cvsFacade: CvsFacade,
     private employeesFacade: EmployeesFacade,
     private employeesService: EmployeesApiService,
     private router: Router,
@@ -99,6 +101,7 @@ export class EmployeesEffects {
       ofType(EmployeesActions.addEmployee),
       switchMap((action) =>
         this.employeesService.addEmployee(action.employee).pipe(
+          switchMap((res) => this.cvsFacade.updateNewCvsInStore(res.id)),
           map(() => {
             this.messageService.showSuccessMessage(
               VALUE_ADDED_SUCCESS,

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, map } from 'rxjs';
+import { combineLatest, delay, forkJoin, map } from 'rxjs';
 import { API_PATH } from '../../../environments/environment.development';
 import { CvDto, ICv } from '../../employees/models/cvs.model';
 import { ProjectsAdapter } from './projects-adapter.service';
@@ -37,10 +37,10 @@ export class CvApiService {
       this.http.put<ICv>(
         `${API_PATH}/cvs/${cv.id}`,
         this.transformLanguageInDto(cv)
-      )
+      ).pipe(delay(1000))
     );
 
-    return forkJoin(observersArray);
+    return combineLatest(observersArray);
   }
 
   public deleteCv(id: number) {
@@ -66,8 +66,11 @@ export class CvApiService {
   }
 
   private transformLanguageInDto(cvDto: CvDto) {
+    const dto = {...cvDto}
+    delete dto.id
+    delete dto.isInvalid
     return {
-      ...cvDto,
+      ...dto,
       language: cvDto.language.map((lang) => ({
         name: { name: lang.name },
         level: { name: lang.level },
