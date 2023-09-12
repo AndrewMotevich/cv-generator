@@ -2,12 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { EMPLOYEES } from '../../shared/constants/routing-paths.consts';
-import { EmployeesApiService } from '../../shared/services/employees-api.service';
-import * as EmployeesActions from './employees.actions';
-import { ToastMessageService } from '../../shared/services/toast-messages.service';
-import { EmployeesFacade } from './employees.facade';
+import { EMPLOYEES as employeeUrl } from '../../shared/constants/routing-paths.consts';
 import {
+  EMPLOYEE,
+  EMPLOYEES,
   VALUES_LOADED_FAILURE,
   VALUES_LOADED_SUCCESS,
   VALUE_ADDED_FAILURE,
@@ -19,7 +17,10 @@ import {
   VALUE_UPDATED_FAILURE,
   VALUE_UPDATED_SUCCESS,
 } from '../../shared/constants/toasts-messages.consts';
-import { TranslateService } from '@ngx-translate/core';
+import { EmployeesApiService } from '../../shared/services/employees-api.service';
+import { ToastMessageService } from '../../shared/services/toast-messages.service';
+import * as EmployeesActions from './employees.actions';
+import { EmployeesFacade } from './employees.facade';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeesEffects {
@@ -27,12 +28,8 @@ export class EmployeesEffects {
     private employeesFacade: EmployeesFacade,
     private employeesService: EmployeesApiService,
     private router: Router,
-    private messageService: ToastMessageService,
-    private translateService: TranslateService
+    private messageService: ToastMessageService
   ) {}
-
-  private translatedEmployees = this.translateService.instant('Employees');
-  private translatedEmployee = this.translateService.instant('Employee');
   private actions$ = inject(Actions);
 
   get$ = createEffect(() =>
@@ -46,7 +43,7 @@ export class EmployeesEffects {
           map((employees) => {
             this.messageService.showSuccessMessage(
               VALUES_LOADED_SUCCESS,
-              this.translatedEmployees
+              EMPLOYEES
             );
             return EmployeesActions.loadEmployeesSuccess({
               employees: employees,
@@ -55,7 +52,7 @@ export class EmployeesEffects {
           catchError((error) => {
             this.messageService.showErrorMessage(
               VALUES_LOADED_FAILURE,
-              this.translatedEmployees
+              EMPLOYEES
             );
             return of(EmployeesActions.loadEmployeesFailure({ error }));
           })
@@ -78,14 +75,14 @@ export class EmployeesEffects {
           map((employee) => {
             this.messageService.showSuccessMessage(
               VALUE_LOADED_SUCCESS,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return EmployeesActions.loadEmployeeByIdSuccess({ employee });
           }),
           catchError((error) => {
             this.messageService.showErrorMessage(
               VALUE_LOADED_FAILURE,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return of(EmployeesActions.loadEmployeesFailure({ error }));
           })
@@ -105,18 +102,15 @@ export class EmployeesEffects {
           map(() => {
             this.messageService.showSuccessMessage(
               VALUE_ADDED_SUCCESS,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return EmployeesActions.addEmployeeSuccess();
           }),
           tap(() => {
-            this.router.navigate([EMPLOYEES.path]);
+            this.router.navigate([employeeUrl.path]);
           }),
           catchError((error) => {
-            this.messageService.showErrorMessage(
-              VALUE_ADDED_FAILURE,
-              this.translatedEmployee
-            );
+            this.messageService.showErrorMessage(VALUE_ADDED_FAILURE, EMPLOYEE);
             return of(EmployeesActions.addEmployeeFailure({ error }));
           })
         )
@@ -132,14 +126,14 @@ export class EmployeesEffects {
           map(() => {
             this.messageService.showSuccessMessage(
               VALUE_UPDATED_SUCCESS,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return EmployeesActions.updateEmployeeSuccess();
           }),
           catchError((error) => {
             this.messageService.showErrorMessage(
               VALUE_UPDATED_FAILURE,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return of(EmployeesActions.updateEmployeeFailure({ error }));
           })
@@ -156,17 +150,17 @@ export class EmployeesEffects {
           map(() => {
             this.messageService.showSuccessMessage(
               VALUE_DELETED_SUCCESS,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return EmployeesActions.deleteEmployeeSuccess();
           }),
           tap(() => {
-            this.router.navigate([EMPLOYEES.path]);
+            this.router.navigate([employeeUrl.path]);
           }),
           catchError((error) => {
             this.messageService.showErrorMessage(
               VALUE_DELETED_FAILURE,
-              this.translatedEmployee
+              EMPLOYEE
             );
             return of(EmployeesActions.deleteEmployeeFailure({ error }));
           })

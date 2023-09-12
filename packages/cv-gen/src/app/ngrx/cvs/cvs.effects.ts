@@ -1,12 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { TranslateService } from '@ngx-translate/core';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import {
+  CV,
+  CVS,
   VALUES_LOADED_FAILURE,
   VALUE_ADDED_FAILURE,
   VALUE_DELETED_FAILURE,
-  VALUE_LOADED_FAILURE
+  VALUE_LOADED_FAILURE,
+  VALUE_UPDATED_FAILURE,
 } from '../../shared/constants/toasts-messages.consts';
 import { CvApiService } from '../../shared/services/cv-api.service';
 import { ToastMessageService } from '../../shared/services/toast-messages.service';
@@ -18,11 +20,8 @@ export class CvsEffects {
   constructor(
     private cvsService: CvApiService,
     private cvsFacade: CvsFacade,
-    private errorsService: ToastMessageService,
-    private translateService: TranslateService
+    private errorsService: ToastMessageService
   ) {}
-  private translationCVS = this.translateService.instant('Cvs');
-  private translationCV = this.translateService.instant('Cv');
   private actions$ = inject(Actions);
 
   get$ = createEffect(() =>
@@ -32,10 +31,7 @@ export class CvsEffects {
         this.cvsService.getCvs().pipe(
           map((cvs) => CvsActions.loadCvsSuccess({ cvs })),
           catchError((error) => {
-            this.errorsService.showErrorMessage(
-              VALUES_LOADED_FAILURE,
-              this.translationCVS
-            );
+            this.errorsService.showErrorMessage(VALUES_LOADED_FAILURE, CVS);
             return of(CvsActions.loadCvsFailure({ error }));
           })
         )
@@ -50,10 +46,7 @@ export class CvsEffects {
         this.cvsService.getCvById(action.id).pipe(
           map((cv) => CvsActions.loadCvByIdSuccess({ cv })),
           catchError((error) => {
-            this.errorsService.showErrorMessage(
-              VALUE_LOADED_FAILURE,
-              this.translationCV
-            );
+            this.errorsService.showErrorMessage(VALUE_LOADED_FAILURE, CV);
             return of(CvsActions.loadCvsFailure({ error }));
           })
         )
@@ -72,10 +65,7 @@ export class CvsEffects {
             this.cvsFacade.loadCvs();
           }),
           catchError((error) => {
-            this.errorsService.showErrorMessage(
-              VALUE_ADDED_FAILURE,
-              this.translationCV
-            );
+            this.errorsService.showErrorMessage(VALUE_ADDED_FAILURE, CV);
             return of(CvsActions.addCvsFailure({ error }));
           })
         )
@@ -94,10 +84,7 @@ export class CvsEffects {
             this.cvsFacade.loadCvs();
           }),
           catchError((error) => {
-            // this.errorsService.showErrorMessage(
-            //   VALUE_UPDATED_FAILURE,
-            //   this.translationCV
-            // );
+            this.errorsService.showErrorMessage(VALUE_UPDATED_FAILURE, CV);
             return of(CvsActions.updateCvsFailure({ error }));
           })
         )
@@ -112,10 +99,7 @@ export class CvsEffects {
         this.cvsService.deleteCv(action.id).pipe(
           map(() => CvsActions.deleteCvSuccess()),
           catchError((error) => {
-            this.errorsService.showErrorMessage(
-              VALUE_DELETED_FAILURE,
-              this.translationCV
-            );
+            this.errorsService.showErrorMessage(VALUE_DELETED_FAILURE, CV);
             return of(CvsActions.deleteCvFailure({ error }));
           })
         )

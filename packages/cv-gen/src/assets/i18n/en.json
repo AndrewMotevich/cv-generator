@@ -75,6 +75,7 @@
     "VALUE_DELETED_FAILURE": "{{value}} deleted failure",
     "EMPLOYEE_VALIDATE_WARNING": "You should write all employee data",
     "CVS_VALIDATE_WARNING": "You should write all cvs data",
+    "SHARED_LOADED_FAILURE": "Shared loaded failure",
     "AUTH_LOGIN_FAILURE": "Login failure, check you credentials!!!",
     "AUTH_REFRESH_FAILURE_INFO": "Refresh your previous credentials failure! Please, re-login!!!",
     "AUTH_LOGOUT_FAILURE": "Logout failure!!!"

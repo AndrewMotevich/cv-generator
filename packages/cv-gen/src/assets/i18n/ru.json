@@ -75,6 +75,7 @@
     "VALUE_DELETED_FAILURE": "{{value}} не удален",
     "EMPLOYEE_VALIDATE_WARNING": "Заполните все поля для сотрудника",
     "CVS_VALIDATE_WARNING": "Заполните все поля для всех резюме",
+    "SHARED_LOADED_FAILURE": "Дополнительные коллекции не загружены",
     "AUTH_LOGIN_FAILURE": "Вход неуспешен!!! Проверьте данные для входа",
     "AUTH_REFRESH_FAILURE_INFO": "Вход по предыдущим данным неуспешен!!! Войдите в приложение снова!",
     "AUTH_LOGOUT_FAILURE": "Выход из приложения не успешен"

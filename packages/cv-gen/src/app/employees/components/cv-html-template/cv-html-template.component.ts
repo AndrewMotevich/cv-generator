@@ -20,6 +20,7 @@ export class CvHtmlTemplateComponent implements OnInit {
     this.cvsFacade.selectedCv$
       .pipe(untilDestroyed(this))
       .subscribe((cv) => (this.cv = cv));
+      //create pdf
     // this.location.back()
   }
 }

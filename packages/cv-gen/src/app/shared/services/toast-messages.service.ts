@@ -11,7 +11,10 @@ export class ToastMessageService {
 
   public showErrorMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.ERROR');
-    const translatedMessage = this.translateService.instant(message, {value});
+    const translatedValue = this.translateService.instant(value);
+    const translatedMessage = this.translateService.instant(message, {
+      value: translatedValue,
+    });
     this.messageService.add({
       severity: 'error',
       summary,
@@ -21,7 +24,10 @@ export class ToastMessageService {
 
   public showSuccessMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.SUCCESS');
-    const translatedMessage = this.translateService.instant(message, {value});
+    const translatedValue = this.translateService.instant(value);
+    const translatedMessage = this.translateService.instant(message, {
+      value: translatedValue,
+    });
     this.messageService.add({
       severity: 'success',
       summary,
@@ -29,9 +35,12 @@ export class ToastMessageService {
     });
   }
 
-  public showWarningMessage(message: string) {
+  public showWarningMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.WARNING');
-    const translatedMessage = this.translateService.instant(message);
+    const translatedValue = this.translateService.instant(value);
+    const translatedMessage = this.translateService.instant(message, {
+      value: translatedValue,
+    });
     this.messageService.add({
       severity: 'warn',
       summary,
@@ -39,9 +48,12 @@ export class ToastMessageService {
     });
   }
 
-  public showInfoMessage(message: string) {
+  public showInfoMessage(message: string, value?: string) {
     const summary = this.translateService.instant('MESSAGES.INFO');
-    const translatedMessage = this.translateService.instant(message);
+    const translatedValue = this.translateService.instant(value);
+    const translatedMessage = this.translateService.instant(message, {
+      value: translatedValue,
+    });
     this.messageService.add({
       severity: 'info',
       summary,
