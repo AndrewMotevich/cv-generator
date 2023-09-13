@@ -22,6 +22,7 @@ import { BREADCRUMB_PROJECT_LIST } from '../../constants/breadcrumbs.const';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListPageComponent implements OnInit {
+  public loaded$ = this.projectsFacade.loaded$;
   public projects: Observable<ProjectTableData[]>;
 
   public readonly cols: IColumns[] = ProjectColumns;

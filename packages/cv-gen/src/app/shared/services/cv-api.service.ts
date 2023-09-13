@@ -34,11 +34,9 @@ export class CvApiService {
 
   public updateCvs(cvDtoArray: CvDto[]) {
     // const observersArray = cvDtoArray.map((cv) => {
-    //   return  this.http.put<ICv>(
-    //         `${API_PATH}/cvs/${cv.id}`,
-    //         this.transformLanguageInDto(cv)
-    //       )
-    //     )
+    //   return this.http.put<ICv>(
+    //     `${API_PATH}/cvs/${cv.id}`,
+    //     this.transformLanguageInDto(cv)
     //   );
     // });
 

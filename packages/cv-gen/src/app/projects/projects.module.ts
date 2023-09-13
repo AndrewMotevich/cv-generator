@@ -9,8 +9,9 @@ import { CreateProjectPageComponent } from './pages/create-project/create-projec
 import { EditProjectPageComponent } from './pages/edit-project/edit-project.page.component';
 import { ProjectListPageComponent } from './pages/projects-list/projects-list.page.component';
 
-import { ButtonModule } from 'primeng/button';
 import { TranslateModule } from '@ngx-translate/core';
+import { ButtonModule } from 'primeng/button';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     BaseTable2Component,
     ProjectFormComponent,
     ButtonModule,
+    ProgressSpinnerModule,
   ],
 })
 export class ProjectsModule {}

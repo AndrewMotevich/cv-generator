@@ -1,4 +1,6 @@
-<cv-gen-project-form [formControl]="cvaProjectForm">
+<cv-gen-project-form
+  [formControl]="cvaProjectForm"
+  *ngIf="(loaded$ | async); else projectSpinner">
   <div class="button-wrapper">
     <div class="buttons-container">
       <div>
@@ -20,3 +22,9 @@
     </div>
   </div>
 </cv-gen-project-form>
+
+<ng-template #projectSpinner>
+  <div class="align-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

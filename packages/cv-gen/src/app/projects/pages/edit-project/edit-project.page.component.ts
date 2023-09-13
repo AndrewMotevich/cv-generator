@@ -17,6 +17,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProjectPageComponent implements OnInit {
+  public loaded$ = this.projectsFacade.loaded$
   public cvaProjectForm = new FormControl(null);
 
   private id: number;

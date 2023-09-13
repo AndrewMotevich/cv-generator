@@ -27,18 +27,20 @@ export const initialEmployeesState: EmployeesState =
 
 export const EmployeesReducer = createReducer(
   initialEmployeesState,
+  on(EmployeesActions.getEmployees, (state) => {
+    return { ...state, loaded: false };
+  }),
   on(EmployeesActions.loadEmployeesSuccess, (state, { employees }) => {
-    return employeesAdapter.setAll(employees, state);
+    return {
+      ...employeesAdapter.setAll(employees, state),
+      loaded: true,
+    };
+  }),
+
+  on(EmployeesActions.getEmployeeById, (state) => {
+    return { ...state, loaded: false };
   }),
   on(EmployeesActions.loadEmployeeByIdSuccess, (state, { employee }) => {
     return { ...state, selectedEmployee: employee, loaded: true };
-  }),
-
-  //
-  on(EmployeesActions.setLoadedFalse, (state) => {
-    return {...state, loaded: false}
-  }),
-  on(EmployeesActions.setLoadedTrue, (state) => {
-    return {...state, loaded: true}
-  }),
+  })
 );

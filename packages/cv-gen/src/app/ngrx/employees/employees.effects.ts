@@ -19,15 +19,13 @@ import {
 } from '../../shared/constants/toasts-messages.consts';
 import { EmployeesApiService } from '../../shared/services/employees-api.service';
 import { ToastMessageService } from '../../shared/services/toast-messages.service';
-import * as EmployeesActions from './employees.actions';
-import { EmployeesFacade } from './employees.facade';
 import { CvsFacade } from '../cvs/cvs.facade';
+import * as EmployeesActions from './employees.actions';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeesEffects {
   constructor(
     private cvsFacade: CvsFacade,
-    private employeesFacade: EmployeesFacade,
     private employeesService: EmployeesApiService,
     private router: Router,
     private messageService: ToastMessageService
@@ -37,9 +35,6 @@ export class EmployeesEffects {
   get$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeesActions.getEmployees),
-      tap(() => {
-        this.employeesFacade.setLoadedFalse();
-      }),
       switchMap(() =>
         this.employeesService.getEmployees().pipe(
           map((employees) => {
@@ -60,18 +55,12 @@ export class EmployeesEffects {
           })
         )
       ),
-      tap(() => {
-        this.employeesFacade.setLoadedTrue();
-      })
     )
   );
 
   getById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeesActions.getEmployeeById),
-      tap(() => {
-        this.employeesFacade.setLoadedFalse();
-      }),
       switchMap((action) =>
         this.employeesService.getEmployeeById(action.id).pipe(
           map((employee) => {
@@ -90,9 +79,6 @@ export class EmployeesEffects {
           })
         )
       ),
-      tap(() => {
-        this.employeesFacade.setLoadedTrue();
-      })
     )
   );
 

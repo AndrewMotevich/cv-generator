@@ -76,11 +76,3 @@ export const deleteEmployeeFailure = createAction(
   '[Employees/API] Delete Employee Failure',
   props<{ error: string }>()
 );
-
-// Set loaded
-export const setLoadedTrue = createAction(
-  '[Employees/Api] Set loaded true'
-)
-export const setLoadedFalse = createAction(
-  '[Employees/Api] Set loaded false'
-)

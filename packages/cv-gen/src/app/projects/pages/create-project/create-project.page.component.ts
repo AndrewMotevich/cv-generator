@@ -11,6 +11,7 @@ import { BREADCRUMB_PROJECT_CREATE } from '../../constants/breadcrumbs.const';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateProjectPageComponent implements OnInit {
+  public loaded$ = this.projectsFacade.loaded$
   public cvaProjectForm = new FormControl(null);
 
   constructor(
