@@ -21,6 +21,11 @@ export const getCvById = createAction(
   props<{ id: number }>()
 );
 
+export const setSelectedCvById = createAction(
+  '[Cvs/API] Set selected Cv by id',
+  props<{ id: number }>()
+);
+
 export const loadCvByIdSuccess = createAction(
   '[Cvs/API] Load selected Cv by id Success',
   props<{ cv: CvDto }>()
@@ -49,9 +54,9 @@ export const addCvsFailure = createAction(
 // Update cv
 export const updateCvs = createAction('[Cvs/Page] Update Cvs at backend');
 
-export const updateNewCvsInStore = createAction(
+export const addEmployeeIdToNewCvs = createAction(
   '[Cvs/Page] Update employeeId for new cvs in store',
-  props<{ newCvs: Update<CvDto>[] }>()
+  props<{ employeeId: number }>()
 );
 
 export const updateCvInStore = createAction(

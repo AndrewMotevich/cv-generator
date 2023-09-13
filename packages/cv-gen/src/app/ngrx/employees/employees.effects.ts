@@ -101,8 +101,8 @@ export class EmployeesEffects {
       ofType(EmployeesActions.addEmployee),
       switchMap((action) =>
         this.employeesService.addEmployee(action.employee).pipe(
-          switchMap((res) => this.cvsFacade.updateNewCvsInStore(res.id)),
-          map(() => {
+          map((res) => {
+            this.cvsFacade.addCvsToNewEmployee(res.id)
             this.messageService.showSuccessMessage(
               VALUE_ADDED_SUCCESS,
               EMPLOYEE

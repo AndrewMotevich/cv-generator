@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { combineLatest, map } from 'rxjs';
+import { combineLatest, concatMap, delay, map, of } from 'rxjs';
 import { API_PATH } from '../../../environments/environment.development';
 import { CvDto, ICv } from '../../employees/models/cvs.model';
 import { ProjectsAdapter } from './projects-adapter.service';
@@ -26,20 +26,34 @@ export class CvApiService {
 
   public addCvs(cvDtoArray: CvDto[]) {
     const observersArray = cvDtoArray.map((cv) =>
-      this.http
-        .post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
+      this.http.post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
     );
 
     return combineLatest(observersArray);
   }
 
   public updateCvs(cvDtoArray: CvDto[]) {
-    const observersArray = cvDtoArray.map((cv) =>
-      this.http
-        .put<ICv>(`${API_PATH}/cvs/${cv.id}`, this.transformLanguageInDto(cv))
-    );
+    // const observersArray = cvDtoArray.map((cv) => {
+    //   return  this.http.put<ICv>(
+    //         `${API_PATH}/cvs/${cv.id}`,
+    //         this.transformLanguageInDto(cv)
+    //       )
+    //     )
+    //   );
+    // });
 
-    return combineLatest(observersArray);
+    // return combineLatest(observersArray);
+
+    return combineLatest(
+      cvDtoArray.map((cv, index) =>
+        of(cv).pipe(
+          delay(index * 300),
+          concatMap((cvItem) =>
+            this.http.put<ICv>(`${API_PATH}/cvs/${cv.id}`, this.transformLanguageInDto(cvItem))
+          )
+        )
+      )
+    );
   }
 
   public deleteCv(id: number) {
