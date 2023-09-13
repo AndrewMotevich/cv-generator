@@ -57,7 +57,7 @@ export class CvsEffects {
   postMany$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CvsActions.addCvs),
-      switchMap(() => this.cvsFacade.employeeNewCvs$.pipe(take(1))),
+      switchMap(() => this.cvsFacade.employeeNewCvs$),
       switchMap((cvs) =>
         this.cvsService.addCvs(cvs).pipe(
           map(() => CvsActions.addCvsSuccess()),

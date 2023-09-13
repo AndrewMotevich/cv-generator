@@ -28,6 +28,7 @@
     "MAX_LENGTH": "Max length {{maxlength}}!"
   },
   "PLACEHOLDERS": {
+    "CV_NAME": "Enter cv name",
     "FIRST_NAME": "Enter your first name",
     "LAST_NAME": "Enter your last name",
     "DEPARTMENT": "Enter your department",

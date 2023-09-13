@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { combineLatest, delay, forkJoin, map } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { API_PATH } from '../../../environments/environment.development';
 import { CvDto, ICv } from '../../employees/models/cvs.model';
 import { ProjectsAdapter } from './projects-adapter.service';
@@ -26,18 +26,17 @@ export class CvApiService {
 
   public addCvs(cvDtoArray: CvDto[]) {
     const observersArray = cvDtoArray.map((cv) =>
-      this.http.post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
+      this.http
+        .post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
     );
 
-    return forkJoin(observersArray);
+    return combineLatest(observersArray);
   }
 
   public updateCvs(cvDtoArray: CvDto[]) {
     const observersArray = cvDtoArray.map((cv) =>
-      this.http.put<ICv>(
-        `${API_PATH}/cvs/${cv.id}`,
-        this.transformLanguageInDto(cv)
-      ).pipe(delay(1000))
+      this.http
+        .put<ICv>(`${API_PATH}/cvs/${cv.id}`, this.transformLanguageInDto(cv))
     );
 
     return combineLatest(observersArray);
@@ -66,9 +65,9 @@ export class CvApiService {
   }
 
   private transformLanguageInDto(cvDto: CvDto) {
-    const dto = {...cvDto}
-    delete dto.id
-    delete dto.isInvalid
+    const dto = { ...cvDto };
+    delete dto.id;
+    delete dto.isInvalid;
     return {
       ...dto,
       language: cvDto.language.map((lang) => ({

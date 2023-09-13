@@ -6,6 +6,7 @@ import { filter, map } from 'rxjs';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
+import { CV_TO_PDF } from '../../../shared/constants/routing-paths.consts';
 import {
   CVS_VALIDATE_WARNING,
   EMPLOYEE_VALIDATE_WARNING,
@@ -13,7 +14,6 @@ import {
 import { ToastMessageService } from '../../../shared/services/toast-messages.service';
 import { BREADCRUMB_EMPLOYEE_EDIT_FACTORY } from '../../constants/breadcrumbs.consts';
 import { CvDto } from '../../models/cvs.model';
-import { CV_TO_PDF } from '../../../shared/constants/routing-paths.consts';
 
 @UntilDestroy()
 @Component({
@@ -78,6 +78,7 @@ export class EditEmployeePageComponent implements OnInit {
     );
     this.cvsFacade.updateCvs();
     this.cvsFacade.addCvs();
+    this.cvsFacade.clearSelectedCv()
   }
 
   public updateCv() {
@@ -117,6 +118,6 @@ export class EditEmployeePageComponent implements OnInit {
   public toPDF() {
     this.updateCv();
     if (this.isCvFormInvalid()) return;
-    this.router.navigate([CV_TO_PDF.fullPath]);
+    window.open(CV_TO_PDF.fullPath + this.cvaCvForm.value.id, '_blank');
   }
 }

@@ -56,6 +56,6 @@ export const ID: IRoutingPath = {
 }
 
 export const CV_TO_PDF: IRoutingPath = {
-  path: 'cv',
-  fullPath: '/cv'
+  path: 'cv/:id',
+  fullPath: '/cv/'
 }
