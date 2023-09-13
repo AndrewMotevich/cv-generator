@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { ConfirmationService } from 'primeng/api';
 import { filter, map } from 'rxjs';
 import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
@@ -20,6 +21,7 @@ import { CvDto } from '../../models/cvs.model';
   selector: 'cv-gen-edit-employee.page',
   templateUrl: './edit-employee.page.component.html',
   styleUrls: ['./edit-employee.page.component.scss'],
+  providers: [ConfirmationService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditEmployeePageComponent implements OnInit {
@@ -40,7 +42,7 @@ export class EditEmployeePageComponent implements OnInit {
     private employeesFacade: EmployeesFacade,
     private route: ActivatedRoute,
     private coreFacade: CoreFacade,
-    private router: Router
+    private confirmationService: ConfirmationService,
   ) {}
 
   public ngOnInit() {
@@ -117,7 +119,14 @@ export class EditEmployeePageComponent implements OnInit {
 
   public toPDF() {
     this.updateCv();
-    if (this.isCvFormInvalid()) return;
-    window.open(CV_TO_PDF.fullPath + this.cvaCvForm.value.id, '_blank');
+    this.confirmationService.confirm({
+      message: 'Are you sure that you save cv before convert?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (this.isCvFormInvalid()) return;
+        window.open(CV_TO_PDF.fullPath + this.cvaCvForm.value.id, '_blank');
+      }
+  });
   }
 }

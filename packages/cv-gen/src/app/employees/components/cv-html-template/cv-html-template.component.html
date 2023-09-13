@@ -20,12 +20,15 @@
     <p class="rela-block list-thing">{{cv.email}}</p>
     <br>
     <p class="rela-block caps side-header">Skills:</p>
-    <div *ngFor="let skill of cv.skills">
-      <p class="rela-block list-thing">{{skill}}</p>
-      <br>
+    <div class="skills-wrapper">
+      <p-tag
+        *ngFor="let skill of cv.skills"
+        [value]="skill"></p-tag>
     </div>
     <br>
-    <p class="rela-block caps side-header">Languages</p>
+    <p
+      class="rela-block caps side-header"
+      *ngIf="cv.language.length > 0">Languages</p>
     <div *ngFor="let lang of cv.language">
       <p class="rela-block list-thing">{{lang.name}}: {{lang.level}}</p>
     </div>
@@ -35,7 +38,11 @@
     <h2 class="rela-block caps title">{{cv.department}} {{cv.specialization}}</h2>
     <div class="rela-block separator"></div>
 
-    <div class="rela-block caps greyed">Projects</div>
+    <div
+      class="rela-block caps greyed"
+      *ngIf="cv.projects.length> 0">
+      Projects
+    </div>
 
     <div *ngFor="let project of cv.projects">
       <h3>{{project.projectName}}</h3>

@@ -10,6 +10,8 @@ import {
   HttpClient,
   HttpClientModule,
 } from '@angular/common/http';
+import { TagModule } from 'primeng/tag';
+
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ToastModule } from 'primeng/toast';
@@ -33,7 +35,8 @@ import { CvHtmlTemplateComponent } from './employees/components/cv-html-template
       },
       useDefaultLang: false,
     }),
-    ToastModule
+    ToastModule,
+    TagModule,
   ],
   providers: [
     {
@@ -41,7 +44,7 @@ import { CvHtmlTemplateComponent } from './employees/components/cv-html-template
       useClass: AuthorizationInterceptor,
       multi: true,
     },
-    MessageService
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })
