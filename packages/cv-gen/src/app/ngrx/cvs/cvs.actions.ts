@@ -22,7 +22,7 @@ export const getCvById = createAction(
 );
 
 export const setSelectedCvById = createAction(
-  '[Cvs/API] Set selected Cv by id',
+  '[Cvs/Page] Set selected Cv by id',
   props<{ id: number }>()
 );
 

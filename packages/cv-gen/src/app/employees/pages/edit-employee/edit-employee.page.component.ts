@@ -42,7 +42,7 @@ export class EditEmployeePageComponent implements OnInit {
     private employeesFacade: EmployeesFacade,
     private route: ActivatedRoute,
     private coreFacade: CoreFacade,
-    private confirmationService: ConfirmationService,
+    private confirmationService: ConfirmationService
   ) {}
 
   public ngOnInit() {
@@ -80,7 +80,8 @@ export class EditEmployeePageComponent implements OnInit {
     );
     this.cvsFacade.updateCvs();
     this.cvsFacade.addCvs();
-    this.cvsFacade.clearSelectedCv()
+    this.cvsFacade.clearSelectedCv();
+    this.activeTab = 0;
   }
 
   public updateCv() {
@@ -119,14 +120,7 @@ export class EditEmployeePageComponent implements OnInit {
 
   public toPDF() {
     this.updateCv();
-    this.confirmationService.confirm({
-      message: 'Are you sure that you save cv before convert?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        if (this.isCvFormInvalid()) return;
-        window.open(CV_TO_PDF.fullPath + this.cvaCvForm.value.id, '_blank');
-      }
-  });
+    if (this.isCvFormInvalid()) return;
+    window.open(CV_TO_PDF.fullPath + this.cvaCvForm.value.id, '_blank');
   }
 }

@@ -15,7 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AccordionModule } from 'primeng/accordion';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ButtonModule } from 'primeng/button';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { TabViewModule } from 'primeng/tabview';
@@ -57,7 +56,6 @@ import { ProjectsAccordionComponent } from './components/projects-accordion/proj
     SelectInputModule,
     AccordionModule,
     ProgressSpinnerModule,
-    ConfirmDialogModule,
   ],
 })
 export class EmployeesModule {}

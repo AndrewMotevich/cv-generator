@@ -3,7 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -11,6 +11,8 @@ import { CvsFacade } from '../../../ngrx/cvs/cvs.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import { ICvName } from '../../../shared/interfaces/cv-name.interface';
 import { EMPTY_CV } from '../../constants/empty-cv.const';
+import { filter } from 'rxjs';
+import { EmployeeDto } from '../../models/employee.model';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -24,6 +26,7 @@ export class CvsSidebarComponent implements OnInit {
   public cvsNames: ICvName[];
 
   public cvId: number;
+  public employeeData: EmployeeDto;
 
   constructor(
     private cvsFacade: CvsFacade,
@@ -37,21 +40,24 @@ export class CvsSidebarComponent implements OnInit {
       this.cvsNames = cvs;
       this.cdr.markForCheck();
     });
+    this.employeeFacade.selectedEmployee$
+      .pipe(untilDestroyed(this), filter(Boolean))
+      .subscribe((employee) => {
+        this.employeeData = employee;
+      });
   }
 
   public addNewCv() {
     this.cvForm.markAsUntouched();
     const id = Date.now();
-    this.employeeFacade.selectedEmployee$
-      .pipe(untilDestroyed(this))
-      .subscribe((employee) => {
-        this.cvsFacade.addCvInStore({
-          ...EMPTY_CV,
-          ...employee,
-          id,
-          employeeId: employee.id,
-        });
-      });
+
+    this.cvsFacade.addCvInStore({
+      ...EMPTY_CV,
+      ...this.employeeData,
+      id,
+      employeeId: this.employeeData.id,
+    });
+
     this.selectCv(id);
   }
 

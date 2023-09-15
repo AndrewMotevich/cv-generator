@@ -33,6 +33,7 @@ export class CvFormComponent
   implements ControlValueAccessor, OnInit, OnDestroy
 {
   public showCvForm = false;
+  public isNew = false;
 
   public departments$ = this.sharedFacade.departments$;
   public specializations$ = this.sharedFacade.specializations$;
@@ -55,6 +56,7 @@ export class CvFormComponent
     });
 
     this.cvsFacade.selectedCv$.pipe(untilDestroyed(this)).subscribe((cv) => {
+      this.isNew = cv?.isNew || false
       this.setFormVisibility(cv);
       this.form.patchValue(cv);
       this.setProjectAccordion(cv);

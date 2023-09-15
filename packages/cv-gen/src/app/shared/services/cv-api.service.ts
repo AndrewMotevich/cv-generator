@@ -25,23 +25,19 @@ export class CvApiService {
   }
 
   public addCvs(cvDtoArray: CvDto[]) {
-    const observersArray = cvDtoArray.map((cv) =>
-      this.http.post<ICv>(`${API_PATH}/cvs`, this.transformLanguageInDto(cv))
+    return combineLatest(
+      cvDtoArray.map((cv, index) =>
+        of(cv).pipe(
+          delay(index * 300),
+          concatMap((cvItem) =>
+            this.http.post<ICv>(`${API_PATH}/cvs/`, this.transformLanguageInDto(cvItem))
+          )
+        )
+      )
     );
-
-    return combineLatest(observersArray);
   }
 
   public updateCvs(cvDtoArray: CvDto[]) {
-    // const observersArray = cvDtoArray.map((cv) => {
-    //   return this.http.put<ICv>(
-    //     `${API_PATH}/cvs/${cv.id}`,
-    //     this.transformLanguageInDto(cv)
-    //   );
-    // });
-
-    // return combineLatest(observersArray);
-
     return combineLatest(
       cvDtoArray.map((cv, index) =>
         of(cv).pipe(

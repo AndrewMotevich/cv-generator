@@ -48,5 +48,5 @@
     <cv-gen-language-accordion [form]="form"></cv-gen-language-accordion>
 
   </form>
-  <ng-content></ng-content>
+  <ng-content *ngIf="!isNew"></ng-content>
 </div>
