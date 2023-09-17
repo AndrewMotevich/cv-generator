@@ -4,6 +4,7 @@ export default {
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/packages/cv-gen',
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
