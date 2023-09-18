@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { Observable } from 'rxjs';
+import { CoreFacade } from '../../../ngrx/core/core.facade';
 import { EmployeesFacade } from '../../../ngrx/employees/employees.facade';
 import {
   CREATE_EMPLOYEES,
@@ -9,10 +10,9 @@ import {
   EMPLOYEES,
 } from '../../../shared/constants/routing-paths.consts';
 import { IColumns } from '../../../shared/interfaces/columns.interfeces';
+import { BREADCRUMB_EMPLOYEE_LIST } from '../../constants/breadcrumbs.consts';
 import { EmployeesColumns } from '../../constants/employees-columns.const';
 import { EmployeeTransformed, IEmployee } from '../../models/employee.model';
-import { CoreFacade } from '../../../ngrx/core/core.facade';
-import { BREADCRUMB_EMPLOYEE_LIST } from '../../constants/breadcrumbs.consts';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -21,8 +21,10 @@ import { BREADCRUMB_EMPLOYEE_LIST } from '../../constants/breadcrumbs.consts';
   styleUrls: ['./employees-list.page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeesListPageComponent implements OnInit {
+export class EmployeesListPageComponent implements OnInit{
   public loaded$ = this.employeesFacade.loaded$
+
+  isH2 = false;
 
   public data: Observable<EmployeeTransformed[]>;
   public cols: IColumns[] = EmployeesColumns;
@@ -36,7 +38,7 @@ export class EmployeesListPageComponent implements OnInit {
     private employeesFacade: EmployeesFacade
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.employeesFacade.loadEmployees();
     this.data = this.employeesFacade.employeesList$;
     this.coreFacade.setBreadcrumbs(BREADCRUMB_EMPLOYEE_LIST);

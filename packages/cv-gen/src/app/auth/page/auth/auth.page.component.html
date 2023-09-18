@@ -2,11 +2,13 @@
   [formGroup]="authForm"
   class="auth-form-wrapper">
   <cv-gen-text-input
+    data-testid="email"
     label="{{'LABELS.EMAIL' | translate}}"
     placeholder="{{'PLACEHOLDERS.EMAIL'| translate}}"
     formControlName="email"></cv-gen-text-input>
 
   <cv-gen-password-input
+    data-testid="password"
     label="{{'LABELS.PASSWORD' | translate}}"
     placeholder="{{'PLACEHOLDERS.PASSWORD'| translate}}"
     formControlName="password"></cv-gen-password-input>
@@ -15,7 +17,7 @@
     label="{{'LABELS.REMEMBER_ME' | translate}}"
     [formControl]="rememberMe"></cv-gen-checkbox-input>
 
-  <p-button (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
+  <p-button data-testid="login" (click)="submitAuth()">{{'BUTTONS.LOG-IN' | translate}}</p-button>
 </form>
 
 <cv-gen-language-button class="lang-button"></cv-gen-language-button>

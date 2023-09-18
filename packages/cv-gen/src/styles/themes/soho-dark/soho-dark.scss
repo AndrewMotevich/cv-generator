@@ -1455,6 +1455,7 @@ p-password.ng-invalid.ng-dirty > .p-password > .p-inputtext {
 }
 
 .p-password-panel {
+  display: none !important;
   padding: 1.25rem;
   background: #282936;
   color: rgba(255, 255, 255, 0.87);
