@@ -1,0 +1,20 @@
+<div class="flex-layout">
+  <label htmlFor="textareaInput">{{label}}</label>
+  <textarea
+    pInputTextarea
+    id="textareaInput"
+    [rows]="rows"
+    [cols]="cols"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+    [placeholder]="placeholder"
+    [autoResize]="true"
+    [formControl]="control"></textarea>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small
+      class="p-error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
+  </ng-template>
+</div>

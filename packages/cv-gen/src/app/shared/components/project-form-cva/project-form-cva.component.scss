@@ -1,0 +1,18 @@
+@import '../../../../styles/abstracts/variables';
+@import '../../../../styles/abstracts/mixins';
+
+:host {
+  display: block;
+  width: 100%;
+  flex: 1;
+  padding: 1rem;
+  background-color: var(--surface-overlay);
+}
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  @include respond-to("medium") {
+    grid-template-columns: 1fr;
+  }
+}

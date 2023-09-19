@@ -1,0 +1,19 @@
+<div class="flex-layout">
+  <label htmlFor="inputSelect">{{label}}</label>
+  <p-dropdown
+    id="inputSelect"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+    [options]="options"
+    [formControl]="control"
+    [optionLabel]="optionLabel"
+    [placeholder]="placeholder"
+    [editable]="true"></p-dropdown>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small
+      class="p-error"
+      translate
+      [translateParams]="{ label: label || 'Field', maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
+  </ng-template>
+</div>

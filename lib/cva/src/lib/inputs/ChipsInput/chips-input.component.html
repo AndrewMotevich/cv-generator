@@ -1,0 +1,18 @@
+<div class="flex-layout">
+  <label htmlFor="chipsInput">{{label}}</label>
+  <p-autoComplete
+    [placeholder]="placeholder"
+    [formControl]="control"
+    [suggestions]="filteredSuggestions"
+    (completeMethod)="filterSuggestions($event)"
+    [multiple]="true"
+    (keydown.enter)="onKeyEnter()"></p-autoComplete>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small
+      class="p-error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
+  </ng-template>
+</div>

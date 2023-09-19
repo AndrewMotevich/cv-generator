@@ -1,0 +1,22 @@
+<div
+  *ngIf="(loaded$ | async); else spinner"
+  class="employee-list-page-wrapper">
+  <div class="add-employee-button">
+    <p-button
+      icon="pi pi-plus"
+      [label]="'BUTTONS.ADD' | translate"
+      [routerLink]="addEmployeePath"></p-button>
+  </div>
+  <div class="table-wrapper">
+    <cv-gen-base-table1
+      [cols]="cols"
+      [data]="data | async"
+      (itemInfo)="navigateToEdit($event)"></cv-gen-base-table1>
+  </div>
+</div>
+
+<h2 *ngIf="isH2">saffd</h2>
+
+<ng-template #spinner>
+  <p-progressSpinner class="employee-list-page-wrapper"></p-progressSpinner>
+</ng-template>

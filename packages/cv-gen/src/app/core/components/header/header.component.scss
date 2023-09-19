@@ -1,0 +1,55 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  background-color: var(--highlight-bg);
+}
+
+header {
+  padding: 0 1rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  color: #ffffff;
+  box-shadow: $shadow;
+  z-index: 3;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  order: 2;
+}
+
+.cv-logo {
+  width: 3rem;
+  height: 3rem;
+  background-image: url('../../../../assets/images/cv-icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.bars-button {
+  order: 1;
+}
+
+.settings-button {
+  order: 3;
+}
+
+.header-buttons-wrapper{
+  order: 4;
+}

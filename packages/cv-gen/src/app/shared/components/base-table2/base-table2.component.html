@@ -1,0 +1,11 @@
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <ng-content select="[header]"></ng-content>
+  </ng-template>
+  <ng-template
+    pTemplate="body"
+    let-rowData
+    let-columns="columns">
+    <ng-content select="[body]"></ng-content>
+  </ng-template>
+</p-table>

@@ -1,0 +1,51 @@
+<div
+  *ngIf="(loaded$ | async); else spinner"
+  class="page-wrapper">
+  <p-tabView
+    class="page-wrapper"
+    [(activeIndex)]="activeTab"
+    (activeIndexChange)="updateCv()">
+
+    <p-tabPanel [header]="'HEADER.INFO' | translate">
+      <cv-gen-info-form [formControl]="cvaEmployeeInfoForm"></cv-gen-info-form>
+    </p-tabPanel>
+
+    <p-tabPanel [header]="'HEADER.CV' | translate">
+      <div class="cv-wrapper">
+        <cv-gen-cvs-sidebar [cvForm]="cvaCvForm"></cv-gen-cvs-sidebar>
+        <cv-gen-cv-form [formControl]="cvaCvForm">
+          <div class="create-pdf-button">
+              <p-button
+                icon="pi pi-file-pdf"
+                styleClass="p-button-danger"
+                label="PDF"
+                (click)="toPDF()"
+                >
+              </p-button>
+          </div>
+        </cv-gen-cv-form>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+
+  <div class="button-wrapper">
+    <div>
+      <p-button
+        [label]="'BUTTONS.SAVE' | translate"
+        (click)="saveEmployeeWithCvs()"></p-button>
+    </div>
+    <div class="delete-button">
+      <p-button
+        icon="pi pi-trash"
+        styleClass="p-button-rounded p-button-danger p-button-raised"
+        (click)="deleteEmployee()"></p-button>
+    </div>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <div class="align-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

@@ -1,0 +1,16 @@
+<cv-gen-header></cv-gen-header>
+
+<main class="main-wrapper">
+  <cv-gen-side-bar *cvGenHideElement="{breakpoint: middleBreakpoint}"></cv-gen-side-bar>
+
+  <div class="content-wrapper">
+    <cv-gen-breadcrumbs
+      *cvGenHideElement="{breakpoint: middleBreakpoint}"
+      class="breadcrumbs"></cv-gen-breadcrumbs>
+    <div
+      id="style-2"
+      class="content-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

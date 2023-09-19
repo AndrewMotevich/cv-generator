@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: 100%;
+  flex: 1;
+}
+.page-wrapper {
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--surface-overlay);
+}
+.button-wrapper {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+.cv-wrapper {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 1rem;
+}

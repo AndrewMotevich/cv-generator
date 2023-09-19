@@ -1,0 +1,24 @@
+<aside [@openClose]="isSidebarOpen ? 'open' : 'closed'">
+  <nav>
+    <ul>
+      <li
+        class="navigation-link"
+        [routerLink]="employeesPath">
+        <i class="pi pi-briefcase"></i>
+        <span>{{'HEADER.EMPLOYEES' | translate}}</span></li>
+      <li
+        class="navigation-link"
+        [routerLink]="projectsPath">
+        <i class="pi pi-server"></i>
+        <span>{{'HEADER.PROJECTS' | translate}}</span></li>
+    </ul>
+  </nav>
+  <div class="aside-footer">
+    <hr>
+    <p-button
+      class="aside-footer-button"
+      styleClass="p-button-outlined p-button p-button-text p-button-raised"
+      [icon]="isSidebarOpen ? 'pi pi-window-minimize' : 'pi pi-window-maximize'"
+      (click)="toggleSidebar()"></p-button>
+  </div>
+</aside>

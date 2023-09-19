@@ -1,0 +1,42 @@
+@import '../../../../styles/abstracts/variables';
+
+:host {
+  display: block;
+  height: 100%;
+  background-color: var(--surface-overlay);
+}
+aside {
+  width: 18rem;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  box-shadow: $shadow;
+}
+i {
+  font-size: 1.5rem;
+  color: var(--highlight-text-color);
+}
+
+.aside-footer{
+  margin-bottom: 1rem;
+}
+.aside-footer-button{
+  margin: 1rem;
+}
+
+.navigation-link {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.5rem;
+  &:hover,
+  &:active {
+    cursor: pointer;
+    color: var(--highlight-text-color);
+  }
+}

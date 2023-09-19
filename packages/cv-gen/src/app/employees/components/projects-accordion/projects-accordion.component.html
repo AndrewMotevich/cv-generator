@@ -1,0 +1,43 @@
+<form [formGroup]="form">
+  <h3>{{"HEADER.PROJECTS"|translate}}</h3>
+  <div class="add-wrapper">
+    <div class="add-button">
+      <p-button
+        icon="pi pi-plus"
+        [label]="'BUTTONS.ADD' | translate"
+        (click)="addProjectForm()"></p-button>
+    </div>
+    <cv-gen-select-input
+      placeholder="Select project"
+      [formControl]="selectedProjectControl"
+      optionLabel="projectName"
+      [options]="projectsOptions$ | async"></cv-gen-select-input>
+  </div>
+
+  <div formArrayName="projects">
+    <div *ngFor="let formControl of projectsFormArray.controls; let index = index">
+      <p-accordion [selectOnFocus]="true">
+        <p-accordionTab
+          [header]
+          [ngClass]="{'invalid': formControl.invalid}">
+          <ng-template pTemplate="header">
+            <div class="accordion-header-wrapper">
+              <span class="vertical-align-middle">{{formControl?.value?.projectName}}</span>
+              <div class="delete-button">
+                <p-button
+                  icon="pi pi-trash"
+                  styleClass="p-button-rounded p-button-text p-button-raised p-button-sm"
+                  (click)="deleteProjectForm(index)"></p-button>
+              </div>
+            </div>
+          </ng-template>
+
+          <cv-gen-project-form
+            [formControlName]="index"
+            #projectForm></cv-gen-project-form>
+
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</form>

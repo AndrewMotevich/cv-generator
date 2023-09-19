@@ -1,0 +1,27 @@
+<div class="page-wrapper">
+  <p-tabView
+    class="page-wrapper"
+    [(activeIndex)]="activeTab"
+    (activeIndexChange)="updateCv()">
+
+    <p-tabPanel [header]="'HEADER.INFO' | translate">
+      <cv-gen-info-form [formControl]="cvaEmployeeInfoForm"></cv-gen-info-form>
+    </p-tabPanel>
+
+    <p-tabPanel [header]="'HEADER.CV' | translate">
+      <div class="cv-wrapper">
+        <cv-gen-cvs-sidebar [cvForm]="cvaCvForm"></cv-gen-cvs-sidebar>
+        <cv-gen-cv-form [formControl]="cvaCvForm"></cv-gen-cv-form>
+      </div>
+    </p-tabPanel>
+
+  </p-tabView>
+
+  <div class="button-wrapper">
+    <div>
+      <p-button
+        [label]="'BUTTONS.SAVE' | translate"
+        (click)="saveEmployeeWithCvs()"></p-button>
+    </div>
+  </div>
+</div>

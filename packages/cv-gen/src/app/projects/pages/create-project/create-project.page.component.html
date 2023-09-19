@@ -1,0 +1,22 @@
+<cv-gen-project-form
+  [formControl]="cvaProjectForm"
+  *ngIf="(loaded$ | async); else projectSpinner">
+  <div class="button-wrapper">
+    <div>
+      <p-button
+        [label]="'BUTTONS.SAVE' | translate"
+        (click)="submitProjectForm()"></p-button>
+    </div>
+    <div>
+      <p-button
+        [label]="'BUTTONS.CLEAR' | translate"
+        (click)="clearProjectForm()"></p-button>
+    </div>
+  </div>
+</cv-gen-project-form>
+
+<ng-template #projectSpinner>
+  <div class="align-spinner">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

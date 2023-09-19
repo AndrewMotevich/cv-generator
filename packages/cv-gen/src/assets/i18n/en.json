@@ -1,0 +1,90 @@
+{
+  "APPLICATION": "CV-Gen",
+  "LABELS": {
+    "CV_NAME": "CV name",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "LANGUAGE_NAME": "Language",
+    "LANGUAGE_LEVEL": "Level",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "DEPARTMENT": "Department",
+    "SPECIALIZATION": "Specialization",
+    "SKILLS": "Skills",
+    "TECH_STACK": "Tech stack",
+    "DESCRIPTION": "Description",
+    "TEAM_SIZE": "Team size",
+    "START_DATE": "Date start",
+    "REMEMBER_ME": "Remember me",
+    "TEAM_ROLES": "Team roles",
+    "RESPONSIBILITIES": "Responsibilities",
+    "PROJECT_NAME": "Project name",
+    "END_DATE": "Date end"
+  },
+  "ERROR_MESSAGES": {
+    "REQUIRED": "{{label}} is required!",
+    "EMAIL": "Invalid email!",
+    "MIN_LENGTH": "Min length {{minlength}}!",
+    "MAX_LENGTH": "Max length {{maxlength}}!"
+  },
+  "PLACEHOLDERS": {
+    "CV_NAME": "Enter cv name",
+    "FIRST_NAME": "Enter your first name",
+    "LAST_NAME": "Enter your last name",
+    "DEPARTMENT": "Enter your department",
+    "SPECIALIZATION": "Enter your specialization",
+    "SKILLS": "Enter your skills",
+    "LANGUAGE_NAME": "Enter language name",
+    "LANGUAGE_LEVEL": "Enter language level",
+    "EMAIL": "Enter your email",
+    "PASSWORD": "Enter your password"
+  },
+  "BUTTONS": {
+    "LOG-IN": "Log-in",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "CLEAR": "Clear"
+  },
+  "HEADER": {
+    "CV": "CV",
+    "CVS": "CVS",
+    "INFO": "Info",
+    "LANGUAGES": "Languages",
+    "NAVIGATION": "Navigation",
+    "EMPLOYEE": "Employee",
+    "EMPLOYEES": "Employees",
+    "PROJECT": "Project",
+    "PROJECTS": "Projects",
+    "SETTINGS": "Settings",
+    "THEME": "Switch theme",
+    "ABOUT": "About"
+  },
+  "MESSAGES": {
+    "ERROR": "Error",
+    "SUCCESS": "Success",
+    "WARNING": "Warning",
+    "INFO": "Info",
+    "VALUES_LOADED_SUCCESS": "{{value}} loaded success",
+    "VALUES_LOADED_FAILURE": "{{value}} loaded failure",
+    "VALUE_LOADED_SUCCESS": "{{value}} loaded success",
+    "VALUE_LOADED_FAILURE": "{{value}} loaded failure",
+    "VALUE_ADDED_SUCCESS": "{{value}} added success",
+    "VALUE_ADDED_FAILURE": "{{value}} added failure",
+    "VALUE_UPDATED_SUCCESS": "{{value}} updated success",
+    "VALUE_UPDATED_FAILURE": "{{value}} updated failure",
+    "VALUE_DELETED_SUCCESS": "{{value}} deleted success",
+    "VALUE_DELETED_FAILURE": "{{value}} deleted failure",
+    "EMPLOYEE_VALIDATE_WARNING": "You should write all employee data",
+    "CVS_VALIDATE_WARNING": "You should write all cvs data",
+    "SHARED_LOADED_FAILURE": "Shared loaded failure",
+    "AUTH_LOGIN_FAILURE": "Login failure, check you credentials!!!",
+    "AUTH_REFRESH_FAILURE_INFO": "Refresh your previous credentials failure! Please, re-login!!!",
+    "AUTH_LOGOUT_FAILURE": "Logout failure!!!"
+  },
+  "BREADCRUMBS": {
+    "EMPLOYEES_LIST": "Employees list",
+    "EMPLOYEE_CREATE": "Create employee",
+    "PROJECTS_LIST": "Projects list",
+    "PROJECT_CREATE": "Create project"
+  }
+}

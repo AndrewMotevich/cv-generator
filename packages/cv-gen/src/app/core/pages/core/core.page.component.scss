@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--surface-ground);
+  display: flex;
+  flex-direction: column;
+}
+.main-wrapper {
+  width: 100%;
+  height: calc(100% - 5rem);
+  display: flex;
+}
+.content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content-container {
+  width: 100%;
+  // height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  padding: 0rem 1rem 0rem 1.5rem;
+  overflow-y: auto;
+}
+
+//custom scrollbar
+#style-2::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+#style-2::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+#style-2::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--highlight-text-color);
+}

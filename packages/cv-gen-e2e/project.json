@@ -1,0 +1,44 @@
+{
+  "name": "cv-gen-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/cv-gen-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "run-e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "packages/cv-gen-e2e/cypress.config.ts",
+        "devServerTarget": "cv-gen:serve:development",
+        "testingType": "e2e",
+        "parallel": false
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "cv-gen:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/cv-gen-e2e/**/*.{js,ts}"]
+      }
+    },
+    "e2e": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx run nest-be:serve", "nx run cv-gen-e2e:run-e2e --configuration=production"],
+        "cwd": "./",
+        "parallel": true
+      },
+      "configurations": {
+        "watch": {
+          "commands": ["nx run nest-be:serve", "nx run cv-gen-e2e:run-e2e --configuration=production --watch=true"]
+        }
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["cv-gen", "nest-be"]
+}

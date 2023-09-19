@@ -1,0 +1,28 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-ground);
+  background-image: url('../../../../assets/images/auth-background.png');
+  background-repeat: repeat;
+  background-size: contain;
+  background-position: center;
+}
+.auth-form-wrapper{
+  width: 18rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.lang-button{
+  position: absolute;
+  top: 5rem;
+  left: 2rem;
+}
+.theme-button{
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}

@@ -19,7 +19,20 @@
           "packages/cv-gen/src/favicon.ico",
           "packages/cv-gen/src/assets"
         ],
-        "styles": ["packages/cv-gen/src/styles.scss"],
+        "styles": [
+          "node_modules/primeng/resources/primeng.min.css",
+          "packages/cv-gen/src/styles.scss",
+          {
+            "input": "packages/cv-gen/src/styles/themes/soho-dark/soho-dark.scss",
+            "bundleName": "soho-dark",
+            "inject": false
+          },
+          {
+            "input": "packages/cv-gen/src/styles/themes/soho-light/soho-light.scss",
+            "bundleName": "soho-light",
+            "inject": false
+          }
+        ],
         "scripts": []
       },
       "configurations": {
@@ -44,7 +57,13 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true
+          "namedChunks": true,
+          "fileReplacements": [
+            {
+              "replace": "packages/cv-gen/src/environments/environment.ts",
+              "with": "packages/cv-gen/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -59,7 +78,10 @@
           "browserTarget": "cv-gen:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "packages/cv-gen/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -89,6 +111,15 @@
           "ci": true,
           "codeCoverage": true
         }
+      }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "packages/cv-gen/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "cv-gen:build"
       }
     }
   }

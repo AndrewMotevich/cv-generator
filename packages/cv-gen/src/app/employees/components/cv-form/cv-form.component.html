@@ -1,0 +1,52 @@
+<div
+  class="form-wrapper"
+  *ngIf="showCvForm">
+  <form [formGroup]="form">
+    <cv-gen-text-input
+      [label]="'LABELS.CV_NAME' | translate"
+      [placeholder]="'PLACEHOLDERS.CV_NAME' | translate"
+      formControlName="cvName"></cv-gen-text-input>
+
+    <h3>{{'HEADER.INFO' | translate}}</h3>
+    <div class="employee-info">
+      <cv-gen-text-input
+        [label]="'LABELS.FIRST_NAME' | translate"
+        [placeholder]="'PLACEHOLDERS.FIRST_NAME' | translate"
+        formControlName="firstName"></cv-gen-text-input>
+
+      <cv-gen-text-input
+        [label]="'LABELS.LAST_NAME' | translate"
+        [placeholder]="'PLACEHOLDERS.LAST_NAME' | translate"
+        formControlName="lastName"></cv-gen-text-input>
+
+      <cv-gen-text-input
+        [label]="'LABELS.EMAIL' | translate"
+        [placeholder]="'PLACEHOLDERS.EMAIL' | translate"
+        formControlName="email"></cv-gen-text-input>
+
+      <cv-gen-select-input
+        [label]="'LABELS.DEPARTMENT' | translate"
+        [placeholder]="'PLACEHOLDERS.DEPARTMENT' | translate"
+        formControlName="department"
+        [options]="departments$ | async"></cv-gen-select-input>
+
+      <cv-gen-select-input
+        [label]="'LABELS.SPECIALIZATION' | translate"
+        [placeholder]="'PLACEHOLDERS.SPECIALIZATION' | translate"
+        formControlName="specialization"
+        [options]="specializations$ | async"></cv-gen-select-input>
+
+      <cv-gen-chips-input
+        [label]="'LABELS.SKILLS' | translate"
+        [placeholder]="'PLACEHOLDERS.SKILLS' | translate"
+        formControlName="skills"
+        [suggestions]="skills$ | async"></cv-gen-chips-input>
+    </div>
+
+    <cv-gen-projects-accordion [form]="form"></cv-gen-projects-accordion>
+
+    <cv-gen-language-accordion [form]="form"></cv-gen-language-accordion>
+
+  </form>
+  <ng-content *ngIf="!isNew"></ng-content>
+</div>

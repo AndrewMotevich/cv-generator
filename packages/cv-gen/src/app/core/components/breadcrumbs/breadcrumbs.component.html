@@ -1,0 +1,14 @@
+<div class="breadcrumbs-wrapper">
+  <div class="path">
+    <ul>
+      <li
+        *ngFor="let crumb of breadcrumbs | async"
+        [routerLink]="crumb.route">
+        {{crumb.label}}
+        <span>/</span>
+      </li>
+    </ul>
+  </div>
+  <h2>{{(pageData | async).title | translate}}</h2>
+  <p>{{(pageData | async).pageInfo | translate}}</p>
+</div>

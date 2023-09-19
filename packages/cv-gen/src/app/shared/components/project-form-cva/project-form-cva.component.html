@@ -1,0 +1,46 @@
+<form [formGroup]="form">
+  <cv-gen-text-input
+    label="{{'LABELS.PROJECT_NAME' | translate}}"
+    placeholder="Enter project name"
+    formControlName="projectName"></cv-gen-text-input>
+
+  <cv-gen-textarea-input
+    label="{{'LABELS.DESCRIPTION' | translate}}"
+    placeholder="Write description"
+    formControlName="description"></cv-gen-textarea-input>
+
+  <cv-gen-date-input
+    label="{{'LABELS.START_DATE' | translate}}"
+    placeholder="Select Date"
+    formControlName="startDate"></cv-gen-date-input>
+
+  <cv-gen-date-input
+    label="{{'LABELS.END_DATE' | translate}}"
+    placeholder="Select Date"
+    formControlName="endDate"></cv-gen-date-input>
+
+  <cv-gen-number-input
+    label="{{'LABELS.TEAM_SIZE' | translate}}"
+    placeholder="Enter team size"
+    formControlName="teamSize"></cv-gen-number-input>
+
+  <cv-gen-chips-input
+    label="{{'LABELS.TECH_STACK' | translate}}"
+    placeholder="Enter project tech-stack"
+    formControlName="techStack"
+    [suggestions]="techStack$ | async"></cv-gen-chips-input>
+
+  <cv-gen-chips-input
+    label="{{'LABELS.RESPONSIBILITIES' | translate}}"
+    placeholder="Enter responsibilities"
+    formControlName="responsibilities"
+    [suggestions]="responsibilities$ | async"></cv-gen-chips-input>
+
+  <cv-gen-chips-input
+    label="{{'LABELS.TEAM_ROLES' | translate}}"
+    placeholder="Enter team-roles"
+    formControlName="teamRoles"
+    [suggestions]="teamRoles$ | async"></cv-gen-chips-input>
+
+</form>
+<ng-content></ng-content>

@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.button-wrapper{
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.buttons-container{
+  display: flex;
+  gap: 1rem;
+}
+.align-spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}

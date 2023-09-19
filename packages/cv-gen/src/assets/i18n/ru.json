@@ -1,0 +1,90 @@
+{
+  "APPLICATION": "CV-Gen",
+  "LABELS": {
+    "CV_NAME": "Название резюме",
+    "FIRST_NAME": "Имя",
+    "LAST_NAME": "Фамилия",
+    "LANGUAGE_NAME": "Язык",
+    "LANGUAGE_LEVEL": "Уровень",
+    "EMAIL": "Почта",
+    "PASSWORD": "Пароль",
+    "DEPARTMENT": "Департамент",
+    "SPECIALIZATION": "Специализация",
+    "SKILLS": "Навыки",
+    "TECH_STACK": "Технологии",
+    "DESCRIPTION": "Описание",
+    "TEAM_SIZE": "Размер команды",
+    "START_DATE": "Дата начала",
+    "REMEMBER_ME": "Запомнить меня",
+    "TEAM_ROLES": "Рол(ь/и) в команде",
+    "RESPONSIBILITIES": "Ответственность",
+    "PROJECT_NAME": "Имя проекта",
+    "END_DATE": "Дата завершения"
+  },
+  "ERROR_MESSAGES": {
+    "REQUIRED": "Поле {{label}} обязателен!",
+    "EMAIL": "Неправильная почта!",
+    "MIN_LENGTH": "Минимальная длина {{minlength}}!",
+    "MAX_LENGTH": "Максимальная длина {{maxlength}}!"
+  },
+  "PLACEHOLDERS": {
+    "CV_NAME": "Введите имя резюме",
+    "FIRST_NAME": "Введите свое имя",
+    "LAST_NAME": "Введите свою фамилию",
+    "DEPARTMENT": "Введите свой департамент",
+    "SPECIALIZATION": "Введите свою специализацию",
+    "SKILLS": "Введите свои навыки",
+    "LANGUAGE_NAME": "Введите название языка",
+    "LANGUAGE_LEVEL": "Введите уровень владения",
+    "EMAIL": "Введите свою почту",
+    "PASSWORD": "Введите свой пароль"
+  },
+  "BUTTONS": {
+    "LOG-IN": "Войти",
+    "ADD": "Добавить",
+    "SAVE": "Сохранить",
+    "CLEAR": "Отчистить"
+  },
+  "HEADER": {
+    "CV": "Резюме",
+    "CVS": "Резюме",
+    "INFO": "Инфо",
+    "LANGUAGES": "Языки",
+    "NAVIGATION": "Навигация",
+    "EMPLOYEE": "Сотрудник",
+    "EMPLOYEES": "Сотрудники",
+    "PROJECT": "Проект",
+    "PROJECTS": "Проекты",
+    "SETTINGS": "Настройки",
+    "THEME": "Изменить тему",
+    "ABOUT": "Описание"
+  },
+  "MESSAGES": {
+    "ERROR": "Ошибка",
+    "SUCCESS": "Успех",
+    "WARNING": "Внимание",
+    "INFO": "Информация",
+    "VALUES_LOADED_SUCCESS": "{{value}} загружены успешно",
+    "VALUES_LOADED_FAILURE": "{{value}} не были загружены",
+    "VALUE_LOADED_SUCCESS": "{{value}} загружен успешно",
+    "VALUE_LOADED_FAILURE": "{{value}} не был загружен",
+    "VALUE_ADDED_SUCCESS": "{{value}} добавлен успешно",
+    "VALUE_ADDED_FAILURE": "{{value}} не добавлен",
+    "VALUE_UPDATED_SUCCESS": "{{value}} изменен успешно",
+    "VALUE_UPDATED_FAILURE": "{{value}} не изменен",
+    "VALUE_DELETED_SUCCESS": "{{value}} удален успешно",
+    "VALUE_DELETED_FAILURE": "{{value}} не удален",
+    "EMPLOYEE_VALIDATE_WARNING": "Заполните все поля для сотрудника",
+    "CVS_VALIDATE_WARNING": "Заполните все поля для всех резюме",
+    "SHARED_LOADED_FAILURE": "Дополнительные коллекции не загружены",
+    "AUTH_LOGIN_FAILURE": "Вход неуспешен!!! Проверьте данные для входа",
+    "AUTH_REFRESH_FAILURE_INFO": "Вход по предыдущим данным неуспешен!!! Войдите в приложение снова!",
+    "AUTH_LOGOUT_FAILURE": "Выход из приложения не успешен"
+  },
+  "BREADCRUMBS": {
+    "EMPLOYEES_LIST": "Список сотрудников",
+    "EMPLOYEE_CREATE": "Добавить сотрудника",
+    "PROJECTS_LIST": "Список проектов",
+    "PROJECT_CREATE": "Добавить проект"
+  }
+}

@@ -1,0 +1,16 @@
+<div class="flex-layout">
+  <label htmlFor="dateInput">{{label}}</label>
+  <p-calendar
+    id="dateInput"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+    [placeholder]="placeholder"
+    [formControl]="control"></p-calendar>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small
+      class="p-error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
+  </ng-template>
+</div>

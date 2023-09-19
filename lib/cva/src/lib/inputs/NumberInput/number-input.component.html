@@ -1,0 +1,18 @@
+<div class="flex-layout">
+  <label htmlFor="inputNumber">{{label}}</label>
+  <p-inputNumber
+    id="inputNumber"
+    mode="decimal"
+    [ngClass]="{'ng-invalid ng-dirty' : (control.dirty && control.invalid)}"
+    [useGrouping]="false"
+    [placeholder]="placeholder"
+    [formControl]="control"></p-inputNumber>
+  <ng-template [ngIf]="control.errors && control.dirty">
+    <small
+      class="p-error"
+      translate
+      [translateParams]="{ label, maxlength, minlength }">
+      {{control.errors | getErrorMessage}}
+    </small>
+  </ng-template>
+</div>

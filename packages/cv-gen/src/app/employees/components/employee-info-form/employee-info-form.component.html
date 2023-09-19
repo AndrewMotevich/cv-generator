@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+  <cv-gen-text-input
+    [label]="'LABELS.FIRST_NAME' | translate"
+    [placeholder]="'PLACEHOLDERS.FIRST_NAME' | translate"
+    formControlName="firstName"></cv-gen-text-input>
+
+  <cv-gen-text-input
+    [label]="'LABELS.LAST_NAME' | translate"
+    [placeholder]="'PLACEHOLDERS.LAST_NAME' | translate"
+    formControlName="lastName"></cv-gen-text-input>
+
+  <cv-gen-text-input
+    [label]="'LABELS.EMAIL' | translate"
+    [placeholder]="'PLACEHOLDERS.EMAIL' | translate"
+    formControlName="email"></cv-gen-text-input>
+
+  <cv-gen-select-input
+    [label]="'LABELS.DEPARTMENT' | translate"
+    [placeholder]="'PLACEHOLDERS.DEPARTMENT' | translate"
+    formControlName="department"
+    [options]="departments$ | async"></cv-gen-select-input>
+
+  <cv-gen-select-input
+    [label]="'LABELS.SPECIALIZATION' | translate"
+    [placeholder]="'PLACEHOLDERS.SPECIALIZATION' | translate"
+    formControlName="specialization"
+    [options]="specializations$ | async"></cv-gen-select-input>
+</form>
+<ng-content></ng-content>
