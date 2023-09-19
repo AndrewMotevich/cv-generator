@@ -1,17 +1,27 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BaseTable1Component } from './base-table1.component';
-import { TableModule } from 'primeng/table';
-import { TranslateModule } from '@ngx-translate/core';
-import { IColumns } from '../../interfaces/columns.interfeces';
 import { EmployeesColumns } from '../../../employees/constants/employees-columns.const';
+import { IColumns } from '../../interfaces/columns.interfeces';
+import { BaseTable1Component } from './base-table1.component';
 
 describe('BaseTable1Component', () => {
   let component: BaseTable1Component;
   let fixture: ComponentFixture<BaseTable1Component>;
+  const testData: unknown[] = [
+    {
+      id: 1,
+      firstName: 'A',
+      lastName: 'B',
+      email: 'C',
+      department: 'D',
+      specialization: 'E',
+    },
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BaseTable1Component, TableModule, TranslateModule.forRoot()],
+      imports: [BaseTable1Component],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     fixture = TestBed.createComponent(BaseTable1Component);
@@ -24,16 +34,6 @@ describe('BaseTable1Component', () => {
   });
 
   it('should have data input', () => {
-    const testData: unknown[] = [
-      {
-        id: 1,
-        firstName: 'A',
-        lastName: 'B',
-        email: 'C',
-        department: 'D',
-        specialization: 'E',
-      },
-    ];
     component.data = testData;
     expect(component.data).toEqual(testData);
   });
@@ -45,22 +45,11 @@ describe('BaseTable1Component', () => {
   });
 
   it('should emit itemInfo', () => {
-    const testItem: unknown = {
-      id: 1,
-      firstName: 'A',
-      lastName: 'B',
-      email: 'C',
-      department: 'D',
-      specialization: 'E',
-    };
     let emittedItem: unknown;
-
     component.itemInfo.subscribe((item) => {
       emittedItem = item;
     });
-
-    component.sendItemInfo(testItem);
-
-    expect(emittedItem).toEqual(testItem);
+    component.sendItemInfo(testData);
+    expect(emittedItem).toEqual(testData);
   });
 });

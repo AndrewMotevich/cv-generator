@@ -18,5 +18,6 @@ describe('cv-gen', () => {
     }).as('postRequest');
     cy.contains('button', 'Save').click();
     cy.contains('Error').should('exist');
+    // cy.contains('Cypress project').should('exist')
   });
 });

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_PATH } from '../../../environments/environment.development';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { parseJwt } from '../utils/parse-jwt.util';
 import { ICredentials } from '../interfaces/credentials.interface';
+import { ITokenData } from '../interfaces/token-data.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthApiService {
@@ -30,7 +31,7 @@ export class AuthApiService {
     })
   }
 
-  public refresh() {
+  public refresh(): Observable<ITokenData> {
     return this.http
       .get<{ access_token: string }>(`${API_PATH}/auth/refresh`, {
         withCredentials: true,
