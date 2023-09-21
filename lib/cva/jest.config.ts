@@ -4,6 +4,7 @@ export default {
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/lib/cva',
+  collectCoverageFrom: ['src/lib/inputs/**/*.{ts,tsx}'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

@@ -6,7 +6,7 @@ import { parseJwt } from '../utils/parse-jwt.util';
 import { ICredentials } from '../interfaces/credentials.interface';
 import { ITokenData } from '../interfaces/token-data.interface';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'any' })
 export class AuthApiService {
   constructor(private http: HttpClient) {}
 
